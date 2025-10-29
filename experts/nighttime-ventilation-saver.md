@@ -69,14 +69,24 @@ Before confirming ANY waste pattern, you MUST:
 
 ## [ANALYSIS WORKFLOW]
 ```
-1. DETECT: Room has both airflow and presence sensors
+1. SAMPLE: Pick at random, 5 rooms with both airflow and presence sensors
 2. RETRIEVE: 14-day hourly data for presence and airflow
 3. SEGMENT: Separate occupied hours (presence>0.5) from unoccupied hours
 4. ANALYZE: Calculate avg airflow during unoccupied weeknights vs weekends
 5. CLASSIFY: Apply waste criteria (HIGH/MODERATE/MINOR/OPTIMIZED)
+6. EXPAND: If and only if any of the analyzed rooms have HIGH or MODERATE waste: sample 5 additional rooms (for a total of 10) and execute steps 2,3,4,5
 6. QUANTIFY: Estimate L/s-hours wasted per week and annual kWh
 7. REPORT: Concise summary with strategy classification
 8. PROMPT: Ask user for next step
+```
+
+## [ENERGY CONVERSION FACTOR]
+
+### Standard Conversion:
+```
+Energy (kWh/year) = L/s-hours per week × 52 weeks × CONVERSION_FACTOR
+
+CONVERSION_FACTOR = 0.40 kWh per 1000 L/s-hours
 ```
 
 ## [OUTPUT FORMAT - CONCISE]
@@ -84,16 +94,16 @@ Before confirming ANY waste pattern, you MUST:
 ### Per Room Structure
 Only include HIGH WASTE rooms, and at maximum 3
 ```
-[🔴|🟡|🟢] ROOM: [Name] ([Capacity]) - [Type]
+ROOM: [Name] ([Capacity]) - [Type]
 
-STRATEGY: [HIGH WASTE | MODERATE WASTE | MINOR WASTE | OPTIMIZED]
+Waste: [HIGH | MODERATE | MINOR | OPTIMIZED]
 
 UNOCCUPIED AIRFLOW:
 - Weeknights: [avg] L/s ([expected: 0 L/s])
 - Weekends: [avg] L/s
 - Pattern: [One sentence - e.g., "Full ventilation 24/7" or "Proper weekend shutdown only"]
 
-WASTE QUANTIFICATION:
+QUANTIFICATION:
 - Weekly waste: [value] L/s-hours
 - Annual impact: [value] kWh/year
 - Savings potential: [percentage]% of room ventilation energy
@@ -158,29 +168,10 @@ Approval required: YES | Expected ROI: [payback period]
 
 ## [ENERGY WASTE CLASSIFICATION LOGIC]
 
-### 🔴 HIGH ENERGY WASTE (Priority 1):
-- Airflow >50% of occupied levels during ALL unoccupied periods
-- No response to presence sensors
-- 50%+ of ventilation energy wasted
-- Example: "Cafe maintains 25 L/s 24/7 despite zero nighttime occupancy"
-
-### 🟡 MODERATE ENERGY WASTE (Priority 2):
-- Consistent baseline (10-20 L/s) every unoccupied night
-- Weekend proper, weeknight broken
-- 30-50% of ventilation energy wasted
-- Example: "Project room maintains 15 L/s baseline all weeknights, 0 L/s weekends"
-
-### 🟠 MINOR ENERGY WASTE (Priority 3):
-- Inconsistent behavior, some nights proper, some maintain flow
-- Possible control anomalies or programming gaps
-- 15-30% of ventilation energy wasted
-- Example: "Meeting room: 3 nights proper shutdown, 2 nights baseline maintained"
-
-### 🟢 OPTIMIZED (No Action):
-- 0 L/s during unoccupied periods
-- Proper pre-occupancy flush
-- <5% waste from grace periods
-- Example: "Conference room: 0 L/s 18:00-05:00, flush 05:00-07:00"
+- HIGH ENERGY WASTE: 50%+ of ventilation energy wasted
+- MODERATE ENERGY WASTE: 30-50% of ventilation energy wasted
+- MINOR ENERGY WASTE: 15-30% of ventilation energy wasted
+- OPTIMIZED (No Action): <5% waste from grace periods
 
 ## [COMMUNICATION PRINCIPLES]
 - **Brevity**: Max 7 lines per room
@@ -190,91 +181,12 @@ Approval required: YES | Expected ROI: [payback period]
 - **Prioritized**: Lead with highest-impact rooms
 
 ## [SEVERITY ICONS]
-- 🔴 Critical Energy Waste (immediate action required, >50% waste)
-- 🟡 High Energy Waste (short-term action needed, 30-50% waste)
-- 🟠 Moderate Energy Waste (optimization opportunity, 15-30% waste)
-- 🟢 Optimized (proper control, <5% waste)
+- 🔴 High Energy Waste
+- 🟡 Moderate Energy Waste | Minor Energy Waste
+- 🟢 Optimized
 - ⚠️ Control Anomaly (requires investigation)
 - ⚪ Insufficient Data (continue monitoring)
 
-## [EXAMPLE OUTPUT]
-```
-🔴 ROOM: Cafe 95P (95 capacity) - Dining Area
-
-STRATEGY: HIGH ENERGY WASTE
-
-UNOCCUPIED AIRFLOW:
-- Weeknights: 24.5 L/s (expected: 0 L/s)
-- Weekends: 0 L/s
-- Pattern: Full ventilation 24/7 weekdays, proper weekend shutdown only
-
-WASTE QUANTIFICATION:
-- Weekly waste: 1,470 L/s-hours
-- Annual impact: 500 kWh/year
-- Savings potential: 52% of room ventilation energy
-
-ROOT CAUSE: Weeknight shutdown schedule not configured, weekend schedule works
-
----
-
-🟡 ROOM: Project Room 6P (6 capacity) - Collaborative Space
-
-STRATEGY: MODERATE ENERGY WASTE
-
-UNOCCUPIED AIRFLOW:
-- Weeknights: 16 L/s (expected: 0 L/s)
-- Weekends: 0 L/s
-- Pattern: Consistent baseline all weeknights, proper weekend shutdown
-
-WASTE QUANTIFICATION:
-- Weekly waste: 1,040 L/s-hours
-- Annual impact: 65 kWh/year
-- Savings potential: 33% of room ventilation energy
-
-ROOT CAUSE: Time-based schedule gap, proper capability demonstrated on weekends
-
----
-
-╔════════════════════════════════════════════════════════════╗
-║              ENERGY SAVINGS SUMMARY                         ║
-╚════════════════════════════════════════════════════════════╝
-
-WASTE ANALYSIS TABLE (Sorted by Impact):
-┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-│ Room                  │ Class.      │ Occupied │ Wasted   │ Total    │ Waste │ kWh/year    │
-│                       │             │ L/s-hrs  │ L/s-hrs  │ L/s-hrs  │ %     │ Potential   │
-├──────────────────────────────────────────────────────────────────────────────────────────────┤
-│ Projektrum 6P A08     │ 🔴 HIGH     │ 2,800    │ 2,730    │ 5,530    │ 49%   │ 2,040       │
-│ Projektrum 6P A04     │ 🟡 MODERATE │ 1,575    │ 1,965    │ 3,540    │ 55%   │ 785         │
-│ Cafe 95P              │ 🔴 HIGH     │ 1,650    │ 1,580    │ 3,230    │ 49%   │ 1,165       │
-│ Mötesrum 8P B02       │ 🟡 MODERATE │ 2,150    │ 1,320    │ 3,470    │ 38%   │ 528         │
-│ Mötesrum 14P B10      │ ⚠️ ANOMALY  │ 2,240    │ 504      │ 2,744    │ 18%   │ 202 (!)     │
-│ Kontorslandskap A01   │ 🟢 OPTIMIZED│ 3,850    │ 65       │ 3,915    │ 2%    │ 26          │
-│ Projektrum 6P (sens.) │ 🟢 OPTIMIZED│ 1,890    │ 40       │ 1,930    │ 2%    │ 16          │
-├──────────────────────────────────────────────────────────────────────────────────────────────┤
-│ TOTALS                │ —           │ 16,155   │ 8,204    │ 24,359   │ 34%   │ 4,762       │
-└──────────────────────────────────────────────────────────────────────────────────────────────┘
-
-CLASSIFICATION SUMMARY:
-├─ 🔴 High waste (>50%):        2 rooms - 3,205 kWh/year
-├─ 🟡 Moderate waste (30-50%):  2 rooms - 1,313 kWh/year
-├─ 🟠 Minor waste (15-30%):     0 rooms - 0 kWh/year
-├─ ⚠️ Critical anomalies:       1 room - 202 kWh/year (requires investigation)
-└─ 🟢 Optimized (<15%):         2 rooms - 42 kWh/year
-
-TOTAL SAVINGS POTENTIAL (Sample):
-├─ Weekly waste:    8,204 L/s-hours
-├─ Annual energy:   4,762 kWh/year
-└─ Weighted avg:    34% waste across analyzed rooms
-
-BUILDING-WIDE EXTRAPOLATION:
-├─ Conservative:    35,000 kWh/year (70,000 SEK/year at 2.0 SEK/kWh)
-├─ Aggressive:      52,000 kWh/year (104,000 SEK/year at 2.0 SEK/kWh)
-└─ CO₂ reduction:   14,000 kg CO₂/year
-
-COMPLIANCE STATUS:
-├─ ASHRAE 62.1/90.1: NON-COMPLIANT ✗
-└─ ISO 17772/EN 16798: PARTIAL ⚠
 ```
 
 ## [CRITICAL REMINDERS]
