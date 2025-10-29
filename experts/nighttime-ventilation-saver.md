@@ -82,10 +82,11 @@ Before confirming ANY waste pattern, you MUST:
 ## [OUTPUT FORMAT - CONCISE]
 
 ### Per Room Structure
+Only include HIGH WASTE rooms, and at maximum 3
 ```
 [🔴|🟡|🟢] ROOM: [Name] ([Capacity]) - [Type]
 
-STRATEGY: [CRITICAL WASTE | HIGH WASTE | MODERATE WASTE | OPTIMIZED]
+STRATEGY: [HIGH WASTE | MODERATE WASTE | MINOR WASTE | OPTIMIZED]
 
 UNOCCUPIED AIRFLOW:
 - Weeknights: [avg] L/s ([expected: 0 L/s])
@@ -104,30 +105,32 @@ ROOT CAUSE: [One-sentence hypothesis]
 
 ### Energy Savings Summary (MANDATORY)
 ```
-╔════════════════════════════════════════════════════════════╗
-║              ENERGY SAVINGS SUMMARY                         ║
-╚════════════════════════════════════════════════════════════╝
+WASTE ANALYSIS TABLE (Sorted by Impact):
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│ Room                │ Class.    │ Occupied │ Wasted    │ Total     │ Waste │ kWh/year  │
+│                     │           │ L/s-hrs  │ L/s-hrs   │ L/s-hrs   │ %     │ Potential │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│ [Sorted by Wasted L/s-hrs descending, one row per room]                                │
+├─────────────────────────────────────────────────────────────────────────────────────────┤
+│ TOTALS              │ —         │ [total]  │ [total]   │ [total]   │ [avg%]│ [total]   │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
 
-ROOMS ANALYZED: [count]
-├─ Critical waste:  [count] rooms ([list room names])
-├─ High waste:      [count] rooms ([list room names])
-├─ Moderate waste:  [count] rooms ([list room names])
-└─ Optimized:       [count] rooms
+CLASSIFICATION SUMMARY:
+├─ 🔴 High waste (>50%):        [count] rooms - [total kWh/year]
+├─ 🟡 Moderate waste (30-50%):  [count] rooms - [total kWh/year]
+├─ 🟠 Minor waste (15-30%):     [count] rooms - [total kWh/year]
+├─ ⚠️ Critical anomalies:       [count] rooms - [requires investigation]
+└─ 🟢 Optimized (<15%):         [count] rooms
 
 TOTAL SAVINGS POTENTIAL (Sample):
 ├─ Weekly waste:    [total] L/s-hours
 ├─ Annual energy:   [total] kWh/year
-└─ Percentage:      [avg]% of total ventilation energy
+└─ Weighted avg:    [avg]% waste across analyzed rooms
 
 BUILDING-WIDE EXTRAPOLATION:
 ├─ Conservative:    [value] kWh/year ([value] SEK/year at [rate] SEK/kWh)
 ├─ Aggressive:      [value] kWh/year ([value] SEK/year at [rate] SEK/kWh)
 └─ CO₂ reduction:   [value] kg CO₂/year
-
-TOP PRIORITY ROOMS (Highest Impact):
-1. [Room name]: [kWh/year] savings potential
-2. [Room name]: [kWh/year] savings potential
-3. [Room name]: [kWh/year] savings potential
 
 COMPLIANCE STATUS:
 ├─ ASHRAE 62.1/90.1: [COMPLIANT ✓ | NON-COMPLIANT ✗]
@@ -236,26 +239,38 @@ ROOT CAUSE: Time-based schedule gap, proper capability demonstrated on weekends
 ║              ENERGY SAVINGS SUMMARY                         ║
 ╚════════════════════════════════════════════════════════════╝
 
-ROOMS ANALYZED: 3
-├─ High waste:  1 room (Cafe 95P)
-├─ Moderate waste:      1 room (Project Room 6P)
-├─ Minor waste:  1 room (Meeting Room 8P)
-└─ Optimized:       0 rooms
+WASTE ANALYSIS TABLE (Sorted by Impact):
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│ Room                  │ Class.      │ Occupied │ Wasted   │ Total    │ Waste │ kWh/year    │
+│                       │             │ L/s-hrs  │ L/s-hrs  │ L/s-hrs  │ %     │ Potential   │
+├──────────────────────────────────────────────────────────────────────────────────────────────┤
+│ Projektrum 6P A08     │ 🔴 HIGH     │ 2,800    │ 2,730    │ 5,530    │ 49%   │ 2,040       │
+│ Projektrum 6P A04     │ 🟡 MODERATE │ 1,575    │ 1,965    │ 3,540    │ 55%   │ 785         │
+│ Cafe 95P              │ 🔴 HIGH     │ 1,650    │ 1,580    │ 3,230    │ 49%   │ 1,165       │
+│ Mötesrum 8P B02       │ 🟡 MODERATE │ 2,150    │ 1,320    │ 3,470    │ 38%   │ 528         │
+│ Mötesrum 14P B10      │ ⚠️ ANOMALY  │ 2,240    │ 504      │ 2,744    │ 18%   │ 202 (!)     │
+│ Kontorslandskap A01   │ 🟢 OPTIMIZED│ 3,850    │ 65       │ 3,915    │ 2%    │ 26          │
+│ Projektrum 6P (sens.) │ 🟢 OPTIMIZED│ 1,890    │ 40       │ 1,930    │ 2%    │ 16          │
+├──────────────────────────────────────────────────────────────────────────────────────────────┤
+│ TOTALS                │ —           │ 16,155   │ 8,204    │ 24,359   │ 34%   │ 4,762       │
+└──────────────────────────────────────────────────────────────────────────────────────────────┘
+
+CLASSIFICATION SUMMARY:
+├─ 🔴 High waste (>50%):        2 rooms - 3,205 kWh/year
+├─ 🟡 Moderate waste (30-50%):  2 rooms - 1,313 kWh/year
+├─ 🟠 Minor waste (15-30%):     0 rooms - 0 kWh/year
+├─ ⚠️ Critical anomalies:       1 room - 202 kWh/year (requires investigation)
+└─ 🟢 Optimized (<15%):         2 rooms - 42 kWh/year
 
 TOTAL SAVINGS POTENTIAL (Sample):
-├─ Weekly waste:    3,225 L/s-hours
-├─ Annual energy:   615 kWh/year
-└─ Percentage:      40% of total ventilation energy
+├─ Weekly waste:    8,204 L/s-hours
+├─ Annual energy:   4,762 kWh/year
+└─ Weighted avg:    34% waste across analyzed rooms
 
 BUILDING-WIDE EXTRAPOLATION:
-├─ Conservative:    10,000 kWh/year (20,000 SEK/year at 2.0 SEK/kWh)
-├─ Aggressive:      14,000 kWh/year (28,000 SEK/year at 2.0 SEK/kWh)
-└─ CO₂ reduction:   3,500 kg CO₂/year
-
-TOP PRIORITY ROOMS (Highest Impact):
-1. Cafe 95P: 500 kWh/year savings potential
-2. Project Room 6P: 65 kWh/year savings potential
-3. Meeting Room 8P: 70 kWh/year savings potential
+├─ Conservative:    35,000 kWh/year (70,000 SEK/year at 2.0 SEK/kWh)
+├─ Aggressive:      52,000 kWh/year (104,000 SEK/year at 2.0 SEK/kWh)
+└─ CO₂ reduction:   14,000 kg CO₂/year
 
 COMPLIANCE STATUS:
 ├─ ASHRAE 62.1/90.1: NON-COMPLIANT ✗
