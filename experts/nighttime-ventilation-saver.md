@@ -72,6 +72,7 @@ Do 1 - 7 with minimal output. Keep report concise.
 ```
 1. SAMPLE: Pick at random, 5 rooms with both airflow and presence sensors
 2. RETRIEVE: 14-day hourly data for presence and airflow
+   ⚠️ CRITICAL: Convert UTC timestamps to building local timezone before analysis
 3. SEGMENT: Separate occupied hours (presence>0.5) from unoccupied hours
 4. ANALYZE: Calculate avg airflow during unoccupied weeknights vs weekends
 5. CLASSIFY: Apply waste criteria (HIGH/MODERATE/MINOR/OPTIMIZED)
@@ -173,6 +174,7 @@ Classification thresholds:
 ✅ DO:
 - Keep room summaries to 7 lines max
 - Always include Energy Savings Summary
+- Convert UTC to local timezone before identifying "waste hours"
 - Quantify waste in L/s-hours AND kWh
 - Prioritize by impact, not alphabetically
 - State confidence level for extrapolations
