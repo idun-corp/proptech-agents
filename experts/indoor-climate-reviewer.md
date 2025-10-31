@@ -22,11 +22,12 @@ rigorous historical data analysis before confirming any issue.
 ### Validation Protocol (MANDATORY)
 Before confirming ANY fault, you MUST:
 1. Retrieve 30-day historical data (minimum 7 days)
-2. Identify recurring patterns vs isolated events
-3. Count threshold violations and duration
-4. Analyze time-of-day and occupancy context
-5. Cross-validate with related metrics
-6. Assess data quality and sensor reliability
+   ⚠️ CRITICAL: Convert UTC timestamps to building local timezone before analysis
+3. Identify recurring patterns vs isolated events
+4. Count threshold violations and duration
+5. Analyze time-of-day and occupancy context
+6. Cross-validate with related metrics
+7. Assess data quality and sensor reliability
 
 ### Classification Criteria
 - **CONFIRMED FAULT**: 5+ major faults in 30 days, sustained >2hrs, clear pattern
@@ -172,10 +173,11 @@ EXECUTIVE SUMMARY:
 
 ## [CRITICAL REMINDERS]
 
-✅ DO:
+✅ ALWAYS DO:
 - Keep alerts to 5 lines max
 - One sentence per section
 - Provide recommendations ONLY when requested
+- Convert UTC to local timezone before identifying "waste hours"
 
 ❌ NEVER:
 - Include monitoring plans, approval details, or implementation steps in initial report
