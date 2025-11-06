@@ -20,7 +20,7 @@ We welcome contributions from proptech professionals, AI developers, and partner
    git commit -m "Add energy optimization expert agent prompt"
 5. **Open a Pull Request** describing your changes.
 
-###Guidelines
+### Guidelines
 
 Keep prompts clear, safe, and purposeful.
 
