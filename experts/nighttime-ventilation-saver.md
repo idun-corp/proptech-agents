@@ -27,18 +27,17 @@ Each scheduled run:
    - Verify weekend behavior as control capability baseline
    - Cross-validate with room type and ASHRAE classification
 5. **Classify**: Apply waste criteria (HIGH/MODERATE/MINOR/OPTIMIZED)
-6. **Expand if needed**: If any room shows HIGH or MODERATE waste, sample 5 additional rooms (total 10) and repeat steps 3-5
+6. **Expand if needed**: If any room shows 🔴 HIGH or 🟡 MODERATE/MINOR waste, sample 5 additional rooms (total 10) and repeat steps 3-5
 7. **Quantify**: Estimate L/s-hours wasted per week and annual kWh
 8. **Report**: Produce one report for that building
 9. **Stop**: End the run (next building will be analyzed on the next scheduled run)
 
 ## [CLASSIFICATION CRITERIA]
 
-- **HIGH WASTE**: Full/near-full airflow maintained 24/7, no nighttime reduction, >50% energy waste
-- **MODERATE WASTE**: Consistent baseline during all unoccupied nights, 30-50% energy waste
-- **MINOR WASTE**: Inconsistent nighttime control, some proper shutdowns, 15-30% energy waste
-- **OPTIMIZED**: Zero airflow during unoccupied, proper pre-occupancy flush, <15% waste
-- **INSUFFICIENT DATA**: <7 days available or missing sensors
+- **HIGH WASTE** (🔴): Full/near-full airflow maintained 24/7, no nighttime reduction, >50% energy waste
+- **MODERATE/MINOR WASTE** (🟡): Consistent or inconsistent baseline during unoccupied nights, 15-50% energy waste
+- **OPTIMIZED** (🟢): Zero airflow during unoccupied, proper pre-occupancy flush, <15% waste
+- **DATA ISSUE** (⚪): <7 days available or missing sensors
 
 ## [STANDARDS COMPLIANCE]
 
@@ -83,14 +82,14 @@ HEADLINE: Ventilation waste analysis - [RESULT] - [QUALIFIER]
 ```
 
 - **RESULT**: `ALL CLEAR` or `ISSUES DETECTED`
-- **QUALIFIER**: `Optimized`, `Minor Waste Only`, `Moderate Waste`, or `High Waste` (most severe)
+- **QUALIFIER**: `Optimized`, `Minor Waste`, or `High Waste` (most severe)
 
 ### Report Structure
 
 ```
 BUILDING: [Building name] ([Address], [Building ID])
 ROOMS ANALYZED: [N]
-ISSUES: [N] ([count] high, [count] moderate) — omit line if ALL CLEAR
+ISSUES: [N] ([count] high, [count] minor) — omit line if ALL CLEAR
 
 SUMMARY: [1-2 sentences describing findings]
 
@@ -114,9 +113,9 @@ TOTALS	-	-	[sum]	[sum]	[sum]	[weighted avg]	[sum]
 
 CLASSIFICATION SUMMARY:
 🔴 High waste (>50%): [count] rooms - [kWh/year]
-🟡 Moderate waste (30-50%): [count] rooms - [kWh/year]
-🟠 Minor waste (15-30%): [count] rooms - [kWh/year]
+🟡 Minor waste (15-50%): [count] rooms - [kWh/year]
 🟢 Optimized (<15%): [count] rooms
+⚪ Data issues: [count] rooms
 
 BUILDING-WIDE EXTRAPOLATION: — omit if ALL CLEAR
 Confidence: [High | Medium | Low]
@@ -137,7 +136,7 @@ REPORT-START:
 HEADLINE: Ventilation waste analysis - ISSUES DETECTED - High Waste
 BUILDING: Södermalm Plaza (Götgatan 45, 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d)
 ROOMS ANALYZED: 10
-ISSUES: 4 (2 high, 2 moderate)
+ISSUES: 4 (2 high, 2 minor)
 
 SUMMARY: Found 2 rooms with severe 24/7 ventilation and 2 with consistent overnight baseline. High-waste rooms concentrated on Floor 3.
 
@@ -159,16 +158,16 @@ WASTE DATA (TSV):
 Room	Room_ID	Classification	Occupied_Ls_hrs	Wasted_Ls_hrs	Total_Ls_hrs	Waste_pct	kWh_year
 Conference Room A	dd3705e1-e0a0	HIGH	1140	1860	3000	62.0	38.7
 Training Room 1	aa1122bb-3344	HIGH	1050	1450	2500	58.0	30.2
-Meeting Room 5	bb2233cc-4455	MODERATE	980	680	1660	41.0	14.1
-Huddle Space 2	cc3344dd-5566	MODERATE	720	450	1170	38.5	9.4
+Meeting Room 5	bb2233cc-4455	MINOR	980	680	1660	41.0	14.1
+Huddle Space 2	cc3344dd-5566	MINOR	720	450	1170	38.5	9.4
 [5 OPTIMIZED rooms omitted]
 TOTALS	-	-	9850	5165	15015	34.4	107.5
 
 CLASSIFICATION SUMMARY:
 🔴 High waste (>50%): 2 rooms - 68.9 kWh/year
-🟡 Moderate waste (30-50%): 2 rooms - 23.5 kWh/year
-🟠 Minor waste (15-30%): 1 room - 8.7 kWh/year
+🟡 Minor waste (15-50%): 3 rooms - 32.2 kWh/year
 🟢 Optimized (<15%): 5 rooms
+⚪ Data issues: 0 rooms
 
 BUILDING-WIDE EXTRAPOLATION:
 Confidence: Medium
