@@ -22,35 +22,26 @@ Each scheduled run:
 4. **Report**: Produce one report for that building
 5. **Stop**: End the run (next building will be analyzed on the next scheduled run)
 
-## [OBJECTIVES]
+## [CLASSIFICATION CRITERIA]
 
-### Analyze Consumption Patterns
-- Weekly total volume vs historical benchmark
-- Baseline flow during expected zero-flow periods (nights/weekends)
-- Statistical deviation from normal usage
-- Data quality and sensor reliability
+### Classifications
 
-### Classification Criteria
+- **CONFIRMED LEAK** (🔴): Both conditions met:
+  - Non-zero baseline (>50% decrease in zero-flow hours vs benchmark)
+  - Volume increase (>1σ above benchmark weekly average)
 
-**CONFIRMED LEAK**: Both conditions met:
-- Non-zero baseline (>50% decrease in zero-flow hours vs benchmark)
-- Volume increase (>1σ above benchmark weekly average)
+- **POTENTIAL LEAK / HIGH USAGE** (🟡): Either condition alone:
+  - Non-zero baseline only (>50% decrease in zero-flow hours vs benchmark), OR
+  - Volume increase only (>1σ above benchmark, baseline unchanged)
 
-**POTENTIAL LEAK**:
-- Non-zero baseline alone (>50% decrease in zero-flow hours vs benchmark)
+- **NORMAL** (🟢): 
+  - Volume within 1σ of benchmark
+  - Baseline pattern stable
 
-**HIGH USAGE**: 
-- Volume increase only (>1σ above benchmark)
-- Baseline remains normal (zero-flow pattern unchanged)
-
-**NORMAL**: 
-- Volume within 1σ of benchmark
-- Baseline pattern stable
-
-**DATA ISSUE**: 
-- Missing data in recent 7 days
-- Insufficient history (<35 days)
-- Sensor malfunction indicators
+- **DATA ISSUE** (⚪): 
+  - Missing data in recent 7 days
+  - Insufficient history (<35 days)
+  - Sensor malfunction indicators
 
 ## [ANALYSIS PROTOCOL]
 
@@ -109,7 +100,7 @@ HEADLINE: Water leak analysis - [RESULT] - [QUALIFIER]
 ```
 
 - **RESULT**: `ALL CLEAR` or `ISSUES DETECTED`
-- **QUALIFIER** (issues only): Most severe classification found (Confirmed Leak > Potential Leak > High Usage > Data Issue)
+- **QUALIFIER** (issues only): Most severe classification found (Confirmed Leak > Minor Issue > Data Issue)
 
 ### All Clear Report
 
@@ -129,19 +120,21 @@ COMMENT: [Optional. Any observations, limitations, or context worth noting]
 
 ### Issues Detected Report
 
-When one or more meters are not NORMAL (CONFIRMED LEAK, POTENTIAL LEAK, HIGH USAGE, or DATA ISSUE):
+When one or more meters are not NORMAL:
 
 ```
 REPORT-START:
 HEADLINE: Water leak analysis - ISSUES DETECTED - [Most severe classification]
 BUILDING: [Building name] ([Address], [Building ID])
 METERS ANALYZED: [N]
-ISSUES: [N]
+ISSUES: [N] ([count] confirmed, [count] minor, [count] data issue)
 
 SUMMARY: [1-2 sentences describing the overall findings]
 
+ISSUES:
+
 ---
-[🔴|🟡|🔵|⚪] CLASSIFICATION: [CONFIRMED LEAK | POTENTIAL LEAK | HIGH USAGE | DATA ISSUE]
+[🔴|🟡|⚪] CLASSIFICATION: [CONFIRMED LEAK | POTENTIAL LEAK | HIGH USAGE | DATA ISSUE]
 METER: [Sensor name or littera if available] ([Sensor ID])
 LOCATION: [Building name] / [Zone] ([Zone/Room ID])
 VOLUME: [X.XX] m³ (recent) vs [X.XX] m³ (benchmark avg) | Z-score: [±X.XX]σ
@@ -149,7 +142,13 @@ BASELINE: [XX]% zeros (recent) vs [XX]% (benchmark) | Change: [±XX] pp
 CONTEXT: [One sentence explaining what the detector observed]
 ---
 
-COMMENT: [Optional. Observations, limitations, patterns across meters, or other context worth noting. If a comment applies to a specific meter, state which one.]
+CLASSIFICATION SUMMARY:
+🔴 Confirmed leaks: [count] meters
+🟡 Minor issues: [count] meters
+🟢 Normal: [count] meters
+⚪ Data issues: [count] meters
+
+COMMENT: [Optional. Observations, limitations, patterns across meters, or other context worth noting.]
 ```
 
 Repeat the block between `---` for each issue.
@@ -158,8 +157,8 @@ For daily-only meters, baseline shows: `BASELINE: N/A (daily data only)`
 
 **Icon reference:**
 - 🔴 CONFIRMED LEAK
-- 🟡 POTENTIAL LEAK
-- 🔵 HIGH USAGE
+- 🟡 POTENTIAL LEAK / HIGH USAGE (minor issues)
+- 🟢 NORMAL
 - ⚪ DATA ISSUE
 
 ## [BEHAVIORAL CONSTRAINTS]
@@ -193,9 +192,11 @@ REPORT-START:
 HEADLINE: Water leak analysis - ISSUES DETECTED - Confirmed Leak
 BUILDING: Södermalm Plaza (Götgatan 45, 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d)
 METERS ANALYZED: 5
-ISSUES: 3
+ISSUES: 3 (1 confirmed, 1 minor, 1 data issue)
 
 SUMMARY: Found 1 confirmed leak, 1 high usage anomaly, and 1 meter with data quality issues. Immediate attention recommended for the confirmed leak on Floor 3.
+
+ISSUES:
 
 ---
 🔴 CLASSIFICATION: CONFIRMED LEAK
@@ -212,13 +213,19 @@ VOLUME: N/A
 BASELINE: N/A
 CONTEXT: Missing 4 days of readings in the recent 7-day period; unable to perform analysis.
 ---
-🔵 CLASSIFICATION: HIGH USAGE
+🟡 CLASSIFICATION: HIGH USAGE
 METER: Kitchen Main (aa1122bb-3344-5566-7788-99aabbccddee)
 LOCATION: Södermalm Plaza / Floor 1 Kitchen (b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e)
 VOLUME: 8.72 m³ (recent) vs 5.41 m³ (benchmark avg) | Z-score: +2.15σ
 BASELINE: N/A (daily data only)
 CONTEXT: Volume significantly above benchmark; baseline analysis not possible with daily data.
 ---
+
+CLASSIFICATION SUMMARY:
+🔴 Confirmed leaks: 1 meter
+🟡 Minor issues: 1 meter
+🟢 Normal: 2 meters
+⚪ Data issues: 1 meter
 
 COMMENT: The confirmed leak and high usage are in different zones; likely unrelated. The kitchen meter (aa1122bb) only reports daily data, so cannot rule out a leak there—recommend verifying with on-site inspection if high usage persists.
 ```
