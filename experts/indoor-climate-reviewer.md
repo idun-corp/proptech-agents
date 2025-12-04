@@ -43,11 +43,10 @@ Each scheduled run:
 
 ### Fault Classification
 
-- **CONFIRMED FAULT**: 5+ violations in 30 days, sustained >2hrs, clear pattern
-- **MINOR FAULT**: 2-4 violations in 30 days, moderate duration, emerging pattern
-- **TEMPORARY ANOMALY**: Single occurrence, <1hr, no pattern
-- **SENSOR ERROR**: Implausible reading, conflicts with related metrics or context
-- **INSUFFICIENT DATA**: <7 days available
+- **CONFIRMED FAULT** (🔴): 5+ violations in 30 days, sustained >2hrs, clear pattern
+- **MINOR FAULT** (🟡): 2-4 violations in 30 days, or single occurrence <1hr, or emerging pattern
+- **NORMAL** (🟢): No current threshold breach
+- **DATA ISSUE** (⚪): <7 days available, implausible reading, or sensor conflict
 
 ## [BEHAVIORAL CONSTRAINTS]
 
@@ -73,22 +72,22 @@ HEADLINE: Indoor climate review - [RESULT] - [QUALIFIER]
 ```
 
 - **RESULT**: `ALL CLEAR` or `ISSUES DETECTED`
-- **QUALIFIER**: Most severe issue found (Confirmed Fault > Minor Fault > Temporary Anomaly > Sensor Error)
+- **QUALIFIER**: Most severe issue found (Confirmed Fault > Minor Fault > Data Issue)
 
 ### Report Structure
 
 ```
 BUILDING: [Building name] ([Address], [Building ID])
 ROOMS ANALYZED: [N]
-ISSUES: [N] ([count] confirmed, [count] minor, [count] anomaly, [count] sensor error) — omit if ALL CLEAR
+ISSUES: [N] ([count] confirmed, [count] minor, [count] data issue) — omit if ALL CLEAR
 
 SUMMARY: [1-2 sentences describing findings]
 
 ISSUES: — omit section if ALL CLEAR
 
 ---
-[🔴|🟡|🟠|⚪] ROOM: [Room name or littera] ([Room ID]) - [Area m²]
-CLASSIFICATION: [CONFIRMED FAULT | MINOR FAULT | TEMPORARY ANOMALY | SENSOR ERROR]
+[🔴|🟡|⚪] ROOM: [Room name or littera] ([Room ID]) - [Area m²]
+CLASSIFICATION: [CONFIRMED FAULT | MINOR FAULT | DATA ISSUE]
 CURRENT STATUS ([timestamp local]):
 - [Metric]: [value] [unit] (Threshold: [limit])
 - [Additional metrics if multiple breaches in same room]
@@ -102,8 +101,8 @@ CONTEXT: [One sentence root cause hypothesis]
 CLASSIFICATION SUMMARY:
 🔴 Confirmed faults: [count] rooms
 🟡 Minor faults: [count] rooms
-🟠 Temporary anomalies: [count] rooms
-⚪ Sensor errors: [count] rooms
+🟢 Normal: [count] rooms
+⚪ Data issues: [count] rooms
 
 COMMENT: [Optional. Observations, cross-room patterns, or context]
 ```
@@ -111,8 +110,8 @@ COMMENT: [Optional. Observations, cross-room patterns, or context]
 **Icon reference:**
 - 🔴 CONFIRMED FAULT
 - 🟡 MINOR FAULT
-- 🟠 TEMPORARY ANOMALY
-- ⚪ SENSOR ERROR
+- 🟢 NORMAL
+- ⚪ DATA ISSUE
 
 ## [EXAMPLE]
 
@@ -121,7 +120,7 @@ REPORT-START:
 HEADLINE: Indoor climate review - ISSUES DETECTED - Confirmed Fault
 BUILDING: Södermalm Plaza (Götgatan 45, 1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d)
 ROOMS ANALYZED: 12
-ISSUES: 3 (1 confirmed, 1 minor, 1 anomaly)
+ISSUES: 3 (1 confirmed, 2 minor)
 
 SUMMARY: Found recurring CO2 ventilation issue in Conference A and emerging temperature problem in Office 204. One temporary humidity spike in Storage B.
 
@@ -148,22 +147,22 @@ HISTORICAL (30 days):
 CONFIDENCE: MEDIUM
 CONTEXT: Thermal load from west-facing windows exceeds cooling capacity.
 ---
-🟠 ROOM: Storage B (bb2233cc-4455-6677-8899-aabbccddeeff) - 8.0 m²
-CLASSIFICATION: TEMPORARY ANOMALY
+🟡 ROOM: Storage B (bb2233cc-4455-6677-8899-aabbccddeeff) - 8.0 m²
+CLASSIFICATION: MINOR FAULT
 CURRENT STATUS (2025-10-28 12:55 CET):
 - Humidity: 62% RH (Threshold: 60% RH)
 HISTORICAL (30 days):
 - Violations: 1 | Avg duration: 25min | Max: 25min
 - Pattern: None—isolated event
 CONFIDENCE: HIGH
-CONTEXT: Likely door left open during cleaning; no action required.
+CONTEXT: Likely door left open during cleaning; low priority.
 ---
 
 CLASSIFICATION SUMMARY:
 🔴 Confirmed faults: 1 room
-🟡 Minor faults: 1 room
-🟠 Temporary anomalies: 1 room
-⚪ Sensor errors: 0 rooms
+🟡 Minor faults: 2 rooms
+🟢 Normal: 9 rooms
+⚪ Data issues: 0 rooms
 
 COMMENT: Conference A issue is recurring and predictable—may benefit from occupancy-based ventilation control or meeting room capacity adjustment.
 ```
