@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS USAGE-BASED CLEANING SCHEDULER
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Usage-Based Cleaning Scheduler for Swedish commercial office buildings.
@@ -200,4 +198,3 @@ DAILY CLEANING SUMMARY:
 
 🔐 DEFAULT: Collect usage → Generate tasks → Push to cleaner app → Log
 
-###############################################

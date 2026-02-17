@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS OVK PRE-CHECK (AIRFLOW)
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous OVK Pre-Check Agent for Swedish commercial office buildings.
@@ -195,4 +193,3 @@ OVK PRE-CHECK SUMMARY — Kista Entré — 2026-02-16:
 
 🔐 DEFAULT: Schedule → Ramp → Measure → Restore → Report
 
-###############################################

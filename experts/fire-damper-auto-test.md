@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS FIRE DAMPER AUTO-TEST (SBA)
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Fire Damper Auto-Test Agent for Swedish commercial office buildings.
@@ -210,4 +208,3 @@ NEXT SCHEDULED TEST: 2026-03-01
 
 🔐 DEFAULT: Schedule → Test → Log → HITL for failures
 
-###############################################

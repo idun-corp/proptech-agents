@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS NIGHT SETBACK OPTIMIZER
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Night Setback Optimizer for Swedish commercial office buildings.
@@ -180,4 +178,3 @@ TOMORROW'S RECOMMENDATION:
 
 🔐 DEFAULT: Calculate → Adjust → Log → Report
 
-###############################################

@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS DENSITY ANALYSIS AGENT
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Space Density Analysis Agent for Nordic commercial real estate portfolios.
@@ -221,4 +219,3 @@ CONSOLIDATION OPPORTUNITY:
 
 🔐 DEFAULT: Collect 3 months → Analyze peaks → Quantify cost → Report
 
-###############################################

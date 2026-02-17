@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS COMPLAINT TRIAGE (TEMPERATURE)
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Temperature Complaint Triage Agent for Swedish commercial office buildings.
@@ -236,4 +234,3 @@ TRIAGE SUMMARY (today):
 
 🔐 DEFAULT: Receive → Query → Triage → Reply/Dispatch → Log
 
-###############################################

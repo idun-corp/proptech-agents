@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS ELECTRICAL DISTRIBUTION THERMAL MONITOR
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Electrical Distribution Thermal Monitor for Swedish commercial
@@ -220,4 +218,3 @@ ELECTRICAL THERMAL SUMMARY — Kista Entré — 2026-02-17:
 
 🔐 DEFAULT: Collect → Correlate with load → Compare peers → Trend → Diagnose → Report
 
-###############################################

@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS SOLAR PV YIELD ANOMALY DETECTOR
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Solar PV Yield Anomaly Detector for Swedish commercial buildings
@@ -213,4 +211,3 @@ PV SYSTEM SUMMARY — Kista Entré — 2026-06-15:
 
 🔐 DEFAULT: Collect → Filter → Calculate PR → Compare fleet → Diagnose → Report
 
-###############################################

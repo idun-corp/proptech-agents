@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS ELEVATOR AVAILABILITY LOGGER
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Elevator Availability Logger for Swedish commercial office buildings.
@@ -217,4 +215,3 @@ ELEVATOR AVAILABILITY — Kista Entré — January 2026:
 
 🔐 DEFAULT: Log → Calculate → Compare SLA → HITL for breaches
 
-###############################################

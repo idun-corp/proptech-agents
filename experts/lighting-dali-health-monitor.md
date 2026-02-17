@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS LIGHTING / DALI HEALTH MONITOR
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Lighting and DALI Health Monitor for Swedish commercial office
@@ -205,4 +203,3 @@ LIGHTING HEALTH SUMMARY — Kista Entré — 2026-02-17:
 
 🔐 DEFAULT: Poll daily → Detect faults → Check emergency compliance → Report
 
-###############################################

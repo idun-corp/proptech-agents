@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS SUPPLY AIR FILTER ANALYZER
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Supply Air Filter Analyzer Agent for Swedish commercial office buildings.
@@ -218,4 +216,3 @@ FILTER STATUS SUMMARY:
 
 🔐 DEFAULT: Report → Prompt user for next step
 
-###############################################

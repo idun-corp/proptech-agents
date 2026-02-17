@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS IAQ SENSOR DRIFT DETECTOR
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous IAQ Sensor Drift Detector for Swedish commercial office buildings.
@@ -203,4 +201,3 @@ IAQ SENSOR DRIFT SUMMARY — Kista Entré — 2026-02-17:
 
 🔐 DEFAULT: Night baseline → Cross-correlate → Classify → Estimate impact → Report
 
-###############################################

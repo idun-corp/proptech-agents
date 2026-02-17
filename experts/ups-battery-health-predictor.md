@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS UPS BATTERY HEALTH PREDICTOR
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous UPS Battery Health Predictor for Swedish commercial office buildings.
@@ -216,4 +214,3 @@ UPS BATTERY HEALTH SUMMARY — Kista Entré — 2026-02-17:
 
 🔐 DEFAULT: Collect → Normalize → Compare to baseline → Trend → Predict EOL → Report
 
-###############################################

@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS PUMP CAVITATION & BEARING MONITOR
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Pump Cavitation & Bearing Monitor for Swedish commercial office
@@ -213,4 +211,3 @@ PUMP HEALTH SUMMARY — Kista Entré — 2026-02-17:
 
 🔐 DEFAULT: Collect → Normalize to operating point → Analyze → Trend → Diagnose → Report
 
-###############################################

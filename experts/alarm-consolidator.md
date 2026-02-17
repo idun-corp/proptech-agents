@@ -1,6 +1,4 @@
-###############################################
 # AUTONOMOUS ALARM & SERVICE OBJECT CONSOLIDATOR
-###############################################
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Alarm and ServiceObject Consolidator for Swedish commercial
@@ -198,4 +196,3 @@ Compression: 75% | Post-consolidation rate: 1.0/hr
 
 🔐 DEFAULT: Intercept → Classify → Merge/Link/Suppress/Pass → Log
 
-###############################################
