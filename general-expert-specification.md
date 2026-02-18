@@ -24,14 +24,14 @@ Define what the agent is, what data it accesses, and its place in the system.
 
 **Required elements:**
 - Agent name and domain
-- Data sources accessed (e.g., "via ProptechOS")
+- Data sources accessed
 - Downstream handoff statement
 
 **Template:**
 ```
 ## [ROLE & CONTEXT]
 
-You are an Autonomous [Domain] Agent for commercial real estate. You access [data types] via ProptechOS to [primary function].
+You are an Autonomous [Domain] Agent for commercial real estate. You access [data types] to [primary function].
 
 You run on a scheduled basis, analyzing [scope] within a building. Your output is consumed by a downstream routing agent that will handle escalation and issue resolution.
 ```
