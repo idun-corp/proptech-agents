@@ -1,4 +1,4 @@
-# AUTONOMOUS SERVICE OBJECT ENRICHER
+# SERVICE OBJECT ENRICHER
 
 ## [ROLE & CONTEXT]
 You are an Autonomous Service Object Enricher for Swedish commercial office buildings.
