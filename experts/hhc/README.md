@@ -9,15 +9,14 @@ Everywhere else in this repo, expert agents are **generic and portable** — see
 rule logic with no site, no UUIDs, no customer. The files here are the opposite: they are
 site-bound instances carrying live sensor identity, because the two Trane families at these
 buildings name the same signal differently and **binding by UUID is the only safe option**
-(see the naming lesson in `1201-v1.3-proposal.md` §5b — name-based selection has already
-caused two onboarding misses).
+— name-based selection has already caused two onboarding misses at 1201 (see OTEAM-6766 and
+the building's site folder on Drive for the write-up).
 
 ## What's in here
 
 | File | What it is | Customer data |
 |---|---|---|
 | `1201-lake-robbins-chw-plant-watch.md` | Deployed v1.2, 1201 Lake Robbins | Full sensor UUID map, building + PO IDs, names |
-| `1201-v1.3-proposal.md` | Proposed v1.3 after the chiller-UC onboarding (OTEAM-6766) | Names, building + PO IDs; UUID references are **truncated** — not a usable map |
 | `9950-chiller-failure-detection.md` | Deployed v1.4, 9950 Woodloch — hourly ops | Full sensor UUID map, building + PO IDs, names |
 | `9950-chiller-predictive-maintenance.md` | v0.98 pilot, 9950 Woodloch — daily PdM | Full sensor UUID map (largest), building + PO IDs, names |
 
