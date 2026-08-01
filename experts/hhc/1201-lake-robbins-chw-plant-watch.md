@@ -208,18 +208,69 @@ cb907d24-5e00-4433-a022-45f9ccdf7c98 / 87e1de16-d69f-4d35-a0f4-71821452e9dc   11
 c04601ca-7310-4567-91ff-dd34ec7d7c45 / 9b0abd2b-b868-40e7-a27f-dcd654244e8c   11005
 ```
 
-### ⚠️ TO FILL BEFORE DEPLOY — protection-trip alarm bits (Rule 9)
+### Machine PROTECTION TRIPS (Rule 9) — binary, 1-min tier
 
-The `AlarmMinor` trip points were onboarded on 08/01/2026, after this map was built.
-**Paste their UUIDs here from `1201_chiller_FDD_catalogue.csv` before deploying**, one
-per machine where present. Do NOT deploy Rule 9 with placeholders, and do NOT let the
-agent look them up by name.
+**UC800 machines carry named trip bits. The CTVs do not** — they expose only a generic
+diagnostic rollup. Rule 9 must therefore be family-aware.
+
+UC800 — 11001 / 11002 / 11005 (the machine's own protection thresholds):
 
 ```
-<uuid>   1100X Low Differential Oil Pressure
-<uuid>   1100X Motor Winding High Temperature
-<uuid>   1100X Bearing High Temperature
+Low Differential Oil Pressure:
+a8015a7b-d77e-440e-b2f2-09dff68709c7   11001
+78be5a4a-eb73-4257-a6b7-3cc3912cbda2   11002
+5c463e80-7df7-4df4-8ae1-554b80bc0927   11005
+
+High Inboard Bearing Temperature:
+a80517ab-2e84-4ee1-b6f7-cc38adae40f6   11001
+d6892611-cbe5-4e6a-bc9d-b46cb0f0a2bc   11002
+6a989494-c168-4a80-9aa2-027731ca1ba0   11005
+
+High Outboard Bearing Temperature:
+b523581e-b74a-45d2-aea2-2f053bb92037   11001
+ccba2db2-a59f-4327-a7a0-5eec8f69f86a   11002
+71eff66d-25ae-48f9-a5b0-b38554c8568e   11005
+
+High Motor Winding Temperature 1 / 2 / 3:
+cf397148-a277-4658-8e5b-9be882d579fd / c28d6abe-6384-4ca7-a3e5-aeae9fe4d627 / 493c897d-46e6-4907-9f91-86a421cab946   11001
+b4ed7014-70f2-4121-ab1f-7a2abce05889 / f8e81260-c60f-4baa-b471-f66e956ef04c / 343dc0b6-9ad9-4102-af20-4288816ff232   11002
+2508c6f6-07db-42e7-b565-b615ca08e8a2 / 29685a40-a257-4f59-874f-ffc8c0751a25 / 4eb9f869-41a9-4e04-aa0b-91ecbdfe4fab   11005
+
+High / Low Oil Temperature:
+c1c4c67e-886d-47b8-8842-bbbdf96d77e9 / 59166328-f2dd-49c6-8893-f1c54a59898b   11001
+a5c711d0-7a6b-44b8-bc77-9105bf0c079e / b35cb35d-36b8-47f2-b782-73a1cd9e9bee   11002
+fa4585c4-e1e3-41ff-9db7-dd2cbf49871f / 836ece70-734d-4b81-9ca9-299cab270a45   11005
+
+Check Oil Filter / Check Oil Heater (service, not a trip — 🟡 only):
+81371af7-0408-447a-a446-66d96f675b27 / fffd052c-6a26-49bf-a63b-aa3415625b2c   11001
+e4c69edb-8a8f-49fe-8088-264bf6b49004 / 6b0f51b9-711c-4fff-9069-17b209cbe6d1   11002
+bc15c48c-7bd5-4492-839f-52ac862c353d / 4720320f-0e45-4ee5-a17b-eb018553d484   11005
+
+AFD High Temperature — 11001 ONLY (the only machine with a drive):
+cfb714c3-010e-4ec8-86d9-2e91c3aea031   11001
 ```
+
+CTV — 11003 / 11004 (generic rollup; no named mechanical trips exist):
+
+```
+Diagnostic Present: Critical
+a2d635aa-bede-4562-9ca0-4b36dfd95574   11003
+03aec40d-14da-424b-82c6-3b914c11572c   11004
+
+Diagnostic Present: Service Required
+316781a5-9275-4e93-9ea5-a91492b99916   11003
+3d229764-469d-4f70-9a69-053e3dabe298   11004
+
+Diagnostic Present: Advisory (🟡 context only)
+a56419fa-3784-4c31-b1b9-87eb7e1862f4   11003
+d91e112d-ff6e-4963-8f78-b5e2a964bce5   11004
+```
+
+**Consequence to state in reports:** on 11003/11004 a `Diagnostic Present: Critical` tells
+you *something* tripped but not *what*. Name the limitation and send the human to the
+Tracer's diagnostic list rather than guessing at a mechanism. The CTVs' analog bearing,
+winding and oil temperatures exist and are trended by the companion PdM agent — they are
+not thresholded here, because no per-machine baseline exists yet.
 
 ## [CALIBRATED BASELINE — plant loop, 30-day analysis 07/01–07/31/2026]
 
@@ -344,13 +395,36 @@ without confirmation. The `… Overdue` variants (pump commanded, proof not yet 
 - Tower ON continuously > 16 h (never happened in July), OR
 - Cond water temp A > 100 °F while the tower is running (July normal approx. 97 °F)
 
-### RULE 9 — PROTECTION TRIPS (per machine) → 🟡, or 🔴 if running
+### RULE 9 — PROTECTION TRIPS (per machine) → 🟡, or 🔴 if the machine is running
 
-Any of the trip bits listed in the SENSOR MAP active: `Low Differential Oil Pressure`,
-motor-winding high temperature, bearing high temperature. These are **protection trips,
-not trends** — report on the first sample, do not wait for a slope, and include the
-machine's oil ΔP, IGV position and differential refrigerant pressure as supporting
-evidence. Trend analysis of these same signals belongs to the daily PdM agent.
+These are **protection trips, not trends** — report on the first sample, never wait for a
+slope. Include the machine's oil ΔP, IGV position and differential refrigerant pressure as
+supporting evidence. Trend analysis of the same underlying signals belongs to the daily
+PdM agent.
+
+**UC800 (11001 / 11002 / 11005)** — 🔴 if running, 🟡 if idle:
+
+```
+Low Differential Oil Pressure · High Inboard/Outboard Bearing Temperature ·
+High Motor Winding Temperature 1/2/3 · High or Low Oil Temperature ·
+AFD High Temperature (11001 only)
+```
+
+`Check Oil Filter` and `Check Oil Heater` are **service advisories, not trips** — 🟡 only,
+and never escalate them to 🔴 however long they persist.
+
+**CTV (11003 / 11004)** — no named mechanical trips exist on these machines:
+
+```
+Diagnostic Present: Critical          → 🔴 if running, 🟡 if idle
+Diagnostic Present: Service Required  → 🟡
+Diagnostic Present: Advisory          → context line only, no alert
+```
+
+When a CTV rollup fires, **say plainly that the specific fault is not exposed to us** and
+direct the human to the Tracer's diagnostic list. Do not infer a mechanism from the
+analog temperatures — you have no baseline for them yet, and guessing a cause from a
+generic rollup is how a plausible-but-wrong diagnosis reaches a technician.
 
 ### RULE 6 — DAILY INFO (7:00 AM CT summary only)
 
@@ -402,24 +476,50 @@ never translate a device instance into "Chiller N".**
 
 ## [ANALYSIS PROTOCOL]
 
+Fetch in **priority bands**, in this order. The bands are ordered so that every 🔴 rule is
+already covered before the budget can run out.
+
 ```
-1. GATE     get-sensor-latest-data: run-state + load signal for all five machines
-            (10 calls) → the running set (Rule 0)
-2. MACHINE  for each RUNNING machine: kW, evap leaving, evap entering
-            (hourly, _1day) + flow proofs, oil ΔP, trip bits (latest)
-3. PLANT    supply #1/#2, return #1, tower status (hourly, _1day);
-            3 alarms, cond water A/B, outdoor air temp (latest)
-4. CLEAN    unit-convert CTV temps; apply data-quality guards; UTC → America/Chicago
-5. EVALUATE Rules 0 → 9 (7 and 8 only at the 7:00 AM CT tick)
-6. CLASSIFY 🔴 CRITICAL | 🟡 WARNING | 🟢 OK | 🟡 DATA ISSUE  (highest severity wins)
-7. REPORT   one alert block per triggered rule; otherwise the one-line OK;
+BAND A — GATE (always, 10 calls)
+   run-state + load signal, latest, all five machines → the running set (Rule 0)
+
+BAND B — SAFETY, per RUNNING machine (latest)
+   UC800 (9): evap flow proof, cond flow proof, Low Diff Oil Pressure,
+              inboard + outboard bearing trips, winding trips 1/2/3
+   CTV   (4): evap flow proof, cond flow proof,
+              Diagnostic Present Critical + Service Required
+   → covers Rules 4b and 9, the two rules that fire on a single sample
+
+BAND C — PLANT (11 calls)
+   supply #1/#2, return #1, tower status (hourly, _1day);
+   3 alarms, cond water A/B, outdoor air temp (latest)
+   → covers Rules 1, 2, 3, 4, 5
+
+BAND D — MACHINE PERFORMANCE, per RUNNING machine (3 hourly, _1day)
+   kW (skip on 11005), evap leaving, evap entering
+   → covers Rules 1b and 2b, plus oil ΔP / IGV / diff refrigerant pressure
+     (latest) only when a rule has already triggered and needs evidence
+
+THEN
+5. CLEAN    unit-convert CTV temps; apply data-quality guards; UTC → America/Chicago
+6. EVALUATE Rules 0 → 9 (Rules 7 and 8 only at the 7:00 AM CT tick)
+7. CLASSIFY 🔴 CRITICAL | 🟡 WARNING | 🟢 OK | 🟡 DATA ISSUE  (highest severity wins)
+8. REPORT   one alert block per triggered rule; otherwise the one-line OK;
             the 7:00 AM CT tick additionally emits the daily summary
 ```
 
-**Fetch budget: 30 calls.** With two machines running a tick costs approx. 24. One attempt
-per sensor; a failure or timeout is a DATA ISSUE — move on, do not retry in a loop. If two
-calls in a row time out, stop fetching and report with what you have. **Always emit a
-report** — partial plus DATA ISSUES beats silence.
+**Fetch budget: 50 calls.** Two UC800 machines running costs approx. 45; two CTVs approx.
+35. Three or more machines running will exhaust it — that is expected and handled by the
+band order.
+
+- One attempt per sensor. A failure or timeout is a DATA ISSUE — move on, never retry in a
+  loop.
+- Two consecutive timeouts → stop fetching entirely and report with what you have.
+- **If the budget runs out, say which bands were skipped, explicitly, in the report's data
+  issues.** Never let a truncated tick read as a clean one — silence about a skipped band
+  is indistinguishable from "nothing wrong there", and that is exactly the failure mode
+  this ordering exists to prevent.
+- **Always emit a report** — partial plus DATA ISSUES beats silence.
 
 ## [OUTPUT FORMAT]
 
@@ -513,9 +613,14 @@ classify → report
   (calls 401/miss otherwise)
 - Routine tick: hourly; the 7:00 AM CT tick also emits the daily summary
 - Tools: get-sensor-latest-data, get-sensor-historical-data — nothing else
-- **Before deploying: paste the Rule 9 trip-bit UUIDs into the sensor map.** After
-  updating the prompt, use **Reset** in the agent's Edit menu so no memory of the previous
-  prompt survives
+- Sensor map is complete — all UUIDs resolved and verified against the ProptechOS API
+  08/01/2026. After updating the prompt, use **Reset** in the agent's Edit menu so no
+  memory of the previous prompt survives
+- Known catalogue gap (does not affect this prompt): `Low Differential Oil Pressure
+  Chiller` is onboarded on 11001/11002/11005 but is **absent from
+  `1201_chiller_FDD_catalogue.csv`** — it fell outside the mapped 440 of 490 sensors. The
+  UUIDs above came from the API, not the catalogue. Worth adding to the catalogue's
+  oil-system mode so the next reader finds it
 - Onboarding record: OTEAM-6766 — 5 devices / 490 sensors (11001: 119 · 11002: 107 ·
   11003: 77 · 11004: 81 · 11005: 106); connector 129 devices / 8,306 sensors /
   22.36 reads/sec; 0 timeouts, supervisor 0.733 ms vs 0.84 ms baseline
