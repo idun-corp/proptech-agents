@@ -16,7 +16,8 @@ the building's site folder on Drive for the write-up).
 
 | File | What it is | Customer data |
 |---|---|---|
-| `1201-lake-robbins-chw-plant-watch.md` | Deployed v1.2, 1201 Lake Robbins | Full sensor UUID map, building + PO IDs, names |
+| `1201-lake-robbins-chw-plant-watch.md` | Deployed v1.3, 1201 Lake Robbins — hourly ops | Full sensor UUID map, building + PO IDs, names |
+| `1201-chiller-predictive-maintenance.md` | v0.1 pilot, 1201 Lake Robbins — daily PdM | Full sensor UUID map (largest), building + PO IDs, names |
 | `9950-chiller-failure-detection.md` | Deployed v1.4, 9950 Woodloch — hourly ops | Full sensor UUID map, building + PO IDs, names |
 | `9950-chiller-predictive-maintenance.md` | v0.98 pilot, 9950 Woodloch — daily PdM | Full sensor UUID map (largest), building + PO IDs, names |
 
