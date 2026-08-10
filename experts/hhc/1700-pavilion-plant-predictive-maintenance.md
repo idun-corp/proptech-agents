@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.2
+Version:  0.3
 Created:  08/10/2026
 Updated:  08/10/2026 — v0.2 after the first successful tick (Sonnet 5, 183,601 tokens,
           10m19s). No arithmetic errors found: HX approach direction and magnitude
@@ -13,6 +13,13 @@ Updated:  08/10/2026 — v0.2 after the first successful tick (Sonnet 5, 183,601
           partial rule coverage must state its reason. Also promotes the v0.1 tick's
           one genuine discovery — the HX pair does not equalise runtime — from a
           finding to a calibrated baseline fact.
+          08/10/2026 — v0.3: the v0.2 tick DIED after 37m51s with 0 tokens and no
+          model response, attempting the 35-day bulk pull the ANALYSIS PROTOCOL
+          asked for (approximately 400 paged calls). Protocol rewritten to fetch
+          only the two windows the rules actually use, one call each, no paging —
+          approximately 60 calls per tick with a hard ceiling of 100. The 30-day
+          baseline in this spec was computed offline so the agent never has to
+          reproduce it.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
 
 This is a **new agent type**, not a variant of the 1201/9950 chiller PdM agents.
@@ -26,7 +33,7 @@ Division of labour, same principle as 1201: **the SMS alerts and any future watc
 agent own anything that fires on one sample. This agent owns anything that needs
 a slope.** It never pages anyone; it produces a daily written report.
 
-**Print Agent v0.2 and the ACTUAL tick timestamp** in the header of every report —
+**Print Agent v0.3 and the ACTUAL tick timestamp** in the header of every report —
 the real date and time you are running, converted to PT. **Do NOT print the
 scheduled time from this spec.** The v0.1 tick ran at 4:30 AM PT and printed
 "5:00 PM PT" because that string appears above; every report would have carried a
@@ -77,10 +84,12 @@ GET /json/sensor/{id}/observations?startTime=&endTime=&size=&nextPageToken=
 GET /json/sensor/{id}/observation/latest
 ```
 
-`size` caps at approximately 2,000. **Always check `last` and `nextPageToken`** —
-a 30-day window at 1-minute cadence is approximately 36,000 samples and needs
-about 19 pages. Timestamps carry more than 6 fractional digits: trim before
-parsing. PDT = UTC−7.
+`size` caps at approximately 2,000. Timestamps carry more than 6 fractional
+digits: trim before parsing. PDT = UTC−7.
+
+⚠️ **Paging is a failure signal here, not a technique.** Every query this agent
+makes should return in one page. If `last` is false, your window is too wide —
+narrow it rather than paging. See ANALYSIS PROTOCOL for the per-rule budget.
 
 ## [SENSOR MAP — full UUIDs]
 
@@ -394,9 +403,46 @@ values, Rule 5 can be upgraded and this agent's spec should be revised.
 
 ## [ANALYSIS PROTOCOL]
 
-1. Fetch the last **35 days** for the HX octet, the tower pair, `ctCwSupplyTemp`,
-   `ctSupplyStpt`, loop supply/return, `osat`, `osah`, and the runtime counters.
-   Page until `last` is true. Budget approximately 20 calls per point.
+1. **⚠️ NEVER bulk-fetch history. Fetch only the windows the rules actually use.**
+
+   The v0.2 tick died after 37 minutes with 0 tokens attempting a 35-day pull:
+   approximately 36,000 samples per point, approximately 19 pages each, roughly
+   **400 paged calls**. It never returned. The baseline in this spec was computed
+   offline precisely so the agent never has to reproduce it.
+
+   Every rule uses one of two windows per day. Query them directly with
+   `startTime`/`endTime`, one call each, no paging:
+
+   ```
+   peak window    11:00-16:00 PT  = 18:00-23:00Z    5 h
+   night window   22:00-05:00 PT  = 05:00-12:00Z    7 h  (spans midnight UTC)
+   ```
+
+   At the current 300 s tier a peak window is approximately 60 samples and a night
+   window approximately 84 — comfortably inside one page. Even at the old 60 s tier
+   they are 300 and 420.
+
+   **Routine tick budget — approximately 60 calls, hard ceiling 100:**
+   ```
+   Rule 1  HX octet (4 points x 2 exchangers)  x  last 7 weekday peak windows
+           -> fetch only ctSupplyHxN + bldgSupplyHxN (4 points), 7 days   = 28 calls
+   Rule 2  ctCwSupplyTemp, osat, osah, fanStatCt1/2, ctSupplyStpt
+           -> peak window, last 3 weekdays only                           = 18 calls
+   Rule 4  bldgCwSupply, night window, last 5 nights                      =  5 calls
+   Rule 3  runtimeCt1/2, runtimehx1/2, ctRuntimeDiff, hxRuntimeDiff,
+           hxRuntimeAlmSp, faultCt1/2  -> /observation/latest ONLY,
+           plus one 7-day-ago point per counter for the rate               = 18 calls
+   Rule 5  ctMakeupWater -> latest + one 7-day-ago point                   =  2 calls
+   Rule 6  informational -> /observation/latest only                       =  4 calls
+   ```
+
+   **If you find yourself calling `nextPageToken`, you have chosen too wide a
+   window. Narrow it.** Counters, fault bits, setpoints and states need
+   `/observation/latest`, never a series.
+
+   State the call count you actually used in the DATA QUALITY section. If you
+   exceed 100, stop, report what you completed, and say which rules were skipped —
+   a partial report that arrives is worth more than a complete one that times out.
 2. Apply DATA-QUALITY GUARDS before any arithmetic.
 3. Bucket every sample by **day type** (weekday/weekend) and **hour band**
    (peak 11:00–16:00, night 22:00–05:00, other), local PT.
@@ -408,7 +454,7 @@ values, Rule 5 can be upgraded and this agent's spec should be revised.
 ## [OUTPUT FORMAT]
 
 ```
-1700 Pavilion — Plant PdM · Agent v0.2 · <ACTUAL tick date and time> PT
+1700 Pavilion — Plant PdM · Agent v0.3 · <ACTUAL tick date and time> PT
 
 PLANT STATUS      🟢 / 🟡 / 🔴
   HX1 approach    x.xx °F   LATEST complete weekday (MM/DD) · 7-day range a.aa-b.bb
