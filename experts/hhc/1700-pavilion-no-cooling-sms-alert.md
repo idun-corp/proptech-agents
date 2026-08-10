@@ -124,7 +124,7 @@ ALARM
 1700 Pavilion COOLING ALARM: {{serviceObject.tags.message}}. Check chillers + cooling towers.
 
 ALL CLEAR
-ALL CLEAR 1700: {{serviceObject.tags.alertName}} - back below alarm limit
+1700 Pavilion ALL CLEAR: {{serviceObject.tags.alertName}} - back below alarm limit. No action needed.
 ```
 
 House format: `1700 Pavilion [STATE]: [detail]. [what to do]` — building first,
@@ -204,6 +204,9 @@ All timestamps CEST; block times UTC.
 08/07 17:08   ALARM      77.33 °F   block 15:07:53Z = 77.3315   threshold 70 (test)
 08/07 17:28   ALL CLEAR             (earlier cycle)
 08/08–08/10   silent                40 h, OSAT to 107 °F, max 80.53 — correct
+08/10 10:48   ALARM      78.10 °F   block 08:47:53Z              threshold 70 (test)
+08/10 11:08   ALL CLEAR             block 09:07:53Z              threshold 85
+              ^ final pre-handover run on the exact production configuration
 ```
 
 Every SMS value matches its median block to 2 decimal places, and each arrived

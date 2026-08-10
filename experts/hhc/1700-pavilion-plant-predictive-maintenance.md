@@ -2,8 +2,17 @@
 
 ## [VERSION]
 
-Version:  0.1
+Version:  0.2
 Created:  08/10/2026
+Updated:  08/10/2026 — v0.2 after the first successful tick (Sonnet 5, 183,601 tokens,
+          10m19s). No arithmetic errors found: HX approach direction and magnitude
+          verified independently (agent 6.60 °F for 08/05 vs 6.53 computed here).
+          Four corrections: header must print the ACTUAL tick time, not the
+          scheduled one; headline must be the LATEST complete weekday, not the
+          window maximum; known incident dates must be excluded from trend rules;
+          partial rule coverage must state its reason. Also promotes the v0.1 tick's
+          one genuine discovery — the HX pair does not equalise runtime — from a
+          finding to a calibrated baseline fact.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
 
 This is a **new agent type**, not a variant of the 1201/9950 chiller PdM agents.
@@ -17,7 +26,14 @@ Division of labour, same principle as 1201: **the SMS alerts and any future watc
 agent own anything that fires on one sample. This agent owns anything that needs
 a slope.** It never pages anyone; it produces a daily written report.
 
-Print Agent v0.1 and the tick timestamp in the header of every report.
+**Print Agent v0.2 and the ACTUAL tick timestamp** in the header of every report —
+the real date and time you are running, converted to PT. **Do NOT print the
+scheduled time from this spec.** The v0.1 tick ran at 4:30 AM PT and printed
+"5:00 PM PT" because that string appears above; every report would have carried a
+time that was never true.
+
+If you are running outside the intended 5:00 PM PT window, say so in the header
+and state which day-buckets are therefore incomplete.
 
 ## [DISPLAY FORMAT — US]
 
@@ -188,6 +204,44 @@ Other calibration facts:
 - **Tower runtime over 30 days:** Ct1 +134 h, Ct2 +408 h. HX: Hx1 +711 h,
   Hx2 +407 h. Hx1 is lead, Ct2 is currently favoured.
 
+- **⚠️ THE TWO EQUIPMENT PAIRS BEHAVE OPPOSITELY — this is calibrated, not a
+  finding to rediscover each day:**
+
+```
+                   gap start   gap end     rate          verdict
+  CT  (ct2 - ct1)    -3,203     -2,929    +9.1 h/day    CONVERGING (equalising)
+  HX  (hx2 - hx1)    -4,462     -4,766   -10.0 h/day    WIDENING   (not equalising)
+```
+
+  The towers equalise as designed. **The heat exchangers do not.** Hx1 has accrued
+  approximately 10 h/day more than Hx2 for at least 30 consecutive days and the gap
+  now stands at 4,766 h. Either HX rotation is disabled or Hx1 is hard-set as lead.
+  Report the *rate*, and only escalate on a change in rate — a widening HX gap is
+  the established normal here, so flagging it every day is noise.
+
+  This also **partially confounds Rule 1**: an exchanger idle most of the time
+  fouls differently and has fewer hours in which to demonstrate its approach. Say
+  so whenever HX2's approach is reported as worse than HX1's.
+
+## [KNOWN INCIDENTS — exclude from all trend rules]
+
+Trend rules must **exclude these dates** and report the clean figure. Where an
+incident falls inside the window, report **both** — "including 08/05" and
+"excluding 08/05" — and never let the incident value become the headline.
+
+```
+08/04-08/05/2026   central plant outage. Electrical panel tripped; BMS controllers
+                   offline; controls contractor rewrote programming. Cooling lost
+                   approximately 11 h. Loop peaked 113.8 °F. Device 1200 comms gaps
+                   08/04 00:50-06:09 and 08/05 01:53-06:45 PT.
+08/08/2026         deliberate 20-minute connector stop for alert testing,
+                   12:03:37Z-12:23:33Z. Not a plant event.
+```
+
+The v0.1 tick's entire 7-day window sat on top of the 08/05 outage, so its
+headline number was a five-day-old incident value presented as current state.
+**Append to this list as incidents occur.**
+
 ## [DATA-QUALITY GUARDS — apply before every rule]
 
 1. **Discard values of exactly `0.0`** on every analog point. Approximately 0.2%
@@ -214,6 +268,16 @@ Other calibration facts:
 All rules compare **like with like**: same day type, same hour band, and where
 stated a similar entering-condition band. A rule that cannot find a comparable
 window reports **CALIBRATING**, never a number.
+
+**Two reporting rules that apply to every rule below:**
+
+1. **The headline figure is always the LATEST complete weekday peak window**, not
+   the maximum or the mean across the window. Show the range as context after it.
+   Leading with a window maximum makes a resolved past event read as a present
+   condition.
+2. **If a rule covers fewer days than the window allows, say why** — fan not
+   running, insufficient samples, incident excluded. Partial coverage reported
+   without a reason is indistinguishable from a clean result.
 
 ### RULE 1 — HEAT EXCHANGER FOULING (primary) → 🟡 WATCH / 🔴 ACT
 
@@ -259,10 +323,17 @@ Read `ctRuntimeDiff` (= `runtimeCt2` − `runtimeCt1`) against `ctRuntimeAlmSp`,
 the same for `hxRuntimeDiff` / `hxRuntimeAlmSp`. **The BAS already computes these
 and reports nowhere.**
 
-- Report the **convergence rate**, not the raw gap. Over 07/11–08/10 `ctRuntimeDiff`
-  moved **−3,203 → −2,929**, closing 274 h in 30 days.
-- 🟡 WATCH if the gap **widens** for 7 consecutive days, or if it stops converging
-  while both towers are healthy (`faultCtN` = 1).
+- Report the **rate**, not the raw gap.
+- **Towers:** baseline **+9.1 h/day converging**. 🟡 WATCH if the tower gap stops
+  converging, or reverses, while both towers are healthy (`faultCtN` = 1).
+- **Heat exchangers:** baseline **−10.0 h/day widening — this is the established
+  normal, do NOT raise it as a new finding every day.** 🟡 WATCH only on a
+  *change in rate* of more than approximately 3 h/day sustained a week, or if the
+  gap starts closing (which would mean the sequencing changed).
+- ⚠️ `hxRuntimeAlmSp` was observed **flat at 0** across the v0.1 tick's week.
+  Treat it as **suspected unconfigured** until verified — do not read 0 as "inside
+  the alarm band". Same posture as the CWP duplicate: an unset setpoint is not a
+  healthy one.
 - Cross-check `ctRotateSelect` (observed constant at 3), `ctRotateDay`,
   `ctRotateHour` and `ctManualRotate`.
 
@@ -337,26 +408,34 @@ values, Rule 5 can be upgraded and this agent's spec should be revised.
 ## [OUTPUT FORMAT]
 
 ```
-1700 Pavilion — Plant PdM · Agent v0.1 · MM/DD/YYYY 5:00 PM PT
+1700 Pavilion — Plant PdM · Agent v0.2 · <ACTUAL tick date and time> PT
 
 PLANT STATUS      🟢 / 🟡 / 🔴
-  HX1 approach    x.xx °F   (7-day median, weekday peak · baseline med 1.11 / p90 1.91)
-  HX2 approach    x.xx °F   (baseline med 2.75 / p90 5.60)
-  Tower approach  x.xx °F   vs derived wet bulb · setpoint xx.x °F
+  HX1 approach    x.xx °F   LATEST complete weekday (MM/DD) · 7-day range a.aa-b.bb
+                            · baseline med 1.11 / p90 1.91
+  HX2 approach    x.xx °F   LATEST complete weekday (MM/DD) · 7-day range a.aa-b.bb
+                            · baseline med 2.75 / p90 5.60
+  Tower approach  x.xx °F   vs derived wet bulb · setpoint xx.x °F · n days covered, why
   Night loop max  xx.xx °F  (baseline 82.98 · alarm 85.00)
-  Runtime gap     -x,xxx h  closing/widening x h/day
+  Runtime rate    CT +x.x h/day converging · HX -x.x h/day widening (both normal)
+  Incidents in window: none / 08/05 excluded — figures shown clean
 
 FINDINGS
   [rule] [light] one line each, with the number and the baseline it is measured against
+                 omit 🟢 rules entirely unless the number moved
 
 DATA QUALITY
-  zero rates, sample counts, dead signals still dead?
+  only what CHANGED, plus a one-line confirmation the known-dead signals are still dead
 
 OPEN QUESTIONS
   carry these forward until answered
 ```
 
-Routine days should be **one screen**. Do not restate the baseline table every day.
+**Routine days must fit one screen.** The v0.1 tick cost 183,601 tokens and 10
+minutes; most of that was restating unchanged context. Green rules whose numbers
+have not moved get a single summary line, not a paragraph each. Never restate the
+baseline table, the sensor map, or the dead-signal rationale — they are in this
+spec and the reader has it.
 
 ## [CONSTRAINTS]
 
@@ -385,6 +464,15 @@ Routine days should be **one screen**. Do not restate the baseline table every d
 
 ## [OPEN ITEMS]
 
+- **Why does the HX pair not equalise runtime while the towers do?** Hx1 is
+  approximately 4,766 h ahead and gaining approximately 10 h/day. Rotation
+  disabled, or Hx1 hard-set as lead? This is the v0.1 tick's one real discovery
+  and the best question to put to the site.
+- **Is `hxRuntimeAlmSp` configured?** Observed flat at 0. If unset it joins
+  `blowdownWater` and the CWP duplicate on the dead list.
+- **Verify the 08/05 comms-gap times.** The v0.1 tick reported approximately
+  06:00–09:00 PT; the outage analysis has 01:53–06:45 PT. One of them is wrong and
+  the times get quoted to the customer.
 - Identify what the `device 100005` VFD actually drives (tower fan, condenser
   pump, or building pump). Rule 6 is meaningless until then.
 - Resolve `bldgSupplyFlow` — genuine cycling or broken point?
