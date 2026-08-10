@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.5
+Version:  0.6
 Created:  08/10/2026
 History:  v0.1 first tick OK (183,601 tok). v0.2 added incident handling and
           report discipline. v0.3 cut a 400-call bulk pull that had timed out.
@@ -32,7 +32,7 @@ Division of labour, same principle as 1201: **the SMS alerts and any future watc
 agent own anything that fires on one sample. This agent owns anything that needs
 a slope.** It never pages anyone; it produces a daily written report.
 
-**Print Agent v0.5 and the ACTUAL tick timestamp** in the header of every report —
+**Print Agent v0.6 and the ACTUAL tick timestamp** in the header of every report —
 the real date and time you are running, converted to PT. **Do NOT print the
 scheduled time from this spec.** The v0.1 tick ran at 4:30 AM PT and printed
 "5:00 PM PT" because that string appears above; every report would have carried a
@@ -179,7 +179,8 @@ c4573bc2-f75c-4b7d-95a9-d9d33f916f4f   device 1200/bldgCwReturn
 ```
 dc3d9493-cb1d-4d0f-a552-118740319d57   device 1200/ctMakeupWater    ⚠ WRAPPING totalizer
 8982eb63-7027-4dd7-88af-cc7bbbf0709e   device 1200/chemTreatment
-bbb184ae-d47c-45ae-9ea6-97003b3079f5   device 100005/Power          VFD, load unconfirmed
+bbb184ae-d47c-45ae-9ea6-97003b3079f5   device 100005/Power          ⚠ declared kW, values are W
+                                       TOWER FAN DRIVE (see Rule 6)
 26fef554-ccb7-47a8-9e3d-92d0fd2c63ee   device 100005/kWh Counter
 7d3b54e5-1a70-4517-8c52-65d68e915f76   device 100005/Drive Output Speed
 a4dfa57a-f4d5-4696-a962-f73517f91f51   device 100005/Drive Running
@@ -388,9 +389,12 @@ and reports nowhere.**
 - **Towers:** baseline **+9.1 h/day converging**. 🟡 WATCH if the tower gap stops
   converging, or reverses, while both towers are healthy (`faultCtN` = 1).
 - **Heat exchangers:** baseline **−10.0 h/day widening — this is the established
-  normal, do NOT raise it as a new finding every day.** 🟡 WATCH only on a
-  *change in rate* of more than approximately 3 h/day sustained a week, or if the
-  gap starts closing (which would mean the sequencing changed).
+  normal, do NOT raise it as a new finding every day.**
+- ⚠️ **The rate estimate is noisy: budget ±2 h/day.** Observed across three ticks
+  against a +9.1 baseline: **+8.5, +7.2, +10.5**. That scatter comes from short
+  measurement windows, so **escalate only on a change of more than 4 h/day
+  sustained for a full week**, or if a gap reverses direction (which would mean
+  the sequencing itself changed). A 3 h/day trigger would fire on noise.
 - ⚠️ `hxRuntimeAlmSp` was observed **flat at 0** across the v0.1 tick's week.
   Treat it as **suspected unconfigured** until verified — do not read 0 as "inside
   the alarm band". Same posture as the CWP duplicate: an unset setpoint is not a
@@ -420,20 +424,44 @@ Daily consumption from `ctMakeupWater`, **rollover-aware** (see GUARD 4).
 
 - Trend a 7-day mean against a 30-day mean, normalised by tower runtime hours
   (`runtimeCt1` + `runtimeCt2` accrual).
+- ⚠️ **Reuse Rule 3's runtime series. Do not re-fetch and do not skip for budget.**
+  The v0.5 tick reported it "was not pulled separately this tick" when the same
+  data was already in context from Rule 3.
 - 🟡 WATCH: 7-day mean per tower-hour exceeds the 30-day mean by more than 25%.
 - Rising makeup per tower-hour with no weather explanation = **basin leak,
   overflow, or a stuck float**.
 
 ⚠️ **Cycles of concentration cannot be computed** — see DEAD SIGNALS.
 
-### RULE 6 — VFD ENERGY (CONDITIONAL) → informational only
+### RULE 6 — TOWER FAN ENERGY → 🟡 WATCH
 
-Trend `Power` and `kWh Counter` against tower/pump runtime, plus
-`Drive Heatsink Temp` and `Motor Current`.
+**The `device 100005` VFD drives a cooling tower fan.** Established 08/10 by
+correlating `Drive Running` against fan status over 161 samples:
+`fanStatCt2` **93.8%**, `fanStatCt1` 53.4%, and **no tower fan ever ran while the
+drive was off** (0 of 60 off-samples for Ct1, 1 of 60 for Ct2). Whether it is
+Ct2's dedicated drive or a shared drive following the staged tower is not yet
+separable, because Ct2 currently carries roughly 3x Ct1's hours.
 
-- **Do not compute energy per unit flow until `bldgSupplyFlow` is resolved**
-  (GUARD 3) and until the drive's actual load is identified. Report both as open
-  questions rather than producing a number that looks authoritative.
+**This removes the old blocker.** The rule waited on `bldgSupplyFlow`, which is
+41% zeros and unusable. A fan drive does not need flow:
+
+```
+metric = kWh Counter delta  /  (runtimeCt1 + runtimeCt2) accrual     kWh per tower run-hour
+```
+
+Both inputs are healthy. Reuse Rule 3's runtime series.
+
+- ⚪ CALIBRATING until 14 clean days exist — there is no baseline for this yet.
+- Once calibrated: 🟡 WATCH on a 7-day mean more than 15% above the 30-day mean at
+  comparable wet bulb. Rising kWh per run-hour means the fan is working harder for
+  the same duty — fill fouling, drift eliminator blockage, or a failing bearing.
+- Report `Motor Current`, `Drive Motor Voltage` and `Drive Output Frequency`
+  alongside. A current rise at constant frequency is a mechanical load increase.
+
+⚠️ **`Power` is mislabelled in the model.** It is declared `ActivePowerTotal` in
+**KiloW** but the values (15,730–23,550) are **Watts**. Cross-check: 3-phase 480 V
+at 33.1 A and 0.85 power factor is approximately 23 kW. **Divide by 1,000, and
+state that you have done so.** Flagged for correction in the twin.
 
 ### RULE 7 — DATA-QUALITY WATCHDOG → 🟡 DATA ISSUE
 
@@ -478,7 +506,10 @@ them without IDs.
    Rule 1   ctSupplyHx1, bldgSupplyHx1, ctSupplyHx2, bldgSupplyHx2
             period _7days, aggregation RAW                            4 calls
             -> filter to 11:00-16:00 PT yourself; that is the peak bucket
-   Rule 2   ctCwSupplyTemp, osat, osah   _3days hourly                3 calls
+   Rule 2   ctCwSupplyTemp, osat, osah   _7days hourly                3 calls
+            (_7days, NOT _3days: a 3-day window ending Monday contains exactly
+             one weekday, so the 5-weekday WATCH test could never run. v0.5 hit
+             this and reported CALIBRATING for a reason that was my error.)
             fanStatCt1, fanStatCt2, ctSupplyStpt   latest             3 calls
    Rule 4   bldgCwSupply   _7days hourly                              1 call
    Rule 3   runtimeCt1/2, runtimehx1/2   _7days daily                 4 calls
@@ -507,41 +538,69 @@ them without IDs.
 5. Run Rules 1–7. Any rule lacking a comparable window reports **CALIBRATING**.
 6. Never compare a weekday to a weekend, or a peak window to a night window.
 
+## [STATUS LIGHTS]
+
+PLANT STATUS = the **worst light of any rule**. The scale:
+
+```
+🔴 ACT          a rule breached its escalation threshold
+🟡 WATCH        trending toward one, or a DATA ISSUE affects a reported number
+🟢 OK           evaluated, within range
+⚪ CALIBRATING  not enough window yet — NOT a fault, EXCLUDED from the roll-up
+```
+
+**CALIBRATING is not amber.** v0.4 rolled it up to 🟡 and v0.5 did not; both read
+the previous wording defensibly. A rule that lacks history is not a plant
+condition. Run timing is likewise excluded — an off-schedule tick is flagged in
+the header, never in the light. **The light describes the plant, not the run.**
+
 ## [OUTPUT FORMAT]
 
+**Tables and bullets. No prose paragraphs in FINDINGS.** The v0.5 report was hard
+to scan because each finding ran to four or five lines of continuous text. One row
+per rule; keep any reasoning to a single clause.
+
 ```
-1700 Pavilion — Plant PdM · Agent v0.5 · <ACTUAL tick date and time> PT
+1700 Pavilion — Plant PdM · Agent v0.6 · <ACTUAL date, time> PT
+<one line ONLY if off-schedule or a rule was skipped>
 
-PLANT STATUS      🟢 / 🟡 / 🔴   <- the WORST light of any RULE below.
-                                     A 🟡 DATA ISSUE makes the plant status 🟡.
-                                     Run timing does NOT: an off-schedule tick is
-                                     flagged in the header, never in the light.
-                                     The light describes the plant, not the run.
-  HX1 approach    x.xx °F   LATEST complete weekday (MM/DD) · 7-day range a.aa-b.bb
-                            · baseline med 1.11 / p90 1.91
-  HX2 approach    x.xx °F   LATEST complete weekday (MM/DD) · 7-day range a.aa-b.bb
-                            · baseline med 2.75 / p90 5.60
-  Tower approach  x.xx °F   vs derived wet bulb · setpoint xx.x °F · n days covered, why
-  Night loop max  xx.xx °F  (baseline 82.98 · alarm 85.00)
-  Runtime rate    CT +x.x h/day converging · HX -x.x h/day widening (both normal)
-  Incidents in window: none / 08/05 excluded — figures shown clean
+PLANT STATUS  🟢 / 🟡 / 🔴
 
-FINDINGS
-  [rule] [light] one line each, with the number and the baseline it is measured against
-                 omit 🟢 rules entirely unless the number moved
+| Metric          | Latest   | Baseline          | Note                        |
+|-----------------|----------|-------------------|-----------------------------|
+| HX1 approach    | x.xx °F  | med 1.11 p90 1.91 | 08/07 raw n=58 · 7d x.x-y.y |
+| HX2 approach    | x.xx °F  | med 2.75 p90 5.60 | 08/07 raw n=59 · 7d x.x-y.y |
+| Tower approach  | x.xx °F  | p90 10.78         | setpoint xx.x °F            |
+| Night loop max  | xx.xx °F | 82.98 · alarm 85  | n nights                    |
+| CT runtime rate | +x.x h/d | +9.1              | converging                  |
+| HX runtime rate | -x.x h/d | -10.0             | widening, normal            |
+| Fan kWh/run-h   | x.xx     | (calibrating)     | Rule 6                      |
 
-DATA QUALITY
-  only what CHANGED, plus a one-line confirmation the known-dead signals are still dead
+raw vs hourly on the anchor day: HX1 Dx.xx · HX2 Dx.xx
+
+| Rule | Light | One-line finding |
+|------|-------|------------------|
+| 1 HX fouling | 🟢 | both under p90, HX2 trending down 5.45->2.52 |
+| 2 Tower      | 🟢 | 1.68 vs p90 10.78 |
+| ...          |    | |
+
+CHANGED SINCE LAST TICK
+  - bullets only. If nothing changed, write "nothing".
 
 OPEN QUESTIONS
-  carry these forward until answered
+  - bullets. Drop any that got answered.
 ```
 
-**Routine days must fit one screen.** The v0.1 tick cost 183,601 tokens and 10
-minutes; most of that was restating unchanged context. Green rules whose numbers
-have not moved get a single summary line, not a paragraph each. Never restate the
-baseline table, the sensor map, or the dead-signal rationale — they are in this
-spec and the reader has it.
+**Rules for the tables:**
+
+- **A 🟢 rule whose number has not moved gets one line and no explanation.**
+  Explanations are for lights that changed or numbers near a threshold.
+- **Never restate** the baseline table, the sensor map, the dead-signal list or
+  the incident register. They are in this spec and the reader has it.
+- **DATA QUALITY is a delta section**, not an inventory. If the dead signals are
+  still dead and the tier is unchanged, that is one line. Elaborate only on what
+  is new.
+- Call count and any skipped rules go on the last line.
 
 ## [CONSTRAINTS]
 
