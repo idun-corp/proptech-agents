@@ -249,6 +249,11 @@ request for a `Count` aggregation on Sensor Observations, so a rule can read
 
 ## [OPERATING NOTES]
 
+- **While PLAT-5687 is open, silence detection is manual:**
+  `1700-pavilion-daily-manual-check.md` covers the §3 gap (silence rather than
+  errors) and the §1 latching problem, by reading observation freshness directly
+  instead of waiting for a trigger. Run it 13:00–15:00 CEST — that is the Las
+  Vegas night.
 - Useful zero-data-loss test trick: shrink the Aggregation Period **below the
   sensor's publishing cadence** to manufacture a guaranteed-empty window. The
   median publishes at `:07 / :27 / :47` and executions run at `:34`, so a

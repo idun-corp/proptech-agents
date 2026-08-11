@@ -2,9 +2,14 @@
 
 ## [VERSION]
 
-Version:  1.0
+Version:  1.1
 Created:  08/10/2026
+Updated:  08/11/2026 — alarm text: "chillers" -> "cooling towers + heat
+          exchangers". This building has no chillers.
 Status:   **DEPLOYED AND VALIDATED** — alarm and all-clear both proven end to end.
+          ⚠️ **One pending platform action:** the v1.1 alarm text above is not yet
+          in the live dispatcher. Edit it on WORKFLOW 1 in the ProptechOS UI; the
+          deployed message still names chillers until you do.
 Type:     ProptechOS platform alert (trigger + 2 workflows). NOT an LLM agent —
           no reasoning, no tool calls. One threshold, one sensor, two SMS.
 
@@ -121,7 +126,7 @@ production**. This is a UI bug; the `Service Status` form is the workaround.
 
 ```
 ALARM
-1700 Pavilion COOLING ALARM: {{serviceObject.tags.message}}. Check chillers + cooling towers.
+1700 Pavilion COOLING ALARM: {{serviceObject.tags.message}}. Check cooling towers + heat exchangers.
 
 ALL CLEAR
 1700 Pavilion ALL CLEAR: {{serviceObject.tags.alertName}} - back below alarm limit. No action needed.
@@ -144,6 +149,11 @@ Rules that produced these:
    a normal peak near 81, closure means the loop is under the alarm line — not
    that the plant is healthy. The duller wording will not send someone back to bed
    on a building that is still struggling.
+5. **"Cooling towers + heat exchangers", never "chillers".** 1700 Pavilion has no
+   chillers — the plant is 2 cooling towers + 2 plate heat exchangers. The original
+   text sent the responder hunting for equipment that does not exist in this
+   building. Name only the equipment that is actually here, in the order it should
+   be checked.
 
 ## [CALIBRATED BASELINE — why 85 °F]
 
@@ -251,3 +261,7 @@ than an artifact of saving the trigger.
 - An SMS arriving within seconds of a save is the edit artifact; one arriving at
   `:08 / :28 / :48` is a genuine evaluation.
 - Companion alert: `1700-pavilion-no-data-sms-alert.md`.
+- **Backstop for limitations 1, 2 and 4: `1700-pavilion-daily-manual-check.md`** —
+  a once-daily manual check, run 13:00–15:00 CEST so it covers the Las Vegas
+  night. It is the only thing that verifies this alert is still *armed* rather
+  than latched, and the only thing that notices the median has stalled.

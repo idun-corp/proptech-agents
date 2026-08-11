@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.6
+Version:  0.7
 Created:  08/10/2026
 History:  v0.1 first tick OK (183,601 tok). v0.2 added incident handling and
           report discipline. v0.3 cut a 400-call bulk pull that had timed out.
@@ -32,7 +32,7 @@ Division of labour, same principle as 1201: **the SMS alerts and any future watc
 agent own anything that fires on one sample. This agent owns anything that needs
 a slope.** It never pages anyone; it produces a daily written report.
 
-**Print Agent v0.6 and the ACTUAL tick timestamp** in the header of every report —
+**Print Agent v0.7 and the ACTUAL tick timestamp** in the header of every report —
 the real date and time you are running, converted to PT. **Do NOT print the
 scheduled time from this spec.** The v0.1 tick ran at 4:30 AM PT and printed
 "5:00 PM PT" because that string appears above; every report would have carried a
@@ -556,51 +556,66 @@ the header, never in the light. **The light describes the plant, not the run.**
 
 ## [OUTPUT FORMAT]
 
-**Tables and bullets. No prose paragraphs in FINDINGS.** The v0.5 report was hard
-to scan because each finding ran to four or five lines of continuous text. One row
-per rule; keep any reasoning to a single clause.
+**FINDINGS is a flat list, one line per rule, coloured dot first. Not a table, not
+prose.** The v0.5 report was unreadable because each finding ran to four or five
+lines of continuous text with the rule label buried mid-sentence. The eye needs
+the colour and the rule name at the left margin.
 
 ```
-1700 Pavilion — Plant PdM · Agent v0.6 · <ACTUAL date, time> PT
+1700 Pavilion — Plant PdM · Agent v0.7 · <ACTUAL date, time> PT
 <one line ONLY if off-schedule or a rule was skipped>
 
-PLANT STATUS  🟢 / 🟡 / 🔴
+PLANT STATUS  🟢 OK
 
-| Metric          | Latest   | Baseline          | Note                        |
-|-----------------|----------|-------------------|-----------------------------|
-| HX1 approach    | x.xx °F  | med 1.11 p90 1.91 | 08/07 raw n=58 · 7d x.x-y.y |
-| HX2 approach    | x.xx °F  | med 2.75 p90 5.60 | 08/07 raw n=59 · 7d x.x-y.y |
-| Tower approach  | x.xx °F  | p90 10.78         | setpoint xx.x °F            |
-| Night loop max  | xx.xx °F | 82.98 · alarm 85  | n nights                    |
-| CT runtime rate | +x.x h/d | +9.1              | converging                  |
-| HX runtime rate | -x.x h/d | -10.0             | widening, normal            |
-| Fan kWh/run-h   | x.xx     | (calibrating)     | Rule 6                      |
+MEASUREMENTS
+  HX1 approach      0.73 °F    baseline med 1.11 / p90 1.91    08/07 raw n=58
+  HX2 approach      2.52 °F    baseline med 2.75 / p90 5.60    08/07 raw n=59
+  Tower approach    1.68 °F    p90 10.78                       setpoint 70.3 °F
+  Night loop max   80.51 °F    baseline 82.98 / alarm 85.00    n nights
+  CT runtime      +10.5 h/day  baseline +9.1                   converging
+  HX runtime       -9.8 h/day  baseline -10.0                  widening, normal
+  Fan kWh/run-h       x.xx     no baseline yet                 Rule 6
+  raw vs hourly     HX1 D0.08 · HX2 D0.02
 
-raw vs hourly on the anchor day: HX1 Dx.xx · HX2 Dx.xx
-
-| Rule | Light | One-line finding |
-|------|-------|------------------|
-| 1 HX fouling | 🟢 | both under p90, HX2 trending down 5.45->2.52 |
-| 2 Tower      | 🟢 | 1.68 vs p90 10.78 |
-| ...          |    | |
+FINDINGS
+  🟢 Rule 1 · HX fouling — both below p90; HX2 5.45 -> 2.91 -> 2.52, opposite of fouling
+  🟢 Rule 2 · Tower approach — 1.68 °F, no drift
+  🟢 Rule 3 · Runtime — both pairs at baseline rate; hxRuntimeAlmSp still 0
+  🟢 Rule 4 · Night margin — 2.5 °F below baseline, not eroding
+  ⚪ Rule 5 · Makeup water — CALIBRATING, totalizer reset 08/04-08/06
+  🟢 Rule 6 · Fan energy — 15.7 kW now; kWh/run-h calibrating
+  🟢 Rule 7 · Data quality — dead signals unchanged, 300 s tier
 
 CHANGED SINCE LAST TICK
   - bullets only. If nothing changed, write "nothing".
 
 OPEN QUESTIONS
   - bullets. Drop any that got answered.
+
+Calls: 28/30
 ```
 
-**Rules for the tables:**
+**Hard rules for FINDINGS:**
 
-- **A 🟢 rule whose number has not moved gets one line and no explanation.**
-  Explanations are for lights that changed or numbers near a threshold.
-- **Never restate** the baseline table, the sensor map, the dead-signal list or
-  the incident register. They are in this spec and the reader has it.
-- **DATA QUALITY is a delta section**, not an inventory. If the dead signals are
-  still dead and the tier is unchanged, that is one line. Elaborate only on what
-  is new.
-- Call count and any skipped rules go on the last line.
+- **One line per rule. One.** Colour, rule number, short name, em dash, then the
+  finding in as few words as carry it.
+- A 🟢 rule gets **the number and nothing else** — no reassurance, no restated
+  baseline, no "not new", no explanation of why it is fine.
+- Only 🟡 and 🔴 may add a **single indented second line** for what to do about it.
+- **Never** put the rule label mid-sentence. It goes at the left margin so the
+  list can be scanned in one pass.
+- Caveats that are true every tick — derived wet bulb, HX2's lower duty, the
+  unproven 08/05 hypothesis — belong in this spec, **not** in every report. State
+  them only on the tick where they change a conclusion.
+
+**Other sections:**
+
+- MEASUREMENTS is aligned columns, not a markdown table — tables render
+  unpredictably in the agent UI.
+- DATA QUALITY is folded into Rule 7's one line unless something is new.
+- CHANGED SINCE LAST TICK is what a returning reader actually wants; put real
+  content there rather than in FINDINGS.
+- Call count on the last line, alone.
 
 ## [CONSTRAINTS]
 
