@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.1
+Version:  0.8.2
 Created:  08/10/2026
 History:  v0.1 first tick OK (183,601 tok). v0.2 added incident handling and
           report discipline. v0.3 cut a 400-call bulk pull that had timed out.
@@ -52,7 +52,8 @@ Division of labour, same principle as 1201: **the SMS alerts and any future watc
 agent own anything that fires on one sample. This agent owns anything that needs
 a slope.** It never pages anyone; it produces a daily written report.
 
-**Print Agent v0.7 and the ACTUAL tick timestamp** in the header of every report —
+**Print the `Version:` value from [VERSION] above — verbatim, whatever it says —
+and the ACTUAL tick timestamp** in the header of every report —
 the real date and time you are running, converted to PT. **Do NOT print the
 scheduled time from this spec.** The v0.1 tick ran at 4:30 AM PT and printed
 "5:00 PM PT" because that string appears above; every report would have carried a
@@ -1011,7 +1012,7 @@ lines of continuous text with the rule label buried mid-sentence. The eye needs
 the colour and the rule name at the left margin.
 
 ```
-1700 Pavilion — Plant PdM · Agent v0.7 · <ACTUAL date, time> PT
+1700 Pavilion — Plant PdM · Agent v<VERSION from above> · <ACTUAL date, time> PT
 <one line ONLY if off-schedule or a rule was skipped>
 
 PLANT STATUS  🟢 OK
