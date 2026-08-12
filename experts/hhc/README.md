@@ -20,6 +20,21 @@ the building's site folder on Drive for the write-up).
 | `1201-chiller-predictive-maintenance.md` | v0.1 pilot, 1201 Lake Robbins — daily PdM | Full sensor UUID map (largest), building + PO IDs, names |
 | `9950-chiller-failure-detection.md` | Deployed v1.4, 9950 Woodloch — hourly ops | Full sensor UUID map, building + PO IDs, names |
 | `9950-chiller-predictive-maintenance.md` | v0.98 pilot, 9950 Woodloch — daily PdM | Full sensor UUID map (largest), building + PO IDs, names |
+| `1700-pavilion-no-cooling-sms-alert.md` | v1.1 deployed + validated — the 85 °F acute alert | Sensor UUIDs, building + PO IDs, names, **recipient phone/email** |
+| `1700-pavilion-no-data-sms-alert.md` | v1.0 deployed, **needs manual reset** — not for engineers | Sensor UUIDs, building + PO IDs, **recipient phone/email**, PEG host |
+| `1700-pavilion-plant-predictive-maintenance.md` | v0.8.1, condenser-water plant — daily PdM, never pages | Full sensor UUID map (largest), building + PO IDs, names |
+| `1700-pavilion-daily-manual-check.md` | v0.2, manual daily data-loss backstop | Sensor UUIDs, building ID, **PEG host + SSH user** |
+| `agent-dispatch-sms.md` | Shared reference — how an agent sends SMS/EMAIL/service object (v5.6.3) | None — dispatch never exposes recipients to the LLM |
+
+⚠️ **Two files above now carry more than sensor identity.** `1700-pavilion-no-data-sms-alert.md`
+and `1700-pavilion-daily-manual-check.md` contain the **PEG host, port and SSH user**, and both
+1700 SMS specs contain **recipient phone numbers and the building engineers' mobiles**. That is
+outside the exception as originally granted below ("Not in here, and must stay out: IP
+addresses, hostnames, PEG identities"). **Strip those before this merges** — they belong in the
+site folder on Drive. The containment check in step 4 does not catch them.
+
+**Note also:** this folder is no longer only chiller agents — 1700 Pavilion is a water-side
+plant with no chillers. The folder name and the heading above are both stale.
 
 **Not in here, and must stay out:** IP addresses, hostnames, PEG identities, credentials,
 bearer tokens, VPN details. Those live in the building's site folder on Drive
