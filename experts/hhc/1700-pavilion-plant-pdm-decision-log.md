@@ -135,17 +135,132 @@ the load gate only needs "is tower rise above 2.0 °F", which hourly answers.
 2026-08-12 14:49:30  run -> "Request failed", 17m17s, blank Model, Tokens: 0
 ```
 
-**The model was never invoked**, so no prompt content can be responsible. Same
+⚠️ **DO NOT read `Tokens: 0` as "the model never ran."** Erik established the
+opposite on 08/10, against Pavlo's dead-letter finding: *"zero tokens meant the
+response never came back, not that the model never ran. If akka is treating a
+long-unresponsive actor as dead, then a long tool sequence is plausibly the
+trigger."* I repeated the corrected-away version of this on 08/12 and used it to
+argue no prompt content could be responsible — **wrong, and it nearly sent a fourth
+unfounded escalation to platform.** Prompt content is always in scope for this
+failure mode, because the prompt determines the tool sequence.
+
+**Which versions have ever COMPLETED a full run:**
+
+```
+v0.7     full run, fetch-then-analyse per rule    SUCCESS  1287 s, report produced
+v0.8     aborted at 29 calls on 401               n/a      never reached fetch phase
+v0.8.1   aborted at 2 calls on 401 (x2)           n/a      never reached fetch phase
+v0.8.2   full run attempted, FRONT-LOADED         FAIL     1037 s, Tokens 0
+v0.8.3   full run attempted, FRONT-LOADED         FAIL     1030 s, Tokens 0
+```
+
+**PROMPT EXONERATED 08/12 15:56 — v0.7 redeployed verbatim and FAILED.** The
+identical 35,678-byte prompt that produced a full report at 10:26 CEST now fails at
+964 s with `Tokens: 0`. Same prompt, same reset procedure, opposite outcome. So
+neither the front-loaded fetch design nor the load gate nor size is the cause.
+
+```
+  08/10        fail     16m47s    1007s   -            -
+  08/10        fail     16m46s    1006s   -            -
+  08/10        fail     16m46s    1006s   -            -
+  08/12 10:26  SUCCESS  21m27s    1287s   v0.7    35,678
+  --- 14:35:57 CEST   Pavlo: "messages are deleted" ---
+  08/12 14:49  fail     17m17s    1037s   v0.8.2  58,817
+  08/12 15:19  fail     17m10s    1030s   v0.8.3  48,287
+  08/12 15:56  fail     16m04s     964s   v0.7    35,678
+```
+
+**Every variable we control is now eliminated:** prompt content (same prompt, both
+outcomes), prompt size (35 K / 48 K / 59 K all fail), and reset (three resets today,
+three failures — whereas on 08/10 a reset *did* fix this signature). Six failures
+across two days span 73 s (964–1037), a fixed timeout near 16–17 minutes.
+
+⚠️ **I withdrew the "reset no longer helps" line too early.** It was wrong when the
+14:43:54 reset was routine deploy procedure. It is now supportable on different
+grounds: three reset-then-invoke cycles on 08/12 all failed, against a reset that
+worked on 08/10.
+
+**The only intervening server-side event between the last success and the first
+failure is the message deletion at 14:35:57 CEST.** That is now the leading
+hypothesis, and this time it rests on a same-prompt A/B across the boundary rather
+than on correlation alone.
+
+Same signature as 08/10. Same
 signature Erik reported on 08/10: *"All failures show Tokens: 0 and a blank Model…
 Durations: 37m51s, then 16m47s / 16m46s / 16m46s"* — Pavlo found **dead letters**
 addressed to the agent and suspected the **agenttroupe akka config** treating a
 long-unresponsive actor as dead. An agent reset fixed it then; a reset at 14:43:54
 on 08/12 did **not**.
 
-Open size correlation, which is why v0.8.3 exists: 35,678 ✅ · 49,800 ✅ ·
-**58,817 ❌**. Untested, and worth testing before escalating, because it is our
-variable. Note v0.7 ran 21m27s (1,287 s) successfully, longer than the 1,037 s
-that failed — so a fixed duration timeout does not explain it on its own.
+**SIZE IS EXONERATED — tested 08/12.** v0.8.3 at 48,287 bytes failed identically
+to v0.8.2 at 58,817. A 10 KB reduction changed nothing.
+
+```
+run                  dur        sec    prompt bytes
+08/10 fail           16m47s    1007      -
+08/10 fail           16m46s    1006      -
+08/10 fail           16m46s    1006      -
+08/12 v0.7 OK        21m27s    1287    35,678
+08/12 v0.8.2 fail    17m17s    1037    58,817
+08/12 v0.8.3 fail    17m10s    1030    48,287
+```
+
+Five failures across two days span **31 seconds** (1006–1037 s) — a fixed timeout,
+not variable work. And **the one success ran 1,287 s, longer than every failure**,
+so it is not a cap on how long work may take either.
+
+### Erik resets the agent after EVERY prompt change — so reset is a control
+
+This makes the comparison clean, and corrects two things:
+
+```
+CONSTANT   agent reset before every run, success and failure alike
+VARIED     the prompt only
+
+  v0.7    interleaved,   35,678 b  ->  SUCCESS
+  v0.8.2  front-loaded,  58,817 b  ->  FAIL
+  v0.8.3  front-loaded,  48,287 b  ->  FAIL
+```
+
+With reset held constant and size ruled out, **the prompt is the only variable that
+tracks the outcome.** That is the controlled comparison this investigation had been
+missing.
+
+⚠️ **The draft escalation's "reset no longer helps" line was a mischaracterisation
+— do not send it.** On 08/10 Pavlo used a reset as a *remedy* and it worked. The
+14:43:54 reset was routine deploy procedure, not an attempt to fix a broken agent.
+Nobody has tried reset-as-remedy on this failure.
+
+⚠️ **It also weakens the message-deletion hypothesis below.** A reset followed the
+deletion (14:35:57 -> reset 14:43:54) and the agent still failed, so if reset clears
+conversation state then corrupt state from the deletion is not what is breaking it.
+Keep the AFA prediction as a cheap check, but rank it below the prompt hypothesis.
+
+### Weakened hypothesis: the message deletion broke the agent's state
+
+```
+10:26 CEST  v0.7 tick SUCCEEDS
+14:35:57    Pavlo: "messages are deleted"   (hidden endpoint,
+            2026-07-01 -> 2026-08-12T09:00Z)
+14:43:54    agent reset
+14:49:30    invocation FAILS   Tokens: 0
+15:19:11    invocation FAILS   Tokens: 0
+```
+
+**Every failure is after the deletion; the last success is before it.** The reset
+at 14:43:54 came *after* the deletion and did not repair it, which fits state
+corrupted in a way a reset does not clear — and on 08/10 a reset *did* fix this
+same signature.
+
+**Falsifiable prediction: Per's AFA agent `9d416bf2-…` had its messages deleted in
+the same operation, so it should now fail the same way — `Tokens: 0`, blank Model,
+approximately 1,030 s.** If it does, the deletion is the cause. If it invokes
+normally, this hypothesis is dead and the akka dead-letter theory stands alone.
+Cheap to check and it decides the question.
+
+⚠️ Correlation, not proof — server state is not visible from here, and this is the
+fourth hypothesis in this investigation. State it as a prediction to test, not a
+finding.
 
 ## STANDING OPEN QUESTIONS FOR PLATFORM
 
