@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.3
+Version:  0.8.4
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -70,9 +70,43 @@ These are the only two tools you have. Do NOT attempt REST paths, `startTime`,
 get-sensor-latest-data      { sensorRef }
 get-sensor-historical-data  { sensorRef, period, aggregation }
 
-  period       "_3days" | "_7days"          <- an ENUM. No arbitrary ranges.
+  period       "_1day" | "_3days" | "_7days" | "_14days" | "_30days"
+                                             <- an ENUM. No arbitrary ranges.
+                                             **`_1day` EXISTS — earlier versions
+                                             of this spec omitted it and pushed
+                                             every fetch to _7days.**
   aggregation  "raw" | "hourly" | "daily"
 ```
+
+## [HARD LIMITS — the 08/12 outage was caused by breaking one of these]
+
+⚠️ **There is a 5-minute timeout on each HTTP request to the model, not on the
+agentic run.** (`ClaudeAgenticClient .timeout(Duration.ofMinutes(5))`, confirmed by
+Pavlo 08/12.) Every tool result stays in the context and is **re-sent on every
+subsequent round**, so a large fetch is paid for again on each later round. When one
+round's input grows big enough that time-to-first-token exceeds 5 minutes, OkHttp
+kills the socket and the whole run dies as `Request failed` with `Tokens: 0`.
+
+**This is why the run is not reproducible by prompt version.** The same v0.7 prompt
+succeeded at 10:26 PT and failed at 15:56 PT on 08/12 — it sits close to the limit,
+and whether a given round crosses 5 minutes varies. **Treat payload as the budget,
+not call count.**
+
+```
+raw     approximately 17 tokens per sample, 1,000-sample cap
+hourly  approximately 1.8 tokens per bucket, 25 buckets for _1day
+        -> approximately 370x cheaper per point-day
+```
+
+**Rules:**
+1. **`raw` only where an exact figure decides a threshold** — that is Rule 1's
+   anchor, and nothing else. Everything else uses `hourly` or `daily`.
+2. **Never `raw` with a period longer than `_1day`.**
+3. Pavlo's standing advice, 08/12: *"if that is not critical for your agents I
+   would also recommend to use some aggregation, and not a raw data."* The one
+   place we override it is Rule 1, because `hourly` is a mean and the invalid
+   `0.0` readings poison it — that is the 12.33 °F-during-the-outage failure. State
+   that reason whenever the override is questioned.
 
 **There is no way to request a time-of-day window.** You must fetch a whole
 period and filter to the peak or night band yourself, in context. Budget for that
@@ -535,12 +569,18 @@ window reports **CALIBRATING**, never a number.
 number.**
 
 ```
-ANCHOR  latest complete weekday   raw    _3days   4 HX points
+ANCHOR  latest complete weekday   raw    _1day    4 HX points
         -> the precise figure. Filter to 11:00-16:00 PT, discard 0.0 and
            out-of-range individually, take the median. Expect approximately 60
            samples; below 30 is CALIBRATING.
-           Use _3days not _7days: the 1,000-sample cap means _7days returns the
-           same recent slice but wastes context on parsing it.
+
+           ⚠️ **`_1day`, NEVER `_7days`.** At the 17:00 PT run time the latest
+           complete weekday peak window is inside the last 24 h, so _1day
+           contains everything this anchor needs — approximately 285 samples
+           instead of the 1,000-sample cap. **The 08/12 outage was caused by
+           four raw _7days fetches**: they inflate the context until a later
+           model round exceeds the platform's 5-minute per-HTTP-request
+           timeout and the socket is killed. See [HARD LIMITS].
 
 SHAPE   last 7 days               hourly _7days   same 4 points
         -> the trend the WATCH test runs on, because raw cannot reach back far
@@ -775,8 +815,15 @@ them without IDs.
 
    ```
    Rule 1   ctSupplyHx1, bldgSupplyHx1, ctSupplyHx2, bldgSupplyHx2
-            period _7days, aggregation RAW                            4 calls
+            period _1day, aggregation RAW                             4 calls
             -> filter to 11:00-16:00 PT yourself; that is the peak bucket
+            ⚠️ _1day, NOT _7days. This line said _7days until 08/12 and
+            contradicted the Rule 1 text above; the agent obeyed THIS line and
+            the four raw _7days fetches killed the run. Never let the two
+            disagree again.
+            LOAD GATE points (ctReturnHxN, bldgReturnHxN)  hourly _1day  4 calls
+            -> the gate only asks "is tower rise above 2.0 F", which hourly
+               answers at approximately 1/370th the payload of raw
    Rule 2   ctCwSupplyTemp, osat, osah   _7days hourly                3 calls
             (_7days, NOT _3days: a 3-day window ending Monday contains exactly
              one weekday, so the 5-weekday WATCH test could never run. v0.5 hit
