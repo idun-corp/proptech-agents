@@ -262,6 +262,46 @@ Cheap to check and it decides the question.
 fourth hypothesis in this investigation. State it as a prediction to test, not a
 finding.
 
+## 08/12 EVENING — v0.8.4 CUT THE PAYLOAD 3.2x AND STILL FAILED
+
+Pavlo's diagnosis (5-minute timeout **per HTTP request to the model**, not per run;
+`ClaudeAgenticClient .timeout(Duration.ofMinutes(5))`) is the right mechanism for
+*a* timeout. His explanation of *why* the round got slow — context inflated by four
+raw `_7days` fetches — is now in doubt, because we removed them and nothing changed.
+
+```
+              fetched   +spec   peak ctx   result
+  v0.7         70.9k    14.0k     84.9k    FAIL 964 s
+  v0.8.4       22.5k    14.0k     36.5k    FAIL 992 s
+```
+
+**Time-to-first-token on a 36 k-token input should be seconds, not 300.** So either
+the request is not reaching the model at all, or the slowness is not context-driven.
+
+### The retry arithmetic fits better than context size
+
+```
+failures (s): 1007 1006 1006 1037 1030 964 992
+n=7  min 964  max 1037  spread 73 s  mean 1006
+
+3 attempts x 300 s = 900 s  -> residual work +106 s   <- fits
+2 attempts x 300 s = 600 s  -> residual +406 s
+4 attempts x 300 s = 1200 s -> residual -194 s
+```
+
+**Seven failures across two days, two prompt versions and a 3.2x payload
+difference, all inside a 73-second band.** Variable context would not cluster that
+tightly; a fixed number of fixed-length timeouts would. Working hypothesis:
+**initial attempt + 2 SDK retries, each hitting the 300 s ceiling.** Unverified —
+ask whether the SDK retries on timeout.
+
+The one success ran **1,287 s**, longer than every failure, with no round crossing
+the ceiling.
+
+⚠️ Still unconfirmed: that the v0.8.4 run actually emitted `_1day` raw calls. The
+`usedTools` dump settles it and is the only reliable identifier for these runs —
+the failing reports print no version, no model, no tokens.
+
 ## STANDING OPEN QUESTIONS FOR PLATFORM
 
 1. Does `set-property-owner-id` write **per agent** or **for the current user**?
