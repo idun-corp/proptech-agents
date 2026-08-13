@@ -302,6 +302,47 @@ the ceiling.
 `usedTools` dump settles it and is the only reliable identifier for these runs —
 the failing reports print no version, no model, no tokens.
 
+## 08/13 — PLATFORM CONFIRMS THE ROOT CAUSE. WAIT FOR THE FIX.
+
+Pavlo: **the MCP server can confuse property-owner ids.** A request for Howard
+Hughes data can go out under another PO (e.g. Dachser) and security correctly
+refuses it. He is fixing it; **1–2 days**. The refusal is the system working as
+designed — the bug is upstream of it.
+
+### This explains the one thing that never fit
+
+`set-property-owner-id` returned *"Successfully selected property owner"* while
+`get-current-property-owner` immediately after still reported the old value. That
+is the same confusion. **Consequence: our Step 0 workaround is unreliable** — it
+cannot be trusted to set the PO if the layer that records it is the broken one. It
+was added to all four chiller specs on 08/13 in good faith; **review it once the fix
+lands, and do not treat a "corrected" log line as proof the context is right.**
+
+### It may also be upstream of the 1700 `Tokens: 0` timeout
+
+⚠️ **Hypothesis, unconfirmed — this is the fifth in this investigation, treat it as
+such.** PO confusion produces 401s; 401s make the agent retry; retries inflate the
+tool sequence and the accumulated context; a later model round then crosses the
+5-minute per-request ceiling and the run dies. The v0.7 tick that *succeeded* made
+**approximately 100 tool invocations** precisely because it was retrying 401s — so
+the mechanism for an inflated run is already demonstrated at this building.
+
+If that holds, **fixing the PO confusion may fix the timeout too**, and every
+prompt version we tested was fighting a symptom. What would confirm it: the
+`usedTools` dump for the 18:02:30 run showing repeated or 401-ing calls rather than
+the clean 16–30 the call plan specifies.
+
+### Posture
+
+**Stop deploying prompt versions until the fix lands.** Each test tick costs
+approximately 17 minutes for no information, and testing against a known-broken
+dependency is how confounds got introduced all week. Versions are staged and ready:
+`v0.8.4` (payload fix) and `v0.9.0-min` (rounds bisection).
+
+What is still worth doing during the wait: get answers to the two design questions
+below, because **if `hourly` is a median, Rule 1 drops raw entirely** and payload
+stops being a constraint permanently.
+
 ## STANDING OPEN QUESTIONS FOR PLATFORM
 
 1. Does `set-property-owner-id` write **per agent** or **for the current user**?
