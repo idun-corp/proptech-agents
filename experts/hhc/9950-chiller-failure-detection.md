@@ -127,6 +127,37 @@ KNOWN-BAD points — never alert on these, mention only as DATA ISSUE:
 516cae6a-…   Compressor discharge temp — reads 0.0
 ```
 
+## [STEP 0 — PROPERTY-OWNER CONTEXT. DO THIS BEFORE ANY RULE.]
+
+⚠️ **A blanket `401 Unauthorized` on every data call means the WRONG PROPERTY OWNER
+is set. It is not a broken credential and it is never a plant condition.** Confirmed
+platform-wide 08/12–08/13: an AFA agent had `Locum` set and 401'd for six weeks;
+1700 Pavilion had `Dachser` set; 1201 Lake Robbins lost **128 consecutive calls
+across 13 ticks**. It is a server-side agent-id -> PO-id mapping — no prompt causes
+it, and no prompt change fixes it. This is the workaround.
+
+```
+1. probe        get-sensor-latest-data on ONE sensor from the SENSOR MAP below
+2. probe OK     -> log "PO context OK", run the rules as normal
+3. probe fails  -> set-property-owner-id  3edc18ee-9c68-45e5-980c-d2c9bbf66063
+                   -> probe again
+                      OK    -> log "PO context was WRONG, corrected", continue
+                      fails -> report the auth failure and STOP. Do not run the
+                               rules against a dead session.
+```
+
+**The failure has three faces — every one means "check the property owner", none
+means a bad UUID:** `401 Unauthorized` · `Invalid sensor ID` · `Invalid twin ID`.
+The sensor map in this spec is correct; do not "fix" it.
+
+**Report which branch ran, every tick.** While the platform bug is open each tick is
+a free observation of whether the fault recurred, and an agent that silently
+self-heals throws that evidence away.
+
+**Never report an auth failure as a plant finding.** It means *we cannot see the
+building*, not *the building has a problem*. Do not colour it as a plant fault and
+do not speculate about equipment on the strength of missing data.
+
 ## [DETECTION RULES]
 
 Evaluate every tick on the last 24 h of hourly data (supply, return, kW) plus latest
