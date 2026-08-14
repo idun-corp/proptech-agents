@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.4
+Version:  0.8.5
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -568,6 +568,19 @@ ANCHOR  latest complete weekday   raw    _1day    4 HX points
 SHAPE   last 7 days               hourly _7days   same 4 points
         -> the trend the WATCH test runs on, because raw cannot reach back far
            enough. Weekday peak buckets only.
+
+        ⚠️ **MANDATORY. NOT skippable for call budget.** The 08/13 and the tick
+        before it both dropped SHAPE "for budget" and reported Rule 1 anyway.
+        Without it Rule 1 can state today's number but **cannot detect a trend
+        at all** — and detecting the trend is the entire purpose of this agent.
+        It is 4 hourly fetches, approximately 1.2k tokens against a 201k tick.
+        There is no budget under which it is the right thing to cut. If you are
+        genuinely out of calls, drop Rules 5 and 6 instead and say so.
+
+        The raw-vs-hourly cross-check comes free with SHAPE — compare the anchor
+        day's raw figure to its own hourly figure and report the delta. It is the
+        running measure of how much the aggregation distorts, and it also went
+        unreported on both recent ticks.
 ```
 
 ⚠️ **The WATCH test therefore runs on hourly aggregates.** If `hourly` is a mean
@@ -663,6 +676,13 @@ post-repair figures rest on approximately 70 samples/day rather than 340.
 Approach = `ctCwSupplyTemp` − wet bulb, wet bulb derived from `osat` + `osah`
 (Stull approximation). Weekday peak window only, and only while a tower fan is
 proven running (`fanStatCt1` or `fanStatCt2` = 1).
+
+⚠️ **Prove the fan was running DURING THE PEAK WINDOW, not at tick time.** The
+08/13 tick checked fan status at approximately 11:35 PM PT — overnight, both fans
+off — and reported a peak-window approach anyway. Fetch `fanStatCt1` and
+`fanStatCt2` as **`hourly _1day`** (2 calls, approximately 90 tokens) and confirm a
+fan was running in the 11:00-16:00 PT buckets you are averaging. A tower approach
+computed while both fans were off is not a tower measurement.
 
 - 🟡 WATCH: 7-day median approach exceeds the 30-day weekday-peak p90 of
   **10.78 °F** for 5 consecutive weekdays.
@@ -790,7 +810,11 @@ them without IDs.
    re-fetching the same sensor at a different aggregation doubles the cost for
    nothing. Plan the whole tick before the first call.
 
-   **Target approximately 20 calls. Hard ceiling 30.** This is not about API
+   **Target approximately 30 calls. Hard ceiling 36.** Raised 08/14: the ceiling
+   was set when a tick cost 1.26 M tokens, and the payload fix brought a full
+   7-rule tick to **201 K tokens in 6m36s** — the 08/13 tick then exceeded the old
+   ceiling by one call and still finished comfortably. Do not spend the headroom on
+   raw; spend it on SHAPE and the fan gate. This is not about API
    quota — a long invocation can outlive the runtime's actor timeout and return
    **nothing at all**, which is worse than a partial report. The v0.3 tick used 37
    calls and 320,304 tokens; earlier attempts died at 16-37 minutes with zero
@@ -828,7 +852,7 @@ them without IDs.
    Fetch them only when Rule 3 has flagged a change in rate and you are
    investigating why.
 
-   **Report your actual call count.** If you approach 30, stop, publish what you
+   **Report your actual call count.** If you approach 36, stop, publish what you
    have, and name the rules you skipped.
 
 2. Apply DATA-QUALITY GUARDS before any arithmetic.
