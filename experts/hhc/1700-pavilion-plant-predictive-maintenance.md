@@ -327,46 +327,37 @@ Fetch everything before analysing anything, in priority order.
 ## PROPERTY-OWNER CONTEXT IS THE #1 CAUSE OF A FAILED TICK
 
 Confirmed 08/12: the session had the **wrong property owner** set, so every 1700
-sensor call was refused. Fixed by calling **`set-property-owner-id`** with
-`3edc18ee-9c68-45e5-980c-d2c9bbf66063` (Howard Hughes). It is a **server-side
-agent-id -> PO-id mapping**, a known platform bug, not caused by any prompt.
+sensor call was refused. **This is a platform defect, not caused by any prompt,
+and there is no safe workaround from inside the agent — see the prohibition below.**
 
 ⚠️ **It has THREE faces — all mean "check the PO", none mean a bad UUID:**
 `401 Unauthorized` · `Invalid sensor ID` · `Invalid twin ID`. The sensor map in
 this spec is correct.
 
-### PROBE FIRST, THEN CORRECT — do NOT set the PO unconditionally
-
-⚠️ **Revised.** An earlier v0.8.2 draft made `set-property-owner-id` an
-unconditional Step 0. That is wrong for two reasons: it **destroys the diagnostic
-signal** platform needs while this bug is open, and it writes context the agent may
-have no business writing (see the caution below).
+### PROBE FIRST, THEN REPORT — read-only, no writes
 
 ```
-1. probe            get-sensor-latest-data 0054ec5f-...   (bldgCwSupply)
-2. probe OK         -> log "PO context OK", continue. ONE call, happy path.
-3. probe fails      -> set-property-owner-id 3edc18ee-9c68-45e5-980c-d2c9bbf66063
-                       -> probe again
-                          OK    -> log "PO context was WRONG, corrected", continue
-                          fails -> NOW it is a dead session -> BLIND
+1. probe        get-sensor-latest-data 0054ec5f-...   (bldgCwSupply)
+2. probe OK     -> log "PO context OK", continue. ONE call, happy path.
+3. probe fails  -> report ⚫ BLIND, state that no rule was evaluated, and STOP.
 ```
 
-**Report which branch ran, every tick, in CHANGED SINCE LAST TICK.** While the
-platform bug is open, each tick is a free observation of whether the fault
-recurred — an agent that silently self-heals throws that away, and 1700 Pavilion
-is one of only three known instances.
+🚫 **DO NOT call `set-property-owner-id`.** Removed 08/14 after Pavlo published the
+root cause: caller identity was held in **thread-local memory on a thread pool shared
+by every agent of every customer** and never reliably cleaned up, so one agent's
+identity could stay stuck on a thread and the next agent's request be treated as it.
+A **cross-tenant isolation defect**, his words. Two reasons not to call it:
 
-Apply the same recovery to a mid-run failure: on a 401 **or** `Invalid sensor ID`,
-set the PO once, retry that one call, and continue. Only after correcting the
-context and still failing is the session genuinely dead.
+1. **It cannot be trusted** — the layer that records the PO is the broken one. A set
+   was observed returning *"Successfully selected property owner"* while the very
+   next read returned the old value.
+2. **It may make things worse** — it sets the PO *"for the current user"*, and if
+   that user is resolved from a leaked thread-local identity the write lands on
+   **another customer's** session. That would also explain how Per's AFA agent
+   acquired `Locum` with nothing in its prompt mentioning Locum.
 
-⚠️ **CAUTION — confirm the write scope before making this routine.** Pavlo states
-the PO is *"set for an agent in mcp server… a map of an agent id and the po id"*.
-If `set-property-owner-id` writes **per agent**, this workaround is safe. If it
-writes **account-wide**, then every 1700 tick would flip the whole account to
-Howard Hughes and break the Dachser agent — and, run the other way, that would be
-a candidate **mechanism for the contamination itself**. Ask platform which it is
-before adopting this as standard. Treat it as an open question, not a conclusion.
+**Read-only diagnosis until platform says otherwise.** Proper fix targeted 08/18,
+with a Monday-lunchtime fallback of disabling the PO feature entirely.
 
 ### The failure has TWO faces — neither means "dead session"
 
@@ -475,16 +466,8 @@ get-sensor-latest-data  0054ec5f-171d-44e6-83f3-500026cbd0a2   (bldgCwSupply)
 ```
 
 - **200** → proceed down the priority list.
-- **401 or `Invalid sensor ID`** → **do NOT go BLIND.** Call
-  `set-property-owner-id 3edc18ee-9c68-45e5-980c-d2c9bbf66063` and probe again.
-  Only if the probe fails *after* the context has been explicitly set is the
-  session genuinely dead — then report ⚫ BLIND and stop.
-
-```
-probe fails -> set-property-owner-id -> probe again
-   succeeds  -> continue; log "context was wrong, corrected" in CHANGED SINCE
-   fails     -> NOW it is a dead session -> BLIND
-```
+- **401, `Invalid sensor ID` or `Invalid twin ID`** → report ⚫ BLIND, state that
+  no rule was evaluated, and stop. Do not attempt to set the property owner.
 
 This makes the two failure signatures distinguishable, which matters because they
 have different causes:
