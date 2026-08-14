@@ -129,34 +129,40 @@ KNOWN-BAD points — never alert on these, mention only as DATA ISSUE:
 
 ## [STEP 0 — PROPERTY-OWNER CONTEXT. DO THIS BEFORE ANY RULE.]
 
-⚠️ **A blanket `401 Unauthorized` on every data call means the WRONG PROPERTY OWNER
-is set. It is not a broken credential and it is never a plant condition.** Confirmed
-platform-wide 08/12–08/13: an AFA agent had `Locum` set and 401'd for six weeks;
-1700 Pavilion had `Dachser` set; 1201 Lake Robbins lost **128 consecutive calls
-across 13 ticks**. It is a server-side agent-id -> PO-id mapping — no prompt causes
-it, and no prompt change fixes it. This is the workaround.
+⚠️ **A blanket `401 Unauthorized` on every data call means this agent is running
+under the WRONG PROPERTY OWNER. It is never a plant condition and never a broken
+credential.** Report it as *we cannot see the building* and stop.
+
+**Root cause, confirmed by Pavlo 08/14 — a cross-tenant isolation defect in the MCP
+server.** Caller identity was stored in **thread-local memory** (a Spring AI
+workaround) on a **small thread pool shared by every agent of every customer**, and
+was never reliably cleaned up. Agent A's identity could stay stuck on a thread and a
+later request from agent B on that thread would be treated as agent A. That is why
+it was rare and random, and why more cross-customer traffic made it likelier. Fix is
+a rewrite of token processing — in progress, targeted for 08/18.
 
 ```
 1. probe        get-sensor-latest-data on ONE sensor from the SENSOR MAP below
 2. probe OK     -> log "PO context OK", run the rules as normal
-3. probe fails  -> set-property-owner-id  3edc18ee-9c68-45e5-980c-d2c9bbf66063
-                   -> probe again
-                      OK    -> log "PO context was WRONG, corrected", continue
-                      fails -> report the auth failure and STOP. Do not run the
-                               rules against a dead session.
+3. probe fails  -> report the auth failure, state that no rule was evaluated,
+                   and STOP. Do not run the rules against a dead session.
 ```
 
-**The failure has three faces — every one means "check the property owner", none
-means a bad UUID:** `401 Unauthorized` · `Invalid sensor ID` · `Invalid twin ID`.
-The sensor map in this spec is correct; do not "fix" it.
+🚫 **DO NOT call `set-property-owner-id` to try to fix this.** It was in this spec
+briefly on 08/13 and has been removed. Two reasons: it cannot be trusted, because
+the layer that records the PO is the broken one — a set has been observed returning
+*"Successfully selected property owner"* while the very next read returned the old
+value. And it may make things **worse**: it sets the PO *"for the current user"*, and
+if the current user is resolved from a leaked thread-local identity then the write
+lands on **another customer's** session. Until platform confirms otherwise, treat
+this as a read-only diagnosis.
 
-**Report which branch ran, every tick.** While the platform bug is open each tick is
-a free observation of whether the fault recurred, and an agent that silently
-self-heals throws that evidence away.
+**The failure has three faces — every one means "wrong property owner", none means a
+bad UUID:** `401 Unauthorized` · `Invalid sensor ID` · `Invalid twin ID`. The sensor
+map in this spec is correct; do not "fix" it.
 
-**Never report an auth failure as a plant finding.** It means *we cannot see the
-building*, not *the building has a problem*. Do not colour it as a plant fault and
-do not speculate about equipment on the strength of missing data.
+**Report the probe result every tick.** While the platform bug is open, each tick is
+a free observation of whether the fault recurred.
 
 ## [DETECTION RULES]
 
