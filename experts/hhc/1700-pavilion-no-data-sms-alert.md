@@ -191,6 +191,31 @@ Note also: an intermediate change to `Acknowledged` (08:13) correctly produced n
 SMS, confirming the all-clear filter discriminates properly on status rather than
 firing on any modification.
 
+## [⚠️ NEW FAILURE MODE 08/15 — A SEVEN-DAY-LATE RE-DELIVERY]
+
+An alert email arrived **2026-08-15 05:48:03Z** carrying
+`Time: 2026-08-08 05:47:52 (-07:00)` — i.e. **the event was seven days old.** That
+timestamp is exactly the original alarm in the VALIDATION RECORD below
+(`08/08 12:47:52Z, "2 Sensors in Error status."`), an object that was **manually
+closed on 08/10**. So this was a re-emission of a week-old, already-closed alert,
+not a new fault.
+
+**Verified against the data: there was no data loss.** Over the 20 h to
+08/15 08:36Z — 62 of 62 expected median blocks at **exactly 1200 s** intervals, zero
+missed; 246 raw `bldgCwSupply` samples with no gap exceeding **313 s**.
+
+**Candidate cause, unconfirmed:** Pavlo's bulk message/event deletion on 08/12 ran
+`2026-07-01 → 2026-08-12T09:00Z`, which contains 08/08. Deleting the events may have
+cleared the "already notified" state and let the workflow re-emit. Ask platform;
+do not assume.
+
+**Why this matters more than one stray email.** An alert that can re-deliver a
+week-old event with a stale timestamp is an alert whose arrival no longer means
+"something is happening now". **Before trusting any future alarm from this trigger,
+read the `Time:` field, not the delivery time.** Combined with LIMITATION 1's
+latching problem this is the second way this alert can mislead, and it strengthens
+the case for not handing it to the building engineers yet.
+
 ## [LIMITATIONS — read before handing this to anyone]
 
 1. **⚠️ MANUAL RESET REQUIRED. This is the blocking issue.** Edge status does not
