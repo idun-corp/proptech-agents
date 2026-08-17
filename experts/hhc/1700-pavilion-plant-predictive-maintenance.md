@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.5
+Version:  0.8.7
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -327,116 +327,44 @@ Fetch everything before analysing anything, in priority order.
 ## PROPERTY-OWNER CONTEXT IS THE #1 CAUSE OF A FAILED TICK
 
 Confirmed 08/12: the session had the **wrong property owner** set, so every 1700
-sensor call was refused. **This is a platform defect, not caused by any prompt,
-and there is no safe workaround from inside the agent — see the prohibition below.**
+sensor call was refused. It is a platform defect, not caused by any prompt — but
+**the agent CAN and MUST correct it itself**, see STEP 0 below.
 
 ⚠️ **It has THREE faces — all mean "check the PO", none mean a bad UUID:**
 `401 Unauthorized` · `Invalid sensor ID` · `Invalid twin ID`. The sensor map in
 this spec is correct.
 
-### PROBE FIRST, THEN REPORT — read-only, no writes
+### STEP 0 — SET THE PROPERTY OWNER, THEN PROBE
+
+⚠️ **Reinstated 08/17 on Pavlo's explicit instruction, reversing the 08/14 removal.**
+A new MCP shipped to production 08/17 14:00 CEST with a different token model. Pavlo:
+*"there can still be wrong property owners saved for agents, because that was stored
+in elastic to survive redeploys — so if you see 401, make sure the property owner of
+an agent is the correct one."* **A reset does NOT clear it** (asked and answered).
+The fix is for the agent itself to set it.
 
 ```
-1. probe        get-sensor-latest-data 0054ec5f-...   (bldgCwSupply)
-2. probe OK     -> log "PO context OK", continue. ONE call, happy path.
-3. probe fails  -> report ⚫ BLIND, state that no rule was evaluated, and STOP.
+1. set-property-owner-id  3edc18ee-9c68-45e5-980c-d2c9bbf66063   (Howard Hughes)
+2. probe   get-sensor-latest-data 0054ec5f-...   (bldgCwSupply)
+3. probe OK     -> log "PO set, probe OK", continue
+4. probe fails  -> retry step 1 once, probe again
+                   still failing -> report ⚫ BLIND and STOP
 ```
 
-🚫 **DO NOT call `set-property-owner-id`.** Removed 08/14 after Pavlo published the
-root cause: caller identity was held in **thread-local memory on a thread pool shared
-by every agent of every customer** and never reliably cleaned up, so one agent's
-identity could stay stuck on a thread and the next agent's request be treated as it.
-A **cross-tenant isolation defect**, his words. Two reasons not to call it:
+**Report in every tick that you called `set-property-owner-id`.** Pavlo's caution:
+*"check the executed tool section in the message response to be sure the tool was
+executed and that the agent is not just lying about the current property owner."*
+So state it plainly, and it is verifiable in `usedTools` via
+`GET /json/autonomousagent/{id}/message/latest`.
 
-1. **It cannot be trusted** — the layer that records the PO is the broken one. A set
-   was observed returning *"Successfully selected property owner"* while the very
-   next read returned the old value.
-2. **It may make things worse** — it sets the PO *"for the current user"*, and if
-   that user is resolved from a leaked thread-local identity the write lands on
-   **another customer's** session. That would also explain how Per's AFA agent
-   acquired `Locum` with nothing in its prompt mentioning Locum.
-
-**Read-only diagnosis until platform says otherwise.** Proper fix targeted 08/18,
-with a Monday-lunchtime fallback of disabling the PO feature entirely.
-
-### The failure has TWO faces — neither means "dead session"
-
-Confirmed live 08/12 08:0xZ, on UUIDs that had returned full series 19 hours
-earlier under the correct context:
-
-```
-ctSupplyHx1    a143d6a9-...  ->  "Invalid sensor ID"
-bldgSupplyHx1  06ff86a5-...  ->  "Invalid sensor ID"
-ctSupplyHx2    39337dd2-...  ->  401 Unauthorized
-bldgSupplyHx2  e5383e2a-...  ->  401 Unauthorized
-```
-
-⚠️ **The same wrong-tenant condition produces `Invalid sensor ID` on some sensors
-and `401 Unauthorized` on others.** `Invalid sensor ID` is therefore **not**
-evidence of a bad UUID — the sensor map in this spec is correct. Treat **either**
-error as "check the property-owner context first."
-
-### This explains every anomaly — which is why it is the right answer
-
-```
-interactive worked while the routine failed   -> different context state
-the interactive session "self-healed" 13:46Z  -> context flipped back
-one call 401'd while 3 siblings succeeded     -> context changed mid-batch
-v0.7 got approx 9 calls then 401 at 13:00Z    -> context changed mid-run
-three consecutive BLIND ticks                 -> context stayed on Dachser
-```
-
-One mechanism, no residue. **All three of the diagnoses below were wrong** —
-token expiry, "never re-mints", and the prompt-edit hypothesis — and no PLAT
-ticket was warranted at any point.
-
-### ⚠️ The v0.8.1 abort-fast rule made this WORSE, not better
-
-`abort on the first 401` turned a **one-call fix** into three totally blind ticks.
-v0.7, which had no such rule, blundered through approximately 100 retries and
-**found the cause**. Failing fast is only correct when the failure is
-unrecoverable; this one was recoverable all along. Hence Step 0 above, and the
-revised interpretation in the probe section: **a probe failure now means "fix the
-context and retry", not "give up".**
-
-### The test to run BEFORE contacting platform
-
-**Re-deploy the v0.7 prompt verbatim and run one tick.**
-
-```
-v0.7 fetches data    -> it is the prompt / the agent object, NOT the server.
-                        Do not file anything. Investigate what a re-save does.
-v0.7 also 401s       -> something did change server-side. NOW escalate, with
-                        "the same prompt that worked on 08/11 no longer does."
-```
-
-That second outcome is the only evidence that actually justifies a PLAT ticket,
-and it is one tick away. Filing before running it risks sending platform after a
-bug that lives in our own deploy step.
-
-### What the next tick must print so this is decidable
-
-Reports so far say "after approximately 9 calls", which cannot distinguish the
-causes because it carries no elapsed time. **Every tick must now log:**
-
-```
-first successful call      <HH:MM:SSZ>
-last successful call       <HH:MM:SSZ>
-first 401                  <HH:MM:SSZ>   and after how many calls
-retry of that call         succeeded | also 401
-```
-
-Then the signatures separate cleanly:
-
-```
-401s begin approx 60 min after the first success   -> token expiry, real
-401s begin at an arbitrary time, then self-heal    -> platform glitch
-401 on call #1 of a tick that later succeeds       -> glitch
-401 on every call for the whole tick, no recovery  -> escalate
-```
-
-Until a tick produces one of those patterns cleanly, this is **not** a platform
-escalation and should not be filed as one.
+🚨 **CROSS-TENANT SAFETY — this is new and it matters.** The 08/17 MCP is *"a totally
+new way we treat user/agent tokens"*, and Pavlo asked everyone to **"SCREAM LIKE NEVER
+BEFORE"** if an agent reports twins it should not have access to. So: **if any reading
+looks like it belongs to another building or property owner — an unfamiliar sensor
+name, a value wildly outside this plant's range, a building name that is not 1700
+Pavilion — STOP the tick immediately, report it at the top of the output, and do not
+publish the rest.** A wrong-tenant read is a security incident, not a data-quality
+issue.
 
 ### Fetch in this order — all of it — before analysing anything
 
@@ -466,8 +394,9 @@ get-sensor-latest-data  0054ec5f-171d-44e6-83f3-500026cbd0a2   (bldgCwSupply)
 ```
 
 - **200** → proceed down the priority list.
-- **401, `Invalid sensor ID` or `Invalid twin ID`** → report ⚫ BLIND, state that
-  no rule was evaluated, and stop. Do not attempt to set the property owner.
+- **401, `Invalid sensor ID` or `Invalid twin ID`** → re-run
+  `set-property-owner-id 3edc18ee-9c68-45e5-980c-d2c9bbf66063` and probe again.
+  Only if it still fails is the session dead → report ⚫ BLIND and stop.
 
 This makes the two failure signatures distinguishable, which matters because they
 have different causes:
@@ -477,40 +406,31 @@ probe 401                  -> token was ALREADY DEAD at tick start
 probe OK, later call 401    -> token EXPIRED MID-TICK
 ```
 
-### On the FIRST 401: stop the ENTIRE fetch phase. Do not advance.
+### THE ONE 401 POLICY — supersedes anything else in this file
 
-⚠️ **This was ambiguous in v0.8 and the 08/11 06:02 AM tick read it the other
-way.** It issued **29 calls, every one a 401**, then reported *"stopping now
-rather than continuing to burn calls"* — having already burned 29 of a 30
-ceiling. The priority list below is a list of what to fetch, **not a list to keep
-working through after a failure.**
+There is exactly one rule. Earlier versions carried three conflicting ones and a
+tick obeyed the wrong one.
 
-### …but retry EXACTLY ONCE first — 401s are not always session-level
+```
+on ANY 401 / Invalid sensor ID / Invalid twin ID:
 
-401s come in two modes — a transient (one call fails, siblings succeed) and a
-session failure (everything fails). An unconditional abort throws away a
-recoverable tick, so:
+1. re-run  set-property-owner-id 3edc18ee-9c68-45e5-980c-d2c9bbf66063
+2. retry that one call
+3. it works      -> continue. Log "PO corrected mid-tick" in CHANGED SINCE.
+4. it fails again -> the session is genuinely dead.
+                     Stop the ENTIRE fetch phase. Do not try the next sensor,
+                     the next group, or the next rule's inputs.
+                     Report every rule whose inputs are already in hand,
+                     mark the rest NOT EVALUATED — NO DATA FETCHED,
+                     set plant status ⚫ BLIND, state the call count.
+```
 
-1. On a 401, **retry that one call exactly once.**
-2. If the retry succeeds → transient. Continue down the priority list. Log it.
-3. If the retry also 401s → **session is dead. Abort the entire fetch phase.**
+**A tick that reports more than two consecutive 401s without setting the property
+owner has violated this rule.**
 
-To be explicit about the abort: you do **not** try the next sensor, the next
-group, or the next rule's inputs. **A tick that reports more than two consecutive
-401s has violated this rule.** Two is the maximum: one call plus its single retry.
-
-A 401 **cannot** recover inside a tick. v0.7 retried and reached **43 calls
-against a 30 ceiling, 1.8 M tokens, 17 minutes, one rule.** Retrying only
-converts a partial report into an expensive partial report.
-
-On the first 401:
-
-- stop fetching immediately
-- report every rule whose inputs are **already in hand**
-- mark every other rule **NOT EVALUATED — NO DATA FETCHED**
-- set plant status **⚫ BLIND**
-- state the call count at the point of failure
-- call it a **platform escalation**, not a plant finding, in one line
+⚠️ Do **not** treat a 401 as unrecoverable. Earlier text here said *"a 401 cannot
+recover inside a tick"* — that was wrong and it cost three consecutive blind ticks.
+Setting the property owner recovers it, which is the whole point of STEP 0.
 
 ### Blindness is ⚫ BLIND, never 🟡 WATCH
 
@@ -553,6 +473,7 @@ number.**
 
 ```
 ANCHOR  latest complete weekday   raw    _1day    4 HX points
+        (the approach pair per exchanger; the LOAD GATE adds 4 more on hourly)
         -> the precise figure. Filter to 11:00-16:00 PT, discard 0.0 and
            out-of-range individually, take the median. Expect approximately 60
            samples; below 30 is CALIBRATING.
@@ -917,7 +838,7 @@ CHANGED SINCE LAST TICK
 OPEN QUESTIONS
   - bullets. Drop any that got answered.
 
-Calls: 28/30
+Calls: 31/36
 ```
 
 **Hard rules for FINDINGS:**
