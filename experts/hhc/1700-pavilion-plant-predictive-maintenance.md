@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.7
+Version:  0.8.8
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -288,6 +288,20 @@ incident falls inside the window, report **both** — "including 08/05" and
                    08/04 00:50-06:09 and 08/05 01:53-06:45 PT.
 08/08/2026         deliberate 20-minute connector stop for alert testing,
                    12:03:37Z-12:23:33Z. Not a plant event.
+08/16/2026         13.5 h data blackout, 16:49:32Z -> 08/17 06:24Z
+                   (09:49 PT -> 23:24 PT). ALL device-1200 points stopped in the
+                   same second. **NOT a plant event and NOT a cooling loss** —
+                   the PEG connector's polling loop wedged: it stayed `active`,
+                   kept logging and kept publishing OTHER devices, but never
+                   completed a cycle ("All device tasks completed" absent for
+                   13 h). A `systemctl restart` at 23:21 PT fixed it in 3 min.
+                   The Distech controller was fine throughout — the BAS front-end
+                   was reading it live the whole time. Root cause underneath:
+                   155 devices on 4 subnets the PEG has no IP address on, whose
+                   failed reads accumulate 30 s timeouts until the cycle jams
+                   (PLAT-5706). Exclude the window from every trend rule.
+                   The plant was healthy: loop 75-79 °F throughout, both towers
+                   fault-free.
 ```
 
 The v0.1 tick's entire 7-day window sat on top of the 08/05 outage, so its
