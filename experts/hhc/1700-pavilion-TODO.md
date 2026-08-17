@@ -10,6 +10,23 @@ failure this week has been in our ability to SEE the building, not in the buildi
 
 ---
 
+## ✅ CLOSED OUT 08/17 — see the bottom of this file for detail
+
+The 18 h blackout (connector wedge, fixed by restart) · root cause of the 155 dark
+devices (**PLAT-5706**, Pavlo) · "did we miss onboarding?" (no — 139 of 155 are
+configured) · the service object (**Closed**, alert armed) · `highCt2` (onboarded,
+**in alarm**) · the 41 never-onboarded devices (**OTEAM-6786**, Oksana) · the 08/15
+email (an all-clear, not a stale alarm).
+
+## 🔴 THE ONE REAL PLANT ITEM
+
+- [ ] **E · `device 1200/highCt2` is in alarm and nobody has been told.** 7
+      transitions in 3 days, latest `1.0` at 08/17 09:56Z, on the **lead tower**
+      (CT2 carries the duty; CT1 has 2,929 more lifetime hours so sequencing
+      favours CT2). Its siblings all have ProptechOS triggers — **`highCt2` appears
+      not to**, which is why three days of alarms produced no service object.
+      Message Josh Smith / Josh Chong, then create the missing trigger.
+
 ## NOW — before the Howard Hughes demo, Tue 08/18
 
 - [ ] **E · Rotate the PEG sudo password.** It is in the 08/17 session transcript and

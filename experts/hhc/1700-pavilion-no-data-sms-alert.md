@@ -191,14 +191,35 @@ Note also: an intermediate change to `Acknowledged` (08:13) correctly produced n
 SMS, confirming the all-clear filter discriminates properly on status rather than
 firing on any modification.
 
-## [⚠️ NEW FAILURE MODE 08/15 — A SEVEN-DAY-LATE RE-DELIVERY]
+## [⚠️ NEW FAILURE MODE — ALARM AND ALL-CLEAR EMAILS ARE INDISTINGUISHABLE]
 
-An alert email arrived **2026-08-15 05:48:03Z** carrying
-`Time: 2026-08-08 05:47:52 (-07:00)` — i.e. **the event was seven days old.** That
-timestamp is exactly the original alarm in the VALIDATION RECORD below
-(`08/08 12:47:52Z, "2 Sensors in Error status."`), an object that was **manually
-closed on 08/10**. So this was a re-emission of a week-old, already-closed alert,
-not a new fault.
+**Corrected 08/17.** This section first recorded the 08/15 email as a *seven-day-late
+re-delivery of a stale alarm*. **That was wrong.** Checking the object in the UI
+settled it:
+
+```
+1700 Communication error   Type Alert   Status CLOSED   Severity Major
+Created  2026-08-08 14:47 by Alerting
+Updated  2026-08-15 07:47 by Alerting     <- the email arrived 07:48
+```
+
+The object was **modified** at exactly the time the email went out, and its status is
+**Closed** — so WORKFLOW 2 fired and **it was an all-clear.** Consistent with the
+sticky edge status finally clearing seven days after the event.
+
+⚠️ **The actual defect: you cannot tell an alarm from an all-clear by email.** Both
+workflows dispatch using the *Trigger template*, which renders trigger details,
+`Priority: Major` and the **original event timestamp** regardless of direction. An
+all-clear therefore arrives looking exactly like a fresh Major alarm citing a
+week-old time. This is worse than the stale-delivery theory it replaces, because it
+applies to **every** email this trigger will ever send.
+
+**Until the templates are separated, read the `Time:` field and check the object's
+status — never infer direction from the email body.** The SMS templates *are*
+correctly differentiated (`NO DATA:` vs `DATA OK:`); it is only email that is
+ambiguous.
+
+**Also confirmed 08/17: the object is CLOSED, so this alert is armed, not latched.**
 
 **Verified against the data: there was no data loss.** Over the 20 h to
 08/15 08:36Z — 62 of 62 expected median blocks at **exactly 1200 s** intervals, zero
