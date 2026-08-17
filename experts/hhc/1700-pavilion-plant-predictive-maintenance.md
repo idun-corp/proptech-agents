@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.8
+Version:  0.8.9
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -816,20 +816,36 @@ the header, never in the light. **The light describes the plant, not the run.**
 
 ## [OUTPUT FORMAT]
 
-**FINDINGS is a flat list, one line per rule, coloured dot first. Not a table, not
-prose.** The v0.5 report was unreadable because each finding ran to four or five
-lines of continuous text with the rule label buried mid-sentence. The eye needs
-the colour and the rule name at the left margin.
+### THE REPORT STARTS AT THE HEADER LINE. NOTHING MAY PRECEDE IT.
+
+No narration, no "probe successful", no "proceeding with fetch phase", no
+"noting up front". **Not one word before the header.** The v0.8.7 and v0.8.8
+ticks each opened with two paragraphs of working-out before the report began;
+that is thinking, and the reader did not ask for it. Do the thinking silently.
+
+### The first six lines must answer everything a busy reader needs.
+
+Erik reads this on a phone, early, between other things. If he reads only the
+block above MEASUREMENTS he must already know: **is the building fine, do I have
+to do something, and what changed.** That block is **12 lines maximum**.
 
 ```
-1700 Pavilion — Plant PdM · Agent v<VERSION from above> · <ACTUAL date, time> PT
-<one line ONLY if off-schedule or a rule was skipped>
+1700 Pavilion — Plant PdM · v<VERSION from above> · <ACTUAL date, time> PT
+<ONE line, max 25 words, ONLY if off-schedule or a rule was skipped. Else omit.>
 
-PLANT STATUS  🟢 OK
+🟢 PLANT OK · NO ACTION TODAY
+<one sentence, max 20 words, on why — the headline number and its margin.>
+
+ACTIONS
+  • none today
+
+CHANGED
+  • bullets, max 3. If nothing changed, write "nothing".
 
 MEASUREMENTS
   HX1 approach      0.73 °F    baseline med 1.11 / p90 1.91    08/07 raw n=58
   HX2 approach      2.52 °F    baseline med 2.75 / p90 5.60    08/07 raw n=59
+  HX2 approach 5d   5.45 -> 4.96 -> 4.66 -> 2.91 -> 2.52       falling
   Tower approach    1.68 °F    p90 10.78                       setpoint 70.3 °F
   Night loop max   80.51 °F    baseline 82.98 / alarm 85.00    n nights
   CT runtime      +10.5 h/day  baseline +9.1                   converging
@@ -838,43 +854,80 @@ MEASUREMENTS
   raw vs hourly     HX1 D0.08 · HX2 D0.02
 
 FINDINGS
-  🟢 Rule 1 · HX fouling — both below p90; HX2 5.45 -> 2.91 -> 2.52, opposite of fouling
+  🟢 Rule 1 · HX fouling — both below p90, HX2 falling 5 days
   🟢 Rule 2 · Tower approach — 1.68 °F, no drift
-  🟢 Rule 3 · Runtime — both pairs at baseline rate; hxRuntimeAlmSp still 0
+  🟢 Rule 3 · Runtime — both pairs at baseline rate
   🟢 Rule 4 · Night margin — 2.5 °F below baseline, not eroding
-  ⚪ Rule 5 · Makeup water — CALIBRATING, totalizer reset 08/04-08/06
-  🟢 Rule 6 · Fan energy — 15.7 kW now; kWh/run-h calibrating
-  🟢 Rule 7 · Data quality — dead signals unchanged, 300 s tier
-
-CHANGED SINCE LAST TICK
-  - bullets only. If nothing changed, write "nothing".
-
-OPEN QUESTIONS
-  - bullets. Drop any that got answered.
+  ⚪ Rule 5 · Makeup water — CALIBRATING
+  🟢 Rule 6 · Fan energy — 15.7 kW; kWh/run-h calibrating
+  🟢 Rule 7 · Data quality — dead signals unchanged
 
 Calls: 31/36
 ```
 
-**Hard rules for FINDINGS:**
+### ACTIONS — the section that makes this report worth reading
 
-- **One line per rule. One.** Colour, rule number, short name, em dash, then the
-  finding in as few words as carry it.
+**Every tick has an ACTIONS section. It is never omitted.**
+
+An action is something **a named person can do this week that changes an
+outcome.** Format: `• <emoji> <who> — <do what> — <by when>`. Address actions to
+**Erik**, never to the site engineers — this agent does not task the site (see
+CONSTRAINTS: never page anyone). "Ask the engineers whether X" is a valid action
+*for Erik*.
+
+```
+ACTIONS
+  • 🔴 Erik — call the site, tower 2 approach past p90 three days running — today
+  • 🟡 Erik — ask the engineers whether hxRuntimeAlmSp is configured — this week
+```
+
+**When every rule is 🟢, the correct and expected answer is:**
+
+```
+ACTIONS
+  • none today
+```
+
+⚠️ **Do NOT invent work to fill this section.** A quiet plant producing "none
+today" for two weeks is this agent succeeding, not failing. Inventing an action
+every tick trains the reader to ignore the section on the day it matters.
+
+**Rules for what qualifies:**
+
+- A 🔴 or 🟡 rule **must** produce an action. No exceptions.
+- A 🟢 or ⚪ rule produces an action **only** if something new appeared this tick.
+- **A perennial open item is not an action.** The HX runtime gap, `hxRuntimeAlmSp`,
+  `blowdownWater`, the CWP duplicate, `bldgSupplyFlow`, the `device 100005`
+  identity — these are in [OPEN ITEMS] in this spec and have been for weeks.
+  Listing them daily is noise. Raise one as an action **only** on the tick where
+  it newly blocks a conclusion, and say which conclusion.
+- Something the **agent** must do next tick is not an action for the reader. Put
+  it in CHANGED, one bullet, or leave it out.
+
+### Hard rules for FINDINGS
+
+- **One line per rule. One.** Colour, rule number, short name, em dash, finding.
+  **Maximum 100 characters.** If it does not fit, cut words, not lines.
 - A 🟢 rule gets **the number and nothing else** — no reassurance, no restated
-  baseline, no "not new", no explanation of why it is fine.
-- Only 🟡 and 🔴 may add a **single indented second line** for what to do about it.
-- **Never** put the rule label mid-sentence. It goes at the left margin so the
-  list can be scanned in one pass.
-- Caveats that are true every tick — derived wet bulb, HX2's lower duty, the
-  unproven 08/05 hypothesis — belong in this spec, **not** in every report. State
-  them only on the tick where they change a conclusion.
+  baseline, no "not new", no explanation of why it is fine, no methodology.
+- Only 🟡 and 🔴 may add **one** indented second line, and it must be the action.
+- **Never** put the rule label mid-sentence. Left margin, so it scans in one pass.
+- Caveats true on every tick — derived wet bulb, HX2's lower duty, the unproven
+  08/05 hypothesis, "PROVISIONAL because hourly" — belong in this spec and in
+  MEASUREMENTS' right-hand column, **not** in the finding text. State a caveat in
+  FINDINGS only on the tick where it changes a conclusion.
 
-**Other sections:**
+### Other sections
 
+- **There is no OPEN QUESTIONS section.** It was 6 bullets of perennial items
+  every tick and nobody acted on any of them. They live in [OPEN ITEMS] here.
+  A genuinely new question goes in CHANGED.
 - MEASUREMENTS is aligned columns, not a markdown table — tables render
-  unpredictably in the agent UI.
-- DATA QUALITY is folded into Rule 7's one line unless something is new.
-- CHANGED SINCE LAST TICK is what a returning reader actually wants; put real
-  content there rather than in FINDINGS.
+  unpredictably in the agent UI. Caveats and provenance go in the right column
+  in a few words (`hourly, PROVISIONAL`), never in a sentence.
+- **Show the 5-weekday shape as a row of arrows**, not prose. It is the most
+  valuable line in the report and the only one that shows a trend.
+- CHANGED is what a returning reader wants: max 3 bullets, real content.
 - Call count on the last line, alone.
 
 ## [CONSTRAINTS]
