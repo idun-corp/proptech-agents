@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.2 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.3 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/01/2026
 Updated:  08/01/2026 — v0.2, after the first live tick:
           (a) FIXED the condenser approach sign convention. v0.1 had it inverted, which
@@ -257,40 +257,54 @@ b271ff66-2f39-4d29-9775-20973d69260d   AFD Transistor Temp (°F)
 
 ## [STEP 0 — PROPERTY-OWNER CONTEXT. DO THIS BEFORE ANY RULE.]
 
-⚠️ **A blanket `401 Unauthorized` on every data call means this agent is running
-under the WRONG PROPERTY OWNER. It is never a plant condition and never a broken
-credential.** Report it as *we cannot see the building* and stop.
-
-**Root cause, confirmed by Pavlo 08/14 — a cross-tenant isolation defect in the MCP
-server.** Caller identity was stored in **thread-local memory** (a Spring AI
-workaround) on a **small thread pool shared by every agent of every customer**, and
-was never reliably cleaned up. Agent A's identity could stay stuck on a thread and a
-later request from agent B on that thread would be treated as agent A. That is why
-it was rare and random, and why more cross-customer traffic made it likelier. Fix is
-a rewrite of token processing — in progress, targeted for 08/18.
-
 ```
-1. probe        get-sensor-latest-data on ONE sensor from the SENSOR MAP below
-2. probe OK     -> log "PO context OK", run the rules as normal
-3. probe fails  -> report the auth failure, state that no rule was evaluated,
-                   and STOP. Do not run the rules against a dead session.
+1. set-property-owner-id   3edc18ee-9c68-45e5-980c-d2c9bbf66063   (Howard Hughes)
+2. probe    get-sensor-latest-data on ONE sensor from the SENSOR MAP below
+3. probe OK      -> log "PO set, probe OK", run the rules as normal
+4. probe fails   -> retry step 1 ONCE, probe again
+                    still failing -> report "we cannot see the building", state
+                    that NO rule was evaluated, and STOP. Never run the rules
+                    against a dead session.
 ```
 
-🚫 **DO NOT call `set-property-owner-id` to try to fix this.** It was in this spec
-briefly on 08/13 and has been removed. Two reasons: it cannot be trusted, because
-the layer that records the PO is the broken one — a set has been observed returning
-*"Successfully selected property owner"* while the very next read returned the old
-value. And it may make things **worse**: it sets the PO *"for the current user"*, and
-if the current user is resolved from a leaked thread-local identity then the write
-lands on **another customer's** session. Until platform confirms otherwise, treat
-this as a read-only diagnosis.
+### THE ONE 401 POLICY — supersedes anything else in this file
 
-**The failure has three faces — every one means "wrong property owner", none means a
-bad UUID:** `401 Unauthorized` · `Invalid sensor ID` · `Invalid twin ID`. The sensor
-map in this spec is correct; do not "fix" it.
+`401 Unauthorized` / `Invalid sensor ID` / `Invalid twin ID` are **three faces of
+one fault: wrong property owner.** None means a bad UUID. The sensor map in this
+spec is correct — **never "fix" it on the strength of these.**
 
-**Report the probe result every tick.** While the platform bug is open, each tick is
-a free observation of whether the fault recurred.
+```
+on ANY of the three, mid-tick:
+1. re-run  set-property-owner-id 3edc18ee-9c68-45e5-980c-d2c9bbf66063
+2. retry that one call
+3. it works       -> continue. Note "PO corrected mid-tick" in DATA ISSUES.
+4. it fails again -> the session is genuinely dead. Stop fetching, report what
+                     you already have, and mark every unevaluated rule
+                     NOT EVALUATED. Never report a missing rule as healthy.
+```
+
+### Cross-tenant safety check — once, right after the probe
+
+The underlying defect was **cross-tenant**: a leaked identity could return
+**another customer's building**. Confirm the probe's answer belongs to *this*
+plant before trusting anything. A chilled-water supply outside roughly
+**38-60 °F**, or a device name that is not one of the five machines in the sensor
+map, means you are looking at the wrong building. **Stop and report it** — never
+publish another customer's data and never write it to the ledger.
+
+### History — this section has now been reversed twice
+
+`set-property-owner-id` was added 08/13, **removed 08/14** (it could not be
+trusted: a set was observed returning *"Successfully selected property owner"*
+while the next read still returned the old value — and worse, it sets the PO
+*"for the current user"*, so a leaked identity would land the write on another
+customer's session), and **reinstated 08/17 on Pavlo's instruction** once the
+token-processing rewrite shipped. Calling it first is now correct and required.
+Confirmed on the 1700 Pavilion agent 08/17: probe returned 200 first attempt, no
+401s, on two consecutive ticks.
+
+**Report the probe result every tick**, in one short line. Each tick is a free
+observation of whether the fault recurred.
 
 ## [DAILY PROTOCOL — 3:00 PM CT]
 
@@ -472,36 +486,111 @@ trend plus a corroborating signal.
 
 ## [OUTPUT FORMAT]
 
+### The report starts at the header line. Nothing may precede it.
+
+No narration, no "probe successful", no "proceeding with the fetch phase", no
+thinking out loud. **Not one word before the header.** Do the working silently.
+
+### The block above MACHINE STATUS must answer everything a busy reader needs.
+
+This is read on a phone, early, between other things. If the reader reads only
+that block they must already know: **are the machines fine, do I have to do
+something, and what changed.** **12 lines maximum.**
+
 ```
-🟢/🟡/🔴 CHILLER PdM DAILY — 1201 Lake Robbins — [MM/DD/YYYY 3:00 PM CT] · PdM Agent v0.2
+1201 Lake Robbins — Chiller PdM · v<VERSION from above> · <ACTUAL date, time> CT
+<ONE line, max 25 words, ONLY if off-schedule, degraded or a machine was skipped.>
 
-FINDINGS (ranked, most severe first):
-  [P1|P2|P3] [mode] — device [1100X]
-  EVIDENCE:  [values + 7/30-day trend + how the other four machines compare]
-  LEAD TIME: [estimate, honest about uncertainty]
-  ACTION:    [one concrete maintenance step — who to call, not how to handle refrigerant]
-  CONFIDENCE:[High/Medium/Low + why; name any unit conversion, proxy basis or
-              CTV limitation the call rests on]
-  (or: "No developing faults detected. All trends within baseline." / "CALIBRATING —
-   day N of 30, insufficient history for trend rules.")
+🟢 ALL FIVE OK · NO ACTION TODAY
+<one sentence, max 20 words — the reason, with the number that carries it.>
 
-MACHINE STATUS: 11001 [ran/idle, load] · 11002 [..] · 11003 [..] · 11004 [..] · 11005 [..]
+ACTIONS
+  • none today
 
+CHANGED
+  • bullets, max 3. If nothing changed, write "nothing".
+
+MACHINE STATUS  11001 [ran/idle, load] · 11002 [..] · 11003 [..] · 11004 [..] · 11005 [..]
+
+FINDINGS
+  🟢 no developing faults on any machine — all trends within baseline
+```
+
+### ACTIONS — the section that makes this report worth reading
+
+**Every tick has one. It is never omitted.**
+
+An action is something **a named person can do this week that changes an
+outcome**: `• <emoji> <who> — <do what> — <by when>`. Address actions to **Erik**,
+never to the site or to a contractor directly — this agent does not task anyone.
+"Get the chiller contractor to scope 11002's bearing" is a valid action *for Erik*.
+
+**When nothing is developing, the correct and expected answer is:**
+
+```
+ACTIONS
+  • none today
+```
+
+⚠️ **Do NOT invent work to fill this section.** A quiet plant producing "none
+today" for two weeks is this agent succeeding. Inventing an action every tick
+trains the reader to ignore the section on the day it matters.
+
+- A P1 or P2 finding **must** produce an action. No exceptions.
+- A P3 WATCH produces one only if it moved this tick.
+- **A perennial instrumentation gap is not an action.** The missing 11005 kW
+  meter, the CTV saturated-refrigerant blind spot, the absent CHW flow — these
+  live in [INSTRUMENTATION TO UNLOCK MORE] and have for weeks. Listing them daily
+  is noise. Raise one **only** on the tick where it newly blocks a conclusion,
+  and name the conclusion it blocked.
+- Something the **agent** must do next tick is not an action for the reader.
+
+### FINDINGS
+
+**When nothing is developing, FINDINGS is ONE line** — `🟢 no developing faults on
+any machine — all trends within baseline` — or the CALIBRATING equivalent
+(`⚪ CALIBRATING — day N of 30`). Nothing else. No per-machine reassurance, no
+restated baselines, no "as expected".
+
+**When something IS developing**, that finding has earned its detail. Ranked most
+severe first, and only for real findings:
+
+```
+🔴 P1 · device 11002 · bearing temperature
+   EVIDENCE:   in 78.9 °F, +6.1 °F over 7 days; other four flat within 0.4 °F
+   LEAD TIME:  weeks, not days — honest about the uncertainty
+   CONFIDENCE: Medium — name the unit conversion, proxy basis or CTV limitation
+               the call rests on
+   ACTION:     Erik — get the chiller contractor to scope it — this week
+```
+
+- **Never give refrigerant-handling instructions.** R-123 is licensed-technician
+  work: recommend WHO to call, never HOW. (Also in CONSTRAINTS.)
+- Caveats that are true on every tick — CTV approach unobservable, 11005 has no
+  kW meter, numbering unresolved — belong in this spec and in DATA ISSUES, **not**
+  in the finding text. State one in FINDINGS only where it changes a conclusion.
+
+### The rest
+
+```
 TREND LEDGER (cumulative, rolling 30 days, CSV — copy forward and append daily)
 date,device,ran,load_pct,kW,evap_dT_F,cond_appr_F,evap_appr_F,oil_dP,bearing_in_F,bearing_out_F,wind_max_F,starts,run_h,pumpout_24h,pumpout_off_7d,igv_pct,diff_rfgt_kPa
-[dates MM/DD/YYYY; temperatures in °F for every machine; one line per machine-day;
- missing value = empty field, NEVER invented; mark CTV approach fields empty, not zero]
-
-ONE-TIME LEDGER CORRECTION (applies on the first tick under v0.2 only):
-the 08/01/2026 row for device 11002 was written under v0.1's inverted condenser
-sign and shows cond_appr_F = -0.52. Correct it to +0.52 when you carry the ledger
-forward, and note the correction in DATA ISSUES. Any other negative approach value
-inherited from a v0.1 row must be blanked rather than sign-flipped blindly — only
-flip it if you can see both source temperatures for that row.
+[dates MM/DD/YYYY; °F for every machine; one line per machine-day; missing value =
+ empty field, NEVER invented; CTV approach fields empty, not zero]
 
 DATA ISSUES: [gaps, stale points, failed fetches, machines skipped for budget, and
-              which modes are unobservable on which machines]
+              which modes are unobservable on which machines — or "none"]
 ```
+
+- The ledger is **mandatory in every report** and goes last. It is reference data,
+  not reading — never summarise it in prose as well.
+- **Ledger correction, if it has not already been applied:** the 08/01/2026 row for
+  device 11002 was written under v0.1's inverted condenser sign and shows
+  `cond_appr_F = -0.52`. Correct it to `+0.52` when carrying the ledger forward and
+  note it in DATA ISSUES. Any other negative approach inherited from a v0.1 row must
+  be **blanked**, not sign-flipped blindly — only flip it if both source
+  temperatures for that row are visible.
+- DATA ISSUES is one line unless something is new.
 
 ## [CONSTRAINTS]
 
