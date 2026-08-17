@@ -18,14 +18,32 @@ configured) · the service object (**Closed**, alert armed) · `highCt2` (onboar
 **in alarm**) · the 41 never-onboarded devices (**OTEAM-6786**, Oksana) · the 08/15
 email (an all-clear, not a stale alarm).
 
-## 🔴 THE ONE REAL PLANT ITEM
+## 🟡 `highCt2` — DOWNGRADED 08/17, it tracks the night shutdown
 
-- [ ] **E · `device 1200/highCt2` is in alarm and nobody has been told.** 7
-      transitions in 3 days, latest `1.0` at 08/17 09:56Z, on the **lead tower**
-      (CT2 carries the duty; CT1 has 2,929 more lifetime hours so sequencing
-      favours CT2). Its siblings all have ProptechOS triggers — **`highCt2` appears
-      not to**, which is why three days of alarms produced no service object.
-      Message Josh Smith / Josh Chong, then create the missing trigger.
+- [ ] **E · Ask the engineers a question, do NOT build an alert yet.**
+      `device 1200/highCt2` (binary-input 704) has **no ProptechOS trigger** — its
+      siblings `highCt1`, `lowCt1`, `lowCt2`, `filterAlarmCt2` all have one, so it
+      was missed rather than paused. Only **one** Alert object exists for 1700 since
+      08/10 (`1700 No Cooling - CW Supply`, Closed), confirming nothing fires.
+
+      **But the pattern says nuisance, not fault.** Over 4 days: 9 transitions,
+      dwells of 5–16 h, only one under 30 min, 38.1 h in alarm of 97.7 h (39%).
+      Converted to LV time it **sets 19:30–23:30 PDT and clears 05:00–07:00 PDT** —
+      in alarm overnight, clear all day. That is backwards for a heat-driven high
+      limit, and it lines up with the BAS occupancy schedule (Occupied 05:00–18:00
+      PT) and the fully idle overnight plant (both CT pumps, both CW pumps and
+      Cooling Tower 1 stopped, iso valves closed). Most likely tower 2's water
+      stagnates and drifts toward ambient once circulation stops.
+
+      **It has never tripped during the 11:00–16:00 PT peak window in 4 days.**
+
+      So: ask *"is tower 2's high limit meant to trip when the plant is off
+      overnight?"* — and if a trigger is ever built, gate it to occupied hours.
+      A plain trigger would page someone every single night.
+
+      ⚠️ I first called this "the only real plant item" and pushed to notify the
+      engineers. That was over-called on transition count alone, before looking at
+      dwell times and time-of-day.
 
 ## NOW — before the Howard Hughes demo, Tue 08/18
 
