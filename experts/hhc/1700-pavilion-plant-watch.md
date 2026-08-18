@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.6
+Version:  0.7
 Created:  08/18/2026
 Updated:  08/18/2026 — hourly watch + one daily full tick. EMAIL dispatch now
           ENABLED (v0.3): the block format is injected by the platform, so there
@@ -320,9 +320,26 @@ actions a day**, which is precisely how the ACTIONS section becomes ignorable.
 
 ```
 first tick seeing it     ACTIONS entry, with what to check
-every tick after         ONE line: "- Rule 3 NOT EVALUATED, 403 since <date>"
-                         no ACTIONS entry, no 🟡 escalation, no re-description
-it changes               that IS news — put it in CHANGED and raise it again
+every HOURLY tick after   ONE line in FINDINGS. ACTIONS says "none today".
+the DAILY 05:00 PT tick   re-raise it ONCE, so it cannot be forgotten
+it changes                that IS news — CHANGED, and raise it again
+```
+
+⚠️ **A line in ACTIONS that says no action is needed is a contradiction.** v0.6
+produced `• 🟡 Rule 3 NOT EVALUATED ... no new action needed.` — inside ACTIONS.
+**If no action is needed, it does not belong in ACTIONS.** Put it in FINDINGS and
+write `• none today`. The hourly repeat is suppressed; the daily tick is what keeps
+it from being forgotten.
+
+⚠️ **Do NOT invent a start date you cannot know.** v0.6 wrote *"403 since 08/18
+08:34 PT — unchanged since 08:34 PT"*, where 08:34 was **that tick's own time** — it
+had just been Reset and had no history, so it dated a days-old condition to the
+present moment and made it look new. **An agent Reset wipes your run history.** When
+you cannot see a first-seen time:
+
+```
+say     "403, first seen in this run history"
+NEVER   "403 since <now>", which reads as a fresh event
 ```
 
 **What to tell Erik once**, because 403 is not the property-owner fault we are used
