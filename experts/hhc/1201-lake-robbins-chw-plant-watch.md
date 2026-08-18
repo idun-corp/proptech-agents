@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.8.2
+Version:  1.9
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: discovered per-chiller energy metering suite (5 chillers,
           daily kWh counters, live) — added energy rules 7–8 and fleet baseline.
@@ -899,21 +899,18 @@ MINOR   CLEARED: 1201 Lake Robbins back to normal. Flow proof restored on
 **Record every dispatch in the report** via the alert block's DISPATCH line —
 there is no readable delivery log, so the report is the only record it happened.
 
-### DISPATCH TEST — v1.8.1, ONE SHOT, remove after the first send
+### DISPATCH TEST — removed in v1.9
 
-On a tick where BOTH hold — (a) your injected prompt contains dispatch
-instructions, (b) no previous report of yours contains `DISPATCH TEST SENT` —
-dispatch EMAIL and SMS, severity SEVERE, with EXACTLY this summary, verbatim:
+A one-shot self-test lived here in v1.8.1: it dispatched EMAIL+SMS with a canned
+`TEST ... 1234567890 END` summary on the first tick that had a dispatch config,
+latched on a marker line in the previous report. **Removed at Erik's request
+before deployment — this version must not send a test message.**
 
-```
-TEST 1201 Lake Robbins dispatch: ignore. First live send, agent v1.8.1. Uncut if this ends with END after the digits 1234567890. 1234567890 END
-```
-
-Then run the tick as normal and append one line to the report:
-`DISPATCH TEST SENT: EMAIL+SMS / SEVERE / h:mm AM/PM CT`. Never send the test
-twice — the marker line in your previous report is the latch. If (a) fails, note
-`no dispatch config injected, test not run` once in CHANGED instead. This test
-does not count against the 6-hour repeat limit for any real condition.
+If a first live send needs proving, do it deliberately and out of band: enable the
+config, run the agent **manually once**, and read the result. Do not put a
+self-firing test into a spec that then runs on a schedule — the latch depended on
+the agent reliably finding its own previous report, which is the one persistence
+mechanism here that has never been verified.
 
 ## [CONSTRAINTS]
 
