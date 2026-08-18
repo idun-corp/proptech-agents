@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.8.1
+Version:  1.8.2
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: discovered per-chiller energy metering suite (5 chillers,
           daily kWh counters, live) — added energy rules 7–8 and fleet baseline.
@@ -862,7 +862,7 @@ REPEAT     at most ONCE PER 6 HOURS for the same unresolved condition
 ```
 
 - **The repeat limit is YOUR job — dispatch has no known de-duplication.** You
-  run hourly; an unresolved 🔴 would otherwise page 24 times a day. Read your
+  run every 2 h; an unresolved 🔴 would otherwise page 12 times a day. Read your
   previous report: if the same condition was dispatched within 6 h, do not
   dispatch — write `DISPATCH: suppressed - already dispatched h:mm CT` instead.
 - **Live conditions only.** A 🔴 found in the 24 h window that has already
