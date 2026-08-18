@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.9 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/01/2026
 Updated:  08/01/2026 — v0.2, after the first live tick:
           (a) FIXED the condenser approach sign convention. v0.1 had it inverted, which
@@ -469,10 +469,17 @@ a UC800's `% RLA` as a fallback — that is what appears to have happened, and i
 silently attributed one machine's load to another. **A missing basis is a skipped
 rule, never a borrowed number.**
 
-⚠️ Unverified as of 08/18: whether this is the agent reaching for the wrong
-sensorId, or a genuine duplicate mapping in the connector config. **Both have
-precedent here** — 1700 has `runtimecwp1`/`runtimecwp2` byte-identical from one
-register mapped twice. Check the config before concluding.
+✅ **RESOLVED 08/18: the connector config is clean.** Checked directly on the PEG —
+**zero duplicate sensorIds across the five chillers.** Every point maps to exactly
+one device. A duplicate mapping was the obvious suspect (1700 carries
+`runtimecwp1`/`runtimecwp2` byte-identical from one register mapped twice) and it
+is **not** what happened here.
+
+**So this was the agent, not the platform.** Two machines cannot plausibly read
+68.6 % to the decimal from two distinct sensors; the value was almost certainly
+read once and attributed twice. **That is exactly what the rule above forbids**,
+and it is the reason the rule exists rather than being a tidy-up. Do not raise this
+with platform, and do not re-check the config — it has been checked.
 
 ### 2. 11003's Actual Running Capacity is ALSO frozen since 08/07
 
