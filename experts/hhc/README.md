@@ -23,6 +23,7 @@ the building's site folder on Drive for the write-up).
 | `1700-pavilion-no-cooling-sms-alert.md` | v1.1 deployed + validated — the 85 °F acute alert | Sensor UUIDs, building + PO IDs, names, **recipient phone/email** |
 | `1700-pavilion-no-data-sms-alert.md` | v1.0 deployed, **needs manual reset** — not for engineers | Sensor UUIDs, building + PO IDs, **recipient phone/email**, PEG host |
 | `1700-pavilion-plant-predictive-maintenance.md` | v0.8.1, condenser-water plant — daily PdM, never pages | Full sensor UUID map (largest), building + PO IDs, names |
+| [1700-pavilion-plant-watch.md](1700-pavilion-plant-watch.md) | 1700 Pavilion | Daily ops watch — freshness, aggregation liveness, alert arming, last night's max. Owns everything answerable from one sample; the PdM owns slopes. **v0.1, not yet run.** |
 | `1700-pavilion-daily-manual-check.md` | v0.2, manual daily data-loss backstop | Sensor UUIDs, building ID, **PEG host + SSH user** |
 | `agent-dispatch-sms.md` | Shared reference — how an agent sends SMS/EMAIL/service object (v5.6.3) | None — dispatch never exposes recipients to the LLM |
 
