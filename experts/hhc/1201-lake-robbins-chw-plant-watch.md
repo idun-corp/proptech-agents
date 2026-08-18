@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.9
+Version:  1.10
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: discovered per-chiller energy metering suite (5 chillers,
           daily kWh counters, live) — added energy rules 7–8 and fleet baseline.
@@ -688,9 +688,13 @@ band order.
   this ordering exists to prevent.
 - **Always emit a report** — partial plus DATA ISSUES beats silence.
 
-### The cadence decision — 2 h, not hourly
+### The cadence decision — HOURLY, because the platform allows nothing else
 
-**Run every 2 hours.** Reasoning, so it is not re-argued:
+⚠️ **Runs HOURLY. 2 h was the right answer and is not currently selectable** —
+checked 08/18, the schedule picker offers no other interval. Revisit if that
+changes; the reasoning is kept below so it is not re-argued from scratch.
+
+**Why 2 h would be better, and why hourly costs nothing in detection:**
 
 ⚠️ **Tick cadence sets LATENCY, not detection.** Every tick reads the **last 24 h
 hourly**, so a slower tick misses nothing — it only learns later. Nothing falls
@@ -715,23 +719,24 @@ hourly   24 ticks/day   6.6 M tok/day   Rule 1 still cannot fire faster than 2 h
 4-hourly  6 ticks/day   1.7 M tok/day   loses same-shift detection during occupancy
 ```
 
-**2 h is the point where the cadence matches the ruleset.** 4 h halves the cost
-again but means an event at 08:00 may not be reported until noon, inside occupied
-hours — that is the tradeoff to weigh, and it is a business call, not a technical
-one.
+**2 h is the point where the cadence matches the ruleset**, so hourly is paying
+double for latency no rule can use. It loses nothing in detection — only money.
+**Since the rate is fixed, the only remaining lever is the size of this file.**
 
 ## [COST — read this before adding anything to this file]
 
-At 2 h this agent ticks 12 times a day, and its dominant cost is **this prompt,
-not the data.**
+This agent ticks **24 times a day**, and its dominant cost is **this prompt, not
+the data.**
 
 ```
 measured 08/18   275,320 tokens · 35 calls · 2m 1s · v1.6 at 36,932 bytes
 
 spec 36,932 bytes  ~=  9,233 tokens
 observed / spec    =   29.8  ->  the prompt is re-sent ~30 times per tick
-at 2 h             =   275,320 x 12  =  3.3 M tokens/day
-at 2 h + 12 KB spec                     =  1.1 M tokens/day
+hourly at v1.6     =   275,320 x 24  =  6.6 M tokens/day
+hourly at v1.9     =   this file is now 49,353 bytes -> approx. 12,300 tokens
+                       x approx. 30 rounds x 24  =  approx. 8.9 M tokens/day
+hourly at 12 KB    =   approx. 90 K/tick x 24    =  approx. 2.2 M tokens/day
 ```
 
 **Every tool call re-sends the entire prompt.** So cost is `prompt size × rounds`,
@@ -752,6 +757,14 @@ daily agent.** A paragraph added here is re-read **720 times a month.** If
 something is background rather than an instruction, it belongs in a decision log,
 not in the prompt — that move took the 1700 PdM from 58.8 KB to 48.3 KB.
 
+
+⚠️ **This file grew 36,932 -> 49,353 bytes on 08/18 (+34 %).** Both this session
+and a parallel one added to it — the fetch barrier, Rule 1c, dispatch, the cost
+section, this note. On a daily agent that is free. On an hourly one it is roughly
+**+2.3 M tokens/day**. The additions were each defensible; the aggregate was never
+reviewed. **A trim to a rules-only prompt with the rationale moved to a decision
+log is now the single highest-value change available to this agent** — that move
+took the 1700 PdM from 58.8 KB to 48.3 KB with no loss of function.
 
 ## [OUTPUT FORMAT]
 
@@ -862,7 +875,7 @@ REPEAT     at most ONCE PER 6 HOURS for the same unresolved condition
 ```
 
 - **The repeat limit is YOUR job — dispatch has no known de-duplication.** You
-  run every 2 h; an unresolved 🔴 would otherwise page 12 times a day. Read your
+  run hourly; an unresolved 🔴 would otherwise page 24 times a day. Read your
   previous report: if the same condition was dispatched within 6 h, do not
   dispatch — write `DISPATCH: suppressed - already dispatched h:mm CT` instead.
 - **Live conditions only.** A 🔴 found in the 24 h window that has already
