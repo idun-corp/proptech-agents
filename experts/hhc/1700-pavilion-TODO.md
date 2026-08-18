@@ -66,6 +66,31 @@ email (an all-clear, not a stale alarm).
       the REST bearer token expired. Reconnect at claude.ai/settings/connectors, or
       paste a fresh token, and I will report loop + indoor temps immediately.
 
+## 🟡 BLIND SPOT — we cannot currently verify our own alerting
+
+- [~] **Oksana · Grant the Plant Watch agent service-object read access (RPP).**
+      `get-service-objects` returns **403 Forbidden** for the 1700 Plant Watch
+      agent, so **Rule 3 cannot run.** Asked 08/18; Erik does not have the rights
+      to change the Resource Permission Policy himself. Blocked, not forgotten.
+
+      **What it costs:** Rule 3 is the only check anywhere in the system that
+      answers *"is our alerting still armed?"* Both 1700 SMS alerts are currently
+      unverifiable. That matters because a **latched** alert is silent in exactly
+      the same way a calm building is — and the no-data alert is **known to
+      latch**: 65 h open, observed 08/08–08/10, needing a manual close.
+
+      ⚠️ **Not the property-owner fault.** That is a `401`, fails on every call,
+      and STEP 0 fixes it. This is a `403` on one endpoint while all fourteen
+      sensor reads succeed — an authorisation scope issue.
+
+      **No REST fallback exists** — the API base has no service-object or alert
+      endpoint (448 paths checked). Only MCP or the UI can answer it.
+
+- [ ] **E · Meanwhile, eyeball it in the UI once.** 30 seconds, and it closes the
+      gap until the RPP lands: open the building's service objects and confirm
+      neither `1700 No Cooling - CW Supply` nor `1700 Communication error` is
+      sitting **open**. Worth doing now rather than after the next quiet night.
+
 ## NEXT — the monitoring gap this outage exposed
 
 - [ ] **E+C · Connector health check.** `All device tasks completed` stopped appearing
