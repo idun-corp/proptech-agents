@@ -183,16 +183,24 @@ YOU write in the prompt    WHEN to dispatch, which SEVERITY, and the SUMMARY tex
 The PLATFORM provides      the block format, the template, the recipients, the send
 ```
 
-### ⚠️ There is NO UI for DispatchConfig — it is created backend-side (as of 08/18)
+### Creating a DispatchConfig: API today, UI later this week (as of 08/18)
 
-Erik searched every tab of the agent create/edit dialog on 08/18: nothing. The
-07/31 precedent (OTEAM-6763, agent `82441aac-0022-4b3b-908c-c12e4e5306d9` "9950
-Chiller Monitoring") was configured **by Pavlo, backend-side** — Erik never
-touched a config screen, only did the reset. The Workflows → Dispatchers page is
-the *transport channels* (SMS/Email, 2021) reused at send time, not where agent
-configs live. **To get a DispatchConfig, ask Pavlo with the agent name/ID and
-the recipients.** Fallback if ever needed: SERVICE_OBJECT dispatch + a trigger
-on `Created` + a workflow → the old path, with inherent dedup.
+Erik searched every tab of the agent create/edit dialog on 08/18: nothing there
+yet. Two answers came back the same day (group DM, Pavlo + Yaroslav):
+
+- **Pavlo:** DispatchConfig **endpoints exist in the agent API now** — *"use
+  those endpoints in agent api"*. So it is self-service via API, not a
+  backend-only favour (the 07/31 OTEAM-6763 setup for agent
+  `82441aac-0022-4b3b-908c-c12e4e5306d9` just happened to be done by Pavlo).
+- **Yaroslav:** *"The UI capability to set those up is coming this week later"*
+  (week of 08/17). **Decision 08/18: wait for the UI** — the dispatch test is
+  parked, fully staged, until it ships.
+
+The Workflows → Dispatchers page is the *transport channels* (SMS/Email, 2021)
+reused at send time, not where agent configs live. Legacy fallback (agent
+creates a service object → trigger on `Created` → workflow → dispatchers) is
+possible but heavier: service-object API access for an agent needs permissions
+granted via the Azure portal (Pavlo, 08/11).
 
 ### ⚠️ The one operational step: RESET after adding a dispatch config
 
