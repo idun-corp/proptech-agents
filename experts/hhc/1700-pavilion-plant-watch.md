@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.7
+Version:  0.8
 Created:  08/18/2026
 Updated:  08/18/2026 — hourly watch + one daily full tick. EMAIL dispatch now
           ENABLED (v0.3): the block format is injected by the platform, so there
@@ -342,6 +342,17 @@ say     "403, first seen in this run history"
 NEVER   "403 since <now>", which reads as a fresh event
 ```
 
+**Manually verified 08/18 — both alerts ARMED.** Erik checked the service objects in
+the ProptechOS UI: `1700 No Cooling - CW Supply` (08/10 10:47) and `1700
+Communication error` (08/08 14:47) both read **Closed**, as did two `1700 lowCt1`
+objects from 08/08. **So nothing is latched, and the 403 is a reporting gap rather
+than an exposure.**
+
+⚠️ **Do NOT report that as ARMED, though.** A human check on 08/18 says nothing
+about today — an alert can latch at any time, and the no-data alert has latched
+before for 65 h. Report `⚪ NOT EVALUATED`, and cite the manual check only as
+context: `last verified by hand 08/18, both Closed`.
+
 **What to tell Erik once**, because 403 is not the property-owner fault we are used
 to — that presents as `401` / `Invalid sensor ID`, fails everywhere, and STEP 0
 fixes it. A 403 on one endpoint while every sensor read succeeds is an
@@ -575,8 +586,21 @@ ones nobody else will produce:
 🔴 ACT          a rule breached its threshold, or an alert is dead/latched
 🟡 WATCH        trending toward one, or an unexplained data gap
 🟢 OK           evaluated, within range
+⚪ NOT EVALUATED  we were not permitted or not able to run the rule
+                  NOT a fault — EXCLUDED from the roll-up
 ⚫ BLIND        STEP 0 failed — the building is not visible, NOTHING evaluated
 ```
+
+⚠️ **A rule we are not permitted to run is NOT amber.** Rule 3's `403` is ⚪, not
+🟡, and it must **not** cap the plant status. This is the same principle the PdM
+already applies to CALIBRATING: *a rule that lacks history is not a plant
+condition.* A rule that lacks **permission** is not one either.
+
+**Why this matters more than it looks:** the RPP fix is with Oksana and may take
+weeks. At hourly, 🟡 on every tick for a known, tracked, unfixable-by-us gap means
+**hundreds of amber reports in a row** — and an indicator that is always amber
+carries no information at all. Report `⚪ Rule 3 · NOT EVALUATED (403)` on one line
+and let the header show what the plant is actually doing.
 
 **⚫ BLIND is not 🟢.** The single most important discipline in this agent is
 distinguishing *"healthy"* from *"not visible"*. **Silence is only reassuring
