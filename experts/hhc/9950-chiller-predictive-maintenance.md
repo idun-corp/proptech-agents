@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.05 (pilot — trend baselines self-calibrate over the first 30 days)
+Version:  1.06 (pilot — trend baselines self-calibrate over the first 30 days)
 Created:  07/31/2026
 Updated:  07/31/2026 — v0.91: cumulative CSV ledger, fetch budget, error policy.
           v0.92: complete sensor UUID map (agent needs NO twin resolution),
@@ -253,6 +253,53 @@ against `usedTools` whenever a tick looks wrong, and always after a platform
 redeploy.
 
 
+
+## [TWO GATES THAT MUST RUN BEFORE ANY TEMPERATURE RULE]
+
+Added 08/18 after the first live tick raised a **P2 on Chiller_01** that neither
+gate had been applied to. Both are transposed from 1201, where they already exist.
+
+### GATE 1 — an IDLE chiller's water temperatures mean nothing
+
+⚠️ **A stopped chiller's evaporator holds stagnant water that drifts toward ambient.
+Its leaving-water sensor keeps reporting, and the number is meaningless.**
+
+```
+BEFORE using any water temperature, establish the machine's run state
+FOR THAT SAME WINDOW — not for the moment you happen to be sampling.
+
+running (kW > 20)   the temperature is real, evaluate it
+idle                the temperature is stagnant barrel water. NOT EVALUATED.
+                    Never trend it, never compare it, never raise a finding on it.
+```
+
+⚠️ **The run state must cover the window the excursion happened in.** The 08/18 tick
+reported Ch01 running *at 11:58 AM* and raised a P2 about *7 PM–5 AM the previous
+night* — two different questions. **A machine running now says nothing about
+whether it was running then.**
+
+**A warm leaving-water reading from an idle machine is the single most likely false
+P2 this agent can produce**, because it looks exactly like capacity strain: elevated
+leaving temperature, sustained for hours, resolving when the machine restarts.
+
+### GATE 2 — never borrow another machine's sensor
+
+Until 08/18 this spec instructed *"if the running chiller lacks an entering sensor,
+use Ch04's."* **That instruction was wrong and has been removed.** Ch04's entering
+water is not Ch01's entering water; a dT built from the two is not a measurement of
+anything.
+
+```
+machine has its own entering sensor    compute dT, evaluate the rule
+it does not                            dT is NOT EVALUATED for that machine
+```
+
+**A missing basis is a skipped rule, never a borrowed number.** The same rule was
+added at 1201 on 08/18 after a tick attributed one machine's load to another.
+
+**Rules that need only ONE machine's own sensor are unaffected** — a leaving-water
+excursion is still evaluable on its own, provided GATE 1 passes.
+
 ## [DATA INTEGRITY — five lessons from the 1201 and 1700 agents, 08/18]
 
 ⚠️ **None of these were learned here.** They are transposed from agents that ran
@@ -344,7 +391,8 @@ FETCH — the exact call list (≤17 calls, in this order):
   1–4    kW latest, all four chillers (determines who is RUNNING: kW > 20)
   5–7    running chiller's phase currents L1/L2/L3 (latest)
   8–9    running chiller's evap leaving + entering (hourly, _1day)
-         [if the running chiller lacks an entering sensor, use Ch04's]
+         [if the machine lacks its OWN entering sensor: NOT EVALUATED.
+          NEVER substitute another machine's — see GATE 2 below]
   10–13  Ch04 extras: oil ΔP, starts, running time, cond leaving (latest)
   14     Ch04 cond ENTERING (latest) — pairs with cond leaving for the
          condenser-approach proxy (mode 1/2); skip only to replace a failed call
