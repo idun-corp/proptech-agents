@@ -12,7 +12,8 @@ Updated:  08/18/2026 — the "no syntax published" blocker is RESOLVED: the
           required after adding a config. See [RESOLVED 08/18].
 Status:   **DOCUMENTED, NOT YET USED BY ANY AGENT IN THIS FOLDER** — but proven
           to work at this account outside it (Erik, 07/31). The first hhc user is
-          `1700-pavilion-plant-watch.md` v0.3.
+          `1700-pavilion-plant-watch.md` v0.3 (EMAIL only); the second is
+          `1201-lake-robbins-chw-plant-watch.md` v1.8 (EMAIL + SMS, 08/18).
 
 Shared reference for every agent in `hhc/`. Read together with
 `1700-pavilion-no-cooling-sms-alert.md`, whose hard-won SMS craft rules still
