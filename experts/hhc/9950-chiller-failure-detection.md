@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.10
+Version:  1.11
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: Ch02 entering sensor, full BAS alarm UUIDs, plant-wide
           energy summary, starts-delta persistence via daily report.
@@ -219,6 +219,90 @@ GET /json/autonomousagent/{id}/message/latest      (Admin API swagger UI)
 State the probe result plainly every tick, but treat it as a claim to be checked
 against `usedTools` whenever a tick looks wrong, and always after a platform
 redeploy.
+
+
+## [DATA INTEGRITY — five lessons from the 1201 and 1700 agents, 08/18]
+
+⚠️ **None of these were learned here.** They are transposed from agents that ran
+first, so that this one does not have to rediscover them. Every one came from a
+real tick producing a wrong report.
+
+### 1. AGE BEFORE VALUE — a frozen reading is not a healthy machine
+
+**Check the timestamp before you use the value.** A sensor that has stopped
+updating keeps returning its last number, and that is indistinguishable from a
+stable machine: every slope computes to zero, every threshold passes, and the most
+broken input presents as the best-behaved.
+
+```
+sample age <= 6 h   use it
+sample age >  6 h   EXCLUDED, "NOT EVALUATED, frozen since <date>"
+unchanged across 3 ticks with a stale timestamp -> frozen, NOT stable
+```
+
+At 1201 a chiller sat on an 11-day-old reading while every tick called it *"idle,
+run state 0"* — because the value was `0` and nothing checked the age.
+
+### 2. PLAUSIBILITY — is this number physically possible for this plant?
+
+```
+a 0.0 °F approach at full load     instrument, not performance
+a phase current of exactly 0 while the machine runs   dead CT, not a fault
+a runtime longer than the plant has existed           units, not age
+```
+
+⚠️ **`run_h` units are NOT portable and have never been checked here.** At 1700 the
+runtime registers are **hours**; at 1201 the same class of register is **seconds**,
+and writing it raw produced a chiller apparently 16,000 years old. **9950 runs a
+different connector (oBIX, not BACnet), so assume nothing.** Sanity-check the first
+reading: divide by 3,600 and see which answer is credible for a machine of this age
+— then record which it was, in this file, so the next tick does not re-derive it.
+
+**A value that fails this test is blanked and raised as an open question, never
+written as a measurement.**
+
+### 3. UNDEFINED IS NOT ZERO
+
+A ratio with a zero denominator, a percentage where both counts are `0`, a mean
+over no samples — all **undefined**. Report blank, not `0.0`. `0.0` is a
+measurement; blank is an absence. Writing one for the other makes a baseline
+quietly wrong and is very hard to spot later.
+
+### 4. DIRECTION MATTERS ON ANY TEMPERATURE OR CURRENT SPREAD
+
+Say whether the outlier reads **high or low** against its siblings, and what that
+implies — the same spread means opposite things.
+
+```
+a winding 30 °F ABOVE its two siblings   thermal risk
+a winding 30 °F BELOW them               sensor candidate
+one phase current far below the others   dead CT, not an imbalance
+```
+
+At 1201, a 35 °F winding spread with the odd one **low** was reported two ticks
+running — far likelier a dead sensor than a real imbalance, since a genuine one
+that size would trip protection.
+
+### 5. NEVER CREATE A KNOWN-ISSUE ENTRY FROM ONE TICK
+
+A known-issue note **suppresses future investigation** — that is its purpose — so a
+wrong one is worse than none. **Two independent observations, or a direct check
+against the source.** On 08/18 a single 1201 tick produced two wrong claims and one
+was written into a spec before anyone verified it. **An agent's report is a claim,
+not evidence.**
+
+### And: RESET WIPES YOUR RUN HISTORY
+
+Your own previous report is your only memory, and a Reset clears it.
+
+```
+say     "first seen in this run history"
+NEVER   "since <today>", which makes an old problem look new
+```
+
+**Print `Calls: n/<budget>` as the last line of every report.** It is the single
+most useful piece of self-reporting these agents produce, and it is how a silent
+budget overrun gets caught.
 
 ## [DETECTION RULES]
 
