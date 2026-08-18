@@ -2,14 +2,17 @@
 
 ## [VERSION]
 
-Version:  0.1
+Version:  0.2
 Created:  08/11/2026
 Source:   ProptechOS release notes **v5.6.3**, 2026-03-16 — *Autonomous Agent
           Service → Dispatch property*. Transcribed here because the hhc agent
           specs are the consumers and the release notes are not in the repo.
-Status:   **DOCUMENTED, NOT YET USED BY ANY AGENT IN THIS FOLDER.** The exact
-          syntax of the dispatch block is **not given in the release notes** —
-          see [OPEN — BLOCKING]. Nothing here has been exercised end to end.
+Updated:  08/18/2026 — the "no syntax published" blocker is RESOLVED: the
+          platform injects the block itself, there is nothing to write. Reset is
+          required after adding a config. See [RESOLVED 08/18].
+Status:   **DOCUMENTED, NOT YET USED BY ANY AGENT IN THIS FOLDER** — but proven
+          to work at this account outside it (Erik, 07/31). The first hhc user is
+          `1700-pavilion-plant-watch.md` v0.3.
 
 Shared reference for every agent in `hhc/`. Read together with
 `1700-pavilion-no-cooling-sms-alert.md`, whose hard-won SMS craft rules still
@@ -159,27 +162,65 @@ not an oversight to correct.
   agent had to be restarted by hand after each deploy. Relevant to the 1700 PdM
   routine: if it stops running, a redeploy is **no longer** the explanation.
 
-## [OPEN — BLOCKING before any agent here dispatches]
+## [RESOLVED 08/18 — there is no syntax to write]
 
-1. **⚠️ The dispatch block syntax is not in the release notes.** They say "a
-   structured block in its response" and nothing more — no field names, no
-   fencing, no example. **This cannot be written into an agent prompt until
-   somebody produces one working example.** Ask Pavlo or check a newer release
-   note; do not guess a format and ship it.
-2. **Is `MINOR` used at this site?** The 1700 convention has only two levels.
-   Decide whether `MINOR` means anything here or is simply unused.
-3. **Is there de-duplication or a cooldown?** The platform trigger path
-   de-duplicates inherently — `Created` fires once per service object, which is
-   what keeps a sustained excursion to one SMS. **Dispatch appears to have no
-   equivalent**, so an hourly agent that dispatches on a persistent condition may
-   send hourly forever. This is the single biggest risk in adopting it: the
-   pre-dispatch world produced a 30-SMS flood in 5 hours at this building.
-4. **Is there a delivery log the agent or a human can read?** The 1700 work found
-   there is no SMS delivery log anywhere in the platform, which is why every alert
-   pairs SMS with email. "Logs event" appears in the release notes — establish
-   what that log contains and who can see it.
-5. **Can dispatch be tested without sending?** No dry-run is mentioned. Until one
-   exists, first exercise must go to an internal number only.
+⚠️ **The v0.1 blocker was a misunderstanding. Nothing here needs the block format,
+because the prompt never contains it.** Pavlo, #platform, 05/13/2026:
+
+> *"no need to add it to a system prompt of the agent"*
+> *"agenttroupe is adding message block to a system prompt by itself if there is
+> a dispatch config for agent"*
+
+**The Agent Troupe injects the dispatch block format into the system prompt
+automatically, whenever the agent has a DispatchConfig.** That is why no release
+note documents it — there is nothing for a prompt author to write. Per Karlberg
+set a reminder on 05/13 asking platform to *"describe the exact message block
+format for agent dispatching"*; the answer was that it is not needed.
+
+```
+YOU write in the prompt    WHEN to dispatch, which SEVERITY, and the SUMMARY text
+The PLATFORM provides      the block format, the template, the recipients, the send
+```
+
+### ⚠️ The one operational step: RESET after adding a dispatch config
+
+Pavlo, DM 07/31/2026: *"a dispatch to work we need to reset the agent, ok?"* The
+injected block only reaches the system prompt on a reset. **Add the DispatchConfig
+in ProptechOS first, then Reset the agent** — otherwise it has no idea dispatch
+exists and will silently never use it.
+
+⚠️ **Do not confuse this with the property owner.** Both involve Reset and they
+behave oppositely:
+
+```
+dispatch config   Reset is REQUIRED   — it injects the block into the prompt
+property owner    Reset does NOTHING  — the PO is in redis; only
+                                        set-property-owner-id changes it
+```
+
+**Dispatch has already been used successfully at this account.** Erik, 07/31,
+after the reset: *"btw: they work very good now - thanks!!!"* So this path is
+proven, not theoretical — what is unproven is *our* use of it on the hhc agents.
+
+## [STILL OPEN — decide before the first hhc agent dispatches]
+
+1. **Is there de-duplication or a cooldown?** Still unconfirmed, and it is now the
+   single biggest risk. The platform trigger path de-duplicates inherently —
+   `Created` fires once per service object, which is what keeps a sustained
+   excursion to one SMS. **Dispatch appears to have no equivalent**, so an
+   **hourly** agent that dispatches on a persistent condition may send hourly
+   forever. The pre-dispatch world produced a **30-SMS flood in 5 hours** at 1700.
+   Until platform confirms otherwise, **de-duplication is the agent's own job** —
+   see the repeat rule in `1700-pavilion-plant-watch.md`.
+2. **Is there a delivery log anyone can read?** "Logs event" appears in the
+   release notes. The 1700 work found no SMS delivery log anywhere in the
+   platform, which is why every alert pairs SMS with email. Establish what this
+   log contains and who can see it.
+3. **Can dispatch be tested without sending?** No dry-run is mentioned. First
+   exercise must go to an internal address only.
+4. **Is `MINOR` used at this site?** Proposed 08/18: map it to **all-clear /
+   informational**, which is currently the only unfilled slot in the house
+   convention. Our choice, not platform doctrine — say so if it is questioned.
 
 ## [RELATED]
 
