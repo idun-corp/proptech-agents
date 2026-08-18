@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.07 (pilot — trend baselines self-calibrate over the first 30 days)
+Version:  1.08 (pilot — trend baselines self-calibrate over the first 30 days)
 Created:  07/31/2026
 Updated:  07/31/2026 — v0.91: cumulative CSV ledger, fetch budget, error policy.
           v0.92: complete sensor UUID map (agent needs NO twin resolution),
@@ -256,8 +256,15 @@ redeploy.
 
 ## [TWO GATES THAT MUST RUN BEFORE ANY TEMPERATURE RULE]
 
-Added 08/18 after the first live tick raised a **P2 on Chiller_01** that neither
-gate had been applied to. Both are transposed from 1201, where they already exist.
+Added 08/18 after the first live tick raised a **P2 on Chiller_01** that neither gate
+had been applied to. Both are transposed from 1201, where they already exist.
+
+✅ **That P2 was checked and was an artifact.** Ch01 drew **zero kW across the whole
+window** — median 0.0 over 600 samples — while Ch04 held the building at 41 °F. The
+47.4 → 49.0 °F drift was stagnant barrel water in a stopped evaporator. ⚠️ **Its 48.8 °F
+peak matched the real 07/05 precursor to the decimal, by coincidence** — a genuine
+precursor and stagnant water occupy the same numeric range here, and only run state for
+the window tells them apart. That is precisely what GATE 1 exists for.
 
 ### GATE 1 — an IDLE chiller's water temperatures mean nothing
 
