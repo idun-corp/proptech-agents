@@ -183,6 +183,17 @@ YOU write in the prompt    WHEN to dispatch, which SEVERITY, and the SUMMARY tex
 The PLATFORM provides      the block format, the template, the recipients, the send
 ```
 
+### ⚠️ There is NO UI for DispatchConfig — it is created backend-side (as of 08/18)
+
+Erik searched every tab of the agent create/edit dialog on 08/18: nothing. The
+07/31 precedent (OTEAM-6763, agent `82441aac-0022-4b3b-908c-c12e4e5306d9` "9950
+Chiller Monitoring") was configured **by Pavlo, backend-side** — Erik never
+touched a config screen, only did the reset. The Workflows → Dispatchers page is
+the *transport channels* (SMS/Email, 2021) reused at send time, not where agent
+configs live. **To get a DispatchConfig, ask Pavlo with the agent name/ID and
+the recipients.** Fallback if ever needed: SERVICE_OBJECT dispatch + a trigger
+on `Created` + a workflow → the old path, with inherent dedup.
+
 ### ⚠️ The one operational step: RESET after adding a dispatch config
 
 Pavlo, DM 07/31/2026: *"a dispatch to work we need to reset the agent, ok?"* The
