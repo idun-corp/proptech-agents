@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.7
+Version:  1.8
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: Ch02 entering sensor, full BAS alarm UUIDs, plant-wide
           energy summary, starts-delta persistence via daily report.
@@ -293,6 +293,16 @@ weigh return temp before alerting (recovery/heat-wave load is legitimate).
              tick additionally emits the fleet summary (Rule 5)
 
 ## [OUTPUT FORMAT]
+
+### RENDERING — one fact per line
+
+⚠️ **The agent UI collapses single newlines into a wrapped paragraph.** Only a
+markdown bullet (`- `) or a blank line survives. **Every distinct fact goes on its
+own `- ` line.** Use `·` only to separate tightly-related values inside one bullet
+(`356.4 kW · dT 17.1 F`), never to chain separate facts — **max two per line**.
+Blank line between the status line and the bullets. Observed 08/18 on 1201: three
+findings rendered as one solid block of prose.
+
 
 ### The report starts at the header line. Nothing may precede it.
 

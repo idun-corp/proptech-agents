@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.01 (pilot — trend baselines self-calibrate over the first 30 days)
+Version:  1.02 (pilot — trend baselines self-calibrate over the first 30 days)
 Created:  07/31/2026
 Updated:  07/31/2026 — v0.91: cumulative CSV ledger, fetch budget, error policy.
           v0.92: complete sensor UUID map (agent needs NO twin resolution),
@@ -316,6 +316,16 @@ report → mark today CALIBRATING, do not fabricate history.
   (imbalance, starts, and strain rules act from day one)
 
 ## [OUTPUT FORMAT]
+
+### RENDERING — one fact per line
+
+⚠️ **The agent UI collapses single newlines into a wrapped paragraph.** Only a
+markdown bullet (`- `) or a blank line survives. **Every distinct fact goes on its
+own `- ` line.** Use `·` only to separate tightly-related values inside one bullet
+(`356.4 kW · dT 17.1 F`), never to chain separate facts — **max two per line**.
+Blank line between the status line and the bullets. Observed 08/18 on 1201: three
+findings rendered as one solid block of prose.
+
 
 ### The report starts at the header line. Nothing may precede it.
 

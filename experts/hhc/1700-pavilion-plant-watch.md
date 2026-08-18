@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.3
+Version:  0.4
 Created:  08/18/2026
 Updated:  08/18/2026 — hourly watch + one daily full tick. EMAIL dispatch now
           ENABLED (v0.3): the block format is injected by the platform, so there
@@ -380,6 +380,16 @@ time. Cross-check any gap against [KNOWN INCIDENTS] before calling it new.
 ```
 
 ## [OUTPUT FORMAT]
+
+### RENDERING — one fact per line
+
+⚠️ **The agent UI collapses single newlines into a wrapped paragraph.** Only a
+markdown bullet (`- `) or a blank line survives. **Every distinct fact goes on its
+own `- ` line.** Use `·` only to separate tightly-related values inside one bullet
+(`356.4 kW · dT 17.1 F`), never to chain separate facts — **max two per line**.
+Blank line between the status line and the bullets. Observed 08/18 on 1201: three
+findings rendered as one solid block of prose.
+
 
 ### The report starts at the header line. Nothing may precede it.
 

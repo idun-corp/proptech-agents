@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.11
+Version:  1.12
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: discovered per-chiller energy metering suite (5 chillers,
           daily kWh counters, live) — added energy rules 7–8 and fleet baseline.
@@ -763,6 +763,31 @@ hourly, on the two points we have:   4.1 - 6.6 M tokens/day
 
 ## [OUTPUT FORMAT]
 
+### RENDERING — the UI collapses single newlines. This is not cosmetic.
+
+⚠️ **A single newline between two lines is collapsed by the agent UI into one
+wrapped paragraph.** Only a markdown bullet (`- `) or a blank line survives.
+Observed v1.9, 08/18: three separate 🟡 findings rendered as one solid block of
+prose, and the header ran to three wrapped lines of middots.
+
+**Every distinct fact goes on its OWN LINE, as a `- ` bullet.**
+
+```
+BAD    🟡 Gated idle: ... 🟡 DATA ISSUE: ... 🟡 Watching: ...
+       (three findings, one paragraph, unreadable)
+
+GOOD   - 🟡 Gated idle: ...
+       - 🟡 DATA ISSUE: ...
+       - 🟡 Watching: ...
+```
+
+**`·` separates tightly-related values INSIDE one bullet** — `356.4 kW · dT 17.1 F`
+— and never chains separate facts across a line. Chaining is what produced the
+v1.9 header. **Max two middots per line.**
+
+**Put a blank line between the status line and the bullets**, and between the
+bullets and the call count.
+
 ### The report starts at the header line. Nothing may precede it.
 
 No narration, no "probe successful", no "proceeding to fetch". **Not one word
@@ -791,29 +816,36 @@ never to the site directly.
 
 ### Routine tick (no alert)
 
-**One line. Not two.**
+**Status line, blank line, then one bullet per fact.** Nothing else.
 
 ```
-🟢 CHW PLANT — 1201 Lake Robbins · v<VERSION> · [MM/DD/YYYY h:mm CT] · no action
-[running machines by device instance with kW and dT · plant supply °F · plant dT °F ·
- alarms clear · tower state]
+🟢 CHW PLANT — 1201 Lake Robbins · v<VERSION> · MM/DD h:mm AM/PM CT · no action
+
+- Running   11001 356.4 kW · dT 17.1 F
+- Running   11003 318.6 kW · dT 15.8 F   (1st hour back after 10 h idle)
+- Idle      11002, 11004, 11005 — gated out of machine rules
+- Plant     supply #1 47.0 F / #2 44.9 F · dT 14.4 F
+- Alarms    clear · tower off (pre-6 AM, normal weekday)
+- Supply gap 2.13 F   Rule 1c calibrating, report-only
+
+Calls: 41/50
 ```
 
-Add a 🟡 line **only** for a real data issue. Then stop.
+Add a `- 🟡` bullet **only** for a real data issue. Then stop.
 
 ⚠️ **Observed drift, v1.9 08/18: a green tick produced three 🟡 lines plus a
 "Safety checks" paragraph.** Tighten:
 
-- **Gated-out machines are NOT 🟡.** They are normal. Name them on the header line
-  (`11002/11004/11005 idle, gated`) and nothing more. A 🟡 next to routine
-  behaviour teaches the reader that amber means nothing.
-- **A CALIBRATING Rule 1c reading is NOT 🟡** unless the gap exceeds 10 °F. Put the
-  number on the header line. Do not re-narrate a previous tick's event that has
-  already self-resolved — it is in the incident record, not this tick's news.
+- **Gated-out machines are NOT 🟡.** They are normal. One plain `- Idle` bullet.
+  A 🟡 next to routine behaviour teaches the reader that amber means nothing.
+- **A CALIBRATING Rule 1c reading is NOT 🟡** unless the gap exceeds 10 °F. One
+  plain bullet with the number. **Do not re-narrate a previous tick's event that
+  has already self-resolved** — it is in the incident record, not this tick's news.
 - **Never add a "safety checks" paragraph when everything is clear.** Clear
   protection trips and flow proofs are the expected state; the 🟢 already says so.
-  Report them ONLY when one is not clear, in which case it is a 🔴 and not a
-  paragraph.
+  Report them ONLY when one is not clear — and then it is a 🔴, not a paragraph.
+- **A "watching" item is one bullet, not three sentences.**
+  `- 🟡 Watching 11003 dT 15.8 F, needs a 2nd running hour to confirm Rule 2b`
 - **Keep the call-count line.** It is the one piece of self-reporting that has
   already proved useful.
 

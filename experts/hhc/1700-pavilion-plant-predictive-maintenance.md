@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.11
+Version:  0.8.12
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -838,6 +838,16 @@ condition. Run timing is likewise excluded — an off-schedule tick is flagged i
 the header, never in the light. **The light describes the plant, not the run.**
 
 ## [OUTPUT FORMAT]
+
+### RENDERING — one fact per line
+
+⚠️ **The agent UI collapses single newlines into a wrapped paragraph.** Only a
+markdown bullet (`- `) or a blank line survives. **Every distinct fact goes on its
+own `- ` line.** Use `·` only to separate tightly-related values inside one bullet
+(`356.4 kW · dT 17.1 F`), never to chain separate facts — **max two per line**.
+Blank line between the status line and the bullets. Observed 08/18 on 1201: three
+findings rendered as one solid block of prose.
+
 
 ### THE REPORT STARTS AT THE HEADER LINE. NOTHING MAY PRECEDE IT.
 

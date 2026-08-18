@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.5 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.6 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/01/2026
 Updated:  08/01/2026 — v0.2, after the first live tick:
           (a) FIXED the condenser approach sign convention. v0.1 had it inverted, which
@@ -533,6 +533,16 @@ machines rather than time. **Never raise P1 from a single day's reading** — P1
 trend plus a corroborating signal.
 
 ## [OUTPUT FORMAT]
+
+### RENDERING — one fact per line
+
+⚠️ **The agent UI collapses single newlines into a wrapped paragraph.** Only a
+markdown bullet (`- `) or a blank line survives. **Every distinct fact goes on its
+own `- ` line.** Use `·` only to separate tightly-related values inside one bullet
+(`356.4 kW · dT 17.1 F`), never to chain separate facts — **max two per line**.
+Blank line between the status line and the bullets. Observed 08/18 on 1201: three
+findings rendered as one solid block of prose.
+
 
 ### The report starts at the header line. Nothing may precede it.
 
