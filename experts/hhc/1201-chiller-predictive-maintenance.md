@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.6 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.7 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/01/2026
 Updated:  08/01/2026 — v0.2, after the first live tick:
           (a) FIXED the condenser approach sign convention. v0.1 had it inverted, which
@@ -399,6 +399,47 @@ THEN
   indistinguishable from "nothing wrong there".
 - **ALWAYS emit a report.** Partial plus DATA ISSUES beats silence. No previous report →
   mark today CALIBRATING and do not invent history.
+
+
+## [DEVICE 11004 IS DARK — DO NOT TREND IT]
+
+⚠️ **`device 11004` has not produced a new reading since 08/07/2026.** Its
+run-state and Actual Running Capacity are **frozen on that sample** and repeat
+tick after tick.
+
+**This is the most dangerous possible input to a trend agent.** A frozen value is
+not a gap — it reads as a perfectly stable machine. Every slope you compute on it
+will be exactly zero, every threshold will pass, and 11004 will look like the
+healthiest chiller in the plant while you are in fact looking at an 11-day-old
+photograph.
+
+```
+DO      exclude 11004 from every trend rule, every slope, every fleet comparison
+DO      leave its ledger rows EMPTY, never carry the frozen value forward
+DO      report one line: "11004 excluded, frozen since 08/07, PLAT-5715"
+NEVER   use it as a comparison control for the other four machines
+NEVER   report its zero slopes as healthy
+NEVER   write the frozen value into the CSV ledger — it would poison the
+        30-day baseline permanently, and the ledger is copy-forward
+```
+
+**Cause is known and ticketed, so do not re-investigate it.** Established on the
+PEG 08/18: the device resolves without error, is present on the Tracer SC+ at
+`13.04`, and its four siblings on the same MS/TP trunk read 43k-65k times per run.
+It is **not switched off and not unreachable** — our connector simply never polls
+it. Raised as **PLAT-5715**. Same cause, same treatment: `121017`, `32004`,
+`41007`, and supervisors `70000`, `40000`, `60000`, `20000`, `50000`.
+
+**Resume trending 11004 only when it produces a reading newer than the previous
+tick** — and say so in CHANGED when it does, because that is a real event.
+
+### The general guard this implies
+
+**Check sample age before every rule, on every machine.** A reading older than
+**6 h** is excluded, not used. A machine whose value is unchanged across three
+consecutive ticks with a stale timestamp is frozen, not stable. **Age first,
+value second** — a trend agent that skips this reports its most broken input as
+its best-behaved machine.
 
 ## [TREND RULES]
 
