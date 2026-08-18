@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.12 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.13 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/01/2026
 Updated:  08/01/2026 — v0.2, after the first live tick:
           (a) FIXED the condenser approach sign convention. v0.1 had it inverted, which
@@ -506,10 +506,38 @@ the raw register into the `run_h` column:
 **Divide by 3,600 and record hours.** `run_h` means hours; a value that would make
 the machine older than the building is a unit error, not a reading.
 
-⚠️ **This one is worse than a wrong number in a report, because the ledger is
-copy-forward.** A bad row propagates for 30 days and every runtime slope computed
-against it is wrong by 3,600×. If a row already carries seconds, **correct it when
-carrying forward** and note the correction in DATA ISSUES.
+### Why this matters — and the part that is NOT the problem
+
+**A consistent unit error mostly cancels.** Rules 1 and 6 both compare
+*week-over-week* — `pumpout per run hour, rising` and `starts per run hour,
+rising`. A ratio-of-ratios is unit-free, so a ledger entirely in seconds produces
+**the same trend** as one entirely in hours. The absolute number is wrong; the
+signal is not.
+
+⚠️ **The danger is MIXING units inside one 30-day window.**
+
+```
+rows 1-3   seconds
+row 4      hours      <- the fix lands here
+           -> a 3,600x step change in run_h between consecutive days
+           -> pumpout-per-run-hour jumps 3,600x in one day
+           -> Rule 1 reads it as catastrophic air ingress, on the plant's
+              single most important failure mode
+```
+
+**So the rule is consistency first, correctness second.** Never change the unit
+mid-ledger. If existing rows carry seconds:
+
+```
+BEST   start the ledger clean and record hours from row 1
+       (an agent Reset does this — the run history goes with it)
+OK     convert EVERY existing row to hours when carrying forward, in one pass,
+       and note it in DATA ISSUES
+NEVER  fix it going forward and leave older rows in seconds
+```
+
+Absolute thresholds are the one place the raw unit does bite on its own — but the
+only flat threshold here is *starts per day*, which does not involve `run_h`.
 
 **Sanity gate for the whole ledger, not just this field:** before writing any value,
 ask whether it is physically possible for this plant. A chiller with 16,000 years of
