@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.5
+Version:  0.6
 Created:  08/18/2026
 Updated:  08/18/2026 — hourly watch + one daily full tick. EMAIL dispatch now
           ENABLED (v0.3): the block format is injected by the platform, so there
@@ -298,6 +298,44 @@ as **ARMED** or **LATCHED**. Latched is 🔴 regardless of temperature.
 ⚠️ **An empty result is weak evidence, not an all-clear.** Objects are known to
 sometimes not appear under the building twin even when `Building: 1700 Pavilion`
 is populated. If the call returns nothing, report **UNVERIFIED**, not ARMED.
+
+### `403 Forbidden` — a capability gap, NOT a latch and NOT a plant condition
+
+Found on the first live tick, 08/18: `get-service-objects` returns **403**.
+
+```
+403 Forbidden   we are not permitted to ask. Rule 3 is NOT EVALUATED.
+empty result    we asked, got nothing. UNVERIFIED — may be a lookup quirk.
+objects listed  the only case where ARMED or LATCHED can be stated.
+```
+
+**A 403 says nothing about the alerts.** Do not infer LATCHED, do not infer ARMED,
+and **do not colour the plant on it** — the building may be perfectly healthy with
+Rule 3 unevaluable. It caps the report at 🟡 because we have lost a check, not
+because anything is wrong.
+
+⚠️ **Raise it ONCE, then stop.** Observed 08/18: two consecutive ticks each produced
+a full ACTIONS entry for the same unchanged 403. **At hourly, that is 24 identical
+actions a day**, which is precisely how the ACTIONS section becomes ignorable.
+
+```
+first tick seeing it     ACTIONS entry, with what to check
+every tick after         ONE line: "- Rule 3 NOT EVALUATED, 403 since <date>"
+                         no ACTIONS entry, no 🟡 escalation, no re-description
+it changes               that IS news — put it in CHANGED and raise it again
+```
+
+**What to tell Erik once**, because 403 is not the property-owner fault we are used
+to — that presents as `401` / `Invalid sensor ID`, fails everywhere, and STEP 0
+fixes it. A 403 on one endpoint while every sensor read succeeds is an
+**authorisation scope** problem instead:
+
+- the agent's **Permissions** tab in ProptechOS may not grant service-object access;
+- `get-service-objects` **enforces the property-owner boundary** where
+  `get-sensor-latest-data` does not, so it can fail alone;
+- ⚠️ **it cannot be checked over REST** — there is no service-object or alert
+  endpoint on that API base (448 paths, none matching service/alert/alarm/trigger).
+  Confirming this needs MCP or the ProptechOS UI.
 
 ### Rule 4 · DID THE LV NIGHT STAY UNDER 85 °F?   (DAILY 05:00 PT TICK ONLY)
 
@@ -676,9 +714,12 @@ latch behaviour            65 h open object observed 08/08-08/10
 wedged-connector mode      08/16, service `active` for 13.5 h with no cycle
 ```
 
-**Two thresholds are NOT yet validated** and must be treated as provisional until
-a tick exercises them: `get-service-objects` behaviour in Rule 3, and the 60–110 °F
-cross-tenant guard. Report what happens the first time each fires.
+**One threshold is still unvalidated:** the 60–110 °F cross-tenant guard.
+
+✅ **Rule 3's behaviour was validated on the first tick, 08/18 — by failing.** It
+returns `403 Forbidden`, which is why the 403 path above exists. This is what a
+first week is for: the rule did not work, and it told us so instead of reporting a
+false ARMED. Report what happens the first time each fires.
 
 ## [RELATED]
 
