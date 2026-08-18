@@ -445,8 +445,28 @@ again** (see [COST]). Report the call count so this stays visible.
 ### RULE 1c — THE TWO SUPPLY SENSORS DISAGREE → 🟡 DATA ISSUE
 
 ```
-| supply #1 - supply #2 | > 3.0 °F   on the SAME hour, either direction
+⚪ CALIBRATING — THE THRESHOLD IS NOT VALIDATED. Do not fire on a number yet.
 ```
+
+⚠️ **A 3.0 °F threshold was drafted on 08/18 and withdrawn the same day.** It was
+invented, not measured — nobody has established what normal disagreement between
+supply #1 and supply #2 looks like at this plant, by hour and day type. This file's
+own CONSTRAINTS forbid exactly that, and **two rules have already been killed here
+for failing that test** (the dT dead-loop rule and the CT1 supply-temp rule).
+
+**Until it is calibrated, this rule REPORTS and does not fire:**
+
+```
+each tick   record  | supply #1 - supply #2 |  for the hour, in DATA ISSUES,
+                    one line, with both values. Nothing else.
+never       raise a 🟡 on the gap alone
+always      report a gap > 10 °F, which is far outside anything plausible
+            for two sensors on the same header and is worth a human look
+```
+
+**To calibrate** (one-off, not the agent's job): pull 30 days of both supplies,
+hourly, split weekday/weekend and occupied/unoccupied, and take the p95 of the
+absolute difference. The threshold is that p95, not a round number.
 
 Report which sensor is the outlier by comparing each against **return #1** and
 against the running machine's evap leaving temp — the one that no longer fits the
@@ -668,16 +688,50 @@ band order.
   this ordering exists to prevent.
 - **Always emit a report** — partial plus DATA ISSUES beats silence.
 
+### The cadence decision — 2 h, not hourly
+
+**Run every 2 hours.** Reasoning, so it is not re-argued:
+
+⚠️ **Tick cadence sets LATENCY, not detection.** Every tick reads the **last 24 h
+hourly**, so a slower tick misses nothing — it only learns later. Nothing falls
+through the gap between ticks.
+
+**Hourly cannot make the main rule faster.** Rule 1 requires supply above 46 °F on
+**both** sensors for **2 consecutive hours** before it fires. A tick more often
+than every 2 h therefore cannot report anything Rule 1 has confirmed. **Running
+faster than your slowest confirmation window buys nothing** — and Rules 1, 1b and
+2b all carry confirmation windows of 1–2 h.
+
+**The one exception is Rule 4b, flow loss, which fires on the first sample.** That
+is a real argument for speed — and the honest answer is that **a watch agent is the
+wrong instrument for it.** Flow loss damages an evaporator in minutes; the BAS
+protection trips the machine, not us. Our value is noticing it happened and that
+nobody was told. If that latency must come down, the fix is a **platform trigger**
+(fires in approx. 40 min, costs nothing per evaluation), not a faster LLM.
+
+```
+hourly   24 ticks/day   6.6 M tok/day   Rule 1 still cannot fire faster than 2 h
+2-hourly 12 ticks/day   3.3 M tok/day   matches the slowest confirmation window
+4-hourly  6 ticks/day   1.7 M tok/day   loses same-shift detection during occupancy
+```
+
+**2 h is the point where the cadence matches the ruleset.** 4 h halves the cost
+again but means an event at 08:00 may not be reported until noon, inside occupied
+hours — that is the tradeoff to weigh, and it is a business call, not a technical
+one.
+
 ## [COST — read this before adding anything to this file]
 
-This agent runs **hourly**, and its dominant cost is **this prompt, not the data.**
+At 2 h this agent ticks 12 times a day, and its dominant cost is **this prompt,
+not the data.**
 
 ```
 measured 08/18   275,320 tokens · 35 calls · 2m 1s · v1.6 at 36,932 bytes
 
 spec 36,932 bytes  ~=  9,233 tokens
 observed / spec    =   29.8  ->  the prompt is re-sent ~30 times per tick
-hourly             =   275,320 x 24  =  6.6 M tokens/day
+at 2 h             =   275,320 x 12  =  3.3 M tokens/day
+at 2 h + 12 KB spec                     =  1.1 M tokens/day
 ```
 
 **Every tool call re-sends the entire prompt.** So cost is `prompt size × rounds`,
