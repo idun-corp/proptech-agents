@@ -45,6 +45,15 @@ email (an all-clear, not a stale alarm).
       engineers. That was over-called on transition count alone, before looking at
       dwell times and time-of-day.
 
+## 🟡 WATCH — CT1 fan has not run in 14 h (opened 08/18 evening)
+
+- [ ] **E · Ask the engineers only if it survives a peak.** CT1's fan duty was **0 %**
+      over 14 h to 10:50 PT on 08/18 while CT2 alone held the tower 6.5 F off wet bulb
+      on a 95.6 F day. `faultCt1` healthy throughout, and CT2 being lead fits the
+      runtime gap converging at ~7 h/day — so **rotation is the likely explanation.**
+      **The test: does CT1 stage in during 11:00-16:00 PT?** Rule 2's fan gate checks
+      it; read the next PdM tick before raising anything with the site.
+
 ## NOW — before the Howard Hughes demo, Tue 08/18
 
 - [ ] **E · Rotate the PEG sudo password.** It is in the 08/17 session transcript and
