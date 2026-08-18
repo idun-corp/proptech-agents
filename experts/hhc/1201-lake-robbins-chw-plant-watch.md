@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.10
+Version:  1.11
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: discovered per-chiller energy metering suite (5 chillers,
           daily kWh counters, live) — added energy rules 7–8 and fleet baseline.
@@ -723,48 +723,43 @@ hourly   24 ticks/day   6.6 M tok/day   Rule 1 still cannot fire faster than 2 h
 double for latency no rule can use. It loses nothing in detection — only money.
 **Since the rate is fixed, the only remaining lever is the size of this file.**
 
-## [COST — read this before adding anything to this file]
-
-This agent ticks **24 times a day**, and its dominant cost is **this prompt, not
-the data.**
+## [COST — two measurements, and a retracted model]
 
 ```
-measured 08/18   275,320 tokens · 35 calls · 2m 1s · v1.6 at 36,932 bytes
-
-spec 36,932 bytes  ~=  9,233 tokens
-observed / spec    =   29.8  ->  the prompt is re-sent ~30 times per tick
-hourly at v1.6     =   275,320 x 24  =  6.6 M tokens/day
-hourly at v1.9     =   this file is now 49,353 bytes -> approx. 12,300 tokens
-                       x approx. 30 rounds x 24  =  approx. 8.9 M tokens/day
-hourly at 12 KB    =   approx. 90 K/tick x 24    =  approx. 2.2 M tokens/day
+        tokens   calls   spec bytes   duration
+v1.6   275,320      35       36,932      2m 01s
+v1.9   169,106      40       49,353      1m 51s
+        -39%      +14%         +34%
 ```
 
-**Every tool call re-sends the entire prompt.** So cost is `prompt size × rounds`,
-and there are only two levers:
+⚠️ **A "cost = prompt size x call count" model was written here on 08/18 and is
+RETRACTED.** It was built on the single v1.6 measurement. Against v1.9 it predicts
+493 K and the actual was 169 K — **wrong by 2.9x, and in the wrong direction**: the
+spec got 34 % bigger and the tick got 39 % cheaper.
+
+**What actually drives it: the number of agentic ROUNDS, and rounds are not
+calls.** The agent batches tool calls, so 40 calls can cost fewer prompt re-sends
+than 35. v1.6 behaved like ~30 rounds, v1.9 like ~14. **Batching varies tick to
+tick and is not directly controllable from this file.**
 
 ```
-FEWER CALLS     the Rule 0 fetch barrier above. 29 latest-data calls on a
-                one-machine night is the single biggest avoidable item.
-SHORTER PROMPT  at 12 KB this tick would cost ~90 K instead of 275 K -> 2.2 M/day
+hourly, on the two points we have:   4.1 - 6.6 M tokens/day
 ```
 
-⚠️ **Data volume is NOT the problem here** — every historical call is already
-`hourly, _1day`, which is ~25 buckets and near-free. Do not "optimise" the
-fetches; optimise the call count.
+**Consequences for editing this file:**
 
-⚠️ **Adding history and rationale to this file is not free the way it is in a
-daily agent.** A paragraph added here is re-read **720 times a month.** If
-something is background rather than an instruction, it belongs in a decision log,
-not in the prompt — that move took the 1700 PdM from 58.8 KB to 48.3 KB.
-
-
-⚠️ **This file grew 36,932 -> 49,353 bytes on 08/18 (+34 %).** Both this session
-and a parallel one added to it — the fetch barrier, Rule 1c, dispatch, the cost
-section, this note. On a daily agent that is free. On an hourly one it is roughly
-**+2.3 M tokens/day**. The additions were each defensible; the aggregate was never
-reviewed. **A trim to a rules-only prompt with the rationale moved to a decision
-log is now the single highest-value change available to this agent** — that move
-took the 1700 PdM from 58.8 KB to 48.3 KB with no loss of function.
+- **Do not trim this spec on cost grounds alone.** The evidence does not support
+  it. The 1700 PdM's 58.8 -> 48.3 KB trim was worth doing, but that agent's saving
+  came from replacing `raw _7days` fetches with `_1day` — a **data** change, not a
+  prose change, and it was measured (1.26 M -> 201 K).
+- **The lever that IS proven here is the Rule 0 fetch barrier** — v1.9 confirmed
+  it live: *"gate correctly limited detailed fetch to the 2 running machines out
+  of 5"*, 41 calls with two machines running.
+- **Still true, and the honest reason to keep this file tight:** an hourly agent
+  re-reads every paragraph ~720 times a month. That is an argument for not adding
+  waffle, not an argument for a rewrite.
+- ⚠️ **n=2. Do not build another model on it.** A third measurement that lands
+  outside 150-280 K means something else is driving this.
 
 ## [OUTPUT FORMAT]
 
@@ -804,8 +799,23 @@ never to the site directly.
  alarms clear · tower state]
 ```
 
-Add a 🟡 line **only** for a data issue or a machine gated out as idle. If there is
-nothing to add, do not add a line saying there is nothing to add.
+Add a 🟡 line **only** for a real data issue. Then stop.
+
+⚠️ **Observed drift, v1.9 08/18: a green tick produced three 🟡 lines plus a
+"Safety checks" paragraph.** Tighten:
+
+- **Gated-out machines are NOT 🟡.** They are normal. Name them on the header line
+  (`11002/11004/11005 idle, gated`) and nothing more. A 🟡 next to routine
+  behaviour teaches the reader that amber means nothing.
+- **A CALIBRATING Rule 1c reading is NOT 🟡** unless the gap exceeds 10 °F. Put the
+  number on the header line. Do not re-narrate a previous tick's event that has
+  already self-resolved — it is in the incident record, not this tick's news.
+- **Never add a "safety checks" paragraph when everything is clear.** Clear
+  protection trips and flow proofs are the expected state; the 🟢 already says so.
+  Report them ONLY when one is not clear, in which case it is a 🔴 and not a
+  paragraph.
+- **Keep the call-count line.** It is the one piece of self-reporting that has
+  already proved useful.
 
 ### Daily summary (7:00 AM CT tick)
 
