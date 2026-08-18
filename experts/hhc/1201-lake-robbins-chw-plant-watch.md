@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.12
+Version:  1.13
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: discovered per-chiller energy metering suite (5 chillers,
           daily kWh counters, live) — added energy rules 7–8 and fleet baseline.
@@ -729,8 +729,14 @@ double for latency no rule can use. It loses nothing in detection — only money
         tokens   calls   spec bytes   duration
 v1.6   275,320      35       36,932      2m 01s
 v1.9   169,106      40       49,353      1m 51s
-        -39%      +14%         +34%
+v1.12  132,665      40       52,308      2m 04s
 ```
+
+**Three points, and the trend is the opposite of the retracted model**: the spec
+has grown 42 % since v1.6 and the tick has got 52 % cheaper. Hourly that is
+**approx. 3.2 M tokens/day**, down from 6.6 M. Plausible reading — clearer output
+rules mean less deliberation, so fewer rounds — but that is a hypothesis, not a
+measurement, and it must not become the next model built on thin evidence.
 
 ⚠️ **A "cost = prompt size x call count" model was written here on 08/18 and is
 RETRACTED.** It was built on the single v1.6 measurement. Against v1.9 it predicts
@@ -743,7 +749,7 @@ than 35. v1.6 behaved like ~30 rounds, v1.9 like ~14. **Batching varies tick to
 tick and is not directly controllable from this file.**
 
 ```
-hourly, on the two points we have:   4.1 - 6.6 M tokens/day
+hourly, on the three points we have:   3.2 - 6.6 M tokens/day, and falling
 ```
 
 **Consequences for editing this file:**
@@ -758,8 +764,8 @@ hourly, on the two points we have:   4.1 - 6.6 M tokens/day
 - **Still true, and the honest reason to keep this file tight:** an hourly agent
   re-reads every paragraph ~720 times a month. That is an argument for not adding
   waffle, not an argument for a rewrite.
-- ⚠️ **n=2. Do not build another model on it.** A third measurement that lands
-  outside 150-280 K means something else is driving this.
+- ⚠️ **n=3, all declining. Do not build another model on it.** A measurement that
+  lands outside 100-280 K means something else is driving this.
 
 ## [OUTPUT FORMAT]
 
@@ -832,6 +838,40 @@ Calls: 41/50
 ```
 
 Add a `- 🟡` bullet **only** for a real data issue. Then stop.
+
+### A STALE DEVICE IS NOT AN IDLE DEVICE — and after 24 h it needs an owner
+
+⚠️ **The 6 h staleness guard must run BEFORE the Rule 0 run-state gate**, on every
+machine, every tick. A machine whose run-state reads `0` from an old sample looks
+exactly like a machine that is switched off.
+
+```
+sample age <= 6 h    ->  evaluate the run gate normally
+sample age >  6 h    ->  EXCLUDED, not idle. Say the age and the sample date.
+                         Never let it into "idle, gated out".
+```
+
+**Found live 08/18: device 11004's run-state and Actual Running Capacity were
+stuck on an 08/07 reading — 11 days.** The 05:50 tick that same morning had
+reported it as *"Idle 11002, 11004, 11005 — run state 0, load signal 0%"*, because
+the value was `0` and nothing checked the age. **One of five machines had been
+invisible for eleven days and every tick called it healthy-idle.**
+
+**Escalation, because a bullet is not enough for this:**
+
+```
+stale < 24 h    a 🟡 bullet on the routine tick. Nothing more.
+stale >= 24 h   print the FULL report shape, not the one-line tick, and add:
+
+                ACTIONS
+                  • 🟡 Erik — device 1100X has not reported since MM/DD
+                    (N days). Confirm it is genuinely off and not dark. — this week
+```
+
+A machine that is off for a fortnight is a normal plant decision. A machine that is
+**dark** for a fortnight means that if it ran and failed, nobody would know. **The
+report cannot tell those apart — a human must**, and that is why it becomes an
+action rather than an observation.
 
 ⚠️ **Observed drift, v1.9 08/18: a green tick produced three 🟡 lines plus a
 "Safety checks" paragraph.** Tighten:
