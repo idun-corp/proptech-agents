@@ -35,6 +35,35 @@ v0.8.2 root cause found (property owner); probe-first recovery replaces abort-fa
 v0.8.3 same rules, forensics moved to this file, 48,287 bytes
 ```
 
+## 2026-08-18 — the agent's arithmetic independently verified, first time
+
+The v0.8.14 tick anchored Rule 1 on the **08/17 peak window** and reported:
+
+```
+                  agent (v0.8.14)    independent REST check, same window
+HX1 approach          0.84 °F                    0.84 °F
+HX2 approach          2.69 °F                    2.69 °F
+```
+
+The REST check was computed separately that morning from raw observations pulled
+over `GET /json/sensor/{uuid}/observations`, paired by nearest timestamp within
+180 s, with the same `0.0` and 30–130 °F guards — **written before the tick ran and
+without reference to it.** Exact agreement to two decimals on both exchangers.
+
+**Why this is worth recording.** Every previous confidence in this agent's numbers
+rested on them being *plausible* and *internally consistent across ticks*. This is
+the first time the computation itself has been checked against the source data by a
+different route. It says the fetch, the pairing, the guards and the approach
+arithmetic are all correct — which is the part of the agent nobody had verified.
+
+⚠️ **It does not verify the thresholds, the baselines, or the interpretation.** Those
+still rest on the 30-day characterisation. It verifies the measurement, nothing more.
+
+Same tick: 36/36 calls, 6m37s, 247,572 tokens, all seven rules evaluated, 🟢 OK.
+Duration sits with the 08/13 success (6m36s) and well clear of the 964–1041 s
+failure band.
+
+
 ## THE 401 INVESTIGATION — three wrong diagnoses before the right one
 
 Root cause: **the session had the wrong property owner set.** Every 1700 sensor
