@@ -2,12 +2,17 @@
 
 ## [VERSION]
 
-Version:  0.1
+Version:  0.2
 Created:  08/18/2026
-Status:   **NOT YET RUN AS AN AGENT.** Every threshold below is validated against
-          the 07/11–08/06 raw record, including the real precursor window — but
-          this prompt has never executed as a whole. Treat the first week as
-          validation.
+Updated:  08/18/2026 — first live tick ran 09:44 PT, 🟢, all arithmetic verified
+          against the independent 08/06 totalizer baseline (CT1 +55 h in 11 days
+          since the reprogram — it IS staging again). Three format deviations
+          fixed below: preamble before the header, commentary on 🟢 findings, a
+          trailing free-form Note. Call budget corrected 13 → 12 (the v0.1 table
+          summed to 12; the agent was right and the spec was wrong).
+Status:   **VALIDATION WEEK.** Thresholds are replay-validated against
+          07/11–08/06 including the real precursor window; the freeze signature
+          has not yet been exercised live.
 Origin:   The 08/18 forecastability analysis of the 08/05 outage (REST pull,
           17 points × 27 days, day-by-day). Finding: **the lag cooling tower
           stopped staging on 07/28 — eight days before the outage — and nothing
@@ -140,7 +145,7 @@ BAND C  historical  fanStatCt1 · fanStatCt2       raw · _1day          2 calls
 BAND D  historical  osat                          raw · _1day          1 call
 BAND E  historical  cwSupplyCt1 · cwSupplyCt2     raw · _1day          2 calls
 
-                                       budget  13 calls (+ STEP 0's two)
+                                       budget  12 calls (+ STEP 0's two)
 ```
 
 - **`raw` with `_1day` and never longer.** Roughly 285 samples per point at the
@@ -280,6 +285,12 @@ No narration, no "probe successful". **Print the `Version:` value from
 [VERSION] above, verbatim. Print the ACTUAL time you ran, never the scheduled
 one.**
 
+⚠️ The first live tick (08/18) opened with *"Probe OK — PO set, supply loop
+reading 75.18 °F … Proceeding."* — exactly the line this rule forbids. Do the
+STEP 0 working silently; its outcome is already visible in the report itself.
+The same tick appended a free-form "Note:" paragraph after the Calls line —
+**nothing follows the Calls line.** Caveats worth keeping belong in CHANGED.
+
 ### Mode 1 — all green: ONE line, then stop
 
 ```
@@ -327,7 +338,9 @@ FINDINGS
 Calls: 13/13
 ```
 
-- One line per rule, max 100 characters. 🟢 gets the number and nothing else.
+- One line per rule, max 100 characters. 🟢 gets the number and nothing else —
+  not "staged normally on a hot Monday" (first-tick wording; the numbers alone
+  already say it).
 - Only 🟡/🔴 may add ONE indented second line, and it must be the action.
 - ACTIONS are addressed to **Erik**, never the site. The Rule 1 🔴 action is
   always some form of: *"Ask the site whether CT-N is locked out or its zero

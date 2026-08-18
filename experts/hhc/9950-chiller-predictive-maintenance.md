@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.06 (pilot — trend baselines self-calibrate over the first 30 days)
+Version:  1.07 (pilot — trend baselines self-calibrate over the first 30 days)
 Created:  07/31/2026
 Updated:  07/31/2026 — v0.91: cumulative CSV ledger, fetch budget, error policy.
           v0.92: complete sensor UUID map (agent needs NO twin resolution),
@@ -282,23 +282,37 @@ whether it was running then.**
 P2 this agent can produce**, because it looks exactly like capacity strain: elevated
 leaving temperature, sustained for hours, resolving when the machine restarts.
 
-### GATE 2 — never borrow another machine's sensor
+### GATE 2 — a borrowed entering temp is allowed HERE, but must be labelled
 
-Until 08/18 this spec instructed *"if the running chiller lacks an entering sensor,
-use Ch04's."* **That instruction was wrong and has been removed.** Ch04's entering
-water is not Ch01's entering water; a dT built from the two is not a measurement of
-anything.
+⚠️ **Corrected 08/18.** An earlier edit banned this outright by transposing a rule
+from 1201. **That was wrong for this plant**, and the distinction is piping:
 
 ```
-machine has its own entering sensor    compute dT, evaluate the rule
-it does not                            dT is NOT EVALUATED for that machine
+1201   machines with their own loops -> another machine's sensor measures nothing
+9950   four chillers on a COMMON CHW header -> the return temperature is shared,
+       so Ch04's entering temp is a legitimate proxy for the common return
 ```
 
-**A missing basis is a skipped rule, never a borrowed number.** The same rule was
-added at 1201 on 08/18 after a tick attributed one machine's load to another.
+The original v1.4 spec had this right: *"only fall back to another barrel's
+entering sensor if the running chiller's point is missing, and say so."*
 
-**Rules that need only ONE machine's own sensor are unaffected** — a leaving-water
-excursion is still evaluable on its own, provided GATE 1 passes.
+**So the fallback is permitted, under three conditions:**
+
+```
+1. the machine's OWN entering sensor is genuinely missing, not merely stale
+2. BOTH machines are running — an idle barrel holds stagnant water and its
+   entering temp is not the common return either
+3. the report SAYS SO, on the finding, and drops confidence a step
+```
+
+**What is still banned is borrowing a *load* basis** — % RLA, capacity, current —
+between machines. Those are properties of the machine, not of the loop. A shared
+header makes a shared water temperature; it does not make a shared load.
+
+⚠️ **A dT built on a borrowed entering temp cannot carry a P1.** It is sound enough
+to raise a P2 or P3 and ask for a look; it is not sound enough to send someone to
+site on its own. Say which sensor was used, every time.
+
 
 ## [DATA INTEGRITY — five lessons from the 1201 and 1700 agents, 08/18]
 
@@ -391,8 +405,9 @@ FETCH — the exact call list (≤17 calls, in this order):
   1–4    kW latest, all four chillers (determines who is RUNNING: kW > 20)
   5–7    running chiller's phase currents L1/L2/L3 (latest)
   8–9    running chiller's evap leaving + entering (hourly, _1day)
-         [if the machine lacks its OWN entering sensor: NOT EVALUATED.
-          NEVER substitute another machine's — see GATE 2 below]
+         [if the machine lacks its OWN entering sensor, Ch04's may be used as
+          the COMMON HEADER return — both machines running, labelled, and
+          confidence dropped one step. See GATE 2.]
   10–13  Ch04 extras: oil ΔP, starts, running time, cond leaving (latest)
   14     Ch04 cond ENTERING (latest) — pairs with cond leaving for the
          condenser-approach proxy (mode 1/2); skip only to replace a failed call
