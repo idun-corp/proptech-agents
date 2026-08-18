@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.14 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.15 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/01/2026
 Updated:  08/01/2026 — v0.2, after the first live tick:
           (a) FIXED the condenser approach sign convention. v0.1 had it inverted, which
@@ -579,6 +579,29 @@ silent skips that then have to be explained in DATA ISSUES.
 - **A machine that is NOT EVALUATED costs nothing** — 11003 and 11004 should now
   free roughly 30 calls between them. If you are still at 60 with two machines
   excluded, the fetch plan needs trimming, not the budget raising.
+
+
+### THE RUN GATE MUST COVER THE WINDOW, NOT THE SAMPLING MOMENT
+
+⚠️ **Added 08/18 from the 9950 agent's first tick, which made this mistake.** It
+established a chiller was running **at 11:58 AM**, then raised a P2 about that
+machine's water temperature **between 7 PM and 5 AM the previous night** — and
+recommended calling a contractor. **Those are two different questions.**
+
+```
+finding is about a WINDOW  ->  gate on the run state ACROSS THAT WINDOW
+finding is about NOW       ->  gate on the run state now
+never                          use one to license the other
+```
+
+**Why it matters here specifically:** a stopped chiller's evaporator holds stagnant
+water that drifts toward ambient, and its leaving-water sensor keeps reporting.
+That reads **identically to capacity strain** — elevated for hours, sustained, then
+resolving the moment the machine restarts. It is the most likely false P2 a trend
+agent at this plant can produce, and it would send someone to site for nothing.
+
+**If run state for the window is unavailable, the finding is NOT EVALUATED.** Say
+so. A finding you cannot gate is not a weaker finding, it is not a finding.
 
 ## [TREND RULES]
 
