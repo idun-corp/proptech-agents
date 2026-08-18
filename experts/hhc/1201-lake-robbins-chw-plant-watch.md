@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.13
+Version:  1.14
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: discovered per-chiller energy metering suite (5 chillers,
           daily kWh counters, live) — added energy rules 7–8 and fleet baseline.
@@ -730,7 +730,16 @@ double for latency no rule can use. It loses nothing in detection — only money
 v1.6   275,320      35       36,932      2m 01s
 v1.9   169,106      40       49,353      1m 51s
 v1.12  132,665      40       52,308      2m 04s
+v1.12   39,986      42       52,308         7s     <- same spec, same day
 ```
+
+⚠️ **The 7-second tick is unexplained and must not be reasoned from.** Same prompt,
+same call count, one hour after the 132 K run, at a fifth of the cost and a
+seventeenth of the time. Plausible causes include prompt caching on the platform
+side and the v5.6.8 context-management change — **both are guesses.** 42 calls in
+7 s is faster than real BACnet-backed fetches should allow, yet the values differ
+from the previous tick, so it did get fresh data. If ticks keep landing here,
+ask platform what changed before assuming it is free.
 
 **Three points, and the trend is the opposite of the retracted model**: the spec
 has grown 42 % since v1.6 and the tick has got 52 % cheaper. Hourly that is
@@ -749,7 +758,8 @@ than 35. v1.6 behaved like ~30 rounds, v1.9 like ~14. **Batching varies tick to
 tick and is not directly controllable from this file.**
 
 ```
-hourly, on the three points we have:   3.2 - 6.6 M tokens/day, and falling
+hourly, on four points:   1.0 - 6.6 M tokens/day. The spread is now too wide
+  to forecast from — stop quoting a daily figure until it settles.
 ```
 
 **Consequences for editing this file:**
@@ -839,6 +849,23 @@ Calls: 41/50
 
 Add a `- 🟡` bullet **only** for a real data issue. Then stop.
 
+### KNOWN AND TICKETED — report in one line, never as a new finding
+
+```
+device 11004   frozen on its 08/07/2026 reading. NOT off, NOT unreachable.
+               Investigated 08/18 on the PEG: the device resolves without error,
+               is present on the Tracer SC+ at 13.04, and its four siblings on the
+               same MS/TP trunk read 43k-65k times per run. Our connector simply
+               never polls it. Raised as PLAT-5715.
+               Also dark for the same reason: 121017, 32004, 41007, and five
+               supervisors (70000, 40000, 60000, 20000, 50000).
+```
+
+**Report it as `- 11004 excluded, frozen since 08/07, PLAT-5715` and nothing more.**
+Do not re-describe it, do not call it a 🟡 DATA ISSUE, and do not raise an action —
+it is owned and tracked. Escalate again ONLY if it starts reporting, or if a
+*different* device joins it.
+
 ### A STALE DEVICE IS NOT AN IDLE DEVICE — and after 24 h it needs an owner
 
 ⚠️ **The 6 h staleness guard must run BEFORE the Rule 0 run-state gate**, on every
@@ -888,6 +915,12 @@ action rather than an observation.
   `- 🟡 Watching 11003 dT 15.8 F, needs a 2nd running hour to confirm Rule 2b`
 - **Keep the call-count line.** It is the one piece of self-reporting that has
   already proved useful.
+- ⚠️ **Never give a passing rule its own line.** v1.12 08/18 printed *"24h mean
+  supply #1 44.60 F — below the 44.75 F Rule 2 drift line"*. A rule that did not
+  fire is what 🟢 already means. The exception is a value **within 5 % of its
+  threshold**, which is worth one line because it is about to matter — say so
+  explicitly (`approaching Rule 2 line, 44.60 vs 44.75`) rather than reporting it
+  as routine.
 
 ### Daily summary (7:00 AM CT tick)
 
