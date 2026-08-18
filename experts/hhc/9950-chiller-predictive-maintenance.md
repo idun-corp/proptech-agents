@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.03 (pilot — trend baselines self-calibrate over the first 30 days)
+Version:  1.04 (pilot — trend baselines self-calibrate over the first 30 days)
 Created:  07/31/2026
 Updated:  07/31/2026 — v0.91: cumulative CSV ledger, fetch budget, error policy.
           v0.92: complete sensor UUID map (agent needs NO twin resolution),
@@ -320,15 +320,28 @@ report → mark today CALIBRATING, do not fabricate history.
 
 ## [OUTPUT FORMAT]
 
-### RENDERING — one fact per line
+### RENDERING — ONLY A BLANK LINE BREAKS A LINE
 
-⚠️ **The agent UI collapses single newlines into a wrapped paragraph.** Only a
-markdown bullet (`- `) or a blank line survives. **Every distinct fact goes on its
-own `- ` line.** Use `·` only to separate tightly-related values inside one bullet
-(`356.4 kW · dT 17.1 F`), never to chain separate facts — **max two per line**.
-Blank line between the status line and the bullets. Observed 08/18 on 1201: three
-findings rendered as one solid block of prose.
+⚠️ **Measured against real rendered reports on 08/18. Bullets alone are NOT enough.**
 
+```
+SURVIVED     a blank line between two blocks
+COLLAPSED    "ACTIONS" + newline + "  • none today"  ->  "ACTIONS • none today"
+COLLAPSED    a fenced CSV block — every row merged into one run
+COLLAPSED    indented continuation lines inside a finding
+```
+
+**Put a BLANK LINE between every line you want to appear on its own line.** Yes, the
+report becomes double-spaced; that is the cost of being legible, and it is worth
+paying. Confirmed working on the 1201 agents at v0.11 and v0.13.
+
+- **Start each line with `- ` as well** — belt and braces, in case the renderer does
+  handle lists.
+- **`·` joins tightly-related values inside ONE line** (`75.28 F · dT 5.74 F`),
+  never separate facts. **Max two per line.**
+- **Never end one section and start the next without a blank line between them.**
+- A CSV or ledger block is the one exception: its rows will merge, which is
+  tolerable because nobody reads it by eye. **Put it last.**
 
 ### The report starts at the header line. Nothing may precede it.
 
