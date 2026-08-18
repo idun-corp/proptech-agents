@@ -902,8 +902,10 @@ there is no readable delivery log, so the report is the only record it happened.
 ### DISPATCH TEST — removed in v1.9
 
 A one-shot self-test lived here in v1.8.1: it dispatched EMAIL+SMS with a canned
-`TEST ... 1234567890 END` summary on the first tick that had a dispatch config,
-latched on a marker line in the previous report. **Removed at Erik's request
+test summary on the first tick that had a dispatch config, latched on a marker
+line in its own previous report. **The literal test string is deliberately not
+reproduced here** — a canned message sitting in a live prompt is exactly the kind
+of thing that gets sent by accident. **Removed at Erik's request
 before deployment — this version must not send a test message.**
 
 If a first live send needs proving, do it deliberately and out of band: enable the
