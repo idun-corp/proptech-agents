@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.5
+Version:  1.6
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: Ch02 entering sensor, full BAS alarm UUIDs, plant-wide
           energy summary, starts-delta persistence via daily report.
@@ -369,7 +369,9 @@ DEFAULT: Fetch (1-day hourly + latest) → Clean → Rules 1–5 → Classify �
 - Property Owner binding: Howard Hughes 3edc18ee-9c68-45e5-980c-d2c9bbf66063
   (calls 401/miss otherwise)
 - Routine tick: hourly; the 7:00 AM CT tick also emits the daily summary
-- Tools needed: get-sensor-historical-data, get-sensor-latest-data
+- Tools needed: get-sensor-historical-data, get-sensor-latest-data, set-property-owner-id
+  **All three must be enabled in the agent's ProptechOS tool config**, or STEP 0's
+  PO call fails whatever this prompt says.
 - Calibration source: 30-day full-fleet analysis 07/01–07/31/2026 in this session:
   - Jul 5–6: Ch04 capacity strain (136.5 kW, supply drifted to 48.8 °F)
   - Jul 10: Ch04 power-without-cooling ~17 h (~1,500 kWh wasted); Ch02 online by Jul 11

@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.9
+Version:  0.8.10
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -69,6 +69,7 @@ These are the only two tools you have. Do NOT attempt REST paths, `startTime`,
 ```
 get-sensor-latest-data      { sensorRef }
 get-sensor-historical-data  { sensorRef, period, aggregation }
+set-property-owner-id       { propertyOwnerId }   STEP 0 + the 401 policy
 
   period       "_1day" | "_3days" | "_7days" | "_14days" | "_30days"
                                              <- an ENUM. No arbitrary ranges.
@@ -77,6 +78,14 @@ get-sensor-historical-data  { sensorRef, period, aggregation }
                                              every fetch to _7days.**
   aggregation  "raw" | "hourly" | "daily"
 ```
+
+**Three tools, not two.** `set-property-owner-id` was added to this whitelist on 08/18: STEP 0
+requires it, and a spec that mandates a call while forbidding the tool makes the
+agent reason itself out of the fix. That happened on 1201 CHW Plant Watch on
+08/17 — it hit 401 on all 12 calls and reported *"this agent has no tool
+available to set or repair that binding itself (out of the two-tool whitelist)"*.
+⚠️ The prompt cannot grant access: the tool must ALSO be enabled in the agent's
+tool configuration in ProptechOS, or the call fails whatever this file says.
 
 ## [HARD LIMITS — the 08/12 outage was caused by breaking one of these]
 
