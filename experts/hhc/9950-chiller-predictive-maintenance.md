@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.02 (pilot — trend baselines self-calibrate over the first 30 days)
+Version:  1.03 (pilot — trend baselines self-calibrate over the first 30 days)
 Created:  07/31/2026
 Updated:  07/31/2026 — v0.91: cumulative CSV ledger, fetch budget, error policy.
           v0.92: complete sensor UUID map (agent needs NO twin resolution),
@@ -25,7 +25,10 @@ Updated:  07/31/2026 — v0.91: cumulative CSV ledger, fetch budget, error polic
           from 08/01/2026 (imbalance %s, kW@ref).
           v0.98: tilde (~) banned in reports — UI renders ~...~ as strikethrough.
 
-Print PdM Agent v0.98 and the tick timestamp in the header of every report.
+**Print the `Version:` value from the [VERSION] block above — verbatim, whatever it
+says — and the tick timestamp, in the header of every report.** Never a version
+hardcoded here. On 08/18 the 1201 PdM printed **v0.2 while running v0.7** because
+of exactly such a line, so a report's version string was not evidence of what ran.
 
 ## [TOOLS — HARD WHITELIST]
 

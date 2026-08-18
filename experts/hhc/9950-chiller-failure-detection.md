@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.8
+Version:  1.9
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: Ch02 entering sensor, full BAS alarm UUIDs, plant-wide
           energy summary, starts-delta persistence via daily report.
@@ -13,7 +13,10 @@ Updated:  07/31/2026 — v1.1: Ch02 entering sensor, full BAS alarm UUIDs, plant
           Rule 4 threshold recalibrated to live data (provisional).
           v1.4: tilde (~) banned in reports — UI renders ~...~ as strikethrough.
 
-Print Agent v1.4 and the tick timestamp in the header of every report.
+**Print the `Version:` value from the [VERSION] block above — verbatim, whatever it
+says — and the tick timestamp, in the header of every report.** Never a version
+hardcoded here. On 08/18 the 1201 PdM printed **v0.2 while running v0.7** because
+of exactly such a line, so a report's version string was not evidence of what ran.
 
 ## [DISPLAY FORMAT — US]
 
