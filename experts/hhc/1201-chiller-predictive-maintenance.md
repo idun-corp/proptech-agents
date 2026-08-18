@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.13 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.14 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/01/2026
 Updated:  08/01/2026 — v0.2, after the first live tick:
           (a) FIXED the condenser approach sign convention. v0.1 had it inverted, which
@@ -481,16 +481,37 @@ read once and attributed twice. **That is exactly what the rule above forbids**,
 and it is the reason the rule exists rather than being a tidy-up. Do not raise this
 with platform, and do not re-check the config — it has been checked.
 
-### 2. 11003's Actual Running Capacity is ALSO frozen since 08/07
+### 2. 11003's ARC was NOT frozen — that note was wrong, and here is why
 
-Same date as 11004, but a different failure: **11003 is being polled normally**
-(43k reads in the current run) while this one point sits frozen. So the 08/07 event
-was not confined to 11004, and "the device is dark" does not explain it.
+⚠️ **RETRACTED 08/18.** This section previously stated that 11003's Actual Running
+Capacity had been frozen since 08/07. **It has not been.** The v0.13 tick read it
+fresh at **72.5 %** with an 08/18 timestamp, and flagged the contradiction itself.
 
-**Treat 11003's ARC as unavailable** → per the rule above, 11003 is NOT EVALUATED
-for any load-gated rule until ARC updates. Leave those ledger fields empty. Do not
-fall back to `% RLA`. Report one line, do not re-investigate each tick, and note it
-in CHANGED if it starts moving again.
+**How the error got in, because the process matters more than the fact:** the claim
+came from a single v0.2 tick report — *and that was the same tick that also
+reported 11003 at "68.6 % RLA", a value 11003 does not have.* One tick with
+demonstrable sensor confusion produced two wrong claims, and **I hardened one of
+them into this spec without verifying it against the data.**
+
+The same discipline Pavlo insists on for the property owner applies here:
+
+```
+an agent's report is a CLAIM, not evidence
+verify against the data before writing it into a spec as a known issue
+```
+
+**Corollary, now a standing rule: never create a known-issue entry from one tick.**
+A known-issue note suppresses future investigation — that is its whole purpose — so
+a wrong one is worse than no note at all. Require two independent observations, or
+a direct check against the source, before adding one.
+
+**Current status of 11003:** treat ARC as **live**. Resume load-gated rules once a
+second consecutive tick reads it fresh. If it does go stale, the age-before-value
+rule already covers it without needing a named exception.
+
+Note also that 11005's earlier "run-state 0 but load 68.6 %" conflict has likewise
+cleared — v0.13 read `0 % RLA, run state 0, consistent`. **Both anomalies traced to
+the same confused tick**, which is a further reason to distrust single-tick claims.
 
 
 ## [RUN HOURS ARE SECONDS — divide by 3,600 before the ledger]
@@ -786,6 +807,11 @@ FINDINGS is the single 🟢 line above and nothing else.
   - CONTROL      other three flat within 0.4 °F
   - LEAD TIME    weeks, not days — honest about the uncertainty
   - CONFIDENCE   Medium — name the conversion, proxy or CTV limit it rests on
+  - DIRECTION    for a temperature, say whether the reading is high or low against
+                 its siblings, and what that implies. A winding reading 30 °F
+                 BELOW its two siblings is a sensor candidate, not a thermal risk;
+                 a winding 30 °F ABOVE them is the opposite. Same spread, opposite
+                 meaning — 11002's W2 sits low on both 08/18 ticks.
   - ACTION       Erik — get the chiller contractor to scope it — this week
 ```
 
@@ -840,6 +866,10 @@ date,device,ran,load_pct,kW,evap_dT_F,cond_appr_F,evap_appr_F,oil_dP,bearing_in_
 - Dates MM/DD/YYYY · °F for every machine · one line per machine-day.
 - **Missing value = empty field, NEVER invented.** CTV approach fields empty, not
   zero. A frozen reading is a missing value.
+- ⚠️ **An UNDEFINED value is also empty, not `0.0`.** v0.13 wrote
+  `pumpout_off_7d = 0.0` for 11002 where the underlying ON/OFF split is `0/0`,
+  which is undefined rather than zero. `0.0` is a measurement; blank is an absence.
+  Writing one for the other makes a 30-day mean quietly wrong.
 - **Ledger correction, if not already applied:** the 08/01/2026 row for device 11002
   was written under v0.1's inverted condenser sign and shows `cond_appr_F = -0.52`.
   Correct it to `+0.52` when carrying forward and note it in DATA ISSUES. Any other
