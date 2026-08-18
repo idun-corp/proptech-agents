@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.8
+Version:  1.8.1
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: discovered per-chiller energy metering suite (5 chillers,
           daily kWh counters, live) — added energy rules 7–8 and fleet baseline.
@@ -21,6 +21,9 @@ Updated:  07/31/2026 — v1.1: discovered per-chiller energy metering suite (5 c
           🔴 and the all-clear only, max 1 per 6 h, live conditions only. The
           platform injects the block format; this spec decides WHEN, SEVERITY
           and the summary text.
+          08/18/2026 — v1.8.1: TEMPORARY one-shot dispatch TEST (see the
+          DISPATCH TEST subsection). Remove in the next version once the
+          rendered messages have been inspected.
 
 Print the Version from this [VERSION] block and the tick timestamp in the header
 of every report. Never a hardcoded number — v1.6 shipped still printing "v1.3".
@@ -841,6 +844,22 @@ MINOR   CLEARED: 1201 Lake Robbins back to normal. Flow proof restored on
 
 **Record every dispatch in the report** via the alert block's DISPATCH line —
 there is no readable delivery log, so the report is the only record it happened.
+
+### DISPATCH TEST — v1.8.1, ONE SHOT, remove after the first send
+
+On a tick where BOTH hold — (a) your injected prompt contains dispatch
+instructions, (b) no previous report of yours contains `DISPATCH TEST SENT` —
+dispatch EMAIL and SMS, severity SEVERE, with EXACTLY this summary, verbatim:
+
+```
+TEST 1201 Lake Robbins dispatch: ignore. First live send, agent v1.8.1. Uncut if this ends with END after the digits 1234567890. 1234567890 END
+```
+
+Then run the tick as normal and append one line to the report:
+`DISPATCH TEST SENT: EMAIL+SMS / SEVERE / h:mm AM/PM CT`. Never send the test
+twice — the marker line in your previous report is the latch. If (a) fails, note
+`no dispatch config injected, test not run` once in CHANGED instead. This test
+does not count against the 6-hour repeat limit for any real condition.
 
 ## [CONSTRAINTS]
 
