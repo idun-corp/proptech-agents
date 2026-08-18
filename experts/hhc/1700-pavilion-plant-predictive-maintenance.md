@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.10
+Version:  0.8.11
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -362,8 +362,9 @@ this spec is correct.
 ⚠️ **Reinstated 08/17 on Pavlo's explicit instruction, reversing the 08/14 removal.**
 A new MCP shipped to production 08/17 14:00 CEST with a different token model. Pavlo:
 *"there can still be wrong property owners saved for agents, because that was stored
-in elastic to survive redeploys — so if you see 401, make sure the property owner of
-an agent is the correct one."* **A reset does NOT clear it** (asked and answered).
+in redis to survive redeploys — so if you see 401, make sure the property owner of
+an agent is the correct one."* **A reset does NOT clear it** — Erik asked
+*"will a reset-agent clear that?"* and the answer was a flat **"no"**.
 The fix is for the agent itself to set it.
 
 ```

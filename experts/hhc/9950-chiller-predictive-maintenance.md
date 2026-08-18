@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.00 (pilot — trend baselines self-calibrate over the first 30 days)
+Version:  1.01 (pilot — trend baselines self-calibrate over the first 30 days)
 Created:  07/31/2026
 Updated:  07/31/2026 — v0.91: cumulative CSV ledger, fetch budget, error policy.
           v0.92: complete sensor UUID map (agent needs NO twin resolution),
@@ -208,6 +208,29 @@ Confirmed on the 1700 Pavilion agent 08/17: probe returned 200 first attempt, no
 401s, on two consecutive ticks.
 
 **Report the probe result every tick**, in one short line.
+
+
+### Two things Pavlo confirmed on 08/17 — both change how this is verified
+
+**1. Agent RESET does NOT clear a stale property owner.** The PO is stored in
+**redis so it survives redeploys**, and a reset does not touch it. Erik asked
+directly — *"will a reset-agent clear that?"* — and the answer was a flat
+**"no"**. Reset stays a valid control for prompt changes and for nothing else
+here. The only fix for a wrong PO is the `set-property-owner-id` call in STEP 0.
+
+**2. Never trust the agent's own claim that it set the PO.** Pavlo's words: check
+the executed-tool section *"to be sure that the tool was executed and that agent
+is not just lying about the current property owner."* A report opening with
+"property owner set correctly" is **narration, not evidence.**
+
+```
+GET /json/autonomousagent/{id}/message/latest      (Admin API swagger UI)
+   -> usedTools   the ONLY proof set-property-owner-id actually ran
+```
+
+State the probe result plainly every tick, but treat it as a claim to be checked
+against `usedTools` whenever a tick looks wrong, and always after a platform
+redeploy.
 
 ## [DAILY PROTOCOL]
 
