@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.6
+Version:  1.7
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: discovered per-chiller energy metering suite (5 chillers,
           daily kWh counters, live) — added energy rules 7–8 and fleet baseline.
@@ -359,8 +359,24 @@ token-processing rewrite shipped. Calling it first is now correct and required.
 Confirmed on the 1700 Pavilion agent 08/17: probe returned 200 first attempt, no
 401s, on two consecutive ticks.
 
-**Report the probe result every tick**, in one short line. Each tick is a free
-observation of whether the fault recurred.
+### WHERE the probe result goes — it is NOT a preamble
+
+⚠️ **Confirming the PO does NOT license a sentence before the report.** Observed
+live on 1201 CHW Plant Watch v1.6, 08/18: the tick opened with *"Probe OK — PO set
+correctly (session confirmed live), value in expected plant range (44.3 F).
+Proceeding with routine check."* — then the report began. That is this file
+contradicting itself, and the agent obeyed the wrong half.
+
+```
+✅ inside the report   PO ok    as three characters in the header/status line
+✅ inside the report   PO NOT ok -> that IS the report. ⚫ / DATA ISSUE, nothing else.
+✅ in CHANGED          "PO corrected mid-tick" when the retry was needed
+❌ before the header   ANY sentence about the probe, the PO, or what you plan to do
+```
+
+**A green probe is worth three characters, not a paragraph.** It is verifiable in
+`usedTools` — `set-property-owner-id` appears there or it does not — so the report
+does not have to carry the evidence.
 
 
 ### Two things Pavlo confirmed on 08/17 — both change how this is verified
@@ -402,6 +418,45 @@ running(device) = run-state bit true AND load signal > 15 %
 an idle machine as a catastrophic failure. Also: an idle chiller's water temps read
 stagnant barrel water and mean nothing. Evaluate machine rules ONLY for machines passing
 this gate, and say in the report which machines were gated out.
+
+⚠️ **THE GATE IS A FETCH BARRIER, NOT A FILTER APPLIED AFTERWARDS.**
+
+```
+1. fetch ONLY the gate points          run state + load signal, 5 machines
+2. decide the running set
+3. fetch detail for the RUNNING machines ONLY
+```
+
+**Do not fetch all five machines' detail and then discard four.** Observed live
+08/18: 4 of 5 machines were correctly gated out, and the tick still made **29
+`get-sensor-latest-data` calls**. On a plant that runs one machine overnight the
+gate should cut the tick roughly in half, and **every call costs the whole prompt
+again** (see [COST]). Report the call count so this stays visible.
+
+### RULE 1c — THE TWO SUPPLY SENSORS DISAGREE → 🟡 DATA ISSUE
+
+```
+| supply #1 - supply #2 | > 3.0 °F   on the SAME hour, either direction
+```
+
+Report which sensor is the outlier by comparing each against **return #1** and
+against the running machine's evap leaving temp — the one that no longer fits the
+plant's own heat balance is the suspect one. **Never average them**, and never let
+the outlier into a Rule 1 or Rule 2b evaluation.
+
+⚠️ **This rule exists because it happened.** 08/18, ~12:00 AM CT: supply #1 read
+**58.8 °F for one isolated hour** while supply #2 held **43.9 °F** — a 14.9 °F
+disagreement that self-resolved on the next sample. **Both values were
+individually plausible**, so a range check could not see it, and Rule 1 correctly
+did not fire because it requires BOTH sensors above 46 °F for 2 hours. That
+dual-sensor requirement is what stopped a false 🔴 — **do not weaken it.** But the
+event itself is real and worth naming, and it was invisible to every rule.
+
+**Generalises to any paired measurement** (supply/return, entering/leaving): guard
+the PAIR, not just each value. A single-value sanity check cannot see this class of
+fault. The same guard is owed to 1700's HX approach pair and to the 1201/9950
+chiller approach rules, where the deltas are smaller and a bad read distorts
+proportionally more.
 
 ### RULE 1 — LOSS OF COLD WATER (plant) → 🔴 CRITICAL
 
@@ -603,6 +658,37 @@ band order.
   is indistinguishable from "nothing wrong there", and that is exactly the failure mode
   this ordering exists to prevent.
 - **Always emit a report** — partial plus DATA ISSUES beats silence.
+
+## [COST — read this before adding anything to this file]
+
+This agent runs **hourly**, and its dominant cost is **this prompt, not the data.**
+
+```
+measured 08/18   275,320 tokens · 35 calls · 2m 1s · v1.6 at 36,932 bytes
+
+spec 36,932 bytes  ~=  9,233 tokens
+observed / spec    =   29.8  ->  the prompt is re-sent ~30 times per tick
+hourly             =   275,320 x 24  =  6.6 M tokens/day
+```
+
+**Every tool call re-sends the entire prompt.** So cost is `prompt size × rounds`,
+and there are only two levers:
+
+```
+FEWER CALLS     the Rule 0 fetch barrier above. 29 latest-data calls on a
+                one-machine night is the single biggest avoidable item.
+SHORTER PROMPT  at 12 KB this tick would cost ~90 K instead of 275 K -> 2.2 M/day
+```
+
+⚠️ **Data volume is NOT the problem here** — every historical call is already
+`hourly, _1day`, which is ~25 buckets and near-free. Do not "optimise" the
+fetches; optimise the call count.
+
+⚠️ **Adding history and rationale to this file is not free the way it is in a
+daily agent.** A paragraph added here is re-read **720 times a month.** If
+something is background rather than an instruction, it belongs in a decision log,
+not in the prompt — that move took the 1700 PdM from 58.8 KB to 48.3 KB.
+
 
 ## [OUTPUT FORMAT]
 

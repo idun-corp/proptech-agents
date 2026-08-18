@@ -375,11 +375,24 @@ The fix is for the agent itself to set it.
                    still failing -> report ⚫ BLIND and STOP
 ```
 
-**Report in every tick that you called `set-property-owner-id`.** Pavlo's caution:
-*"check the executed tool section in the message response to be sure the tool was
-executed and that the agent is not just lying about the current property owner."*
-So state it plainly, and it is verifiable in `usedTools` via
-`GET /json/autonomousagent/{id}/message/latest`.
+### WHERE the probe result goes — it is NOT a preamble
+
+⚠️ **Confirming the PO does NOT license a sentence before the report.** Observed
+live on 1201 CHW Plant Watch v1.6, 08/18: the tick opened with *"Probe OK — PO set
+correctly (session confirmed live), value in expected plant range (44.3 F).
+Proceeding with routine check."* — then the report began. That is this file
+contradicting itself, and the agent obeyed the wrong half.
+
+```
+✅ inside the report   PO ok    as three characters in the header/status line
+✅ inside the report   PO NOT ok -> that IS the report. ⚫ / DATA ISSUE, nothing else.
+✅ in CHANGED          "PO corrected mid-tick" when the retry was needed
+❌ before the header   ANY sentence about the probe, the PO, or what you plan to do
+```
+
+**A green probe is worth three characters, not a paragraph.** It is verifiable in
+`usedTools` — `set-property-owner-id` appears there or it does not — so the report
+does not have to carry the evidence.
 
 🚨 **CROSS-TENANT SAFETY — this is new and it matters.** The 08/17 MCP is *"a totally
 new way we treat user/agent tokens"*, and Pavlo asked everyone to **"SCREAM LIKE NEVER

@@ -312,8 +312,24 @@ token-processing rewrite shipped. Calling it first is now correct and required.
 Confirmed on the 1700 Pavilion agent 08/17: probe returned 200 first attempt, no
 401s, on two consecutive ticks.
 
-**Report the probe result every tick**, in one short line. Each tick is a free
-observation of whether the fault recurred.
+### WHERE the probe result goes — it is NOT a preamble
+
+⚠️ **Confirming the PO does NOT license a sentence before the report.** Observed
+live on 1201 CHW Plant Watch v1.6, 08/18: the tick opened with *"Probe OK — PO set
+correctly (session confirmed live), value in expected plant range (44.3 F).
+Proceeding with routine check."* — then the report began. That is this file
+contradicting itself, and the agent obeyed the wrong half.
+
+```
+✅ inside the report   PO ok    as three characters in the header/status line
+✅ inside the report   PO NOT ok -> that IS the report. ⚫ / DATA ISSUE, nothing else.
+✅ in CHANGED          "PO corrected mid-tick" when the retry was needed
+❌ before the header   ANY sentence about the probe, the PO, or what you plan to do
+```
+
+**A green probe is worth three characters, not a paragraph.** It is verifiable in
+`usedTools` — `set-property-owner-id` appears there or it does not — so the report
+does not have to carry the evidence.
 
 
 ### Two things Pavlo confirmed on 08/17 — both change how this is verified
