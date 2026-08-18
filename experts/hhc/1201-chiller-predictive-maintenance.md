@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.10 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.11 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/01/2026
 Updated:  08/01/2026 — v0.2, after the first live tick:
           (a) FIXED the condenser approach sign convention. v0.1 had it inverted, which
@@ -626,30 +626,49 @@ trend plus a corroborating signal.
 
 ## [OUTPUT FORMAT]
 
-### RENDERING — the UI collapses single newlines. One fact per line.
+### RENDERING — ONLY A BLANK LINE BREAKS A LINE. Nothing else is reliable.
 
-⚠️ **A single newline between two lines is collapsed into one wrapped paragraph.**
-Only a markdown bullet (`- `) or a blank line survives. Observed 08/18: a Day-1 tick
-rendered each finding's EVIDENCE / LEAD TIME / CONFIDENCE / ACTION as one solid
-block of prose, and DATA ISSUES as a single unreadable paragraph.
+⚠️ **This is the single most-violated rule in this file. Read it twice.**
+
+Measured against a real rendered report on 08/18:
 
 ```
-BAD    EVIDENCE: ... LEAD TIME: ... CONFIDENCE: ... ACTION: ...
-GOOD   - EVIDENCE   ...
-       - LEAD TIME  ...
-       - CONFIDENCE ...
-       - ACTION     ...
+SURVIVED     a blank line between two blocks
+COLLAPSED    "ACTIONS" + newline + "  • none today"  ->  "ACTIONS • none today"
+COLLAPSED    the CSV ledger — every row merged into one continuous run
+COLLAPSED    indented continuation lines inside a finding
 ```
 
-**Rules, and they apply to every section below:**
+**A `•` on its own line was still pulled up onto the previous line. A code fence
+did not protect the ledger's newlines either.** So do not rely on indentation,
+bullets, or fences to separate anything.
 
-- **Every distinct fact is its own `- ` bullet.** No exceptions, including inside
-  a finding block.
-- **`·` separates tightly-related values inside one bullet** — `287.8 kW · 77.4 % RLA`
-  — never to chain separate facts. **Max two per line.**
-- **Blank line between every section**, and between the status line and its bullets.
-- **One machine per line** in MACHINE STATUS. Not a `·`-chained row of five.
-- **DATA ISSUES is bullets, never a paragraph.** It was the worst offender.
+### The rule
+
+**Put a BLANK LINE between every line you want to appear on its own line.**
+
+Yes, that means the report is double-spaced. That is the cost of it being legible,
+and it is worth paying. A dense report that nobody reads is worth less than a long
+one that gets scanned in five seconds.
+
+```
+WRONG                          RIGHT
+
+MACHINE STATUS                 MACHINE STATUS
+- 11001 ran 77.4 %
+- 11002 ran 75.8 %             - 11001  ran   77.4 % RLA · 287.8 kW
+
+                               - 11002  ran   75.8 % RLA · 315.7 kW
+```
+
+- **Start each line with `- `** as well. Belt and braces — if the renderer does
+  handle lists, it looks right; if not, the blank line has already saved it.
+- **`·` joins tightly-related values inside ONE line** — `287.8 kW · 77.4 % RLA` —
+  never separate facts. **Max two per line.**
+- **The CSV ledger is the one exception**: its rows will merge and that is
+  tolerable, because it is machine data nobody reads by eye. Put it LAST so the
+  merge cannot swallow anything else.
+- **Never end a section and start the next without a blank line between them.**
 
 ### The report starts at the header line. Nothing may precede it.
 
