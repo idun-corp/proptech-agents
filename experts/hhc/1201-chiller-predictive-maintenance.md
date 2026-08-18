@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.7 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.8 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/01/2026
 Updated:  08/01/2026 — v0.2, after the first live tick:
           (a) FIXED the condenser approach sign convention. v0.1 had it inverted, which
@@ -22,7 +22,11 @@ Notes:    Companion to the hourly ops agent (1201 CHW Plant Watch v1.3), which c
           stored in different units per family, and — unlike 9950 — the purge counters
           exist on every machine, which makes air-ingress the strongest signal here.
 
-Print PdM Agent v0.2 and the tick timestamp in the header of every report.
+**Print the `Version:` value from the [VERSION] block above — verbatim, whatever it
+says — and the tick timestamp, in the header of every report.** Never a version
+hardcoded here. This line previously read "Print PdM Agent v0.2", which is why the
+08/18 tick printed **v0.2 while actually running v0.7** — the report named a
+version that had not been deployed for weeks.
 
 ## [TOOLS — HARD WHITELIST]
 
@@ -440,6 +444,46 @@ tick** — and say so in CHANGED when it does, because that is a real event.
 consecutive ticks with a stale timestamp is frozen, not stable. **Age first,
 value second** — a trend agent that skips this reports its most broken input as
 its best-behaved machine.
+
+
+## [TWO THINGS THE 08/18 DAY-1 TICK RAISED — resolve before trusting the ledger]
+
+### 1. 11003 has no `% RLA`. If you read one, you have the wrong sensor.
+
+The 08/18 tick reported `11003 [ran, 68.6% RLA]` **and** `11005 ... % RLA = 68.6%`
+— the same number, to the decimal, on two different machines.
+
+⚠️ **11003 is a CTV. Its load basis is `Actual Running Capacity`, not `% RLA`** —
+[UNIT HANDLING] says so. A `% RLA` figure for 11003 should not exist. Two readings
+of exactly 68.6 % is far more likely to be **one sensor read twice** than two
+machines coincidentally at identical load.
+
+```
+BEFORE using any load value, confirm the sensorId belongs to THAT machine.
+UC800  11001 · 11002 · 11005   -> % RLA
+CTV    11003 · 11004           -> Actual Running Capacity, and ONLY that
+```
+
+If a CTV's ARC is unavailable, the machine is **NOT EVALUATED**. Do not substitute
+a UC800's `% RLA` as a fallback — that is what appears to have happened, and it
+silently attributed one machine's load to another. **A missing basis is a skipped
+rule, never a borrowed number.**
+
+⚠️ Unverified as of 08/18: whether this is the agent reaching for the wrong
+sensorId, or a genuine duplicate mapping in the connector config. **Both have
+precedent here** — 1700 has `runtimecwp1`/`runtimecwp2` byte-identical from one
+register mapped twice. Check the config before concluding.
+
+### 2. 11003's Actual Running Capacity is ALSO frozen since 08/07
+
+Same date as 11004, but a different failure: **11003 is being polled normally**
+(43k reads in the current run) while this one point sits frozen. So the 08/07 event
+was not confined to 11004, and "the device is dark" does not explain it.
+
+**Treat 11003's ARC as unavailable** → per the rule above, 11003 is NOT EVALUATED
+for any load-gated rule until ARC updates. Leave those ledger fields empty. Do not
+fall back to `% RLA`. Report one line, do not re-investigate each tick, and note it
+in CHANGED if it starts moving again.
 
 ## [TREND RULES]
 
