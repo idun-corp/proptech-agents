@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.11 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.12 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/01/2026
 Updated:  08/01/2026 — v0.2, after the first live tick:
           (a) FIXED the condenser approach sign convention. v0.1 had it inverted, which
@@ -492,6 +492,45 @@ for any load-gated rule until ARC updates. Leave those ledger fields empty. Do n
 fall back to `% RLA`. Report one line, do not re-investigate each tick, and note it
 in CHANGED if it starts moving again.
 
+
+## [RUN HOURS ARE SECONDS — divide by 3,600 before the ledger]
+
+⚠️ **BACnet `Elapsed Active Time` is in SECONDS, not hours.** The v0.11 tick wrote
+the raw register into the `run_h` column:
+
+```
+11001   142,822,640   as hours -> 16,293 years   as seconds -> 39,673 h  (4.5 y)
+11002   300,116,800   as hours -> 34,236 years   as seconds -> 83,366 h  (9.5 y)
+```
+
+**Divide by 3,600 and record hours.** `run_h` means hours; a value that would make
+the machine older than the building is a unit error, not a reading.
+
+⚠️ **This one is worse than a wrong number in a report, because the ledger is
+copy-forward.** A bad row propagates for 30 days and every runtime slope computed
+against it is wrong by 3,600×. If a row already carries seconds, **correct it when
+carrying forward** and note the correction in DATA ISSUES.
+
+**Sanity gate for the whole ledger, not just this field:** before writing any value,
+ask whether it is physically possible for this plant. A chiller with 16,000 years of
+runtime, a 0.0 °F approach at full load, or a 33 °F winding spread is telling you
+about the instrument or the units, not the machine. **Blank it and raise it as an
+open question rather than writing it.**
+
+## [FETCH BUDGET IS 60 AND IT IS A CEILING]
+
+The v0.11 tick used **65**. Budget is not advisory — going over is what forces the
+silent skips that then have to be explained in DATA ISSUES.
+
+- **Print `Calls: n/60` as the last line of every report**, after the ledger. The
+  watch agent has done this since v1.7 and it is the single most useful piece of
+  self-reporting either agent produces.
+- **Count as you go and stop at 60.** If the plan does not fit, drop Band D on the
+  lowest-load running machine first and say so in one line.
+- **A machine that is NOT EVALUATED costs nothing** — 11003 and 11004 should now
+  free roughly 30 calls between them. If you are still at 60 with two machines
+  excluded, the fetch plan needs trimming, not the budget raising.
+
 ## [TREND RULES]
 
 **Reference condition** (for every "at equal load" comparison): running, load signal within
@@ -764,6 +803,9 @@ ignore the section on the day it matters.
 TREND LEDGER (cumulative, rolling 30 days, CSV — copy forward and append daily)
 date,device,ran,load_pct,kW,evap_dT_F,cond_appr_F,evap_appr_F,oil_dP,bearing_in_F,bearing_out_F,wind_max_F,starts,run_h,pumpout_24h,pumpout_off_7d,igv_pct,diff_rfgt_kPa
 ```
+
+⚠️ **`run_h` is HOURS.** The source register is seconds — divide by 3,600. See
+[RUN HOURS ARE SECONDS].
 
 - **Mandatory in every report, and it goes last.** Reference data, not reading —
   never summarise it in prose as well.
