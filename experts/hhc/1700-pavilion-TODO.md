@@ -86,10 +86,25 @@ email (an all-clear, not a stale alarm).
       **No REST fallback exists** — the API base has no service-object or alert
       endpoint (448 paths checked). Only MCP or the UI can answer it.
 
-- [ ] **E · Meanwhile, eyeball it in the UI once.** 30 seconds, and it closes the
-      gap until the RPP lands: open the building's service objects and confirm
-      neither `1700 No Cooling - CW Supply` nor `1700 Communication error` is
-      sitting **open**. Worth doing now rather than after the next quiet night.
+- [x] **E · Checked manually in the UI, 08/18 — BOTH ARMED, nothing latched.**
+      Every service object reads `Closed`:
+
+      ```
+      1700 No Cooling - CW Supply   2026-08-10 10:47   Closed
+      1700 Communication error      2026-08-08 14:47   Closed
+      1700 No Cooling - CW Supply   2026-08-08 11:07   Closed
+      1700 lowCt1                   2026-08-08 02:13   Closed
+      1700 lowCt1                   2026-08-08 01:06   Closed
+      ```
+
+      **So the 403 is a reporting gap, not an exposure.** Re-check by hand after any
+      alert fires, until the RPP lands.
+
+      Two things worth noting from the list. **`1700 lowCt1` fires and closes on its
+      own** — two events on 08/08 — so that trigger is live and self-clearing, unlike
+      `highCt2`, which has no trigger at all. And **nothing has fired since 08/10**,
+      which includes the 13.5 h blackout on 08/16: consistent with the known
+      silence-detection gap (PLAT-5687), not evidence of a new one.
 
 ## NEXT — the monitoring gap this outage exposed
 
