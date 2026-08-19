@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.11
+Version:  1.12
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: Ch02 entering sensor, full BAS alarm UUIDs, plant-wide
           energy summary, starts-delta persistence via daily report.
@@ -300,7 +300,12 @@ say     "first seen in this run history"
 NEVER   "since <today>", which makes an old problem look new
 ```
 
-**Print `Calls: n/<budget>` as the last line of every report.** It is the single
+**Fetch budget: 30 calls.** The 08/19 tick made 21 and reported *"budget not specified
+in agent config"* — because this file told it to print `n/<budget>` without ever setting
+one. 30 leaves headroom for four running machines; if a tick needs more, drop Band D on
+the lowest-load machine and say so in one line.
+
+**Print `Calls: n/30` as the last line of every report.** It is the single
 most useful piece of self-reporting these agents produce, and it is how a silent
 budget overrun gets caught.
 
@@ -349,7 +354,14 @@ weigh return temp before alerting (recovery/heat-wave load is legitimate).
 ### RULE 5 — FLEET STATUS → INFO (daily, in summary only)
 
 - Per chiller: ran / idle today (kW), days since last run
-- Standing item: Chiller_04 down since the 07/16/2026 failure.
+- ⚠️ **THE JULY FLEET PICTURE IS STALE — RE-DERIVE IT, DO NOT TRUST IT.** Confirmed by
+  the 08/19 tick against live data: **Ch04 is running and cooling normally** (262 kW,
+  leaving 43.2 °F) so "down since 07/16" is retired; **Ch02 reads 0 kW across a full
+  24 h window** so "carrying the building since 07/12" is retired; **Ch01 ran 13 h
+  overnight at 200-238 kW** so "idle all month" is retired. The fleet has rotated
+  completely since the July characterisation.
+  **Report fleet status from the last 24 h of live data every tick. Never carry a
+  standing item about which machine is lead.**
 - CAUTION on snapshot-era conclusions: July's "Ch01/Ch03 idle all month" was
   based on electrical values frozen at ~7:47 AM CT daily — a machine staging
   only during daytime peaks would ALWAYS have read 0. Ch03 in fact ran ~200 kW
@@ -486,6 +498,41 @@ to ignore the section on the day it matters.
   [INSTRUMENTATION TO UNLOCK FULL PdM] and have for weeks. Raise one **only** on a
   tick where it newly blocks a conclusion, and name the conclusion it blocked.
 - Something the **agent** must do next tick is not an action for the reader.
+
+
+## [DISPATCH — EMAIL, 🔴 ONLY. Added 08/19 after it dispatched unguarded.]
+
+⚠️ **On its first live tick this agent emitted TWO `[DISPATCH]` EMAIL blocks, both on
+🟡, with no policy in this file to govern them.** The platform injects the dispatch
+block whenever a DispatchConfig exists, so the capability arrives whether or not the
+prompt mentions it. **Silence in a spec is not a prohibition.** This section is the
+prohibition.
+
+```
+DISPATCH on   🔴 only, and on the recovery from 🔴 back to 🟢 (the all-clear)
+NEVER on      🟡 · 🟢 · a routine tick · a DATA ISSUE · a fleet-status observation
+REPEAT        at most ONCE PER 6 HOURS for the same unresolved 🔴
+```
+
+⚠️ **This agent runs HOURLY. A 🟡 that dispatches sends 24 emails a day.** Both of the
+08/19 sends were 🟡 — a load observation and a stale-sensor note. Accurate, useful in a
+report, and **not worth an email**, let alone one an hour. This building produced a
+30-SMS flood in 5 hours before dispatch existed; that is the failure this rule prevents.
+
+**Severity, house convention:**
+
+```
+SEVERE   the plant has a problem       Rule 1 or Rule 3 fired
+MAJOR    we cannot see the plant       ⚫ BLIND · feed dead · alarms stale
+MINOR    all-clear only               prefix the summary "CLEARED:"
+```
+
+**The repeat limit is yours to enforce** — dispatch has no known platform
+de-duplication. Read your own previous report; if the same 🔴 was dispatched within
+6 h, do not dispatch again, and note "already dispatched HH:MM" instead.
+
+⚠️ **`[HITL_REQUIRED]` is not a dispatch and is the right tool for "a human should
+look at this."** Use it freely. It costs nobody an email.
 
 ## [CONSTRAINTS]
 
