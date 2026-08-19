@@ -183,18 +183,20 @@ YOU write in the prompt    WHEN to dispatch, which SEVERITY, and the SUMMARY tex
 The PLATFORM provides      the block format, the template, the recipients, the send
 ```
 
-### Creating a DispatchConfig: API today, UI later this week (as of 08/18)
+### Creating a DispatchConfig: UI shipped 08/19 — Agent editor → Behavior → Dispatch
 
-Erik searched every tab of the agent create/edit dialog on 08/18: nothing there
-yet. Two answers came back the same day (group DM, Pavlo + Yaroslav):
+**OSUI-4562, prod 08/19/2026 12:12 CEST** (Yaroslav, #apps-team): the Agent
+editor's **Behavior** tab now has a **Dispatch** section — add one or more
+channels per agent (Email / SMS / Service Object), each with its own recipients
+and its own Enabled toggle; several channels of the same type are allowed (e.g.
+facilities email always on, exec escalation kept off until needed). ⚠️ The same
+release added a "new version available" reload snackbar — if the Dispatch
+section is missing, the browser is on a stale UI version; reload.
 
-- **Pavlo:** DispatchConfig **endpoints exist in the agent API now** — *"use
-  those endpoints in agent api"*. So it is self-service via API, not a
-  backend-only favour (the 07/31 OTEAM-6763 setup for agent
-  `82441aac-0022-4b3b-908c-c12e4e5306d9` just happened to be done by Pavlo).
-- **Yaroslav:** *"The UI capability to set those up is coming this week later"*
-  (week of 08/17). **Decision 08/18: wait for the UI** — the dispatch test is
-  parked, fully staged, until it ships.
+Before the UI existed (08/18 and earlier): DispatchConfig endpoints in the agent
+API were the only self-service path (Pavlo: *"use those endpoints in agent
+api"*) — that is how the 07/31 OTEAM-6763 setup for agent
+`82441aac-0022-4b3b-908c-c12e4e5306d9` was done.
 
 The Workflows → Dispatchers page is the *transport channels* (SMS/Email, 2021)
 reused at send time, not where agent configs live. Legacy fallback (agent
