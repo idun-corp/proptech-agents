@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.12
+Version:  0.13
 Created:  08/18/2026
 Updated:  08/19/2026 — v0.10: the first v0.9 tick proved the call-count field
           does not PREVENT fabrication (a zero-call tick invented "8 calls");
@@ -134,7 +134,7 @@ DAILY FULL     the 05:00 AM PT tick ONLY.  Adds Rule 4 + the full report.
 a findings list.
 
 ```
-🟢 1700 Watch · 08/18 09:00 PT · raw @15:58:41Z (2m) · median 1m · alerts ARMED · faults 1/1 · 8 calls
+🟢 1700 Watch v0.13 · 08/18 09:00 PT · raw @15:58:41Z (2m) · median 1m · alerts N/A(403) · faults 1/1 · 7 calls
 ```
 
 This is not a style preference, it is the design. **24 full reports a day, 23 of
@@ -622,12 +622,19 @@ platform-side (fail a routine tick with empty usedTools) — asked of Pavlo.
 ### Mode 1 — the HOURLY tick, all green: ONE line, then stop
 
 ```
-🟢 1700 Watch · <ACTUAL date, time> PT · raw @<HH:MM:SS>Z (<n>m) · median <n>m · alerts <state> · faults 1/1 · <N> calls
+🟢 1700 Watch v<VERSION> · <ACTUAL date, time> PT · raw @<HH:MM:SS>Z (<n>m) · median <n>m · alerts <state> · faults 1/1 · <N> calls
 ```
 
 `raw @…Z` is the newest `bldgCwSupply` observationTime **as returned this tick**;
 `<N> calls` is the count of tool calls you actually made. `<state>` is ARMED,
 LATCHED, or N/A(403).
+
+⚠️ **The version goes on the one-line tick too.** It was omitted until v0.13, and the
+quiet ticks are the ones you cannot identify afterwards — a green line with no version
+tells you nothing about what produced it. **This bit twice today**: the 1201 PdM printed
+`v0.2` while running `v0.7`, and the 9950 Failure Detection agent hardcoded `v1.4`. On a
+hourly agent the green line is 23 reports out of 24, so it is the *most* important place
+for the version, not the least.
 
 Nothing else. No header block, no MEASUREMENTS, no FINDINGS, no ACTIONS, no
 "nothing to report". **One line.** If you are tempted to add a second line
