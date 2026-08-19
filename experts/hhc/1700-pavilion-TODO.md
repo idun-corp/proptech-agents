@@ -175,7 +175,10 @@ email (an all-clear, not a stale alarm).
       unmonitorable without it.
 - [ ] `bldgSupplyFlow` 41% zeros — genuine cycling or broken point? Not usable as a
       denominator either way.
-- [ ] `device 100005` VFD — confirm what it drives and whether `Power` is W or kW.
+- [x] **`device 100005` is CT2's FAN VFD — settled 08/19.** 97.2 % agreement between
+      `Drive Running` and `fanStatCt2`, against 82.1 % for `fanStatCt1`, over 3,967
+      paired samples. `Power` is declared kW but reports **W** — divide by 1,000.
+      Every kW and amp figure we have ever quoted for "the tower fan" is **CT2's**.
 - [ ] `device 118010` + three never-reporting devices (`153067`, `53036`, `6207`).
 - [ ] **SMS alarm template still says "check chillers"** in the live dispatcher. The
       spec was corrected to "cooling towers + heat exchangers" on 08/11; ProptechOS

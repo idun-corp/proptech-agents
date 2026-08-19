@@ -210,6 +210,10 @@ c4573bc2-f75c-4b7d-95a9-d9d33f916f4f   device 1200/bldgCwReturn
 dc3d9493-cb1d-4d0f-a552-118740319d57   device 1200/ctMakeupWater    ⚠ WRAPPING totalizer
 8982eb63-7027-4dd7-88af-cc7bbbf0709e   device 1200/chemTreatment
 bbb184ae-d47c-45ae-9ea6-97003b3079f5   device 100005/Power          ⚠ declared kW, values are W
+                                       ⚠ device 100005 is CT2's FAN VFD — settled
+                                       08/19, 97.2% match to fanStatCt2 vs 82.1%
+                                       to fanStatCt1 over 3,967 paired samples.
+                                       Rule 6 is therefore CT2's fan only.
                                        TOWER FAN DRIVE (see Rule 6)
 26fef554-ccb7-47a8-9e3d-92d0fd2c63ee   device 100005/kWh Counter
 7d3b54e5-1a70-4517-8c52-65d68e915f76   device 100005/Drive Output Speed

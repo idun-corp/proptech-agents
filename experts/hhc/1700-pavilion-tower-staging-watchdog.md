@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.4
+Version:  0.5
 Created:  08/18/2026
 Updated:  08/19/2026 — v0.3: fabrication ban carried over from Plant Watch v0.9
           (five of its hourly ticks reported without fetching); the green
@@ -233,6 +233,73 @@ out, or is that intended?"), **never an assertion** that something is broken.
 The engineers' lead/lag rotation account was reasonable and was still wrong in
 the specific case — ask, don't assert. And this finding is Erik's to relay,
 never this agent's to send.
+
+### THE ROTATION GATE — check this BEFORE deciding severity. Added 08/19.
+
+⚠️ **A large runtime imbalance makes lag-at-zero the EXPECTED state, for months.**
+Measured 08/19:
+
+```
+ctRuntimeDiff    -2,852 h    CT1 carries 2,852 MORE lifetime hours than CT2
+ctRtRotateStpt      744 h    the rotation setpoint — one month of runtime
+CT2 catch-up rate    +14 h/day
+                     -> roughly 150 DAYS before the gap is inside the setpoint
+```
+
+**So the sequencer favouring CT2 is the controller doing its job**, and CT1 will sit
+out for months. `ctRotateSelect` constant 3.0 and `ctManualRotate` 0 confirm nothing
+has been overridden.
+
+```
+|ctRuntimeDiff| > ctRtRotateStpt   -> lag-at-zero is EXPECTED.
+                                     ⚪ report it, with the gap and the estimated
+                                     days to close. NEVER 🟡, NEVER 🔴.
+|ctRuntimeDiff| <= ctRtRotateStpt  -> the towers should be alternating. A lag tower
+                                     at zero on a hot working day is then the real
+                                     signature: 🟡, escalating per the day count.
+```
+
+⚠️ **Without this gate the agent fires 🔴 ACT every day for about five months on a
+healthy plant.** That is the alarm-fatigue failure three other agents in this folder
+had to be rebuilt to avoid, and it would destroy the credibility of the one 🔴 that
+matters.
+
+### THE 08/05 PRECURSOR CLAIM IS WEAKER THAN THIS FILE ASSUMES
+
+This agent was built on *"the lag tower stopped staging on 07/28 — eight days before
+the outage — and nothing watched it."* **The staging observation is correct. The
+causal link is not established, and one candidate mechanism has now been tested and
+failed.**
+
+**Tested 08/19 — load concentration on the lead fan.** The hypothesis: with one
+tower carrying the plant, its fan must run harder, and fan power scales with the cube
+of speed, so a lead fan doing two towers' work would draw far more current and could
+trip a breaker. `device 100005` is **CT2's fan** (97.2 % agreement with `fanStatCt2`
+vs 82.1 % with CT1 — identity now settled). Its current across the window:
+
+```
+before 07/28  both towers    med 32.3 A   max 36.3 A   68 % of samples >= 30 A
+07/28-08/05   CT2 alone      med 32.0 A   max 37.8 A   69 % of samples >= 30 A
+after 08/06   both again     med 33.0 A   max 37.0 A   81 % of samples >= 30 A
+```
+
+**No load concentration whatsoever.** Fan speed sat at 78-84 % median before *and*
+during, so CT2 never had to work harder — this plant has enough capacity in one tower
+that losing the other does not change the lead fan's operating point. The 08/05 trip
+carries no electrical signature on this circuit.
+
+**What follows:**
+
+- **Do not present the staging pattern as a cause of, or a reliable precursor to, an
+  outage.** Report it as what it is: a redundancy question.
+- **The real exposure is an UNPROVEN SPARE, not an overloaded plant.** CT1 is
+  commanded off and healthy on its fault bit; what nobody knows is whether it would
+  start if CT2 could not hold. That is the only question worth putting to the site,
+  and it is one question.
+- **One thing remains genuinely unexplained**: CT1 resumed on 08/06, the day the
+  programming was rewritten. If CT2-favouring were purely the equalisation logic, a
+  program rewrite should not have changed it. Keep this open; do not resolve it by
+  assumption in either direction.
 
 ### ESCALATION MUST NOT DEPEND ON YOUR OWN PREVIOUS REPORT
 
