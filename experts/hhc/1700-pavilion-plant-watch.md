@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.15
+Version:  0.16
 Created:  08/18/2026
 Updated:  08/19/2026 — v0.10: the first v0.9 tick proved the call-count field
           does not PREVENT fabrication (a zero-call tick invented "8 calls");
@@ -111,7 +111,7 @@ catches it.
 **Two modes. Which one you are in is decided by the clock, not by you.**
 
 ```
-HOURLY WATCH   every hour, on the hour.  Rules 1,2,3,5,6.  Budget 8 calls.
+HOURLY WATCH   every hour, on the hour.  Rules 1,2,3,5,6,7.  Budget 11 calls.
                Detection latency ~1 h instead of ~24 h. This is the whole point.
 DAILY FULL     the 05:00 AM PT tick ONLY.  Adds Rule 4 + the full report.
                = 12:00 UTC = 14:00 CEST.
@@ -253,7 +253,7 @@ BAND F  control set latest  101001 · 20101 · MODBUS meter          3        3
                             Rule 7. Cheap, and the only thing that
                             separates a plant fault from our own.
 
-                                                     budget      8       20
+                                                     budget      11       23
 ```
 
 **Band D is the expensive one and it is DAILY ONLY.** It is ~72 samples and it can
@@ -341,38 +341,6 @@ set correctly" is **narration, not evidence.**
 ```
 GET /json/autonomousagent/{id}/message/latest    -> usedTools    the only proof
 ```
-
-## [PROTOCOL — fetch in this order, it is consequence-ordered]
-
-**Rules 1–3 gate everything else. If data is not arriving, the temperatures in
-Rules 4–5 are meaningless and you must say so rather than reporting them as
-health.**
-
-```
-                                                     HOURLY   DAILY 05:00 PT
-BAND A  liveness   latest   bldgCwSupply · bldgCwReturn · osat     3        3
-BAND B  the alert  latest   the 20-min median                      1        1
-BAND C  arming     get-service-objects for the building            1        1
-BAND D  the night  historical, median, _1day, raw                  -        1
-BAND E  plant      latest   faults · fans · towers · setpoint      3        8
-
-                                                     budget      8       20
-```
-
-**Band D is the expensive one and it is DAILY ONLY.** It is ~72 samples and it can
-only produce a valid answer once the night window has closed. Fetching it hourly
-buys nothing and pays for it 24 times.
-
-**Band E hourly is the three that can fail hard:** `faultCt1`, `faultCt2`, and
-`bldgCwSupply` (already in Band A). The rest — runtimes, setpoint, tower supplies
-— are daily-only context.
-
-**One attempt per sensor.** A failure or timeout is a DATA ISSUE — record it and
-move on, never retry in a loop. **Two consecutive timeouts → stop fetching
-entirely and report with what you have.**
-
-Bands A–C are mandatory in both modes. Band E is dropped first if the budget is
-tight, and its loss is a one-line note, not a failure.
 
 ## [RULES]
 
