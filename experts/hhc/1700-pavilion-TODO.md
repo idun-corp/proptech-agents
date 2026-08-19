@@ -90,6 +90,16 @@ email (an all-clear, not a stale alarm).
       other agents it is not impossible** — worth one more question if Rule 3 ever
       matters enough.
 
+      **Now tracked: PLAT-5721** *"Support Service Object API scope in P8S
+      Applications(Agents)"* — Pavlo, **Medium, Backlog, empty description.** A
+      recognised gap, not a refusal. But Medium+Backlog+no-context means months, so
+      treat Rule 3 as permanently unavailable and design around it.
+
+      - [ ] **E · Add the use case to PLAT-5721.** It has no description. The one
+            thing that moves a Backlog ticket is a concrete cost: this is the only
+            automated check on whether our own alerting is armed, and the no-data
+            alert has latched for 65 h before.
+
       **Handled in the agent:** v0.9 stops calling it hourly (24 guaranteed failures a
       day), attempts once on the daily tick, and reports ⚪ NOT EVALUATED — never
       amber, never colouring the plant.

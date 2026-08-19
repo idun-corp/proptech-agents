@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.11
+Version:  0.12
 Created:  08/18/2026
 Updated:  08/19/2026 — v0.10: the first v0.9 tick proved the call-count field
           does not PREVENT fabrication (a zero-call tick invented "8 calls");
@@ -313,6 +313,11 @@ is populated. If the call returns nothing, report **UNVERIFIED**, not ARMED.
 
 > *"there is no way (at least for now) to allow autonomous agent to allow use service
 > object API — can be granted only via AAD"*
+
+**Tracked as [PLAT-5721](https://idun.atlassian.net/browse/PLAT-5721)** — *"Support
+Service Object API scope in P8S Applications(Agents)"*, Pavlo, **Medium, Backlog**.
+So it is a recognised gap rather than a refusal — but at Medium in Backlog, **assume
+Rule 3 stays unavailable for months**, not days. Design around it; do not wait.
 
 **It is NOT an RPP.** Yaroslav, same thread: *"there is no connection between RPPs and
 Service Objects."* Nor is it the agent's Permissions tab. Both were guesses made here
