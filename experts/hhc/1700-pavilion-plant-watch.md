@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.10
+Version:  0.11
 Created:  08/18/2026
 Updated:  08/19/2026 — v0.10: the first v0.9 tick proved the call-count field
           does not PREVENT fabrication (a zero-call tick invented "8 calls");
@@ -457,73 +457,12 @@ as **ARMED** or **LATCHED**. Latched is 🔴 regardless of temperature.
 sometimes not appear under the building twin even when `Building: 1700 Pavilion`
 is populated. If the call returns nothing, report **UNVERIFIED**, not ARMED.
 
-### `403 Forbidden` — a capability gap, NOT a latch and NOT a plant condition
+### Rule 3's `403` — see the PLATFORM LIMIT section above
 
-Found on the first live tick, 08/18: `get-service-objects` returns **403**.
-
-```
-403 Forbidden   we are not permitted to ask. Rule 3 is NOT EVALUATED.
-empty result    we asked, got nothing. UNVERIFIED — may be a lookup quirk.
-objects listed  the only case where ARMED or LATCHED can be stated.
-```
-
-**A 403 says nothing about the alerts.** Do not infer LATCHED, do not infer ARMED,
-and **do not colour the plant on it** — the building may be perfectly healthy with
-Rule 3 unevaluable. Rule 3 becomes **⚪ NOT EVALUATED, excluded from the roll-up**
-(see [STATUS LIGHTS]) — it neither caps nor colours the plant status. (v0.8 change;
-an earlier revision said "caps at 🟡", which put hundreds of consecutive ambers on
-a known, tracked, unfixable-by-us gap.)
-
-⚠️ **Raise it ONCE, then stop.** Observed 08/18: two consecutive ticks each produced
-a full ACTIONS entry for the same unchanged 403. **At hourly, that is 24 identical
-actions a day**, which is precisely how the ACTIONS section becomes ignorable.
-
-```
-first tick seeing it     ACTIONS entry, with what to check
-every HOURLY tick after   ONE line in FINDINGS. ACTIONS says "none today".
-the DAILY 05:00 PT tick   re-raise it ONCE, so it cannot be forgotten
-it changes                that IS news — CHANGED, and raise it again
-```
-
-⚠️ **A line in ACTIONS that says no action is needed is a contradiction.** v0.6
-produced `• 🟡 Rule 3 NOT EVALUATED ... no new action needed.` — inside ACTIONS.
-**If no action is needed, it does not belong in ACTIONS.** Put it in FINDINGS and
-write `• none today`. The hourly repeat is suppressed; the daily tick is what keeps
-it from being forgotten.
-
-⚠️ **Do NOT invent a start date you cannot know.** v0.6 wrote *"403 since 08/18
-08:34 PT — unchanged since 08:34 PT"*, where 08:34 was **that tick's own time** — it
-had just been Reset and had no history, so it dated a days-old condition to the
-present moment and made it look new. **An agent Reset wipes your run history.** When
-you cannot see a first-seen time:
-
-```
-say     "403, first seen in this run history"
-NEVER   "403 since <now>", which reads as a fresh event
-```
-
-**Manually verified 08/18 — both alerts ARMED.** Erik checked the service objects in
-the ProptechOS UI: `1700 No Cooling - CW Supply` (08/10 10:47) and `1700
-Communication error` (08/08 14:47) both read **Closed**, as did two `1700 lowCt1`
-objects from 08/08. **So nothing is latched, and the 403 is a reporting gap rather
-than an exposure.**
-
-⚠️ **Do NOT report that as ARMED, though.** A human check on 08/18 says nothing
-about today — an alert can latch at any time, and the no-data alert has latched
-before for 65 h. Report `⚪ NOT EVALUATED`, and cite the manual check only as
-context: `last verified by hand 08/18, both Closed`.
-
-**What to tell Erik once**, because 403 is not the property-owner fault we are used
-to — that presents as `401` / `Invalid sensor ID`, fails everywhere, and STEP 0
-fixes it. A 403 on one endpoint while every sensor read succeeds is an
-**authorisation scope** problem instead:
-
-- the agent's **Permissions** tab in ProptechOS may not grant service-object access;
-- `get-service-objects` **enforces the property-owner boundary** where
-  `get-sensor-latest-data` does not, so it can fail alone;
-- ⚠️ **it cannot be checked over REST** — there is no service-object or alert
-  endpoint on that API base (448 paths, none matching service/alert/alarm/trigger).
-  Confirming this needs MCP or the ProptechOS UI.
+The full account, with Pavlo's and Yaroslav's replies of 08/19, is in
+[`403 Forbidden` on `get-service-objects` — a PLATFORM LIMIT]. **It is not an RPP
+and not the agent's Permissions tab**; both were wrong guesses made on 08/18 and
+an earlier version of this section repeated them. Do not reinstate that framing.
 
 ### Rule 4 · DID THE LV NIGHT STAY UNDER 85 °F?   (DAILY 05:00 PT TICK ONLY)
 
