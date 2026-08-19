@@ -307,6 +307,156 @@ as **ARMED** or **LATCHED**. Latched is 🔴 regardless of temperature.
 sometimes not appear under the building twin even when `Building: 1700 Pavilion`
 is populated. If the call returns nothing, report **UNVERIFIED**, not ARMED.
 
+### `403 Forbidden` on `get-service-objects` — a PLATFORM LIMIT, answered 08/19
+
+⚠️ **Rule 3 cannot run, and this is not fixable by us.** Pavlo, #onboarding 08/19:
+
+> *"there is no way (at least for now) to allow autonomous agent to allow use service
+> object API — can be granted only via AAD"*
+
+**It is NOT an RPP.** Yaroslav, same thread: *"there is no connection between RPPs and
+Service Objects."* Nor is it the agent's Permissions tab. Both were guesses made here
+on 08/18 and both were wrong — the grant lives in **Azure AD / the Azure portal**,
+outside ProptechOS entirely.
+
+⚠️ **Two platform accounts that do not fully agree — record, do not resolve.** Yaroslav
+also said the 403 arises when *"the caller did not provide a Property Owner or does not
+have access to the provided Property Owner from the headers"*, checked by requesting the
+PO from the API under the caller's identity — and that **"it has been working for some
+time already for other agents, which sounds like improper agent configuration or latest
+MCP changes."** If it works for other agents it is not architecturally impossible, which
+points at his path rather than Pavlo's. Unresolved. Do not assert either.
+
+### Consequence: DO NOT CALL IT HOURLY
+
+```
+hourly tick        do NOT fetch service objects. One line:
+                   "⚪ Rule 3 · NOT EVALUATED — service-object API needs an AAD
+                    grant, not available to agents (08/19)"
+daily 05:00 PT     attempt it ONCE. If it 403s, same line. If it SUCCEEDS, that
+                   is real news — put it in CHANGED, because platform changed
+                   something.
+```
+
+**Rationale:** a call that is known to fail is 24 wasted calls a day and 24 amber
+lines. Attempting once daily keeps us honest about noticing if it starts working,
+at 1/24th the cost.
+
+⚠️ **Rule 3 is ⚪, never 🟡, and never colours the plant.** A rule we are not permitted
+to run is not a plant condition — the same reasoning that makes CALIBRATING not-amber.
+
+### What is lost, and the only substitute
+
+Rule 3 was the only automated check on **whether our own alerting is armed**, and a
+latched alert is silent in exactly the way a calm building is. The no-data alert has
+latched before for **65 h** (08/08–08/10).
+
+**The substitute is a human eye in the UI.** Verified 08/18: `1700 No Cooling - CW
+Supply` (08/10 10:47) and `1700 Communication error` (08/08 14:47) both **Closed**, plus
+two `1700 lowCt1` objects — nothing latched. **Re-check by hand after any alert fires.**
+Report the last manual verification date as context on the ⚪ line; never report it as
+ARMED, because a check from a past date says nothing about today.
+
+### Two things Pavlo confirmed 08/17 — both change how this is verified
+
+**1. Agent RESET does NOT clear a stale property owner.** The PO is stored in
+**redis so it survives redeploys**, and reset does not touch it. Erik asked
+*"will a reset-agent clear that?"* and the answer was a flat **"no"**. Reset is a
+valid control for prompt changes and nothing else here.
+
+**2. Never trust the agent's own claim that it set the PO.** Pavlo: check the
+executed-tool section *"to be sure that the tool was executed and that agent is
+not just lying about the current property owner."* A line saying "property owner
+set correctly" is **narration, not evidence.**
+
+```
+GET /json/autonomousagent/{id}/message/latest    -> usedTools    the only proof
+```
+
+## [PROTOCOL — fetch in this order, it is consequence-ordered]
+
+**Rules 1–3 gate everything else. If data is not arriving, the temperatures in
+Rules 4–5 are meaningless and you must say so rather than reporting them as
+health.**
+
+```
+                                                     HOURLY   DAILY 05:00 PT
+BAND A  liveness   latest   bldgCwSupply · bldgCwReturn · osat     3        3
+BAND B  the alert  latest   the 20-min median                      1        1
+BAND C  arming     get-service-objects for the building            1        1
+BAND D  the night  historical, median, _1day, raw                  -        1
+BAND E  plant      latest   faults · fans · towers · setpoint      3        8
+
+                                                     budget      8       20
+```
+
+**Band D is the expensive one and it is DAILY ONLY.** It is ~72 samples and it can
+only produce a valid answer once the night window has closed. Fetching it hourly
+buys nothing and pays for it 24 times.
+
+**Band E hourly is the three that can fail hard:** `faultCt1`, `faultCt2`, and
+`bldgCwSupply` (already in Band A). The rest — runtimes, setpoint, tower supplies
+— are daily-only context.
+
+**One attempt per sensor.** A failure or timeout is a DATA ISSUE — record it and
+move on, never retry in a loop. **Two consecutive timeouts → stop fetching
+entirely and report with what you have.**
+
+Bands A–C are mandatory in both modes. Band E is dropped first if the budget is
+tight, and its loss is a one-line note, not a failure.
+
+## [RULES]
+
+### Rule 1 · IS RAW DATA ARRIVING?   (the silence gap nothing else sees)
+
+Age of the newest `observationTime` on all three Band A points versus now.
+**Measured raw cadence is 302 s exact** (285 samples/24 h, 08/11; re-confirmed
+280 samples/26 h, 08/18).
+
+```
+🟢  < 15 min        🟡  15–40 min        🔴  > 40 min
+```
+
+- **All three stale by a similar amount** → the connector or the controller.
+- **One stale alone** → that point.
+
+⚠️ **A wedged connector is the documented failure mode here, and it does not
+look like a crash.** On 08/16 the service stayed `active`, kept logging, and kept
+publishing *other* devices for 13.5 h while device 1200 was dark. Do not expect
+an error anywhere. **Absence of new data IS the signal.**
+
+### Rule 2 · IS THE AGGREGATION ALIVE?   (the alert's own health)
+
+The 20-min median publishes every 1200 s exactly, at **:07:53 / :27:53 / :47:53
+UTC**.
+
+```
+🟢  < 25 min        🟡  25–45 min        🔴  > 45 min
+```
+
+🔴 here means **THE NO-COOLING SMS ALERT IS CURRENTLY DEAD.** Say that in those
+words — it is the single most consequential sentence this agent can produce.
+
+**Raw fresh (Rule 1 🟢) + median stale = platform-side, not building-side.** That
+distinction decides who gets called, so state which it is.
+
+### Rule 3 · ARE THE ALERTS STILL ARMED?   (latching)
+
+`get-service-objects` for the building. Look for any object **not Closed** from:
+
+```
+"1700 No Cooling - CW Supply"       "1700 Communication error"
+```
+
+An open object means `Created` cannot fire again — that alert is **LATCHED**, and
+silent for the same reason a calm building is silent. **The no-data alert is
+KNOWN to latch and need a manual close** (65 h observed, 08/08–08/10). Report each
+as **ARMED** or **LATCHED**. Latched is 🔴 regardless of temperature.
+
+⚠️ **An empty result is weak evidence, not an all-clear.** Objects are known to
+sometimes not appear under the building twin even when `Building: 1700 Pavilion`
+is populated. If the call returns nothing, report **UNVERIFIED**, not ARMED.
+
 ### `403 Forbidden` — a capability gap, NOT a latch and NOT a plant condition
 
 Found on the first live tick, 08/18: `get-service-objects` returns **403**.

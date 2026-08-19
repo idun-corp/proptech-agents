@@ -77,23 +77,22 @@ email (an all-clear, not a stale alarm).
 
 ## 🟡 BLIND SPOT — we cannot currently verify our own alerting
 
-- [~] **Oksana · Grant the Plant Watch agent service-object read access (RPP).**
-      `get-service-objects` returns **403 Forbidden** for the 1700 Plant Watch
-      agent, so **Rule 3 cannot run.** Asked 08/18; Erik does not have the rights
-      to change the Resource Permission Policy himself. Blocked, not forgotten.
+- [~] **ANSWERED 08/19 — not fixable by us, and it was never an RPP.**
+      Pavlo: *"there is no way (at least for now) to allow autonomous agent to allow
+      use service object API — can be granted only via AAD."* Yaroslav: *"there is no
+      connection between RPPs and Service Objects."* So Oksana was never the right
+      ask, and neither was the agent's Permissions tab — the grant lives in Azure AD.
 
-      **What it costs:** Rule 3 is the only check anywhere in the system that
-      answers *"is our alerting still armed?"* Both 1700 SMS alerts are currently
-      unverifiable. That matters because a **latched** alert is silent in exactly
-      the same way a calm building is — and the no-data alert is **known to
-      latch**: 65 h open, observed 08/08–08/10, needing a manual close.
+      ⚠️ **But two accounts disagree.** Yaroslav also said it *"has been working for
+      some time already for other agents, which sounds like improper agent
+      configuration or latest MCP changes"*, and that a 403 also arises when the
+      caller lacks access to the Property Owner in the headers. **If it works for
+      other agents it is not impossible** — worth one more question if Rule 3 ever
+      matters enough.
 
-      ⚠️ **Not the property-owner fault.** That is a `401`, fails on every call,
-      and STEP 0 fixes it. This is a `403` on one endpoint while all fourteen
-      sensor reads succeed — an authorisation scope issue.
-
-      **No REST fallback exists** — the API base has no service-object or alert
-      endpoint (448 paths checked). Only MCP or the UI can answer it.
+      **Handled in the agent:** v0.9 stops calling it hourly (24 guaranteed failures a
+      day), attempts once on the daily tick, and reports ⚪ NOT EVALUATED — never
+      amber, never colouring the plant.
 
 - [x] **E · Checked manually in the UI, 08/18 — BOTH ARMED, nothing latched.**
       Every service object reads `Closed`:
