@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.12
+Version:  1.13
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: Ch02 entering sensor, full BAS alarm UUIDs, plant-wide
           energy summary, starts-delta persistence via daily report.
@@ -348,8 +348,28 @@ Running steadily (dT ≥ 8 °F, leaving < 44 °F) AND kW > 210 for ≥ 2 h
 
 Efficiency-drift catch. LIVE baseline (provisional, from 08/01/2026 verification):
 single-chiller daytime peak ≈ 160–175 kW, overnight ≈ 77 kW. Refine after 7 days of
-live data. The old 115 kW threshold came from stale snapshot data — obsolete. Always
-weigh return temp before alerting (recovery/heat-wave load is legitimate).
+live data. The old 115 kW threshold came from stale snapshot data — obsolete. **Weighing return temp is a GATE, not a caveat — check it BEFORE deciding severity.**
+
+```
+return/entering water ABOVE the single-chiller norm (approx. 52-55 °F)
+   -> high kW is EXPECTED. Not a finding. A load note, not 🟡.
+return/entering water WITHIN the norm, and kW still > 210 for >= 2 h
+   -> that is the real Rule 4 signal. 🟡.
+```
+
+⚠️ **Do not fire 🟡 and then explain it away.** The 08/19 tick raised
+`🟡 WARNING — RULE 4` and then wrote that the load *"reads as legitimate heavy
+simultaneous-load operation... not compressor degradation"*, with entering water at
+**58-60.5 °F** against the 52-55 °F norm. By its own evidence it was not a warning. The
+correct output was **🟢 with a load note**: two machines, elevated return, strong dT,
+setpoint held throughout.
+
+**An amber the report then argues against teaches the reader to ignore amber** — the
+same failure the 403 handling had to be rebuilt to avoid.
+
+⚠️ **The agent was right about SCOPE.** Ch01 ran alone 06:00-11:00 CT at 211-238 kW, so
+single-chiller Rule 4 genuinely applied that morning. **Concurrency decides scope;
+return temp decides severity.**
 
 ### RULE 5 — FLEET STATUS → INFO (daily, in summary only)
 
