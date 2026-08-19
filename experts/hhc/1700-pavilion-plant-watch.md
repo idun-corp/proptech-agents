@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.13
+Version:  0.15
 Created:  08/18/2026
 Updated:  08/19/2026 — v0.10: the first v0.9 tick proved the call-count field
           does not PREVENT fabrication (a zero-call tick invented "8 calls");
@@ -169,7 +169,20 @@ c261c495-d378-4bf6-935e-fb9694a7b982   device 1200/fanStatCt1
 1bd06ed8-5615-4c58-8c91-6b3e3726a7e5   device 1200/fanStatCt2
 ```
 
-Fourteen sensors. **Never resolve a sensor by name, never invent a UUID.**
+CONTROL SET for Rule 7 — devices ELSEWHERE in the building, deliberately on other
+connectors and one on another protocol:
+
+```
+7d7a5161-9f8a-488c-a9a2-5bccfa8c915e   device 101001  conn 38d22b5d  ~15 min
+8bf5d0e8-e114-4e32-8782-a9b5037a0a15   device 20101   conn 38d22b5d  ~15 min
+5a3ae5af-cffb-4e18-8515-3944ed4ce127   MODBUS meter, dev 1 reg 69    ~1 min
+```
+
+⚠️ **Do not substitute other sensors for these.** Their value is that they sit on a
+different connector and a different protocol from `device 1200`, which is what makes
+Rule 7 able to tell the plant's electrics apart from our own connector.
+
+Seventeen sensors. **Never resolve a sensor by name, never invent a UUID.**
 
 ## [STEP 0 — SET THE PROPERTY OWNER, THEN PROBE]
 
@@ -236,6 +249,9 @@ BAND B  the alert  latest   the 20-min median                      1        1
 BAND C  arming     get-service-objects for the building            1        1
 BAND D  the night  historical, median, _1day, raw                  -        1
 BAND E  plant      latest   faults · fans · towers · setpoint      3        8
+BAND F  control set latest  101001 · 20101 · MODBUS meter          3        3
+                            Rule 7. Cheap, and the only thing that
+                            separates a plant fault from our own.
 
                                                      budget      8       20
 ```
@@ -254,58 +270,6 @@ entirely and report with what you have.**
 
 Bands A–C are mandatory in both modes. Band E is dropped first if the budget is
 tight, and its loss is a one-line note, not a failure.
-
-## [RULES]
-
-### Rule 1 · IS RAW DATA ARRIVING?   (the silence gap nothing else sees)
-
-Age of the newest `observationTime` on all three Band A points versus now.
-**Measured raw cadence is 302 s exact** (285 samples/24 h, 08/11; re-confirmed
-280 samples/26 h, 08/18).
-
-```
-🟢  < 15 min        🟡  15–40 min        🔴  > 40 min
-```
-
-- **All three stale by a similar amount** → the connector or the controller.
-- **One stale alone** → that point.
-
-⚠️ **A wedged connector is the documented failure mode here, and it does not
-look like a crash.** On 08/16 the service stayed `active`, kept logging, and kept
-publishing *other* devices for 13.5 h while device 1200 was dark. Do not expect
-an error anywhere. **Absence of new data IS the signal.**
-
-### Rule 2 · IS THE AGGREGATION ALIVE?   (the alert's own health)
-
-The 20-min median publishes every 1200 s exactly, at **:07:53 / :27:53 / :47:53
-UTC**.
-
-```
-🟢  < 25 min        🟡  25–45 min        🔴  > 45 min
-```
-
-🔴 here means **THE NO-COOLING SMS ALERT IS CURRENTLY DEAD.** Say that in those
-words — it is the single most consequential sentence this agent can produce.
-
-**Raw fresh (Rule 1 🟢) + median stale = platform-side, not building-side.** That
-distinction decides who gets called, so state which it is.
-
-### Rule 3 · ARE THE ALERTS STILL ARMED?   (latching)
-
-`get-service-objects` for the building. Look for any object **not Closed** from:
-
-```
-"1700 No Cooling - CW Supply"       "1700 Communication error"
-```
-
-An open object means `Created` cannot fire again — that alert is **LATCHED**, and
-silent for the same reason a calm building is silent. **The no-data alert is
-KNOWN to latch and need a manual close** (65 h observed, 08/08–08/10). Report each
-as **ARMED** or **LATCHED**. Latched is 🔴 regardless of temperature.
-
-⚠️ **An empty result is weak evidence, not an all-clear.** Objects are known to
-sometimes not appear under the building twin even when `Building: 1700 Pavilion`
-is populated. If the call returns nothing, report **UNVERIFIED**, not ARMED.
 
 ### `403 Forbidden` on `get-service-objects` — a PLATFORM LIMIT, answered 08/19
 
@@ -469,6 +433,7 @@ The full account, with Pavlo's and Yaroslav's replies of 08/19, is in
 and not the agent's Permissions tab**; both were wrong guesses made on 08/18 and
 an earlier version of this section repeated them. Do not reinstate that framing.
 
+
 ### Rule 4 · DID THE LV NIGHT STAY UNDER 85 °F?   (DAILY 05:00 PT TICK ONLY)
 
 ⚠️ **On an hourly tick, do NOT evaluate this rule and do NOT fetch Band D.**
@@ -529,6 +494,115 @@ time. Cross-check any gap against [KNOWN INCIDENTS] before calling it new.
 
 **A gap already on the list is not a finding.** A gap that is *not* on the list is
 🟡 and goes in ACTIONS.
+
+### Rule 7 · IS IT THE PLANT'S ELECTRICS, OR IS IT US?   (added 08/19)
+
+⚠️ **This is the rule that would have given 29 hours of warning before the 08/05
+outage, and it fires on a difference, not on a threshold.**
+
+A silence on the plant devices means one of two completely different things, and
+they demand opposite actions. **The control set is what tells them apart.**
+
+```
+PLANT DEVICES                                   CONTROL SET (elsewhere in the building)
+0054ec5f-...  device 1200   bldgCwSupply        7d7a5161-9f8a-488c-a9a2-5bccfa8c915e
+              (conn 2c28ab21)                     device 101001, conn 38d22b5d, 15 min
+bbb184ae-...  device 100005 Power  = CT2 fan    8bf5d0e8-e114-4e32-8782-a9b5037a0a15
+              (conn 38d22b5d, ~15 min)            device 20101,  conn 38d22b5d, 15 min
+                                                5a3ae5af-cffb-4e18-8515-3944ed4ce127
+                                                  MODBUS meter, ~1 min, DIFFERENT PROTOCOL
+```
+
+**Note the plant pair sit on DIFFERENT connectors**, and the Modbus meter is a
+different protocol on the same PEG. That is what makes this discriminating rather
+than a coincidence.
+
+```
+plant dark  +  control set FRESH   -> 🔴 THE PLANT'S OWN ELECTRICS.
+                                      Not the network, not us, not the connector.
+                                      This is the 08/04-08/05 signature exactly.
+
+plant dark  +  control set DARK    -> 🟡 OUR SIDE. Connector or PEG.
+                                      This is the 08/16 signature. Restart the
+                                      connector; do NOT call the site.
+
+all fresh                          -> 🟢 nothing to say.
+```
+
+**Staleness thresholds, from measured cadences:**
+
+```
+device 1200      302 s   -> stale if > 20 min
+device 100005    904 s   -> stale if > 45 min
+device 101001    15 min  -> stale if > 45 min
+Modbus meter      60 s   -> stale if > 15 min
+```
+
+### What happened, so the rule is not weakened later
+
+Measured 08/19 from the 08/03-08/06 record:
+
+```
+                                     08/04 window   08/05 window
+device 1200   (plant controller)        DARK 5.32 h    DARK 4.86 h
+device 100005 (CT2 fan VFD)             DARK 5.49 h    DARK 5.15 h
+device 101001 (elsewhere)               18 samples     16 samples
+device 20101  (elsewhere)               18 samples     16 samples
+MODBUS meter                           313 samples    287 samples
+```
+
+**Only the two plant devices went dark. Everything else reported throughout.**
+
+```
+08/04  dark 00:50 -> 06:09 PT, then a completely normal day (75.4 °F flat)
+08/05  dark 01:53 -> 06:45 PT, then the plant did NOT cool:
+       06:00h max  89.14  ·  07:00h max 107.39  ·  08:00h max 113.81
+       recovered mid-morning, roughly 4 h above the 85 °F alarm
+08/06  controls contractor rewrote the programming — and CT1 resumed staging
+       the same day
+```
+
+⚠️ **The first night was benign. The second was not.** So a single occurrence is a
+warning, not an emergency — and a second occurrence is the thing to act on.
+
+```
+first plant-only silence in 7 days   -> 🔴 report it, with the 08/04 precedent
+second within 7 days                  -> 🔴 and say explicitly: "this is the
+                                         08/04-08/05 pattern; the plant failed to
+                                         cool on the second restart"
+```
+
+### On recovery, measure whether cooling was actually lost
+
+You cannot see the loop while the devices are dark. But you can measure the rise
+**across** the window:
+
+```
+(supply after recovery - supply before darkness) / hours dark
+
+approx. 0.55-0.66 °F/h  -> the normal overnight ramp. Cooling was NOT lost;
+                           only visibility was. Both 08/04 and 08/05 measured
+                           0.66 °F/h across the dark window.
+materially faster       -> cooling genuinely stopped. Say so.
+```
+
+**This matters for how it is reported.** The 08/04-08/05 darkness was a *visibility*
+loss with the plant coasting normally underneath. The cooling failure came
+afterwards, on the restart. Conflating the two overstates what happened.
+
+### What NOT to conclude
+
+⚠️ **Do not name a cause.** The recorded cause is a tripped breaker. That may be
+right — recovery at **06:09** and **06:45** is exactly when a site engineer arrives,
+so a manual reset is plausible, and the 36-minute spread between the two argues for
+a person rather than a timeclock. **But nobody has confirmed it.** A trip with the
+plant idle is unusual and has several ordinary explanations (ground fault, a failing
+breaker, a small night load), and a failing supply that recovers on its own fits
+equally well.
+
+**Report the pattern, name the two candidate owners, and let a human decide.** The
+one question that settles it — *"did anyone reset a breaker at the plant early on
+4 or 5 August?"* — is Erik's to ask, not this agent's.
 
 ## [KNOWN INCIDENTS — exclude these, do not re-raise them]
 
@@ -622,7 +696,7 @@ platform-side (fail a routine tick with empty usedTools) — asked of Pavlo.
 ### Mode 1 — the HOURLY tick, all green: ONE line, then stop
 
 ```
-🟢 1700 Watch v<VERSION> · <ACTUAL date, time> PT · raw @<HH:MM:SS>Z (<n>m) · median <n>m · alerts <state> · faults 1/1 · <N> calls
+🟢 1700 Watch v<VERSION> · <ACTUAL date, time> PT · raw @<HH:MM:SS>Z (<n>m) · median <n>m · alerts <state> · faults 1/1 · <N>/11 calls
 ```
 
 `raw @…Z` is the newest `bldgCwSupply` observationTime **as returned this tick**;
