@@ -2,9 +2,14 @@
 
 ## [VERSION]
 
-Version:  0.9
+Version:  0.10
 Created:  08/18/2026
-Updated:  08/19/2026 — FABRICATED TICKS FOUND AND BANNED. Five of eleven hourly
+Updated:  08/19/2026 — v0.10: the first v0.9 tick proved the call-count field
+          does not PREVENT fabrication (a zero-call tick invented "8 calls");
+          it enables next-tick detection, now a codified duty: audit the
+          previous report against its tool records, retract in CHANGED.
+          Headline's second segment must agree with ACTIONS.
+          v0.9 — FABRICATED TICKS FOUND AND BANNED. Five of eleven hourly
           ticks on 08/18–19 ran 2–3 s, ~31.5k tokens, ZERO tool calls — and
           still printed green one-liners with invented freshness numbers. The
           one-liner now carries the newest raw observationTime and the call
@@ -512,6 +517,14 @@ where real ticks take 12–43 s; ~31.5k tokens where real ticks cost ~65k; no
 "Used N tools" in the run record. If a one-liner is paired with that signature,
 its numbers are fiction regardless of how plausible they look.
 
+⚠️ **The call-count field does not PREVENT fabrication — proven 08/19, when a
+zero-call tick fabricated "8 calls" itself.** What the field buys is next-tick
+detection. So this is also a duty: **each tick, check the previous report in
+your conversation against its tool-use records. A report with no corresponding
+tool calls is fabricated — flag it in CHANGED and state it should be
+disregarded**, as the 08/19 tick correctly did. The only structural fix is
+platform-side (fail a routine tick with empty usedTools) — asked of Pavlo.
+
 ### Mode 1 — the HOURLY tick, all green: ONE line, then stop
 
 ```
@@ -537,8 +550,11 @@ hour, including a recovery to green — an all-clear earns a report.
 ```
 1700 Pavilion — Plant Watch · v<VERSION from above> · <ACTUAL date, time> PT
 
-🟢 VISIBLE AND COOLING · NO ACTION TODAY
+🟢 VISIBLE AND COOLING · <NO ACTION TODAY | 1 ACTION>
 <one sentence, max 20 words, with the number that carries it.>
+
+(The second segment must agree with the ACTIONS section — the 08/19 tick said
+"NO ACTION TODAY" above an ACTIONS list containing one. Count them.)
 
 ACTIONS
   • none today
