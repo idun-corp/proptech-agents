@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.5
+Version:  0.6
 Created:  08/18/2026
 Updated:  08/19/2026 — v0.3: fabrication ban carried over from Plant Watch v0.9
           (five of its hourly ticks reported without fetching); the green
@@ -263,6 +263,61 @@ has been overridden.
 healthy plant.** That is the alarm-fatigue failure three other agents in this folder
 had to be rebuilt to avoid, and it would destroy the credibility of the one 🔴 that
 matters.
+
+### THE UNPROVEN SPARE — what replaces the suppressed alert
+
+⚠️ **The rotation gate above suppresses the daily escalation. On its own that leaves
+CT1 completely unwatched, which is not acceptable.** This section is what takes its
+place. The question changes:
+
+```
+NOT   "is CT1 running?"          answered: no, by design, for months
+BUT   "would CT1 START if CT2 could not hold?"      nobody knows
+```
+
+**That is the real exposure and it is unobservable without a test.** So report the
+things that bear on it, every tick:
+
+```
+- days since CT1 last accrued a run hour        count it, always
+- ctRuntimeDiff now, and the gap still to close
+- projected date the gap falls inside ctRtRotateStpt, at the current catch-up rate
+- faultCt1                                       1 = healthy
+- basin divergence |cwSupplyCt1 - cwSupplyCt2|   corroborates genuinely idle
+```
+
+### The four conditions that still escalate
+
+```
+faultCt1 = 0                              -> 🔴 immediately. A real fault, gate or no gate.
+gap closes INSIDE ctRtRotateStpt and CT1
+still accrues zero over 3 hot working days -> 🔴 the expectation has been violated.
+                                              Sequencing should have swapped and did not.
+CT1 zero for > 14 consecutive days         -> 🟡 UNPROVEN SPARE. Not a fault claim.
+                                              "CT-1 has not run for N days; we cannot
+                                              tell whether it would start."
+otherwise                                  -> ⚪ expected, with the counts above
+```
+
+⚠️ **The 14-day figure is INVENTED and must be treated as provisional.** It is not
+derived from this plant's history, and it cannot be: the operating regime changed
+when the sequencer began favouring CT2, so the old pattern of "CT1 ran every hot
+weekday" no longer applies as a baseline. **Say "provisional threshold" whenever this
+fires**, and replace it once there is a full rotation cycle to measure.
+
+### The limitation, stated plainly
+
+⚠️ **While the runtime gap is large, this agent CANNOT distinguish deliberate
+sequencing from a CT1 that has quietly failed.** Both look identical: zero hours, no
+fault bit, basin drifting to ambient. The 07/28-08/06 freeze would be gated to ⚪ by
+this logic too.
+
+**That gap is covered elsewhere, and better.** The 08/04-08/05 event has an electrical
+signature — the plant devices going dark while the rest of the building reports — and
+that is Rule 7 in `1700-pavilion-plant-watch.md`, which would have fired 29 hours
+before the outage. **Do not try to recover that detection here by loosening the
+rotation gate.** Two agents each doing one thing well beats one agent crying wolf
+daily for five months.
 
 ### THE 08/05 PRECURSOR CLAIM IS WEAKER THAN THIS FILE ASSUMES
 
