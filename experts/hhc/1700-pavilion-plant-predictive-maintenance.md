@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.18
+Version:  0.8.19
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -535,6 +535,23 @@ Sat/Sun       ~0.3     ~0.4      ~0.2     ~0.7    plant idle — NOT EVALUATED
 >= its WEEKDAY median x 1.5   -> 🔴
 weekend                        -> NOT EVALUATED
 ```
+
+⚠️ **Score the ANCHOR DAY ONLY against its weekday. The 5-day SHAPE line is RAW
+NUMBERS — do not weekday-score each of the five.**
+
+```
+✅  HX2 5d shape  2.33 -> 2.10 -> 2.69 -> 5.06 -> 5.16
+❌  HX2 5d shape  ... "tracks normal DOW pattern" / each day vs its own weekday
+```
+
+**Why:** the SHAPE line exists to show a direction, and direction is visible in the raw
+numbers. Weekday-scoring all five means ten baseline comparisons instead of two, and
+that analysis is what costs runtime — **measured 08/20: identical prompt size, 397 s ->
+611 s, effective rounds 17 -> 24.5, purely from the added per-day reasoning.** The
+crash band on this agent starts at 964 s.
+
+**One sentence of interpretation on the SHAPE line is enough** — "rising", "flat",
+"falling", or "elevated while CT1 is out".
 
 ⚠️ **n = 4-6 per weekday, so p90 sits near the maximum. Provisional** — say so when a
 finding rests on them, and widen once there are 8+ per weekday.
