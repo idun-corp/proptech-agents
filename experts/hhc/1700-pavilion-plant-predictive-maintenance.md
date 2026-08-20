@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.14
+Version:  0.8.15
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -564,6 +564,93 @@ blend the two into 🟡. A rule that did not run reports **NOT EVALUATED** — n
 colour, because a colour implies a plant observation that does not exist.
 
 Never speculate about equipment on the strength of missing data.
+
+
+## [RULE 1 BASELINE IS PER-WEEKDAY — measured 08/20, replaces the all-days figures]
+
+⚠️ **The old single baseline (HX1 med 1.11 / p90 1.91, HX2 med 2.75 / p90 5.60) is an
+ALL-DAYS average and it is the wrong comparator.** This plant has a strong day-of-week
+signature, so an all-days threshold flags every Tuesday and excuses every Friday.
+
+Measured from 40 days of peak-window medians (07/11-08/19), **excluding 08/03-08/06**
+so the outage window does not contaminate its own baseline:
+
+```
+DOW    n   HX1 med  HX1 p90   HX2 med  HX2 p90
+Mon    5      1.02     1.05      2.58     2.76
+Tue    5      1.65     1.72      4.59     5.06
+Wed    5      1.48     1.65      4.29     5.21
+Thu    4      1.17     1.65      3.21     4.29
+Fri    5      0.91     1.50      2.11     4.28
+Sat    6      0.32     0.38      0.19     0.25     plant idle
+Sun    5      0.29     0.46      0.26     0.71     plant idle
+```
+
+⚠️ **n is 4-6 per weekday. These are provisional** — p90 on five points is close to the
+maximum, so it is sensitive. Widen them once there are 8+ samples per weekday, and say
+"provisional weekday baseline" whenever a finding rests on them.
+
+⚠️ **Weekend approach is meaningless.** Sat/Sun sit at 0.2-0.4 °F because the plant is
+essentially idle. **Never evaluate Rule 1 on a weekend**, and never let weekend values
+into a baseline or a trend.
+
+### Why this matters — it more than triples the warning
+
+Scored against their own weekday, the run-up to the 08/05 outage:
+
+```
+08/03 Mon   HX1 1.91 (p90 1.05) OVER   HX2 5.58 (med 2.58, p90 2.76) OVER  <- 2.2x its Monday median
+08/04 Tue   HX1 1.93 (p90 1.72) OVER   HX2 5.64 (med 4.59, p90 5.06) OVER
+08/05 Wed   HX1 1.97 (p90 1.65) OVER   HX2 6.58 (med 4.29, p90 5.21) OVER  <- OUTAGE
+08/06 Thu   collapses to 0.66 / 2.84 the day the controls were rewritten
+```
+
+**The all-days baseline would have missed 08/03 entirely** (5.58 is below the old 5.60
+p90) and fired only on 08/04 — one day of notice. The weekday baseline fires on
+**08/03, three days out**, because 5.58 against a Monday median of 2.58 is enormous and
+the all-days average hid it completely.
+
+And it correctly stays quiet now:
+
+```
+08/18 Tue   HX2 5.06  vs Tue p90 5.06   at the line, not over
+08/19 Wed   HX2 5.21  vs Wed p90 5.21   at the line, not over
+```
+
+### The revised thresholds
+
+```
+value >= its WEEKDAY p90                    -> 🟡 WATCH
+value >= its WEEKDAY median x 1.5           -> 🔴  (08/03 and 08/05 both qualify)
+weekend                                      -> NOT EVALUATED
+```
+
+### ⚠️ Gate the finding on tower count before calling it fouling
+
+**Approach tracks how many cooling towers are running.** Both elevated episodes
+coincide with CT1 being out, and both collapsed when CT1 came back:
+
+```
+07/29-08/05  CT1 frozen        HX2 4.1 -> 6.6
+08/06        CT1 resumes       HX2 2.84 the same day
+08/18-08/19  CT1 out again     HX2 5.06, 5.21
+```
+
+**Fouling does not fall by half in a day.** So:
+
+```
+both towers ran during the peak window   -> an elevated approach is a REAL Rule 1
+                                            finding. Report it as fouling.
+one tower only                            -> report it as "elevated, single-tower
+                                            operation" and do NOT call it fouling.
+                                            The finding is CT1's absence, not the
+                                            heat exchanger.
+```
+
+⚠️ **This is what makes the 08/05 precursor useful rather than confusing.** The rise
+was almost certainly a *symptom* of the tower freeze, not independent evidence of
+fouling — so the thing to act on is the tower, and approach is the confirmation that
+the plant is working harder for it.
 
 ## [DETECTION RULES]
 
