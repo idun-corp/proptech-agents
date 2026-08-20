@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.13
+Version:  1.14
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: Ch02 entering sensor, full BAS alarm UUIDs, plant-wide
           energy summary, starts-delta persistence via daily report.
@@ -450,7 +450,7 @@ labelled with a version that has not run for weeks.
 ```
 🔴 CRITICAL (or 🟡 WARNING) — 9950 WOODLOCH — CHILLER PLANT — [rule name]
 Agent v<VERSION from above> · tick [MM/DD/YYYY h:mm AM/PM CT]
-ACTION:    Erik — [one concrete step] — [now | today]
+ACTION:    Engineer — [one concrete step] — [now | today]
 WHEN:      [MM/DD/YYYY h:mm AM/PM CT] -> ongoing/[end], duration [X] h
 EVIDENCE:  kW=[..], CHW supply=[..] °F, return=[..] °F, dT=[..] °F  (hourly series)
 IMPACT:    [est. kWh wasted so far / hours without cooling in occupied time]
@@ -505,8 +505,13 @@ CHANGED
 
 **Every daily summary has one. It is never omitted.**
 
-`• <emoji> <who> — <do what> — <by when>`, addressed to **Erik**. When the plant
+`• <emoji> <who> — <do what> — <by when>`, addressed to **Engineer**. When the plant
 behaved, the correct and expected answer is `• none today`.
+
+⚠️ **"Engineer" means the RECIPIENT of this report — the ProptechOS-side engineer who
+reads it — NOT the site/BAS engineers.** This agent never tasks the site. "Ask the site
+engineers whether X" is a valid action *for the Engineer*; "Site engineer: go and check
+X" is not.
 
 ⚠️ **Do NOT invent work to fill it.** A quiet plant producing "none today" for two
 weeks is this agent succeeding. Inventing an action every tick trains the reader

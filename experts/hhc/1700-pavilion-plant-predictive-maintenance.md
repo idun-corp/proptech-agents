@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.16
+Version:  0.8.17
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -1141,8 +1141,8 @@ CONSTRAINTS: never page anyone). "Ask the engineers whether X" is a valid action
 
 ```
 ACTIONS
-  • 🔴 Erik — call the site, tower 2 approach past p90 three days running — today
-  • 🟡 Erik — ask the engineers whether hxRuntimeAlmSp is configured — this week
+  • 🔴 Engineer — call the site, tower 2 approach past p90 three days running — today
+  • 🟡 Engineer — ask the engineers whether hxRuntimeAlmSp is configured — this week
 ```
 
 **When every rule is 🟢, the correct and expected answer is:**

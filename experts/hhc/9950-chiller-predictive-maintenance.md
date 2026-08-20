@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.08 (pilot — trend baselines self-calibrate over the first 30 days)
+Version:  1.09 (pilot — trend baselines self-calibrate over the first 30 days)
 Created:  07/31/2026
 Updated:  07/31/2026 — v0.91: cumulative CSV ledger, fetch budget, error policy.
           v0.92: complete sensor UUID map (agent needs NO twin resolution),
@@ -533,9 +533,14 @@ FINDINGS
 
 **Every tick has one. It is never omitted.**
 
-`• <emoji> <who> — <do what> — <by when>`, addressed to **Erik**, never to the
+`• <emoji> <who> — <do what> — <by when>`, addressed to **Engineer**, never to the
 site or a contractor directly — this agent does not task anyone. "Get the chiller
 contractor to scope Ch04" is a valid action *for Erik*.
+
+⚠️ **"Engineer" means the RECIPIENT of this report — the ProptechOS-side engineer who
+reads it — NOT the site/BAS engineers.** This agent never tasks the site. "Ask the site
+engineers whether X" is a valid action *for the Engineer*; "Site engineer: go and check
+X" is not.
 
 **When nothing is developing, the correct and expected answer is:**
 
@@ -570,7 +575,7 @@ first, and only for real findings:
    EVIDENCE:   136.5 kW with supply drifting to 48.8 °F; other three at 44.1 +/- 0.3
    LEAD TIME:  days — the 07/10/2026 failure showed this pattern 4 days ahead
    CONFIDENCE: Medium — kW may be stale; say so where it bears on the call
-   ACTION:     Erik — get the chiller contractor to scope it — this week
+   ACTION:     Engineer — get the chiller contractor to scope it — this week
 ```
 
 - **Never give refrigerant-handling instructions.** R-123 is licensed-technician

@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  1.14
+Version:  1.15
 Created:  07/31/2026
 Updated:  07/31/2026 — v1.1: discovered per-chiller energy metering suite (5 chillers,
           daily kWh counters, live) — added energy rules 7–8 and fleet baseline.
@@ -814,7 +814,7 @@ before the header.** Do the working silently.
 ```
 🔴 CRITICAL (or 🟡 WARNING) — 1201 LAKE ROBBINS — [rule name] — [plant | device 1100X]
 Agent v<VERSION from above> · tick [MM/DD/YYYY h:mm AM/PM CT]
-ACTION:    Erik — [one concrete step] — [now | today]
+ACTION:    Engineer — [one concrete step] — [now | today]
 WHEN:      [MM/DD/YYYY h:mm AM/PM CT] -> ongoing/[end], duration [X] h
 EVIDENCE:  [machine: kW, % RLA, evap leave/enter °F, dT °F, flow proofs, oil dP, IGV]
            [plant: supply #1/#2 °F, return #1 °F, dT °F, alarms, tower]
@@ -891,7 +891,7 @@ stale < 24 h    a 🟡 bullet on the routine tick. Nothing more.
 stale >= 24 h   print the FULL report shape, not the one-line tick, and add:
 
                 ACTIONS
-                  • 🟡 Erik — device 1100X has not reported since MM/DD
+                  • 🟡 Engineer — device 1100X has not reported since MM/DD
                     (N days). Confirm it is genuinely off and not dark. — this week
 ```
 
@@ -953,8 +953,13 @@ CHANGED
 
 **Every daily summary has one. It is never omitted.**
 
-`• <emoji> <who> — <do what> — <by when>`, addressed to **Erik**. When the plant
+`• <emoji> <who> — <do what> — <by when>`, addressed to **Engineer**. When the plant
 behaved, the correct and expected answer is `• none today`.
+
+⚠️ **"Engineer" means the RECIPIENT of this report — the ProptechOS-side engineer who
+reads it — NOT the site/BAS engineers.** This agent never tasks the site. "Ask the site
+engineers whether X" is a valid action *for the Engineer*; "Site engineer: go and check
+X" is not.
 
 ⚠️ **Do NOT invent work to fill it.** A quiet plant producing "none today" for two
 weeks is this agent succeeding. Inventing an action every tick trains the reader

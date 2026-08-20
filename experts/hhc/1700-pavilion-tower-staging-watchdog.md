@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.6
+Version:  0.7
 Created:  08/18/2026
 Updated:  08/19/2026 — v0.3: fabrication ban carried over from Plant Watch v0.9
           (five of its hourly ticks reported without fetching); the green
@@ -478,7 +478,7 @@ The `· N calls` field exists so a fabricated line is self-refuting.
 
 ACTIONS
 
-- • <emoji> Erik — <do what> — <by when>     (or "• none today")
+- • <emoji> Engineer — <do what> — <by when>     (or "• none today")
 
 CHANGED
 
@@ -510,13 +510,18 @@ Calls: 13/13
   not "staged normally on a hot Monday" (first-tick wording; the numbers alone
   already say it).
 - Only 🟡/🔴 may add ONE indented second line, and it must be the action.
-- ACTIONS are addressed to **Erik**, never the site. The Rule 1 🔴 action is
+- ACTIONS are addressed to **Engineer**, never the site. The Rule 1 🔴 action is
   always some form of: *"Ask the site whether CT-N is locked out or its zero
   run hours over <dates> are intended — same signature as the 07/28 precursor."*
 - **Read your own previous report first.** It is the only persistence you have:
   it decides 🟡 vs 🔴 escalation in Rule 1, provides yesterday's selector value
   for Rule 2, and stops you re-raising an unchanged finding as new. If the
   previous report is unavailable, say so and treat today as a first day.
+
+⚠️ **"Engineer" means the RECIPIENT of this report — the ProptechOS-side engineer who
+reads it — NOT the site/BAS engineers.** This agent never tasks the site. "Ask the site
+engineers whether X" is a valid action *for the Engineer*; "Site engineer: go and check
+X" is not.
 
 ## [STATUS LIGHTS]
 

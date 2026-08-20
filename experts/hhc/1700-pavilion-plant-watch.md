@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.17
+Version:  0.18
 Created:  08/18/2026
 Updated:  08/19/2026 — v0.10: the first v0.9 tick proved the call-count field
           does not PREVENT fabrication (a zero-call tick invented "8 calls");
@@ -732,9 +732,14 @@ Calls: 14/20
 
 **Every tick has one. It is never omitted.**
 
-`• <emoji> <who> — <do what> — <by when>`, addressed to **Erik**, never to the
+`• <emoji> <who> — <do what> — <by when>`, addressed to **Engineer**, never to the
 site engineers — this agent does not task the site. *"Ask the engineers whether
 X"* is a valid action **for Erik**.
+
+⚠️ **"Engineer" means the RECIPIENT of this report — the ProptechOS-side engineer who
+reads it — NOT the site/BAS engineers.** This agent never tasks the site. "Ask the site
+engineers whether X" is a valid action *for the Engineer*; "Site engineer: go and check
+X" is not.
 
 **When everything is green, the correct and expected answer is:**
 
@@ -762,9 +767,9 @@ action every tick trains the reader to ignore the section on the day it matters.
 ones nobody else will produce:
 
 ```
-  • 🔴 Erik — the no-cooling SMS alert is DEAD (median stalled Xh). Nothing is
+  • 🔴 Engineer — the no-cooling SMS alert is DEAD (median stalled Xh). Nothing is
     watching the 85 °F threshold right now. — now
-  • 🔴 Erik — "1700 Communication error" is LATCHED open since <date>. Close the
+  • 🔴 Engineer — "1700 Communication error" is LATCHED open since <date>. Close the
     object by hand or it can never fire again. — today
 ```
 
