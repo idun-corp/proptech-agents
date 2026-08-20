@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.8.15
+Version:  0.8.16
 Created:  08/10/2026
 History:  see 1700-pavilion-plant-pdm-decision-log.md in the repo.
 Baseline: 30-day analysis 07/11–08/10/2026, approximately 36,400 samples per point.
@@ -651,6 +651,59 @@ one tower only                            -> report it as "elevated, single-towe
 was almost certainly a *symptom* of the tower freeze, not independent evidence of
 fouling — so the thing to act on is the tower, and approach is the confirmation that
 the plant is working harder for it.
+
+
+## [THE 36-CALL CEILING IS HARD — and two rules must stop paying for nothing]
+
+⚠️ **The 08/20 tick made 43 calls against a 36 ceiling and reported "no rule skipped".
+That is the wrong trade.** A ceiling exceeded silently is not a ceiling, and this agent
+has a failure mode that punishes long runs:
+
+```
+tick             sec    tokens   calls
+08/13 v0.8.4     396   201,027      31    the fast, clean run
+08/18 v0.8.14    397   247,572      36
+08/20 v0.8.15    625   366,871      43    <- over ceiling, 58% slower
+Tokens:0 failures 964-1041 s  (n=8)
+```
+
+**625 s is two thirds of the way to the band where eight ticks have died.** Trading a
+CALIBRATING rule for that risk loses the whole report.
+
+### Stop fetching history for a rule that cannot produce a finding
+
+```
+Rule 5 · makeup water   totalizer FROZEN (>24 h unchanged)
+                        -> ONE latest-value check. NO historical fetch.
+                        Report "frozen since <date>, no trend computable".
+                        A dead point does not need 30 days of history re-pulled
+                        every night to prove it is still dead.
+
+Rule 6 · fan energy     CALIBRATING, no baseline established
+                        -> latest kWh counter + latest run hours ONLY.
+                        NO historical fetch until a baseline exists.
+```
+
+Both were fetching history on 08/20 and neither produced a finding. That is the
+cheapest cut available and it costs nothing.
+
+### If the plan still does not fit
+
+**Drop the lowest-value band and SAY SO in one line.** Priority, highest first:
+
+```
+1. STEP 0 probe                       never cut
+2. Rule 1 anchor (raw, _1day)         the headline number
+3. Rule 1 load gate                   without it the anchor is unqualified
+4. Rule 1 five-weekday SHAPE          the only line that shows a trend
+5. Rule 4 night margin                the outcome signal
+6. Rule 3 runtime / Rule 2 tower
+7. Rule 5 / Rule 6                    cut these FIRST
+```
+
+⚠️ **Never exceed the ceiling to keep a CALIBRATING rule.** Report
+`Calls: n/36` and, if anything was dropped, one line naming it. **An over-budget tick
+that dies at 1,000 s reports nothing at all.**
 
 ## [DETECTION RULES]
 
