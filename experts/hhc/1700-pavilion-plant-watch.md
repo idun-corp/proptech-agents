@@ -2,7 +2,7 @@
 
 ## [VERSION]
 
-Version:  0.16
+Version:  0.17
 Created:  08/18/2026
 Updated:  08/19/2026 — v0.10: the first v0.9 tick proved the call-count field
           does not PREVENT fabrication (a zero-call tick invented "8 calls");
@@ -111,7 +111,7 @@ catches it.
 **Two modes. Which one you are in is decided by the clock, not by you.**
 
 ```
-HOURLY WATCH   every hour, on the hour.  Rules 1,2,3,5,6,7.  Budget 11 calls.
+HOURLY WATCH   every hour, on the hour.  Rules 1,2,3,5,6,7.  Budget 10 calls.
                Detection latency ~1 h instead of ~24 h. This is the whole point.
 DAILY FULL     the 05:00 AM PT tick ONLY.  Adds Rule 4 + the full report.
                = 12:00 UTC = 14:00 CEST.
@@ -249,11 +249,12 @@ BAND B  the alert  latest   the 20-min median                      1        1
 BAND C  arming     get-service-objects for the building            1        1
 BAND D  the night  historical, median, _1day, raw                  -        1
 BAND E  plant      latest   faults · fans · towers · setpoint      3        8
-BAND F  control set latest  101001 · 20101 · MODBUS meter          3        3
+BAND F  control set latest  device 20103 (SAME connector as 1200)      2        2
+                            + MODBUS meter (other connector)
                             Rule 7. Cheap, and the only thing that
                             separates a plant fault from our own.
 
-                                                     budget      11       23
+                                                     budget      10       22
 ```
 
 **Band D is the expensive one and it is DAILY ONLY.** It is ~72 samples and it can
@@ -270,6 +271,10 @@ entirely and report with what you have.**
 
 Bands A–C are mandatory in both modes. Band E is dropped first if the budget is
 tight, and its loss is a one-line note, not a failure.
+
+### KNOWN: 08/06 19:24-22:42 PT — three short plant gaps were the contractor
+reprogramming the controller on site. Real plant-device events, benign cause.
+Do not re-raise them.
 
 ### `403 Forbidden` on `get-service-objects` — a PLATFORM LIMIT, answered 08/19
 
@@ -463,114 +468,111 @@ time. Cross-check any gap against [KNOWN INCIDENTS] before calling it new.
 **A gap already on the list is not a finding.** A gap that is *not* on the list is
 🟡 and goes in ACTIONS.
 
-### Rule 7 · IS IT THE PLANT'S ELECTRICS, OR IS IT US?   (added 08/19)
+### Rule 7 · IS IT THE PLANT, OUR CONNECTOR, OR THE PEG?   (v0.17, validated)
 
-⚠️ **This is the rule that would have given 29 hours of warning before the 08/05
-outage, and it fires on a difference, not on a threshold.**
-
-A silence on the plant devices means one of two completely different things, and
-they demand opposite actions. **The control set is what tells them apart.**
-
-```
-PLANT DEVICES                                   CONTROL SET (elsewhere in the building)
-0054ec5f-...  device 1200   bldgCwSupply        7d7a5161-9f8a-488c-a9a2-5bccfa8c915e
-              (conn 2c28ab21)                     device 101001, conn 38d22b5d, 15 min
-bbb184ae-...  device 100005 Power  = CT2 fan    8bf5d0e8-e114-4e32-8782-a9b5037a0a15
-              (conn 38d22b5d, ~15 min)            device 20101,  conn 38d22b5d, 15 min
-                                                5a3ae5af-cffb-4e18-8515-3944ed4ce127
-                                                  MODBUS meter, ~1 min, DIFFERENT PROTOCOL
-```
-
-**Note the plant pair sit on DIFFERENT connectors**, and the Modbus meter is a
-different protocol on the same PEG. That is what makes this discriminating rather
-than a coincidence.
+⚠️ **v0.15's two-way version was WRONG and would have sent someone to site for the
+08/16 connector wedge.** It used control sensors on *other* connectors, which
+separates a PEG-wide failure from a plant failure — but the failure we actually get
+is **per-connector**. On 08/16 only `2c28ab21` wedged, the other connectors stayed
+up, and the rule concluded "plant electrics". **A same-connector control is
+mandatory.** Validated against all 7 plant gaps in 07/11-08/19; it now gets every
+one right.
 
 ```
-plant dark  +  control set FRESH   -> 🔴 THE PLANT'S OWN ELECTRICS.
-                                      Not the network, not us, not the connector.
-                                      This is the 08/04-08/05 signature exactly.
+PLANT                0054ec5f-...  device 1200 bldgCwSupply   conn 2c28ab21  302 s
+                     bbb184ae-...  device 100005 Power (CT2 fan) conn 38d22b5d 15 min
 
-plant dark  +  control set DARK    -> 🟡 OUR SIDE. Connector or PEG.
-                                      This is the 08/16 signature. Restart the
-                                      connector; do NOT call the site.
+SAME-CONNECTOR       ac32237c-e63b-4cbc-92f2-34e44518d121
+CONTROL                            device 20103, conn 2c28ab21, dense
+                     backups: b2e858bf-...(dev 165) · 898caf21-...(dev 10102)
 
-all fresh                          -> 🟢 nothing to say.
+OTHER-CONNECTOR      5a3ae5af-cffb-4e18-8515-3944ed4ce127
+CONTROL                            MODBUS meter, different protocol, ~1 min
 ```
 
-**Staleness thresholds, from measured cadences:**
+### The three-way decision
 
 ```
-device 1200      302 s   -> stale if > 20 min
-device 100005    904 s   -> stale if > 45 min
-device 101001    15 min  -> stale if > 45 min
-Modbus meter      60 s   -> stale if > 15 min
+device 1200 fresh                                      -> 🟢
+
+device 1200 dark  +  SAME-connector control FRESH       -> 🔴 THE PLANT'S OWN DEVICES
+                                                            Not us. Ask the site.
+
+device 1200 dark  +  SAME-conn DARK  +  OTHER fresh     -> 🟡 CONNECTOR 2c28ab21
+                                                            OURS. Restart it.
+                                                            Do NOT call the site.
+
+device 1200 dark  +  both controls DARK                 -> 🟡 PEG or uplink. OURS.
 ```
 
-### What happened, so the rule is not weakened later
+**Staleness limits, from measured cadences:** device 1200 > 20 min · device 100005
+> 45 min · device 20103 > 30 min · Modbus > 15 min.
 
-Measured 08/19 from the 08/03-08/06 record:
+⚠️ **Do not substitute other sensors.** `device 20103` was chosen because it is on
+device 1200's own connector AND was verified to behave correctly in both known cases
+— present through 08/04, absent through 08/16. Two other candidates failed that test
+(`device 7168` reported *during* the wedge; `device 28009` was dark on 08/04).
 
-```
-                                     08/04 window   08/05 window
-device 1200   (plant controller)        DARK 5.32 h    DARK 4.86 h
-device 100005 (CT2 fan VFD)             DARK 5.49 h    DARK 5.15 h
-device 101001 (elsewhere)               18 samples     16 samples
-device 20101  (elsewhere)               18 samples     16 samples
-MODBUS meter                           313 samples    287 samples
-```
-
-**Only the two plant devices went dark. Everything else reported throughout.**
+### Validated against every plant gap on record, 07/11-08/19
 
 ```
-08/04  dark 00:50 -> 06:09 PT, then a completely normal day (75.4 °F flat)
-08/05  dark 01:53 -> 06:45 PT, then the plant did NOT cool:
-       06:00h max  89.14  ·  07:00h max 107.39  ·  08:00h max 113.81
-       recovered mid-morning, roughly 4 h above the 85 °F alarm
-08/06  controls contractor rewrote the programming — and CT1 resumed staging
-       the same day
+plant gap          hrs   same-conn  other-conn   verdict
+07/28 07:15 PT    1.12          0           2   connector — ours
+08/04 00:50 PT    5.32         64         313   PLANT 🔴  <- the precursor
+08/05 01:53 PT    4.86         58         286   PLANT 🔴  <- outage followed
+08/06 19:24 PT    1.34          9          51   PLANT 🔴  <- contractor on site
+08/06 20:45 PT    1.09          7          38   PLANT 🔴  <-  reprogramming,
+08/06 21:50 PT    0.92         10          32   PLANT 🔴  <-  see KNOWN INCIDENTS
+08/16 09:49 PT   13.58          0         800   connector — ours ✓
 ```
 
-⚠️ **The first night was benign. The second was not.** So a single occurrence is a
-warning, not an emergency — and a second occurrence is the thing to act on.
+**Seven gaps in 40 days. Two were the precursor, three were a known repair, two were
+ours.** That is the false-positive rate, measured rather than assumed.
+
+### What the precursor looked like, and the lead time
 
 ```
-first plant-only silence in 7 days   -> 🔴 report it, with the 08/04 precedent
-second within 7 days                  -> 🔴 and say explicitly: "this is the
-                                         08/04-08/05 pattern; the plant failed to
-                                         cool on the second restart"
+08/04  dark 5.32 h overnight -> plant restarted fine, normal day at 75.4 °F flat
+08/05  dark 4.86 h overnight -> plant restarted and did NOT cool
+       06:00h max 89.14 · 07:00h max 107.39 · 08:00h max 113.81
+       roughly 4 h above the 85 °F alarm, recovered mid-morning
+08/06  contractor rewrites the programming; CT1 resumes staging the same day
 ```
 
-### On recovery, measure whether cooling was actually lost
+**A 🔴 on 08/04 at ~01:00 PT would have been 29 hours of warning.** The first
+occurrence was benign, so one is a warning and two is the pattern:
 
-You cannot see the loop while the devices are dark. But you can measure the rise
-**across** the window:
+```
+first plant-device darkness in 7 days   -> 🔴 report it, cite the 08/04 precedent
+second within 7 days                     -> 🔴 and say plainly: "this is the
+                                            08/04-08/05 pattern — the plant failed
+                                            to cool on the second restart"
+```
+
+### Was cooling actually lost? Measure it on recovery
 
 ```
 (supply after recovery - supply before darkness) / hours dark
 
-approx. 0.55-0.66 °F/h  -> the normal overnight ramp. Cooling was NOT lost;
-                           only visibility was. Both 08/04 and 08/05 measured
-                           0.66 °F/h across the dark window.
-materially faster       -> cooling genuinely stopped. Say so.
+0.55-0.66 °F/h  -> the normal overnight ramp. VISIBILITY lost, not cooling.
+                   Both 08/04 and 08/05 measured 0.66 °F/h across the dark window.
+materially faster -> cooling genuinely stopped. Say so.
 ```
 
-**This matters for how it is reported.** The 08/04-08/05 darkness was a *visibility*
-loss with the plant coasting normally underneath. The cooling failure came
-afterwards, on the restart. Conflating the two overstates what happened.
+⚠️ **The overnight darkness was NOT a cooling loss.** The plant coasted normally
+underneath both times. The cooling failure came afterwards, on the 08/05 restart.
+Conflating the two overstates what happened.
 
 ### What NOT to conclude
 
-⚠️ **Do not name a cause.** The recorded cause is a tripped breaker. That may be
-right — recovery at **06:09** and **06:45** is exactly when a site engineer arrives,
-so a manual reset is plausible, and the 36-minute spread between the two argues for
-a person rather than a timeclock. **But nobody has confirmed it.** A trip with the
-plant idle is unusual and has several ordinary explanations (ground fault, a failing
-breaker, a small night load), and a failing supply that recovers on its own fits
-equally well.
+⚠️ **Do not name a cause.** The record says a breaker tripped. Recovery at **06:09**
+and **06:45 PT** is when a site engineer arrives, and the 36-minute spread argues for
+a person rather than a timeclock — but nobody has confirmed it. A trip with the plant
+idle is unusual, and a failing supply that recovers on its own fits equally well.
 
-**Report the pattern, name the two candidate owners, and let a human decide.** The
-one question that settles it — *"did anyone reset a breaker at the plant early on
-4 or 5 August?"* — is Erik's to ask, not this agent's.
+**Report the pattern, name which of the three owners it points to, and stop.** The
+question that settles it — *"did anyone reset a breaker at the plant early on 4 or 5
+August?"* — is Erik's to ask.
 
 ## [KNOWN INCIDENTS — exclude these, do not re-raise them]
 
