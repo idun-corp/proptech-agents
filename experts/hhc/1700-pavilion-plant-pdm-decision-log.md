@@ -386,3 +386,231 @@ stops being a constraint permanently.
    working state and correct PO — plus whether scheduled triggers disengaged over
    the summer. 1700's routine fires approximately 06:00 PT against a 17:00 PT
    schedule.
+
+
+## Moved out of the agent prompt 08/20 — evidence, not instruction
+
+The agent spec grew 57,954 -> 64,200 B on 08/18-20 and its runtime went 397 -> 603 s
+against a failure band at 964-1041 s. These sections are the justification for rules
+that remain in the spec in condensed form. Nothing operative was removed.
+
+## [THE 36-CALL CEILING IS HARD — and two rules must stop paying for nothing]
+
+⚠️ **The 08/20 tick made 43 calls against a 36 ceiling and reported "no rule skipped".
+That is the wrong trade.** A ceiling exceeded silently is not a ceiling, and this agent
+has a failure mode that punishes long runs:
+
+```
+tick             sec    tokens   calls
+08/13 v0.8.4     396   201,027      31    the fast, clean run
+08/18 v0.8.14    397   247,572      36
+08/20 v0.8.15    625   366,871      43    <- over ceiling, 58% slower
+Tokens:0 failures 964-1041 s  (n=8)
+```
+
+**625 s is two thirds of the way to the band where eight ticks have died.** Trading a
+CALIBRATING rule for that risk loses the whole report.
+
+### Stop fetching history for a rule that cannot produce a finding
+
+```
+Rule 5 · makeup water   totalizer FROZEN (>24 h unchanged)
+                        -> ONE latest-value check. NO historical fetch.
+                        Report "frozen since <date>, no trend computable".
+                        A dead point does not need 30 days of history re-pulled
+                        every night to prove it is still dead.
+
+Rule 6 · fan energy     CALIBRATING, no baseline established
+                        -> latest kWh counter + latest run hours ONLY.
+                        NO historical fetch until a baseline exists.
+```
+
+Both were fetching history on 08/20 and neither produced a finding. That is the
+cheapest cut available and it costs nothing.
+
+### If the plan still does not fit
+
+**Drop the lowest-value band and SAY SO in one line.** Priority, highest first:
+
+```
+1. STEP 0 probe                       never cut
+2. Rule 1 anchor (raw, _1day)         the headline number
+3. Rule 1 load gate                   without it the anchor is unqualified
+4. Rule 1 five-weekday SHAPE          the only line that shows a trend
+5. Rule 4 night margin                the outcome signal
+6. Rule 3 runtime / Rule 2 tower
+7. Rule 5 / Rule 6                    cut these FIRST
+```
+
+⚠️ **Never exceed the ceiling to keep a CALIBRATING rule.** Report
+`Calls: n/36` and, if anything was dropped, one line naming it. **An over-budget tick
+that dies at 1,000 s reports nothing at all.**
+
+
+
+---
+
+## [RULE 1 BASELINE IS PER-WEEKDAY — measured 08/20, replaces the all-days figures]
+
+⚠️ **The old single baseline (HX1 med 1.11 / p90 1.91, HX2 med 2.75 / p90 5.60) is an
+ALL-DAYS average and it is the wrong comparator.** This plant has a strong day-of-week
+signature, so an all-days threshold flags every Tuesday and excuses every Friday.
+
+Measured from 40 days of peak-window medians (07/11-08/19), **excluding 08/03-08/06**
+so the outage window does not contaminate its own baseline:
+
+```
+DOW    n   HX1 med  HX1 p90   HX2 med  HX2 p90
+Mon    5      1.02     1.05      2.58     2.76
+Tue    5      1.65     1.72      4.59     5.06
+Wed    5      1.48     1.65      4.29     5.21
+Thu    4      1.17     1.65      3.21     4.29
+Fri    5      0.91     1.50      2.11     4.28
+Sat    6      0.32     0.38      0.19     0.25     plant idle
+Sun    5      0.29     0.46      0.26     0.71     plant idle
+```
+
+⚠️ **n is 4-6 per weekday. These are provisional** — p90 on five points is close to the
+maximum, so it is sensitive. Widen them once there are 8+ samples per weekday, and say
+"provisional weekday baseline" whenever a finding rests on them.
+
+⚠️ **Weekend approach is meaningless.** Sat/Sun sit at 0.2-0.4 °F because the plant is
+essentially idle. **Never evaluate Rule 1 on a weekend**, and never let weekend values
+into a baseline or a trend.
+
+### Why this matters — it more than triples the warning
+
+Scored against their own weekday, the run-up to the 08/05 outage:
+
+```
+08/03 Mon   HX1 1.91 (p90 1.05) OVER   HX2 5.58 (med 2.58, p90 2.76) OVER  <- 2.2x its Monday median
+08/04 Tue   HX1 1.93 (p90 1.72) OVER   HX2 5.64 (med 4.59, p90 5.06) OVER
+08/05 Wed   HX1 1.97 (p90 1.65) OVER   HX2 6.58 (med 4.29, p90 5.21) OVER  <- OUTAGE
+08/06 Thu   collapses to 0.66 / 2.84 the day the controls were rewritten
+```
+
+**The all-days baseline would have missed 08/03 entirely** (5.58 is below the old 5.60
+p90) and fired only on 08/04 — one day of notice. The weekday baseline fires on
+**08/03, three days out**, because 5.58 against a Monday median of 2.58 is enormous and
+the all-days average hid it completely.
+
+And it correctly stays quiet now:
+
+```
+08/18 Tue   HX2 5.06  vs Tue p90 5.06   at the line, not over
+08/19 Wed   HX2 5.21  vs Wed p90 5.21   at the line, not over
+```
+
+### The revised thresholds
+
+```
+value >= its WEEKDAY p90                    -> 🟡 WATCH
+value >= its WEEKDAY median x 1.5           -> 🔴  (08/03 and 08/05 both qualify)
+weekend                                      -> NOT EVALUATED
+```
+
+### ⚠️ Gate the finding on tower count before calling it fouling
+
+**Approach tracks how many cooling towers are running.** Both elevated episodes
+coincide with CT1 being out, and both collapsed when CT1 came back:
+
+```
+07/29-08/05  CT1 frozen        HX2 4.1 -> 6.6
+08/06        CT1 resumes       HX2 2.84 the same day
+08/18-08/19  CT1 out again     HX2 5.06, 5.21
+```
+
+**Fouling does not fall by half in a day.** So:
+
+```
+both towers ran during the peak window   -> an elevated approach is a REAL Rule 1
+                                            finding. Report it as fouling.
+one tower only                            -> report it as "elevated, single-tower
+                                            operation" and do NOT call it fouling.
+                                            The finding is CT1's absence, not the
+                                            heat exchanger.
+```
+
+⚠️ **This is what makes the 08/05 precursor useful rather than confusing.** The rise
+was almost certainly a *symptom* of the tower freeze, not independent evidence of
+fouling — so the thing to act on is the tower, and approach is the confirmation that
+the plant is working harder for it.
+
+
+
+
+---
+
+### AGE BEFORE VALUE — a frozen reading is not a stable plant
+
+⚠️ **Check the timestamp of every sample before you use its value.** A sensor that
+has stopped updating keeps returning its last number, and to a trend agent that is
+indistinguishable from a perfectly stable machine — **every slope computes to zero,
+every threshold passes, and the most broken input in the plant presents as the
+best-behaved.** It is the worst failure direction this agent has.
+
+```
+sample age <= 6 h   use it
+sample age >  6 h   EXCLUDED. Report "NOT EVALUATED, frozen since <date>".
+                    Never carry it into a rule, a trend, or a comparison.
+unchanged across 3 ticks with a stale timestamp -> frozen, NOT stable
+```
+
+**This is not hypothetical.** At 1201 on 08/18 a chiller had been frozen on an
+11-day-old reading and every tick reported it as *"idle, run state 0"* — because
+the value was `0` and nothing checked the age. Five machines, one invisible for
+eleven days, reported healthy throughout.
+
+⚠️ **Distinguish it from the [DEAD SIGNALS] list.** Those are known and permanently
+dead. This rule is for a **live signal that stops**, which is the dangerous case
+precisely because nobody is expecting it.
+
+### PLAUSIBILITY — ask whether the number is physically possible
+
+Before reporting or trending any value, ask whether this plant could produce it.
+
+```
+a 0.0 °F approach at full load        instrument, not performance
+a negative HX approach                 out of service, not perfect
+an exact 0.0 on a temperature          invalid, not cold water
+a runtime longer than the building     units, not age
+```
+
+**When a value fails this test, blank it and raise it as an open question. Never
+write it into a report as a measurement.**
+
+⚠️ **Runtime units are NOT portable between buildings.** At 1700 the runtime
+registers are **hours** — `ctRuntimeDiff` moves about 9 h/day, which is right. At
+1201 the same class of register is **seconds**, and writing it raw produced a
+chiller apparently 16,000 years old. **Never assume; sanity-check against the
+observed daily rate.**
+
+### UNDEFINED IS NOT ZERO
+
+A ratio with a zero denominator, a percentage where both counts are `0`, an average
+over no samples — all are **undefined**, and must be reported blank, not as `0.0`.
+`0.0` is a measurement; blank is an absence. Reporting one as the other makes a
+baseline quietly wrong and is very hard to spot later.
+
+### NEVER CREATE A KNOWN-ISSUE ENTRY FROM ONE TICK
+
+A known-issue note **suppresses future investigation** — that is its whole purpose —
+so a wrong one is worse than no note at all.
+
+**Require two independent observations, or a direct check against the source,
+before recording something as known.** On 08/18 a single 1201 tick produced two
+wrong claims — a frozen sensor that was not frozen, and a load reading that machine
+does not have — and one was hardened into a spec before anyone verified it. Pavlo's
+rule for the property owner generalises: **an agent's report is a claim, not
+evidence.**
+
+### RESET WIPES YOUR RUN HISTORY
+
+Your own previous report is your only memory, and an agent Reset clears it. So
+after a prompt update you cannot know when a condition started.
+
+```
+say     "first seen in this run history"
+NEVER   "since <today's date>", which makes an old problem look new
+```
+
