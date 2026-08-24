@@ -2,6 +2,8 @@
 
 ## [VERSION]
 
+v0.3 · 2026-08-24 — TESTED END TO END. Both channels BROKEN, see [TEST RESULTS] below.
+
 Version:  0.2
 Created:  08/11/2026
 Source:   ProptechOS release notes **v5.6.3**, 2026-03-16 — *Autonomous Agent
@@ -252,3 +254,62 @@ proven, not theoretical — what is unproven is *our* use of it on the hhc agent
   half of the severity convention
 - `1700-pavilion-plant-predictive-maintenance.md` — must not dispatch; see above
 - `README.md` — this folder's customer-data exception
+
+## [TEST RESULTS 2026-08-24 — dispatch does not work. PLAT-5754.]
+
+Tested end to end with throwaway agent `c6815bb5-49e8-4e42-aca1-9826f51de04c`
+("test 1201 Lake Robbins CHW Plant Watch"). Config: SMS `+46704124900`, Email
+`erik@wallin.se` + `erik@proptechos.com`, both Enabled, saved, agent Reset.
+
+### DEFECT 1 — signalled correctly, never delivered
+
+Three runs (12:40 AM, 12:55 AM, 06:10 AM CT). Each emitted a valid block and reported
+`CHANNELS CONFIGURED: EMAIL, SMS` / `DISPATCH SENT`. **Zero of three recipients received
+anything** — both mailboxes checked `in:anywhere` including spam and trash.
+
+Plain ASCII. SMS body 129 chars = single segment. So neither encoding nor segmentation.
+**No error is surfaced anywhere — the agent believes it notified someone.**
+
+→ This is why the 6 h 09 min 1700 Pavilion outage on 08/21 went unannounced. The Watch
+agent's Rule 7 would have diagnosed it inside the hour. We assumed dispatch was simply
+not wired up. It IS wired up, and it silently drops.
+
+### DEFECT 2 — a Service Object DispatchConfig crashes the invocation
+
+```
+EMAIL + SMS             -> runs fine   (49,776 / 32,433 / 71,073 tokens)
++ Service Object        -> Exception : No ToolCallback found for tool name: none
+                           Tokens: 0 · Model: empty · ~21 s
+Service Object deleted  -> runs fine again
+```
+
+Zero tokens with no model means it aborts while wiring tools, **before the model is
+called**. This explains at least one class of the unexplained `Tokens: 0` agent crashes.
+**Workaround: do not add a Service Object DispatchConfig.**
+
+### CORRECTION to [HOW AN AGENT SIGNALS IT] — the three channels are not one mechanism
+
+```
+EMAIL, SMS       inject DISPATCH INSTRUCTIONS -> agent emits [DISPATCH] channel: ...
+SERVICE OBJECT   injects a TOOL named `create-service-object`, and NO dispatch
+                 instruction. The agent must CALL the tool. A
+                 [DISPATCH] channel: SERVICE OBJECT block does nothing.
+```
+
+Undocumented; found by making the test agent report which channels the injected block
+actually offered. If you use Service Object, `create-service-object` must be on the
+agent's tool whitelist — a spec saying "these are the ONLY two tools you may call"
+forbids it.
+
+### CORRECTION — there is no title or subject field
+
+A dispatch carries only `channel`, `summary`, `severity`. The email subject is generated
+by the platform. Telling an agent to write a title makes it prepend the title to the
+summary, which wastes SMS length and duplicates text. Do not ask for one.
+
+### Open question that would unblock diagnosis
+
+The public API exposes **no dispatch or notification endpoints**, so we cannot distinguish
+"never sent" from "sent but not delivered". That single fact decides the whole diagnosis.
+Asked on PLAT-5754.
+
