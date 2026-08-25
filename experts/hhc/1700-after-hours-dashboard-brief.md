@@ -81,131 +81,159 @@ them as their own bucket; the gap is real and worth surfacing.
 
 ---
 
-## 4. Building facts, for realistic mock data
+## 4. Building load — nine months of real data
 
-Everything in this section is **measured**, not invented.
+**Whole building (both meters), kW by hour, PT. One sample week per period.**
 
 ```
-whole building        3,456 MWh/yr · 9,766 kWh/day
-weekday mean          457 kW          weekend mean   348 kW
-weekday peak          755 kW at 08:00 PT
-weekday minimum       177 kW at 19:00 PT
+ hr   Dec wd   we    Apr wd   we    Jun wd   we    Aug wd   we
+  0      156  145       146  138       160  143       150  150
+  1      150  143       145  138       161  141       150  146
+  2      146  139       141  133       155  136       150  145
+  3      139  136       140  135       152  135       148  144
+  4      136  133       137  132       148  136       148  145
+  5      171  134       246  131       469  138       602  148
+  6      414  144       574  237       557  331       675  331
+  7      731  365       595  352       620  343       696  392
+  8      709  371       607  374       726  350       736  464
+  9      705  359       625  371       742  366       756  446
+ 10      711  369       641  392       741  417       765  468
+ 11      707  366       631  396       727  407       763  475
+ 12      703  372       622  403       724  407       745  476
+ 13      697  147       615  261       706  244       753  293
+ 14      682  134       603  278       703  234       751  284
+ 15      666  135       593  276       705  236       748  285
+ 16      665  183       580  278       696  240       736  283
+ 17      656  193       566  171       676  156       703  226
+ 18      253  191       258  167       262  156       263  197
+ 19      210  187       228  165       214  152       215  171
+ 20      170  138       171  169       181  148       176  150
+ 21      155  135       155  167       172  141       165  148
+ 22      150  134       146  132       161  140       162  151
+ 23      153  134       147  130       163  139       155  149
+```
+
+**This is a textbook office profile.** Ramp at 05:00-07:00, plateau 07:00-17:00, sharp drop at
+18:00, night baseline by 20:00. **There is no evening rise on weekdays** — see the retraction in
+section 6 if you saw the earlier version of this brief.
+
+```
+night baseline        ~140-160 kW, stable all year, weekday and weekend
+weekday plateau       656-765 kW      weekday daily total  ~11,300 kWh (Aug)
+weekend plateau       350-476 kW      weekend daily total  ~6,270 kWh (Aug)
+whole building        3,456 MWh/yr · ~9,770 kWh/day average
 plant motors          833 kWh/day = 8.8 % of the building
-plant run time        ~14 h/day, CT2 lead, CT1 essentially idle
-loop supply           ~75 °F, alarms above 85 °F
-Las Vegas             OAT 84-106 °F in August
 ```
 
-**Whole-building kW by hour (PT), measured 20-24 Aug — use this shape:**
+**Seasonality is in the morning ramp, not the peak.** 05:00 is 171 kW in December and 602 kW in
+August — summer pull-down starts hours earlier. Midday peak barely moves (703 → 745).
+
+### The real signal: weekend daytime operation
+
+Weekends run **350-476 kW from 06:00 to 17:00** against a 145 kW night baseline. The building
+keeps a substantial weekend schedule, ramping at 06:00 and holding through midday.
 
 ```
-hr    weekday  weekend        hr    weekday  weekend
-00       360      320         12       492      475
-01       363      362         13       475      317
-02       367      367         14       470      321
-03       378      365         15       459      332
-04       377      360         16       461      326
-05       656      364         17       447      249
-06       702      511         18       243      212
-07       715      531         19       177      176
-08       755      526         20       406      147
-09       535      431         21       411      150
-10       496      484         22       356      148
-11       504      477         23       353      147
+excess over baseline    ~200-220 kW (Aug)   ~120 kW (Dec)
+per weekend day         ~1,400-2,700 kWh
+annualised              roughly 200,000-280,000 kWh  =  $22,000-31,000/yr
 ```
 
-⚠️ **Look at 20:00-23:00.** Weekdays run 353-411 kW; weekends run 147-150 kW at the same hours.
-A ~250 kW delta for four hours every weeknight is roughly **1,000 kWh/night**, order **$2,400/month**
-at $0.11/kWh. The building drops to 177 kW at 19:00 and then *comes back up*.
+**Whether that is waste is exactly the open question.** Some tenants may legitimately work
+Saturdays and the schedule may be deliberate. This is the number to build the dashboard around,
+because the occupancy points settle it: weekend hours in `Bypass` are billed, weekend hours in
+plain `Occupied` are not.
 
-**That is very likely the thing Courtney is asking about, visible in the meter data before any
-occupancy point is onboarded.** Treat it as the headline the dashboard should be able to explain -
-but note the caveat in section 6: it is five days of data and the cause is not yet established.
+⚠️ **February 2026 returns no meter data at all.** Unexplained gap, flagged separately.
 
-**Assumed, not measured:** electricity at **$0.11-0.12/kWh** (Nevada commercial, not taken from an
-invoice) and the occupied schedule of roughly **05:00-18:00 PT** (from earlier BAS work, not
-re-verified). The 05:00 jump from 377 to 656 kW and the 18:00 collapse to 243 kW both corroborate
-that schedule.
+**Assumed, not measured:** electricity at **$0.11-0.12/kWh** (Nevada commercial, not from an
+invoice — every dollar figure inherits it) and the occupied schedule of roughly **05:00-18:00 PT**
+(corroborated by the ramp and the 18:00 collapse, not read from the BAS).
 
 **Suggested mock behaviour:**
 
-- Weekdays: zones Occupied 05:00–18:00, Unoccupied otherwise
-- Weekends: Unoccupied, with occasional Bypass
-- Bypass events: a handful per tenant per week, mostly 18:00–22:00, duration = that zone's
-  `BypassTime` (mix 30 / 60 / 480 across tenants so the variation shows)
-- **Seed some waste**: a few zones Occupied past 18:00 with no Bypass, and at least one tenant
-  where a whole floor stays Occupied all weekend. That is the finding the dashboard exists to
-  surface, so it must be visible in the mock.
+- Weekdays: zones Occupied 05:00-18:00, Unoccupied otherwise. Match the load shape above.
+- Weekends: a real subset of zones Occupied 06:00-17:00 — this is what the meter shows, so the
+  mock should reproduce it rather than assume weekends are dark.
+- Bypass events: a handful per tenant per week, mostly 18:00-22:00, duration = that zone's
+  `BypassTime` (mix 30 / 60 / 480 so the variation is visible).
+- **Seed the two cases the dashboard exists to separate**: weekend zones running with Bypass
+  (billed) and weekend zones running without it (waste). The second is the finding.
 
-For a real precedent: at 9950 Woodloch the same class of problem is measured at **$1,715/month**
-of weekday-night delivery plus a failed weekend setback worth another $900–1,100/month.
+For a real precedent: at 9950 Woodloch the same class of problem is measured at **$1,715/month** of
+weekday-night delivery plus a failed weekend setback worth another $900-1,100/month.
 
 ---
 
 ## 5. Views worth building
 
-**The headline.** After-hours hours this month split Authorised vs Waste, with a cost on each.
-One number the customer cares about: *"you are giving away £X of cooling."*
+**The headline.** After-hours and weekend hours this month, split Authorised vs Waste, with a cost
+on each.
 
-**By tenant.** Ranked table — after-hours hours, how many were Bypass, how many were not,
-estimated cost, and their `BypassTime` allowance. This is the billing conversation.
+**Weekend view.** Given the finding above, weekends deserve their own panel: which zones run, for
+how long, with or without Bypass, by tenant.
+
+**By tenant.** Ranked table — after-hours hours, how many were Bypass, how many were not, estimated
+cost, and their `BypassTime` allowance. This is the billing conversation.
 
 **Timeline / heatmap.** Day × hour grid per tenant, coloured by state. Bypass and
-unauthorised-Occupied should be instantly distinguishable. The eye finds the pattern faster than
-a table — a whole weekend running hot shows up immediately.
+unauthorised-Occupied must be instantly distinguishable.
 
-**The exceptions list.** Zones Occupied outside schedule with no Bypass, most recent first. This
-is the actionable list an engineer works through.
+**The exceptions list.** Zones Occupied outside schedule with no Bypass, most recent first. The
+actionable list an engineer works through.
 
-Worth showing `BypassTime` prominently somewhere — a tenant on 480 minutes and a tenant on 30 are
-having very different conversations, and neither knows it.
+Worth surfacing `BypassTime` — a tenant on 480 minutes and a tenant on 30 are having very different
+conversations and neither knows it.
 
 ---
 
 ## 6. What is real and what is not
 
-### Measured today, trust it
+### Measured — trust it
 
-- The four `OccupancyStatus` states and their numbering — read from `State_Text` on live controllers
-- `BypassTime` = 30 / 60 / 480 minutes — read from 12 sampled VAVs, genuinely varies
-- All 291 VAV zones, and every tenant name and zone count in section 3 — from ProptechOS placement
-- Every kW figure and the whole hourly profile in section 4 — from two Siemens PAC3220 meters
-  whose combined output reproduces HHC's own GRESB-reported consumption to **101 %**
-- All three objects exist and read cleanly on 12 of 12 controllers sampled
+- The four `OccupancyStatus` states and their numbering, read from live controllers
+- `BypassTime` = 30 / 60 / 480 minutes, read from 12 sampled VAVs
+- All 291 zones and every tenant name and count in section 3
+- **The entire load profile in section 4** — nine months, four seasons, from two Siemens PAC3220
+  meters whose combined output reproduces HHC's own GRESB-reported consumption to **101 %**
+- All three occupancy objects exist and read cleanly on 12 of 12 controllers sampled
 
-### Assumed, flag it if the dashboard leans on it
+### Assumed — label it in the UI
 
-- **$0.11–0.12/kWh.** Nevada commercial rate, not from an invoice. Any dollar figure inherits this.
-- **Occupied schedule 05:00–18:00 PT.** From earlier BAS work, not re-verified today — though the
-  measured load profile corroborates it closely.
+- **$0.11-0.12/kWh.** Not from an invoice. Any dollar figure inherits this.
+- **Occupied schedule 05:00-18:00 PT.** Inferred from the load shape, not read from the BAS.
 
-### Entirely mock — none of this exists yet
+### Entirely mock — none of it exists yet
 
-- **Every occupancy time series.** No zone reports `OccupancyStatus` or `BypassTime` today.
-  Tracked as **OTEAM-6837** (584 sensors).
-- **Every Bypass event.** Not one has been observed. The mechanism is confirmed to exist; it has
-  never been seen firing.
-- **Every per-tenant after-hours hour or cost.** There is no per-zone occupancy history to derive
-  it from.
+- Every occupancy time series. No zone reports `OccupancyStatus` or `BypassTime` today
+  (**OTEAM-6837**, 584 sensors).
+- Every Bypass event. Not one has been observed.
+- Every per-tenant hour or cost.
 
-What the VAVs actually report today is **`VAV Actuator Position`** and **`UNITOUCH SpaceTemp`** —
-two points per controller. The other five onboarded inputs return NaN because they are for a
-ComSensor/UNITOUCH CO₂-and-humidity accessory that was never fitted (**OTEAM-6836**).
+What the VAVs report today is **`VAV Actuator Position`** and **`UNITOUCH SpaceTemp`**. The other
+five onboarded inputs return NaN — they are for a ComSensor/UNITOUCH CO₂-and-humidity accessory
+that was never fitted (**OTEAM-6836**).
+
+### ⚠️ Retracted from the earlier version of this brief
+
+An earlier draft claimed weekday load **"comes back up to 353-411 kW at 20:00-23:00"**, worth
+~$2,400/month. **That was wrong.** It came from bucketing observations by the connector's log-line
+timestamp rather than the observation timestamp; the connector batches, so the two diverge. Same
+sensor, same days: 20:00 reads 179 kW by log-line time and 115 kW by observation time. The
+observation-time figure matches the API exactly.
+
+Nine months of correctly-bucketed data show **no evening rise in any month**. If you built anything
+on that claim, remove it.
 
 ### Not yet proven
 
 That the tenant portal drives `Bypass` at all, rather than something in the supervisory layer above
-BACnet. If, once data flows, after-hours running appears with **no Bypass ever recorded**, that is a
-larger finding than the one we expect — it would mean requests never reach the BMS.
+BACnet. The mechanism is confirmed; a live Bypass event has never been seen. If after-hours running
+appears with **no Bypass ever recorded**, that is a larger finding — requests never reaching the BMS.
 
-**Design for both outcomes.** The dashboard should be equally informative if Bypass never appears.
+**Design for both outcomes.**
 
-### The one real signal available now
-
-The 20:00–23:00 weekday-vs-weekend gap in section 4 is measured, not modelled. It is five days of
-data and the cause is unestablished — it could be tenants legitimately buying hours, a schedule
-that does not release, or a night purge. But it is a real number from real meters, and it is the
-only piece of the after-hours story that does not depend on OTEAM-6837 landing first.
+---
 
 ## 7. Names to get right
 
