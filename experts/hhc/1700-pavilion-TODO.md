@@ -54,6 +54,38 @@ email (an all-clear, not a stale alarm).
       **The test: does CT1 stage in during 11:00-16:00 PT?** Rule 2's fan gate checks
       it; read the next PdM tick before raising anything with the site.
 
+## 🔁 PENDING 2026-08-26 — reboot test to prove the network fix persists
+
+- [ ] **C · Controlled reboot of the 1700 PEG, early afternoon PT.** Deferred from 25 Aug: the
+      plant was at its morning peak (424-442 kW, 06:00-08:00 PT) and Erik had a customer demo, so
+      the tail risk of a PEG that does not come back was badly timed. Best window is after the
+      morning pull-down, before the evening peak.
+
+      **Why:** on 25 Aug we added five IP addresses to close a gap that had 171 devices / 1,040
+      sensors dark. Publishing devices went 75 -> 353 of 357, errors 1,942/h -> 0. The addresses are
+      persisted in the NetworkManager profile on disk (`method=manual`, 8 x `addressN=`), which is
+      exactly what was missing on 21 Aug when a reboot cost 6 h 09 m of cooling visibility. Evidence
+      is strong; the reboot converts "very likely" into "proven".
+
+      **Pre-flight (all verified 25 Aug, re-check before rebooting):**
+      8 addresses in `/etc/NetworkManager/system-connections/Wired connection 1.nmconnection` ·
+      4 connectors + watchdog `enabled` · one NM profile per interface · SSH is on `enP4p65s0`
+      (192.168.50.52), field network is `enP3p49s0` so the reboot does not cut the management path.
+
+      ⚠️ **Copy the connector logs off the box first** — `/var/log` is on zram (`/dev/zram1`), so a
+      failed boot destroys the evidence of why.
+
+      **Checklist:**
+      1. capture baseline: publishing devices + distinct sensors on `2c28ab21`
+      2. `sudo reboot`
+      3. SSH back — 51 s on the 22 Aug test
+      4. verify 8 addresses live, 4 connectors active, device 1200 returning real values
+      5. verify publishing count returns to ~353 devices — 90 s on 22 Aug
+
+      **If the addresses are missing after boot**, the profile was not applied: check
+      `nmcli -g GENERAL.STATE device show enP3p49s0` and whether another profile claimed the
+      interface. Rollback is not needed; re-add with `nmcli connection up "Wired connection 1"`.
+
 ## NOW — before the Howard Hughes demo, Tue 08/18
 
 - [ ] **E · Rotate the PEG sudo password.** It is in the 08/17 session transcript and
