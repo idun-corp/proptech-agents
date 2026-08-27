@@ -54,6 +54,38 @@ email (an all-clear, not a stale alarm).
       **The test: does CT1 stage in during 11:00-16:00 PT?** Rule 2's fan gate checks
       it; read the next PdM tick before raising anything with the site.
 
+## 📌 MONDAY 08/31 — the weekend reconciliation test (opened 08/27)
+
+**Genea has NO request for 1700 on Sat 08/29 or Sun 08/30.** Clean natural experiment: the
+occupancy points are live, and the request list is confirmed empty.
+
+- [ ] **C** — pull `OccupancyStatus` for all 292 sensors, 08/29 00:00 → 08/31 00:00 PT
+- [ ] **C** — count zones showing state 1 during 06:00–17:00 PT each weekend day
+- [ ] **C** — compare PM1+PM2 against the 350–476 kW weekend profile vs ~145 kW baseline
+- [ ] **C** — re-export Genea Activity History; confirm nothing was booked retroactively
+- [ ] **E** — supply a fresh bearer token (1 h lifetime; a scheduled job cannot do this)
+
+**Zones ran** → unordered conditioning, headline is unbilled cost.
+**Baseline + Unoccupied** → weekend load was always Wynn's, headline is margin per booking.
+Either result decides which panel leads the Courtney dashboard. Full procedure in memory
+`hhh-1700-pavilion-plant.md`.
+
+Also due Monday:
+- [ ] **C** — re-check the 21 devices the connector still will not poll (alive, 84 real values)
+- [ ] **C** — confirm whether Wynn's recurring weekend series actually ended after 08/23
+
+---
+
+## 🟢 CHEAP ASK, independent of the test — two suites missing from ProptechOS
+
+- [ ] **E/C** — ask Oksana to map **Suite 150 (Douglas Elliman)** and **Suite 800 (MP Mine
+      Operations, 48 paid hours / $2,160)**. Both are almost certainly inside the 105 VAVs parked
+      in `TENANT SPACE` / `MECH. ROOM`. Every other Genea area already reconciles — see
+      `1700-genea-p8s-join.csv`. This turns the vague "36 % unattributed" into two named suites.
+
+---
+
+
 ## 🔁 PENDING 2026-08-26 — reboot test to prove the network fix persists
 
 - [ ] **C · Controlled reboot of the 1700 PEG, early afternoon PT.** Deferred from 25 Aug: the
