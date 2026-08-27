@@ -2,6 +2,10 @@
 
 ## [VERSION]
 
+v0.4 · 2026-08-27 — DELIVERY WORKS. PLAT-5754 fixed (Done 08/26); EMAIL + SMS
+confirmed received 08/25 ×2 and 08/27. Templates now OBSERVED — see
+[TEMPLATES — OBSERVED 08/25-08/27]. The 08/24 section below is kept as history.
+
 v0.3 · 2026-08-24 — TESTED END TO END. Both channels BROKEN, see [TEST RESULTS] below.
 
 Version:  0.2
@@ -312,4 +316,72 @@ summary, which wastes SMS length and duplicates text. Do not ask for one.
 The public API exposes **no dispatch or notification endpoints**, so we cannot distinguish
 "never sent" from "sent but not delivered". That single fact decides the whole diagnosis.
 Asked on PLAT-5754.
+
+## [TEMPLATES — OBSERVED 08/25-08/27. Delivery WORKS. PLAT-5754 Done.]
+
+PLAT-5754 closed Done 08/26 (Pavlo, no comment). Deliveries confirmed to phone
+and inbox: 08/25 14:37 + 15:14 CEST and 08/27 09:39 CEST, same test agent, same
+config. Everything below is read off the real messages — no more guessing.
+
+### SMS — rendered template
+
+```
+[Severe] <summary> — Agent: <36-char agent UUID>
+       9 chars                    46 chars, and the separator is an EM DASH
+```
+
+Sender: **+1 (602) 833-4055** (US number; iOS shows a spam hint for unknown
+senders — worth saving as a contact on recipients' phones). The 129-char test
+summary rendered to 184 chars total and arrived **complete**, END and all, as
+one concatenated bubble.
+
+**Consequence — the single-segment SMS is dead, and not by our doing.** The
+platform's own suffix contains `—`, which forces the whole message into UCS-2
+(67-char segments) regardless of how GSM-clean our summary is. 184 chars = 3
+segments per alert. The GSM rules for the summary still stand (they keep the
+segment count down and the text renderable), but stop optimising for 160 —
+optimise for **the first ~40 characters on a lock screen**, which is unchanged.
+Worth a platform ask sometime: a plain hyphen and no UUID in the SMS suffix
+would cut every alert from 3 segments to 1.
+
+### EMAIL — rendered template
+
+```
+From:    noreply@proptechos.com
+Subject: [Severe] Agent Notification: <THE ENTIRE SUMMARY, VERBATIM>
+Body:    Agent Dispatch Notification
+         ==========================
+         Severity: Severe
+         Summary: <summary>
+
+         Agent ID: <agent UUID>
+         Timestamp: <ISO 8601, UTC>
+
+         This is an automated notification from the Autonomous Agent system.
+```
+
+The **full summary is dumped into the subject line** — a 370-char test summary
+went in whole, no truncation anywhere. Both configured recipients were on the
+To: line. The body timestamp is UTC, not local.
+
+### What this changes for spec authors
+
+1. **Never put the severity word in a summary** — the template prefixes
+   `[Severe]`/etc. on both channels; repeating it reads twice.
+2. **The first words of the summary ARE the email subject and the SMS
+   preview.** The house `<building> <STATE>:` opening and the `CLEARED:`
+   recovery prefix land exactly where they need to. Keep them.
+3. **Email length is effectively free** (370 chars survived, subject included),
+   so a summary may carry a number and an action — but remember the same
+   string goes to SMS, where every 67 chars is a segment.
+4. The `Agent ID` suffix/footer identifies the sender agent on both channels —
+   specs do not need to name the agent in the summary.
+
+### Still unverified after this test
+
+- SERVICE OBJECT: whether the 08/24 crash (DEFECT 2) is also fixed, and whether
+  the `create-service-object` tool path works end to end.
+- De-duplication / cooldown: unknown as before — the repeat limit stays the
+  agent's own job.
+- Delivery log: still nothing readable anywhere.
 
