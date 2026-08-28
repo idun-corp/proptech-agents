@@ -54,6 +54,36 @@ email (an all-clear, not a stale alarm).
       **The test: does CT1 stage in during 11:00-16:00 PT?** Rule 2's fan gate checks
       it; read the next PdM tick before raising anything with the site.
 
+## 🔴 08/28 INCIDENT — phantom device twin killed the connector (RESOLVED same day)
+
+**337 of 338 devices dark 05:53–12:38 PDT, zero errors logged.** Plant kept reporting throughout, so
+cooling visibility and the no-cooling SMS were never affected.
+
+**Cause:** a device twin whose BACnet instance does not exist at its configured IP answers
+BACnet-Error, leaving `segmentationSupported` null, and the resulting NPE in bacnet4j's transport
+thread aborts binding for *every other device*. Timeouts are benign; only respond-with-error is
+fatal. It cascades — remove one and the next takes over.
+
+**Fixed** by removing 6 phantoms from `iot_edge_config.json` on the PEG and restarting (Erik
+authorised; two plain restarts had already failed). Backup at
+`/tmp/iot_edge_config.BACKUP-2026-08-28.json` on the PEG.
+
+```
+BEFORE     1 device ·   141 sensors
+AFTER    352 devices · 1,599 sensors · 574/574 occupancy · 0 errors   <- 100% of configured
+```
+
+- [x] **C** — recover the site
+- [ ] **E/C** — **Monday: tell Marichka.** The 6 phantoms (10107, 178, 179, 2101, 10115, 161241)
+      still exist in ProptechOS and **return at her next deploy**, bringing the crash risk with them.
+      The local edit is self-cleaning, so this is not optional.
+- [ ] **E/C** — file the PLAT ticket: draft at `experts/hhc/PLAT-draft-phantom-device-npe.md`
+      (Atlassian MCP was disconnected 08/28). Core ask: one device's bind failure must not abort the
+      rest, and a device that fails to bind must log an ERROR rather than go silent.
+
+---
+
+
 ## 📌 MONDAY 08/31 — the weekend reconciliation test (opened 08/27)
 
 **Genea has NO request for 1700 on Sat 08/29 or Sun 08/30.** Clean natural experiment: the
