@@ -3,6 +3,18 @@
 **Site:** 1700 Pavilion (Howard Hughes) · **Connector:** `multi-bacnet-2c28ab21-f7cf-4c82-ba42-abf56a888297`
 **Impact:** 337 of 338 devices stopped publishing for **6 h 45 m** on 28 Aug 2026, with **zero errors logged**.
 
+## ⚠️ This is a REGRESSION in the 27 Aug build, not a long-standing gap
+
+```
+PRODUCTION jar deployed 2026-08-28 12:52:51Z · classes compiled 27 Aug 09:43 PDT
+SIBLING connector (untouched)                 · classes compiled 13 Jul 07:45
+BacnetDataReader.class    13,240 B (Jul)  ->  15,516 B (27 Aug)
+```
+
+`BacnetDataReader` is the class that issues the `protocol-services-supported` read where the NPE
+fires. The same six bad twins had been present and **completely harmless for eleven months** under
+the July build. The new build turns them fatal. Please diff that class first.
+
 ## TL;DR
 
 One device twin whose BACnet instance does not exist at its configured IP throws an
@@ -44,10 +56,10 @@ A device twin pointing at an IP where a **different** instance actually lives. V
 has never caused a problem — 4 such devices at this site are benign. Only the
 **responds-with-error** case triggers the NPE.
 
-## Timeline
+## Timeline (UTC)
 
 ```
-26 Aug 05:18   restart, 0 NPE, 337 devices          fine
+26 Aug 12:18   restart, 0 NPE, 337 devices          fine
 27 Aug         0 NPE all day, 337 devices           fine
 28 Aug 05:53   restart, NPE on device 10107         -> 1 device, 141 sensors
 28 Aug 12:13   restart, NPE on device 10107         -> still 1 device
@@ -91,3 +103,32 @@ the crash risk returns. They need deleting or correcting platform-side.
 Directed `ReadProperty(Object_Name)` per configured device at its own `bacnetHost`. Classify the
 reply: **OK** keep · **timeout** benign · **BACnet-Error PDU** phantom, and a crash trigger.
 At 1700 that was 308 OK, 4 timeout, 6 phantom, 40 MS/TP or unaddressed.
+
+
+---
+
+## Addendum, 28 Aug — one of the six was NOT a phantom
+
+`device 2101` (`MTIII_AHU_02101`, an air handler, 8 sensors) is real and lives at
+**192.168.2.101**. Its twin records **192.168.2.67**, which is where `device 2067` lives. The
+mapping is systematic — instance `2NNN` belongs at `.NNN` — so this is a wrong address, not a
+missing device. It must be corrected rather than deleted.
+
+The other five appear nowhere across all eight subnets and are safe to delete:
+`Wynn VAV 10-28`, `Wynn VAV 10-29`, `ECY-VAV-D837F8`, `ECY-VAV-D84D93`, `VAV-8`.
+
+## Addendum — 37 BACnet devices on this network are not in the connector config
+
+A sweep of 1,720 unconfigured addresses (one wildcard device read each, ~1 min, no impact) found:
+
+```
+10  MTIII_AHU_*  192.168.2.101-110   air handlers — only 2 are collected
+14  ECY-VAV-*    .1.x and .2.x
+ 4  VAV 1-22, VAV-1-17/18/19
+ 1  ECY-TU203-B4BB91  192.168.6.70
+ 1  DIRIS A-40   192.168.0.149       a Socomec power meter, never onboarded
+```
+
+Not a PLAT defect, but it belongs with the onboarding-verification ask: a directed read per
+configured device, plus a subnet sweep for unconfigured ones, would have surfaced both the six bad
+twins and these thirty missing devices at commissioning.
