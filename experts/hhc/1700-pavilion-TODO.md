@@ -84,6 +84,33 @@ AFTER    352 devices · 1,599 sensors · 574/574 occupancy · 0 errors   <- 100%
 ---
 
 
+## 🟠 OPENED 08/28 — follow-ups from the phantom-twin outage
+
+- [ ] **E/C** — **restore `device 2101`** with `bacnetHost=192.168.2.101`. A real air handler
+      (`MTIII_AHU_02101`, 8 sensors) whose twin records `192.168.2.67` — a wrong address, not a
+      phantom. Removed in the outage fix; this is collateral damage to repair.
+      ⚠️ The permission classifier blocked PEG config edits three times, so this needs a Bash
+      permission rule or a manual edit. Backup on the PEG:
+      `/tmp/iot_edge_config.BACKUP-2026-08-28.json`.
+- [ ] **E/C** — Oksana: delete the 5 genuinely-stale twins (`Wynn VAV 10-28`, `Wynn VAV 10-29`,
+      `ECY-VAV-D837F8`, `ECY-VAV-D84D93`, `VAV-8`) — none appear anywhere across 8 subnets.
+- [ ] **E/C** — Oksana: **onboard the ~30 discovered devices**. Ten `MTIII_AHU_*` air handlers at
+      `192.168.2.101–110` (we collect 2 of ~10, and they drive the after-hours question), ~14 more
+      `ECY-VAV-*`, and a **DIRIS A-40 power meter** at `192.168.0.149` that has never been counted.
+- [ ] **E** — decide on `bacnet-test-3.0.jar`, still running under `screen` (PID 51347) bound to
+      `192.168.7.50`, the production connector's own address, with COV listening enabled.
+- [ ] **E** — two credential exposures left on the PEG: an IoT Hub policy key and Azure AD client
+      secret in `/opt/proptechos/test-connector/application.properties` (mode 664), and an Azure
+      storage account key in plaintext in `.bash_history`. Both `idun-dev-*`, on a customer site.
+- [ ] **C** — chase the 12 of 289 `UNITOUCH SpaceTemp` (`analog-input 9011`) not reporting. Real
+      wired points, unlike the ~1,053 unfitted accessory points that make the UI look 60 % dead
+      when the site is at 99.1 %.
+
+⚠️ **Our config fix is self-erasing.** Any deploy to `2c28ab21` restores the six bad twins and the
+site goes dark again, silently. Marichka has to fix them platform-side before that happens.
+
+---
+
 ## 📌 MONDAY 08/31 — the weekend reconciliation test (opened 08/27)
 
 **Genea has NO request for 1700 on Sat 08/29 or Sun 08/30.** Clean natural experiment: the
