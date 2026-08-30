@@ -84,6 +84,63 @@ AFTER    352 devices · 1,599 sensors · 574/574 occupancy · 0 errors   <- 100%
 ---
 
 
+## 🔴 08/30 — SATURDAY RECONCILIATION: the tenant portal is not reaching the BMS
+
+First hard evidence, both failure modes in one day. Every tenant's Saturday on/off mapped:
+
+```
+21 of 24 tenants   ON 06:10 PDT  OFF 13:12 PDT   base Saturday schedule
+Snell & Wilmer     always Occupied, never releases
+Touchstone Living  ON 06:10      OFF 17:07 PDT   4 h longer
+Wynn Design & Dev  ON 06:10      OFF 17:07 PDT   4 h longer
+Howard Hughes      ON 06:10      OFF 13:12 PDT   same as everyone
+```
+
+- **PAID, NOT DELIVERED** — Summerlin Gallery paid **$180** for 13:00–17:00. Zones shut off at
+  **13:12**, twelve minutes in, and stayed off for the whole paid window.
+- **DELIVERED, NOT PAID** — Touchstone Living and Wynn ran 4 h past the base schedule, 24 zones,
+  no booking in the weekend emails.
+- **ZERO Bypass across all 287 zones.** Only state-3 was `device 1200`, the known object-number
+  collision. Power 380 kW vs 390 / 354 the two previous Saturdays — no trace of the paid bookings.
+
+- [ ] **C** — Monday: re-run with the **full weekend**, incl. Sunday's 10 h / $450 booking.
+      `scratchpad/bypasscheck.py <token> sun`. Two failures in a row makes this unarguable.
+- [ ] **E/C** — check the portal whether Touchstone / Wynn had active bookings. ⚠️ The Activity
+      History export **cannot show future active bookings**, so absence there proves nothing.
+- [ ] **E** — then take it to Josh and Courtney. This is a billing-integrity finding, not an
+      energy one: a tenant paid for HVAC they did not receive.
+
+⚠️ Snell & Wilmer's $270 is **unverifiable** — 22 zones locked in Occupied can never show Bypass.
+The "stuck in Occupied" defect is corrupting the measurement, as predicted.
+
+---
+
+## ⚠️ 08/30 — the cooling margin was being OVERSTATED in daily reports
+
+```
+bldgCwSupply peak vs the 85 F alarm, 14 days:  worst 3.3 F (21 Aug, 81.7 F)
+typical peak margin 4-6 F · daily mean stable 75.5-76.4 F
+```
+
+Reports quoting "8–9 F margin" used **overnight** readings, when the building is idle. **Quote the
+daytime peak.** Never breached; mean rock-steady.
+
+**And CT1 is not untested** — correcting a claim repeated for days:
+
+```
+CT1  +19 h over 14 days (ran ~24 Aug)   fan ON 0.3% of last 7 days
+CT2 +189 h over 14 days                 fan ON 53.6% of last 7 days
+```
+
+**Cooling failure risk: LOW.** CT1 is proven functional within the fortnight, CT2 at 54 % duty has
+headroom. Residual: peak margin tighter than assumed, CT2 does ~90 % of the work, CT1's isolation
+valves have not cycled in 7 days.
+
+⚠️ `ctMakeupWater` stepped 0 → 8200 on 29 Aug and has been **flat ever since, including while CT2
+ran**. A register that changed state, not consumption. **Not a leak.**
+
+---
+
 ## 🟠 OPENED 08/28 — follow-ups from the phantom-twin outage
 
 - [ ] **E/C** — **restore `device 2101`** with `bacnetHost=192.168.2.101`. A real air handler
