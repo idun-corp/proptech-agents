@@ -54,3 +54,61 @@ Floor + unit, plus the tenant prefix where present.
 floors 2, 3, 4, 6, 7 and TouchstoneLiving on 9.
 Either expand them in the Nav tree and screenshot, or right-click each folder ->
 Export -> "Object to oBIX" (⚠️ writes to the REMOTE Windows machine).
+
+---
+
+# ProptechOS vs the BAS — the mapping is wrong for almost every tenant
+
+Full BAS VAV lists per tenant are in `1700-bas-tenant-vav-map.json`.
+
+```
+BAS tenant folder             BAS   P8S   verdict
+MP Materials  (Suite 800)      34     -   *** NO ProptechOS ZONE ***
+Wynn Suite 1000                34    12   both Wynn suites share ONE zone of 12
+Wynn Suite 900                 13    12       -> 47 BAS VAVs vs 12 in ProptechOS
+Snell & Wilmer                 22    22   OK
+Howard Hughes (Suite 250)      18    15   +3
+Touchstone Living              14    12   +2
+New York Life                  13    11   +2
+Bessemer Trust                 13    12   +1
+ER Injury                      12    10   +2
+Ghost Lifestyle                12    11   +1
+PNC Bank                       10    11   -1
+Suite 500                      10     -   *** NO ZONE ***
+Northern Trust                 10     8   +2
+Bruin Capital (Suite 300)       9     9   OK
+Hearst Health                   8     7   +1
+Rimini Street (Suite 330)       6     5   +1
+Northmarq                       6     6   OK
+Malibu                          6     4   +2
+Douglas Elliman (Suite 150)     5     -   *** NO ZONE ***
+Mass Mutual (Suite 320)         5     5   OK
+Capital Gurus                   5     5   OK
+Cirrus Company (Suite 315)      4     4   OK
+Edelman Financial (Suite 350)   4     4   OK
+Summerlin Sales (Suite 120)     2     -   *** NO ZONE ***
+Snyder Dental (Suite 310)       2     1   +1
+```
+
+**Only 7 of 25 tenants match.** Six have no ProptechOS zone at all. Most others are under by 1-3.
+
+## 🔴 The big one: Wynn has 12 of 47 zones
+
+Wynn Design & Development is **71 % of Genea's after-hours revenue at 1700** (619 h, $27,856
+Mar-Aug). ProptechOS maps **12** of their **47** VAVs. Every weekend conclusion involving Wynn was
+drawn from a quarter of their space.
+
+## ⚠️ BAS point names are NOT unique — only the full path is
+
+Real collisions found, same name under different tenants:
+```
+Floor 3   Bruin Capital vav3_12..16   AND   Mass Mutual vav3_12..16
+Floor 5   Bessemer vav5_3             AND   ER Injury vav-5-3      (underscore vs hyphen)
+Floor 9   TouchstoneLiving VAV9_4     AND   floor-level vav9_4     (case only)
+Floor 2   HowardHughes vav2_4..9      AND   floor-level vav2_4..9
+```
+➡️ **Never match on the point name alone.** The tenant folder path is the only unique key, so the
+BACnet Object_Name/Description cannot resolve these — the BAS hierarchy is the sole authority.
+
+## Still collapsed (floor 2)
+`Suite_250`, `Suite260`, `TSGConsumer` — contents unknown.
