@@ -14,6 +14,11 @@ Updated:  08/31/2026 — v0.2, after the first live data pull (256 bindings + 1,
               across Sunday 08/30 found **zero running circuits on either unit
               sampled**. The plant is genuinely off nights and weekends.
           (d) Rule 7 thresholds confirmed against real building-wide freshness.
+          (e) **Retracted the floor/riser claim.** v0.1 stated the trailing digit is the
+              floor and the model's placement was wrong. The instance pattern supports it
+              but the live model mounts all 16 in two Rooms and `servesBuildingComponent`
+              is empty, so it is unproven. The agent now reports by device instance only
+              and never states a floor.
 Notes:    First agent on the Downtown Summerlin campus outside 1700 Pavilion.
           Modelled on 1201 Lake Robbins PdM v0.16, with four differences that matter:
           (a) the machines are 16 Trane Vertical Self-Contained units, not 5 centrifugal
@@ -86,14 +91,32 @@ So: **you cannot see the towers, but you can see the loop through 32 windows.** 
 condenser-water entering temperatures and sixteen leaving temperatures ARE your plant
 instrumentation. Use them that way.
 
-### Naming — settled, and it contradicts the onboarding record
+### Naming and location — the numbering is clear, the LOCATION is NOT
 
-BACnet instances run 723101–723124 in strict `{J1-n, J2-n, FPT-Jn}` triplets, n descending
-9 → 2. **The trailing digit is the FLOOR (2–9); "J1"/"J2" is the RISER.**
+BACnet instances run 723101–723124 in strict `{AHU-J1-n, AHU-J2-n, FPT-Jn}` triplets, n
+descending 9 → 2. The VAV networks 9802–9809 map to floors 2–9. **So `n` almost certainly
+denotes floor 2–9, and "J1"/"J2" a riser.**
 
-⚠️ The onboarding handoff places all 16 units on `LEVEL 01` / `LEVEL 02` — it read "J1"/"J2"
-as a floor number. **That placement is wrong.** Report floor and riser from the map below,
-never from a room or storey lookup, and state the device instance alongside every unit name.
+⚠️ **But the live model does not agree, and it has not been settled.** All 16 units are
+mounted in just **two Rooms**:
+
+```
+8 x AHU-J1-*   Room littera 01021   LEVEL 01   roomType none      "Room"
+8 x AHU-J2-*   Room littera 250     LEVEL 02   roomType Office    "AVALLABLE SUIT"
+```
+
+Two mechanical rooms feeding vertical risers is an equally ordinary design for stacked
+self-contained units. **`servesBuildingComponent` is empty on all 16** — the one field that
+would settle it. `hasDeviceFunctionType` is null on all 16 too.
+
+**Therefore: report every unit by DEVICE INSTANCE and the vendor's device name. Never state
+a floor.** Do not say "floor 9" or "riser J2" in a finding; say `723101 / AHU-J1-9`. This is
+the 1201 rule — *machine numbering is unresolved, report by device instance only* — and it
+applies here for location as well as identity.
+
+⚠️ **One thing IS certainly wrong: eight mechanical units are mounted inside a vacant tenant
+office suite** (Suite 250, `roomType = Office`, "AVALLABLE SUIT"). Reported on OTEAM-6846.
+It does not affect any rule in this spec, which binds by UUID and never resolves by space.
 
 ### Cadence
 

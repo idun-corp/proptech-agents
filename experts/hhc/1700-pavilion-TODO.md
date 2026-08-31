@@ -86,7 +86,7 @@ AFTER    352 devices · 1,599 sensors · 574/574 occupancy · 0 errors   <- 100%
 
 ## 🆕 08/31 — EMBODIED BUILDING AGENT drafted, blocked on two bindings
 
-`1700-pavilion-embodied-agent.md` v0.2 + `1700-embodied-zone-bindings.csv` (286 zones).
+`1700-pavilion-embodied-agent.md` v0.3 + `1700-embodied-zone-bindings.csv` (286 zones).
 The first 1700 agent that watches the **occupied** building rather than the plant: zone
 comfort, schedule behaviour, electricity, and a printed daily statement of which senses
 this building does not have. **Daily 06:00 PT, exception-based** — silent one-liner unless a rule
@@ -113,6 +113,17 @@ naming what the specialists own, and aggregation happens in the reader's inbox.
       by taras. They have **no `source`** in the twin, so probably no data path — but if a
       people-counting integration is live, two tenants get a real occupancy sense and the
       "schedule, never people" caveat narrows for them.
+- [ ] **E · Create the EMAIL DispatchConfig** with `erik@wallin.se`, and the SMS config with
+      `+46704124900`, for the validation runs (same pair as the 08/24-08/27 dispatch tests, so a
+      failure is comparable against a known-good run). ⚠️ **Naming them in the prompt does not
+      wire them up** — they must be entered in the Dispatch UI or every signalled dispatch
+      resolves to whatever the config actually holds, possibly nobody.
+      ⚠️ **Then delete the block from the spec** once the channels are proven: personal contact
+      details are outside this folder's containment rule.
+- [ ] **E/C · Test the ON-REQUEST path, both channels.** v0.3 makes "email me that" / "text me"
+      a dispatch trigger in its own right, outside the deviation rules and the repeat limit.
+      Ask it in conversation and confirm both arrive — the cheapest end-to-end proof available,
+      and it does not require waiting for a real deviation.
 - [ ] **E · Create the EMAIL DispatchConfig** (Agent editor -> Behavior -> Dispatch) and
       **Reset the agent** — without a reset the dispatch block never reaches the prompt and
       the agent silently never dispatches. Create the SMS config too but leave it Disabled.
