@@ -2,9 +2,18 @@
 
 ## [VERSION]
 
-Version:  0.1 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.2 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/31/2026
-Updated:  —
+Updated:  08/31/2026 — v0.2, after the first live data pull (256 bindings + 1,311
+          building-wide + 24 h history on two units):
+          (a) **GATE 1 REWRITTEN.** v0.1 gated on `CondSat − CW LEAVING > 1.50 °F`.
+              Both halves were wrong. Reference is now **CW ENTERING**, threshold
+              **5.0 °F**. Evidence and reasoning in GATE 1 below.
+          (b) AHU-J2-2 recorded as a known dark unit (23.9 days) — see KNOWN ISSUES.
+          (c) Added GATE 2, the working-day/occupied-hours gate. A full 24 h pull
+              across Sunday 08/30 found **zero running circuits on either unit
+              sampled**. The plant is genuinely off nights and weekends.
+          (d) Rule 7 thresholds confirmed against real building-wide freshness.
 Notes:    First agent on the Downtown Summerlin campus outside 1700 Pavilion.
           Modelled on 1201 Lake Robbins PdM v0.16, with four differences that matter:
           (a) the machines are 16 Trane Vertical Self-Contained units, not 5 centrifugal
@@ -292,33 +301,96 @@ reported without fetching. Every number in your report must trace to a call made
 ## [GATE 1 — RUN STATE IS DERIVED, AND YOU MUST SAY SO]
 
 ⚠️ **`Cool Output 1–4`, `Supply Fan Status` and `Application Mode Status` exist on these
-units but are NOT onboarded.** You have no direct run-state point. Ticket filed.
+units but are NOT onboarded.** You have no direct run-state point. OTEAM-6846 filed.
 
 Derive circuit run state as:
 
 ```
-circuit N is RUNNING  when  CondSat(N) − CWLeaving  >  1.50 °F
-circuit N is OFF      when  CondSat(N) − CWLeaving  <= 1.50 °F
+circuit N is RUNNING  when  CondSat(N) − Condenser Water ENTERING Temperature  >  5.0 °F
+circuit N is OFF      when  that difference is <= 5.0 °F
 ```
 
-A running circuit MUST reject heat, so its saturated condensing temperature must sit above
-the water it rejects into. An idle circuit's refrigerant equilibrates to loop temperature.
+A running circuit must reject heat, so its saturated condensing temperature rises well
+above the water it rejects into. An idle circuit's refrigerant equilibrates to the loop.
 
-**Observed 07/05 on AHU-J1-3:** circuit 1 87.53 vs CWL 79.69 → +7.84, running (and `Cool
-Output 1 = On`). Circuits 2 and 3 read 78.70 and 78.31 → −0.99 and −1.38, off (`Cool Output
-2/3 = Off`). The derivation matched the vendor's own state on all three circuits.
+### Why ENTERING and not LEAVING — v0.1 had this wrong
 
-Rules:
+**Leaving water is contaminated by the unit's own siblings.** All three circuits share one
+condenser-water pass. When two of three run hard, they push *leaving* up to **+8.16 °F**
+above entering, and a genuinely-running third circuit then fails a leaving-referenced test.
+Measured 08/31 12:44 UTC on AHU J1-2: circuit 1 CondSat **88.42**, CW leaving **87.40**
+→ +1.02, which v0.1 called idle. Against CW *entering* (80.38) it is **+8.04** — running,
+and 88.42 sits squarely in the running band.
+
+**Entering is the common loop supply and is clean:** spread across all 16 units was
+**2.88 °F**, against **8.91 °F** for leaving.
+
+### Why 5.0 and not 1.50
+
+The discriminator is strongly **bimodal**. All 45 circuits on the 15 reporting units,
+08/31 12:44 UTC:
+
+```
+IDLE band   n=23   −5.45 .. +1.93 °F
+RUN  band   n=22   +8.04 .. +17.64 °F
+                   ^^^^^ a 6.11 °F void with nothing in it
+```
+
+**v0.1's 1.50 °F sat INSIDE the idle band**, whose top is +1.93. Over 24 h of history the
+idle band reaches **+3.63**, and on AHU-J1-3 **31.3% of idle circuit-samples** fell in the
+1.50–5.00 °F range — i.e. v0.1 would have called a third of that unit's idle samples
+running. 5.0 sits in the void with 1.37 °F of margin below and 3.04 °F above.
+
+⚠️ **The v0.1 validation was luck, and that is the lesson.** It was checked against
+`Cool Output N` on AHU-J1-3 and agreed 3/3 — but that unit's entering and leaving
+temperatures differ by only −0.19 °F, so the very distinction that matters was invisible
+there. **One agreeing unit is not a validated gate.** Re-validate on a unit with a large
+entering-to-leaving rise.
+
+### Rules
 
 - **Gate every quantitative rule on derived-RUNNING.** An idle circuit reads a number, not a null.
 - The gate must cover **the WINDOW, not the sampling moment**. For a 24 h aggregate, a circuit
   counts as running only for the hours it was running. 9950 raised a P2 on an overnight window
   for a chiller that drew zero power the whole time.
 - **Label the gate as derived in every report** — one line, every tick: `run gate: derived
-  (CondSat − CWL > 1.50 °F), vendor state not onboarded`.
+  (CondSat − CW entering > 5.0 °F), vendor state not onboarded`.
 - Cap any finding that rests ONLY on the derived gate at **P2 / Medium confidence**. Never P1.
-- **Once the vendor points land, validate the derivation against `Cool Output N` for 7 days
-  before trusting it further, and record the disagreement rate in the ledger.**
+- **Once the vendor points land, validate against `Cool Output N` for 7 days before trusting it
+  further** — on units with a LARGE entering-to-leaving spread, not a small one — and record the
+  disagreement rate in the ledger.
+
+## [GATE 2 — WORKING DAY AND OCCUPIED HOURS]
+
+**The plant is genuinely off at night and at weekends.** A full 24 h pull covering Sunday
+08/30 (12:00Z 08/30 → 12:00Z 08/31, i.e. 05:00–05:00 PDT) found **zero running circuits on
+both units sampled**, 243 and 246 circuit-samples respectively. At 12:44 UTC Monday —
+**05:44 PDT** — circuits were running on all 15 reporting units. Plant start is early morning
+local.
+
+- On a weekend or before the morning start, **all-idle is NORMAL**. Make no staging or
+  capacity judgement; say so explicitly rather than reporting a fault.
+- This is the same restraint the 1700 tower staging watchdog applies: *"a weekend → the WORKING
+  DAY gate applies: lag-zero is NORMAL, no staging judgement made."*
+- The 3:00 PM PT tick is deliberately inside the occupied window. If a tick ever lands outside
+  it, report ⚪ for the load-dependent rules, not 🟡.
+
+## [KNOWN ISSUES — verified 08/31/2026, carry forward until cleared]
+
+**AHU-J2-2 (instance 723123, floor 2, riser J2) has been DARK for 23.9 days.** All 22 of its
+sensors last reported **2026-08-07T16:09:29Z**. It is the only one of the 16 units affected,
+and the only device at Bldg J with whole-device staleness.
+
+⚠️ **Its stale values still look entirely plausible** — CW entering 79.01, CW leaving 79.33,
+circuit 1 apparent approach +10.39. **An agent without Rule 7 would report it as a healthy
+running machine.** Exclude it from every rule and name it as excluded. This is the 1201
+device-11004 pattern (11 days frozen while every tick called it "idle").
+
+Building-wide context from the same sweep, for calibrating Rule 7 — **not** this agent's
+findings to report: 1,046 of 1,311 live Bldg J sensors fresh under 1 h; 23 stale over 7 days
+(22 of them AHU-J2-2); **242 have never reported at all, of which 219 are the VAV `Space_Temp`
+point** — 219 of 223 VAVs in the tower have no zone temperature. That is an instrumentation
+gap, not an outage, and it belongs to onboarding, not here.
 
 ## [RULES]
 

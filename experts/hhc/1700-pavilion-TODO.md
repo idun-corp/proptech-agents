@@ -86,11 +86,19 @@ AFTER    352 devices · 1,599 sensors · 574/574 occupancy · 0 errors   <- 100%
 
 ## 🆕 08/31 — EMBODIED BUILDING AGENT drafted, blocked on two bindings
 
-`1700-pavilion-embodied-agent.md` v0.1 + `1700-embodied-zone-bindings.csv` (286 zones).
+`1700-pavilion-embodied-agent.md` v0.2 + `1700-embodied-zone-bindings.csv` (286 zones).
 The first 1700 agent that watches the **occupied** building rather than the plant: zone
 comfort, schedule behaviour, electricity, and a printed daily statement of which senses
-this building does not have. Daily 06:30 PT, no dispatch, 70-call ceiling, 24 sentinel
-zones — it samples, it does not scan.
+this building does not have. **Daily 06:00 PT, exception-based** — silent one-liner unless a rule
+trips; the daily report is a `DAILY_REPORT` switch, off by default. EMAIL dispatch on
+deviation, SMS reserved for a tenant-affecting event no existing alert covers and shipped
+Disabled. 90-call ceiling, 27 sentinel zones — it samples, it does not scan.
+
+⚠️ **It cannot roll up the PdM and the Watch.** No agent in this estate can read another
+agent's output — no report store, no run-history tool, and `get-service-objects` is 403
+(PLAT-5721). 1-to-1 routing re-runs the target agent (~283k tokens, 7.5 min), so it is an
+on-demand escalation, never a daily habit. The agent instead prints a `NOT MINE TODAY` line
+naming what the specialists own, and aggregation happens in the reader's inbox.
 
 - [~] **C · PM1 + PM2 total-power sensorIds.** Rule 4 (electricity) is ⚪ until these are
       bound. `popularName` is null on all 54 meter sensors (**OTEAM-6827**) so they cannot
@@ -98,13 +106,18 @@ zones — it samples, it does not scan.
       `192.168.2.218` / `.219`, total power is register 65.
 - [~] **E · Gross area in ft².** Every `kWh/ft²` figure depends on it, and the agent is
       instructed not to guess one. Absolute kWh only until it is filled in.
-- [ ] **C · Verify the 24 sentinels report** on first run — 12 of 289 UNITOUCH SpaceTemp
+- [ ] **C · Verify the 27 sentinels report** on first run — 12 of 289 UNITOUCH SpaceTemp
       points are genuinely dark, so a sentinel may need swapping.
 - [ ] **C · Do the Northern Trust / ER Injury footfall twins carry observations?**
       `AreaPresence` / `Footfall` / `DirectionInward`-`Outward`, unit `NumPeople`, created
       by taras. They have **no `source`** in the twin, so probably no data path — but if a
       people-counting integration is live, two tenants get a real occupancy sense and the
       "schedule, never people" caveat narrows for them.
+- [ ] **E · Create the EMAIL DispatchConfig** (Agent editor -> Behavior -> Dispatch) and
+      **Reset the agent** — without a reset the dispatch block never reaches the prompt and
+      the agent silently never dispatches. Create the SMS config too but leave it Disabled.
+      ⚠️ Do NOT add a Service Object config: on 08/24 it crashed the invocation outright
+      (`No ToolCallback found for tool name: none`, 0 tokens), and the fix is unverified.
 - [ ] **C · Regenerate the bindings CSV when OTEAM-6845 lands.** Do not hand-patch it.
 - [ ] **E · Get the actual BAS weekday schedule.** Saturday (06:10 → 13:12) and Sunday
       (none) are observed; the weekday off-time is not, so Rule 3 has to hedge.
