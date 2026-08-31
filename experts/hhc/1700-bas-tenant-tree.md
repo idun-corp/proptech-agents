@@ -135,3 +135,26 @@ lease area configured in Genea, or a vacant/reconfigured suite. Worth asking abo
 
 ⚠️ More name collisions on this floor: `Suite_250/vav2_4..9` vs floor-level `vav2_4..9`, and
 `TSGConsumer/VAV_2_4` vs `Suite_250/vav2_4`. Path remains the only unique key.
+
+## ✅ Floor 2 complete — HowardHughes is a DUPLICATE of Suite_250
+
+`HowardHughes` expands to the **same** `vav2_1 .. vav2_18` as `Suite_250`. Two folders, one space,
+one set of devices. Genea calls it Suite 250 / "Howard Hughes".
+
+➡️ **Map to ONE zone only.** Whichever is chosen, the other must be ignored or the 18 VAVs get
+counted twice. Floor 2 real totals: Howard Hughes 18 · Suite260 3 · TSGConsumer 5.
+
+# ✅ MAPPING COMPLETE — all 10 floors
+
+**285 VAVs assigned to a tenant** across 25 tenant folders (excluding the Suite_250/HowardHughes
+duplicate), plus floor-level common/mech units. ProptechOS holds 287 OccupancyStatus devices, so
+the BAS accounts for essentially the whole building.
+
+## Next
+1. Build the PATCH set — match on **floor + tenant folder + unit**, never on point name alone
+   (see the collision list above). Flag ambiguities rather than guessing.
+2. Create ProptechOS zones for the 6 tenants that have none: MP Materials/Suite 800 (34),
+   Suite 500 (10), Douglas Elliman/Suite 150 (5), Suite260 (3), Summerlin Sales/Suite 120 (2).
+3. Fix the 18 tenants whose counts are wrong — Wynn most of all, 12 of 47.
+4. **Then redo the weekend reconciliation from scratch.** Summerlin Gallery, Wynn and Touchstone
+   were all analysed on wrong or partial zone sets.
