@@ -27,8 +27,7 @@ the building's site folder on Drive for the write-up).
 | `1700-pavilion-daily-manual-check.md` | v0.2, manual daily data-loss backstop | Sensor UUIDs, building ID, **PEG host + SSH user** |
 | `onesummerlin-bldgJ-refrigeration-pdm.md` | v0.1 pilot, One Summerlin Bldg J — daily refrigeration PdM over 16 self-contained units / 48 circuits | Full sensor UUID map (256), building + PO IDs, names, BACnet instances |
 | `onesummerlin-bldgJ-refrigeration-bindings.csv` | The 256-row binding table the spec's map is generated from | Sensor + device UUIDs, vendor point names, sample values |
-| `jira-DRAFT-onesummerlin-bldgJ-runstate.md` | Ticket draft — onboard the 6 vendor run-state points × 16 units, + fix the storey placement | Building UUID, device instances |
-| `jira-DRAFT-twosummerlin-cw-plant.md` | Ticket draft — onboard the Two Summerlin CW plant, ERU and 6 VFDs | Building UUID, device names |
+| `jira-DRAFT-summerlin-agent-data-asks.md` | What the Summerlin agents need from onboarding — three comments on EXISTING tickets plus one new placement defect. Supersedes two drafts that wrongly proposed new tickets | Building UUIDs, device instances |
 | `agent-dispatch-sms.md` | Shared reference — how an agent sends SMS/EMAIL/service object (v5.6.3) | None — dispatch never exposes recipients to the LLM |
 
 ⚠️ **Two files above now carry more than sensor identity.** `1700-pavilion-no-data-sms-alert.md`
