@@ -158,3 +158,50 @@ the BAS accounts for essentially the whole building.
 3. Fix the 18 tenants whose counts are wrong — Wynn most of all, 12 of 47.
 4. **Then redo the weekend reconciliation from scratch.** Summerlin Gallery, Wynn and Touchstone
    were all analysed on wrong or partial zone sets.
+
+---
+
+# ⚠️ WITHDRAWN: "Bessemer and ER Injury cannot be separated"
+
+I warned that `vav5_3` and `vav-5-3` were indistinguishable in BACnet. **That was wrong.** The
+punctuation survives into the BACnet Object_Description, and the two tenants sit on entirely
+separate IP blocks:
+
+```
+192.168.5.51  - .5.63    "VAV 5-1" .. "VAV 5-13"     13   Bessemer Trust   (BAS vav5_1..13)
+192.168.5.161 - .5.172   "VAV-5-1" .. "VAV-5-12"     12   ER Injury        (BAS vav-5-1..12)
+```
+
+Contiguous, non-overlapping, and the counts match the BAS exactly. **IP contiguity resolves every
+collision I flagged** — the tenants occupy distinct address blocks, so floor+unit+IP-block is a
+sound key even where the name alone is ambiguous.
+
+# Remap proposal — `1700-zone-remap-proposal.csv`
+
+7 single-device fixes, each justified by falling inside an established contiguous block:
+
+```
+device 50560   .5.60    VAV 5-10           MECH. ROOM   -> Bessemer Trust        HIGH
+device 5163    .5.163   VAV-5-3            MECH. ROOM   -> ER Injury             HIGH
+device 5168    .5.168   VAV-5-8            MECH. ROOM   -> ER Injury             HIGH
+device 3034    .3.34    VAV-3-04           none         -> Rimini Street         HIGH
+device 115036  .3.62    Procedure Rm 105   none         -> Dr. Snyder            HIGH
+device 193231  .2.70    VAV-2-1            TENANT SPACE -> Suite260 (new)        MEDIUM
+device 20106   .2.71    VAV-2-2            TENANT SPACE -> Suite260 (new)        MEDIUM
+```
+
+These alone correct Bessemer 12->13, ER Injury 10->12, Rimini 5->6, Dr Snyder 1->2.
+
+## Zones that must be CREATED (Genea is authoritative for tenant identity)
+```
+MP Materials / Suite 800      34   Genea customer, 48 paid hours, no zone at all
+Wynn Suite 1000               34   decide: separate zone, or merge with Suite 900?
+Suite 500                     10   no matching BACnet devices located yet - investigate
+Douglas Elliman / Suite 150    5
+Suite260                       3   ⚠️ not in Genea's Areas export - confirm with HHH
+Summerlin Sales / Suite 120    2   device 10105 + device 1033
+```
+
+⚠️ **Suite 500's 10 VAVs have no BACnet counterpart on floor 5.** The floor-5 address space holds
+exactly Bessemer (13) + ER Injury (12) and nothing else. Either they are on another subnet, not
+onboarded, or the folder is stale. Resolve before creating that zone.

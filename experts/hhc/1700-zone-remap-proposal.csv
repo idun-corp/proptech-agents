@@ -1,0 +1,8 @@
+device,ip,bas_desc,current_zone,proposed_zone,evidence,confidence
+device 50560,192.168.5.60,VAV 5-10,MECH. ROOM,Bessemer Trust,inside the contiguous .5.51-.63 Bessemer block; BAS Bessemer=vav5_1..13 (13); P8S had 12,HIGH
+device 5163,192.168.5.163,VAV-5-3,MECH. ROOM,ER Injury Attorneys,inside the contiguous .5.161-.172 ER Injury block; BAS ER Injury=vav-5-1..12 (12); P8S had 10,HIGH
+device 5168,192.168.5.168,VAV-5-8,MECH. ROOM,ER Injury Attorneys,inside the contiguous .5.161-.172 ER Injury block,HIGH
+device 3034,192.168.3.34,VAV-3-04,(none),"Rimini Street, Inc.",inside the contiguous .3.31-.36 Rimini block (VAV-3-01..06); BAS Rimini=VAV3_01..06 (6); P8S had 5,HIGH
+device 115036,192.168.3.62,Procedure Rm 105,(none),Dr. Snyder Cosmetic Dentistry,"adjacent to .3.61 'Vocational Rm 103' already mapped to Dr Snyder; BAS SnyderDental=VAV3_61,62 (2); P8S had 1",HIGH
+device 193231,192.168.2.70,VAV-2-1,TENANT SPACE,Suite260 (NEW ZONE),"BAS Suite260=VAV_2_1,VAV_2_2,VAV_2_3; .2.70/.2.71 are the only unassigned VAV-2-1/2",MEDIUM
+device 20106,192.168.2.71,VAV-2-2,TENANT SPACE,Suite260 (NEW ZONE),as above,MEDIUM
