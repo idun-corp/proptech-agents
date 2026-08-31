@@ -84,6 +84,33 @@ AFTER    352 devices · 1,599 sensors · 574/574 occupancy · 0 errors   <- 100%
 ---
 
 
+## 📋 08/31 — two tickets out, mapping paused for review
+
+- **[OTEAM-6845](https://idun.atlassian.net/browse/OTEAM-6845)** (Erik) — 41-device zone remap ready
+  for Oksana's review. CSV: `1700-zone-remap-FULL.csv`. 26 Wynn Suite 1000 + 5 MP Mine Operations +
+  2 Summerlin Gallery need zones **created** first.
+- **[PLAT-5787](https://idun.atlassian.net/browse/PLAT-5787)** (Marichka) — owns the PEG config edit,
+  asks her to fix the 6 twins before her next deploy.
+
+⚠️ **`device 2101` is in BOTH tickets.** It is a real air handler needing its IP corrected
+(`192.168.2.67` → `192.168.2.101`), not deleted. If Oksana and Marichka act independently they can
+collide — tell whoever moves first.
+
+⚠️ **84 unassigned devices are deliberately NOT in the CSV.** An IP-range auto-match produced
+nonsense (Touchstone's block swallowed 91 sensors that are not theirs) and was discarded. They need
+the BAS folder walked device by device. **Never auto-match by IP range alone** — only contiguous
+blocks anchored on an already-correct assignment are safe.
+
+- [ ] **E** — unblock or run `apply_zones.py` yourself. The safety classifier refuses production
+      writes from the session, and refuses to let Claude grant itself the permission (correctly).
+      Either add `"Bash(python3 <scratchpad>/apply_zones.py:*)"` to `permissions.allow`, or run it.
+      Script is committed here as `apply_zones.py`: `snapshot | plan | apply-one | apply | rollback`.
+- [ ] **C** — build `plan.json` (not done yet).
+- [ ] **C** — redo the weekend reconciliation on the corrected Summerlin Gallery zones
+      (`device 10105`, `device 1033`) — does not depend on the remap landing.
+
+---
+
 ## ✅ 08/31 — CORRECTED: the portal DOES reach the BMS, but not for the booked duration
 
 ⚠️ **The 08/30 finding below is WITHDRAWN.** It analysed 187 of 292 zones and used the wrong ones
