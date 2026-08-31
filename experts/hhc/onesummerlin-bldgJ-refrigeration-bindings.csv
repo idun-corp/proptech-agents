@@ -1,0 +1,257 @@
+unit,instance,floor,riser,object_id,vendor_name,units,sensor_uuid,device_uuid,sample
+AHU-J1-9,723101,9,J1,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,81bea6d9-257d-4ace-a8fe-4d1ba4f1cbe1,fa14dc51-0010-4416-8401-57424dee8777,78.697265625
+AHU-J1-9,723101,9,J1,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,d4e2f551-dc29-4436-a637-a7f6ef5aca18,fa14dc51-0010-4416-8401-57424dee8777,78.705078125
+AHU-J1-9,723101,9,J1,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,67935f1b-4f93-4681-817d-68f88d76539f,fa14dc51-0010-4416-8401-57424dee8777,78.416015625
+AHU-J1-9,723101,9,J1,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,a92568c0-56c1-44f0-a072-d001d1f972e1,fa14dc51-0010-4416-8401-57424dee8777,56.763671875
+AHU-J1-9,723101,9,J1,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,32664ae8-a641-46ca-9ce2-fa19e29864e8,fa14dc51-0010-4416-8401-57424dee8777,48.130859375
+AHU-J1-9,723101,9,J1,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,e4d82141-60e0-472d-ab14-03bfde6e4e26,fa14dc51-0010-4416-8401-57424dee8777,54.947265625
+AHU-J1-9,723101,9,J1,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,25c13048-1a79-4a35-b516-3d3096ccd035,fa14dc51-0010-4416-8401-57424dee8777,78.220703125
+AHU-J1-9,723101,9,J1,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,42bf1cd3-06ff-4ae5-a1ec-245d14842333,fa14dc51-0010-4416-8401-57424dee8777,90.974609375
+AHU-J1-9,723101,9,J1,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,3a1606b7-41b8-47d9-9706-d9ebe2cb96b0,fa14dc51-0010-4416-8401-57424dee8777,78.373046875
+AHU-J1-9,723101,9,J1,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,b7457e63-a84d-4030-90ec-cda7c8010816,fa14dc51-0010-4416-8401-57424dee8777,75.001953125
+AHU-J1-9,723101,9,J1,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,6d40abca-19a0-4bc2-a4a8-1114b8ab5279,fa14dc51-0010-4416-8401-57424dee8777,58.158203125
+AHU-J1-9,723101,9,J1,analog-input 15,Space Temperature Active,degrees-fahrenheit,7825d1ce-807b-4a45-9246-3229726100d5,fa14dc51-0010-4416-8401-57424dee8777,76.908203125
+AHU-J1-9,723101,9,J1,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,107e0318-07d5-4a25-85e9-f7181c806977,fa14dc51-0010-4416-8401-57424dee8777,75.041015625
+AHU-J1-9,723101,9,J1,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,4392f183-5bd4-4101-bbf8-e068e1790d84,fa14dc51-0010-4416-8401-57424dee8777,0.0
+AHU-J1-9,723101,9,J1,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,e1e4a89a-5aee-4912-977d-20699bbfcb85,fa14dc51-0010-4416-8401-57424dee8777,72.501953125
+AHU-J1-9,723101,9,J1,analog-input 28,Duct Static Pressure Active,inches-of-water,0901677b-b588-4cd7-b94f-0fc62eb2dec1,fa14dc51-0010-4416-8401-57424dee8777,1.51220703125
+AHU J2-9,723102,9,J2,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,4be185ed-0ca7-4cc8-a9f0-1bdcbf6dd30a,6f4d1cfe-3c54-4722-bb43-436ec23306af,77.943359375
+AHU J2-9,723102,9,J2,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,87d5645f-0757-482a-97ab-1c0dc3966b49,6f4d1cfe-3c54-4722-bb43-436ec23306af,80.251953125
+AHU J2-9,723102,9,J2,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,d079eb61-0aa9-4bce-82c3-5e42a96e0add,6f4d1cfe-3c54-4722-bb43-436ec23306af,80.177734375
+AHU J2-9,723102,9,J2,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,f8aec2db-5e84-43e1-a27f-7c6ba7b4554a,6f4d1cfe-3c54-4722-bb43-436ec23306af,35.095703125
+AHU J2-9,723102,9,J2,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,d0fdfe47-2121-4cf4-ad67-ddbea02a6025,6f4d1cfe-3c54-4722-bb43-436ec23306af,61.158203125
+AHU J2-9,723102,9,J2,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,c2caae5b-18e8-4858-88df-5226608d85c4,6f4d1cfe-3c54-4722-bb43-436ec23306af,56.248046875
+AHU J2-9,723102,9,J2,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,c275f9b6-6c70-410c-834c-5eb9af96c4f8,6f4d1cfe-3c54-4722-bb43-436ec23306af,95.771484375
+AHU J2-9,723102,9,J2,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,fb7aba03-bc58-4b10-a188-3ea4ce619ba6,6f4d1cfe-3c54-4722-bb43-436ec23306af,78.533203125
+AHU J2-9,723102,9,J2,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,4b143829-46c7-4dde-913a-58d8775ecb18,6f4d1cfe-3c54-4722-bb43-436ec23306af,76.521484375
+AHU J2-9,723102,9,J2,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,9e9ae1bf-ae3c-49fe-a9d7-133ffdb4aa93,6f4d1cfe-3c54-4722-bb43-436ec23306af,75.185546875
+AHU J2-9,723102,9,J2,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,605f99dd-f086-4e10-bf6f-3fd7ed8e4c3c,6f4d1cfe-3c54-4722-bb43-436ec23306af,57.376953125
+AHU J2-9,723102,9,J2,analog-input 15,Space Temperature Active,degrees-fahrenheit,6d581cad-f06f-489b-9853-047eae0dd3a5,6f4d1cfe-3c54-4722-bb43-436ec23306af,77.001953125
+AHU J2-9,723102,9,J2,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,a033cf1d-fbc2-42b0-8fd4-d6d589886ba3,6f4d1cfe-3c54-4722-bb43-436ec23306af,82.205078125
+AHU J2-9,723102,9,J2,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,59197150-4209-457b-9417-4e5a06e3c6cf,6f4d1cfe-3c54-4722-bb43-436ec23306af,0.0
+AHU J2-9,723102,9,J2,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,1c3741db-1838-4492-9f5b-bf17b1b6628f,6f4d1cfe-3c54-4722-bb43-436ec23306af,72.501953125
+AHU J2-9,723102,9,J2,analog-input 28,Duct Static Pressure Active,inches-of-water,7fc5459b-d135-406e-af64-c2e3e1d2e030,6f4d1cfe-3c54-4722-bb43-436ec23306af,1.345947265625
+AHU J1-8,723104,8,J1,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,e69a6259-636a-4259-977e-8cd0cb94f38d,25d2095d-24d2-4af3-a168-5498cfec3215,77.638671875
+AHU J1-8,723104,8,J1,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,a0597703-2c59-42a9-b561-1470ca5c1ada,25d2095d-24d2-4af3-a168-5498cfec3215,79.587890625
+AHU J1-8,723104,8,J1,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,6ca72169-ca50-47b6-bef5-e325b04e1db2,25d2095d-24d2-4af3-a168-5498cfec3215,79.587890625
+AHU J1-8,723104,8,J1,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,316e73f0-b420-47b9-8c5f-2183f752bdcc,25d2095d-24d2-4af3-a168-5498cfec3215,43.560546875
+AHU J1-8,723104,8,J1,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,0d229e50-00a8-48bd-9ff3-d386e2056a75,25d2095d-24d2-4af3-a168-5498cfec3215,61.736328125
+AHU J1-8,723104,8,J1,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,530681dc-4c58-4880-9ade-66a124c82562,25d2095d-24d2-4af3-a168-5498cfec3215,59.826171875
+AHU J1-8,723104,8,J1,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,c95a837a-b61a-4cdf-b1ed-678ba8474073,25d2095d-24d2-4af3-a168-5498cfec3215,90.353515625
+AHU J1-8,723104,8,J1,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,9c2e1418-d558-471c-b924-24529d02eb7e,25d2095d-24d2-4af3-a168-5498cfec3215,77.255859375
+AHU J1-8,723104,8,J1,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,1de5c754-6ca4-41ce-8412-0e46849089bb,25d2095d-24d2-4af3-a168-5498cfec3215,77.095703125
+AHU J1-8,723104,8,J1,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,09bb0c0e-c975-49b2-910d-6cd8e26c6cb2,25d2095d-24d2-4af3-a168-5498cfec3215,71.302734375
+AHU J1-8,723104,8,J1,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,2fd72f4c-6c08-43f0-b0d6-a4851159acec,25d2095d-24d2-4af3-a168-5498cfec3215,60.236328125
+AHU J1-8,723104,8,J1,analog-input 15,Space Temperature Active,degrees-fahrenheit,cbb1c93d-080c-4dd9-89d8-6131aecb9c75,25d2095d-24d2-4af3-a168-5498cfec3215,76.916015625
+AHU J1-8,723104,8,J1,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,696dad19-9e1a-484e-bac4-609b545c0e65,25d2095d-24d2-4af3-a168-5498cfec3215,-39.998046875
+AHU J1-8,723104,8,J1,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,087c9eaf-8292-49f0-8f31-f8507406ea76,25d2095d-24d2-4af3-a168-5498cfec3215,57.001953125
+AHU J1-8,723104,8,J1,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,b9d60b3b-59e5-4d4a-ac69-6d321b5f505e,25d2095d-24d2-4af3-a168-5498cfec3215,74.001953125
+AHU J1-8,723104,8,J1,analog-input 28,Duct Static Pressure Active,inches-of-water,a298daaa-8f64-452f-a7b4-4c55960d6dd8,25d2095d-24d2-4af3-a168-5498cfec3215,1.27783203125
+AHU J2-8,723105,8,J2,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,d9bdd669-5efb-4217-9d7a-35c493bf270a,2585ba4e-8b3b-4056-841f-47391592105d,76.837890625
+AHU J2-8,723105,8,J2,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,5dc10ad0-b5a1-40c8-8eca-a2e9bb4b275f,2585ba4e-8b3b-4056-841f-47391592105d,77.888671875
+AHU J2-8,723105,8,J2,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,6fc6598d-8bf2-4e46-a316-9e52255c7e99,2585ba4e-8b3b-4056-841f-47391592105d,77.888671875
+AHU J2-8,723105,8,J2,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,30583194-0c94-4f2f-819e-4bb8083eeb01,2585ba4e-8b3b-4056-841f-47391592105d,38.361328125
+AHU J2-8,723105,8,J2,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,eb6afd3c-7817-408e-8213-c42623040f31,2585ba4e-8b3b-4056-841f-47391592105d,62.373046875
+AHU J2-8,723105,8,J2,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,4a22eca0-74b0-4cd4-9a68-f67eb263a3a1,2585ba4e-8b3b-4056-841f-47391592105d,59.505859375
+AHU J2-8,723105,8,J2,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,ad65d62e-5bb7-43b5-85fd-ab8c95271195,2585ba4e-8b3b-4056-841f-47391592105d,90.439453125
+AHU J2-8,723105,8,J2,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,caf67122-e68d-45b9-bf43-9397d28bcc9b,2585ba4e-8b3b-4056-841f-47391592105d,76.638671875
+AHU J2-8,723105,8,J2,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,d6dd4508-b447-4b75-9ed1-acb38b86d435,2585ba4e-8b3b-4056-841f-47391592105d,75.923828125
+AHU J2-8,723105,8,J2,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,74815fd2-8c4d-4822-98cc-a95d4e72b6d3,2585ba4e-8b3b-4056-841f-47391592105d,70.388671875
+AHU J2-8,723105,8,J2,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,db0d69c7-0a35-4c35-9896-a45106cf3efd,2585ba4e-8b3b-4056-841f-47391592105d,61.876953125
+AHU J2-8,723105,8,J2,analog-input 15,Space Temperature Active,degrees-fahrenheit,84ba38f7-6dae-46f6-a1a9-e65e8d983ebc,2585ba4e-8b3b-4056-841f-47391592105d,77.044921875
+AHU J2-8,723105,8,J2,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,ef873d9c-5b4d-49bd-978c-76ac87591071,2585ba4e-8b3b-4056-841f-47391592105d,-39.998046875
+AHU J2-8,723105,8,J2,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,4dac74ba-1225-40db-8afc-f23cd1028c23,2585ba4e-8b3b-4056-841f-47391592105d,57.001953125
+AHU J2-8,723105,8,J2,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,f781c765-7b13-482b-9942-d9091d7f45c0,2585ba4e-8b3b-4056-841f-47391592105d,74.001953125
+AHU J2-8,723105,8,J2,analog-input 28,Duct Static Pressure Active,inches-of-water,bb448a56-5b0c-4adf-80dd-8bd9022968bb,2585ba4e-8b3b-4056-841f-47391592105d,1.615234375
+AHU-J1-7,723107,7,J1,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,49ccef6a-9ee4-40cb-b6a3-b32bb7ae9702,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,77.638671875
+AHU-J1-7,723107,7,J1,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,31007c00-f5bd-4712-8ba8-5e801f190bf8,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,77.591796875
+AHU-J1-7,723107,7,J1,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,2cf89c6d-56cd-4425-af99-52d3d0d41ec3,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,77.591796875
+AHU-J1-7,723107,7,J1,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,d279dc00-1e02-4d85-9c1c-d2cd57b01411,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,58.869140625
+AHU-J1-7,723107,7,J1,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,1df7acf1-10fc-4259-9a25-8939cf158348,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,61.259765625
+AHU-J1-7,723107,7,J1,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,4dbf55c6-cede-4558-8002-818c86c8c190,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,58.111328125
+AHU-J1-7,723107,7,J1,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,9f81dbae-9604-4d8b-9a17-3c02396213d7,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,88.111328125
+AHU-J1-7,723107,7,J1,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,c21c14c0-dff5-4f19-b9ab-2706adb1451d,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,78.427734375
+AHU-J1-7,723107,7,J1,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,7d25c554-591c-4e4b-8011-071b9a161cf2,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,77.896484375
+AHU-J1-7,723107,7,J1,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,46d44192-e9fb-4b88-9056-2dca31a8deb1,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,71.939453125
+AHU-J1-7,723107,7,J1,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,6da582e4-da7a-45ef-9f4f-caabdab7e77a,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,60.845703125
+AHU-J1-7,723107,7,J1,analog-input 15,Space Temperature Active,degrees-fahrenheit,5a237e01-4248-498a-8a26-b2130ad724c9,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,8.955078125
+AHU-J1-7,723107,7,J1,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,1efb464e-5116-493a-a011-6ce7052bfe1e,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,86.576171875
+AHU-J1-7,723107,7,J1,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,89bcf179-1959-481a-a5a4-b315b7329333,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,0.0
+AHU-J1-7,723107,7,J1,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,7aff8998-c057-4ea3-8e92-01858b792ee6,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,72.501953125
+AHU-J1-7,723107,7,J1,analog-input 28,Duct Static Pressure Active,inches-of-water,4ae83ceb-bb91-4b93-9ea3-100449329517,c64e5ff0-3fd6-44d4-bdfe-94efe6ef521f,1.4951171875
+AHU-J2-7,723108,7,J2,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,eca47de4-d452-49b4-89d6-58e3dc8f8947,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,76.400390625
+AHU-J2-7,723108,7,J2,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,1dc97c93-8520-4f13-967f-cb4844c72810,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,85.416015625
+AHU-J2-7,723108,7,J2,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,b4a489ce-c237-4397-bd6c-73edbb83010e,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,85.326171875
+AHU-J2-7,723108,7,J2,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,5759f554-1939-4a58-bf1a-9c97e123ea26,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,51.595703125
+AHU-J2-7,723108,7,J2,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,101629fd-1dfe-43e9-85b6-c5c5f5fd5d12,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,38.294921875
+AHU-J2-7,723108,7,J2,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,de25c7ad-6647-4a59-98d2-3677a02b2b14,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,34.431640625
+AHU-J2-7,723108,7,J2,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,e00850df-2b1a-40a4-97d0-f2324c924b4e,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,77.189453125
+AHU-J2-7,723108,7,J2,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,d924207a-d54e-4180-ac0b-41fc8c9be34e,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,90.259765625
+AHU-J2-7,723108,7,J2,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,7ea8a45c-1c7d-4ab2-bc67-2f903f87d3e8,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,88.947265625
+AHU-J2-7,723108,7,J2,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,494272d6-eddb-4c49-9495-035cc6ec8ca8,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,73.751953125
+AHU-J2-7,723108,7,J2,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,830d7719-3db7-4cdc-81ea-3561f6539aa0,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,52.048828125
+AHU-J2-7,723108,7,J2,analog-input 15,Space Temperature Active,degrees-fahrenheit,3d0bc058-4d1b-4d1d-b45a-f16cd0da6794,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,77.029296875
+AHU-J2-7,723108,7,J2,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,3e970cf7-cfda-4b6d-ba84-38f5deb73851,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,89.205078125
+AHU-J2-7,723108,7,J2,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,1032acfd-35a5-45e6-8fc3-a56813087657,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,0.0
+AHU-J2-7,723108,7,J2,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,fa7a1c26-3087-45ef-b8b9-ec4b9fdda24b,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,72.501953125
+AHU-J2-7,723108,7,J2,analog-input 28,Duct Static Pressure Active,inches-of-water,8db83c61-058d-428e-a1a8-e45a6b434d4b,a3939da7-e08f-44c5-8cba-4f6da7bdf4ed,1.455322265625
+AHU-J1-6,723110,6,J1,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,e871484a-6ed3-4561-99c3-f296463d1e07,8cbbda74-50f8-4893-9792-edfac679f025,77.630859375
+AHU-J1-6,723110,6,J1,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,75fef231-719a-4a31-bf31-039636888f31,8cbbda74-50f8-4893-9792-edfac679f025,78.951171875
+AHU-J1-6,723110,6,J1,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,169ab3d6-b09b-483a-9597-efb214c4c04d,8cbbda74-50f8-4893-9792-edfac679f025,79.373046875
+AHU-J1-6,723110,6,J1,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,6c92ca2b-6f79-499a-b856-612c25fa6a6f,8cbbda74-50f8-4893-9792-edfac679f025,37.748046875
+AHU-J1-6,723110,6,J1,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,258e7030-288f-401f-af70-93eb0131ea7c,8cbbda74-50f8-4893-9792-edfac679f025,58.388671875
+AHU-J1-6,723110,6,J1,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,a1ca3ec4-91b0-4f3a-a27b-e3f69c91819e,8cbbda74-50f8-4893-9792-edfac679f025,51.708984375
+AHU-J1-6,723110,6,J1,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,13f95939-0a85-4118-8bd0-43ca11946e1d,8cbbda74-50f8-4893-9792-edfac679f025,86.837890625
+AHU-J1-6,723110,6,J1,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,5bb1022a-1405-4ccc-9052-4df4f8cdbb8a,8cbbda74-50f8-4893-9792-edfac679f025,78.314453125
+AHU-J1-6,723110,6,J1,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,d68719c2-3c5d-4444-b456-c9f4432df162,8cbbda74-50f8-4893-9792-edfac679f025,77.658203125
+AHU-J1-6,723110,6,J1,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,26e95834-4cce-4c86-ae29-f1d851c7ee9f,8cbbda74-50f8-4893-9792-edfac679f025,71.939453125
+AHU-J1-6,723110,6,J1,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,0025c7e1-1f64-4012-95d0-94a160aa9047,8cbbda74-50f8-4893-9792-edfac679f025,53.587890625
+AHU-J1-6,723110,6,J1,analog-input 15,Space Temperature Active,degrees-fahrenheit,68357ff3-3cd9-424d-96cf-c3f8b7a525dd,8cbbda74-50f8-4893-9792-edfac679f025,76.962890625
+AHU-J1-6,723110,6,J1,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,e54b735d-3d1c-48da-9b31-bd1d6fd4d948,8cbbda74-50f8-4893-9792-edfac679f025,89.693359375
+AHU-J1-6,723110,6,J1,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,de2d73a1-4e36-4b6b-8ff6-4a39f4fb9566,8cbbda74-50f8-4893-9792-edfac679f025,0.0
+AHU-J1-6,723110,6,J1,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,be39280d-ca9c-4ef9-8e54-9d24c56658f6,8cbbda74-50f8-4893-9792-edfac679f025,72.501953125
+AHU-J1-6,723110,6,J1,analog-input 28,Duct Static Pressure Active,inches-of-water,9b8dde1a-c236-4aa5-9fe5-f0ef87775c77,8cbbda74-50f8-4893-9792-edfac679f025,1.801513671875
+AHU-J2-6,723111,6,J2,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,e8305118-04a2-43be-9cdb-72ffdda78246,6f974fa7-45ab-4731-8878-f0d1b63837ca,79.431640625
+AHU-J2-6,723111,6,J2,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,8adf834d-5b80-475a-8c98-68e826a2c583,6f974fa7-45ab-4731-8878-f0d1b63837ca,78.314453125
+AHU-J2-6,723111,6,J2,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,cfa05484-8806-44ea-8a30-e1be59c31ce0,6f974fa7-45ab-4731-8878-f0d1b63837ca,78.314453125
+AHU-J2-6,723111,6,J2,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,163790df-7861-4c84-8a77-3ff61c4640da,6f974fa7-45ab-4731-8878-f0d1b63837ca,51.818359375
+AHU-J2-6,723111,6,J2,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,d03ea982-d135-47a9-8e10-a40b166d542f,6f974fa7-45ab-4731-8878-f0d1b63837ca,60.201171875
+AHU-J2-6,723111,6,J2,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,9ada797d-9c84-4648-8631-3db05bf2b1c7,6f974fa7-45ab-4731-8878-f0d1b63837ca,
+AHU-J2-6,723111,6,J2,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,06da3aed-00b8-4a47-ae5b-6ff83cacb5e5,6f974fa7-45ab-4731-8878-f0d1b63837ca,88.837890625
+AHU-J2-6,723111,6,J2,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,4bac5dab-e1f3-413f-830d-0c6b44d52120,6f974fa7-45ab-4731-8878-f0d1b63837ca,78.052734375
+AHU-J2-6,723111,6,J2,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,faaa5a3f-22d1-49a0-8cb9-e43fe11049e8,6f974fa7-45ab-4731-8878-f0d1b63837ca,78.849609375
+AHU-J2-6,723111,6,J2,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,d82ab95d-c8eb-4c02-a194-822a32796f91,6f974fa7-45ab-4731-8878-f0d1b63837ca,74.490234375
+AHU-J2-6,723111,6,J2,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,a62d0107-62f2-4a69-9a8f-d5a66b30aa53,6f974fa7-45ab-4731-8878-f0d1b63837ca,58.693359375
+AHU-J2-6,723111,6,J2,analog-input 15,Space Temperature Active,degrees-fahrenheit,de1f0a05-646a-41e3-8283-18c97bb7a54d,6f974fa7-45ab-4731-8878-f0d1b63837ca,76.884765625
+AHU-J2-6,723111,6,J2,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,344d0486-7ee7-41ee-bbd9-b11aa8cd96cf,6f974fa7-45ab-4731-8878-f0d1b63837ca,90.501953125
+AHU-J2-6,723111,6,J2,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,e431c899-8590-4565-a335-a301fbef99c4,6f974fa7-45ab-4731-8878-f0d1b63837ca,0.0
+AHU-J2-6,723111,6,J2,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,d8d6431c-8e10-4e29-b04b-cbb9319ee690,6f974fa7-45ab-4731-8878-f0d1b63837ca,72.501953125
+AHU-J2-6,723111,6,J2,analog-input 28,Duct Static Pressure Active,inches-of-water,28183f2d-04bf-46c1-a830-1952f2f28201,6f974fa7-45ab-4731-8878-f0d1b63837ca,1.522216796875
+AHU-J1-5,723113,5,J1,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,b95fa73a-1da7-4f8b-b716-0355cb03e4ca,7beef893-e2c9-41c7-903b-c8ce4fc89172,78.943359375
+AHU-J1-5,723113,5,J1,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,da8b0202-5373-4409-b724-2b17a778b683,7beef893-e2c9-41c7-903b-c8ce4fc89172,85.986328125
+AHU-J1-5,723113,5,J1,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,02b2447e-e17f-49fe-ae00-ba3a1772f1c9,7beef893-e2c9-41c7-903b-c8ce4fc89172,85.708984375
+AHU-J1-5,723113,5,J1,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,a874c6e5-a794-4f79-b67a-7adc2aff0216,7beef893-e2c9-41c7-903b-c8ce4fc89172,57.716796875
+AHU-J1-5,723113,5,J1,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,1eff9885-e417-4631-a7b9-a388f364b871,7beef893-e2c9-41c7-903b-c8ce4fc89172,58.279296875
+AHU-J1-5,723113,5,J1,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,026f9ab0-d959-4ceb-bd44-f0f5c9978de9,7beef893-e2c9-41c7-903b-c8ce4fc89172,47.724609375
+AHU-J1-5,723113,5,J1,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,b70abc62-33be-4577-9233-c2e2b4058f90,7beef893-e2c9-41c7-903b-c8ce4fc89172,77.080078125
+AHU-J1-5,723113,5,J1,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,8f6fe8b3-53b5-402c-998c-381429006013,7beef893-e2c9-41c7-903b-c8ce4fc89172,78.310546875
+AHU-J1-5,723113,5,J1,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,a11a2ce3-87a5-42df-add6-787eafa7d8f5,7beef893-e2c9-41c7-903b-c8ce4fc89172,89.931640625
+AHU-J1-5,723113,5,J1,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,34fe5415-1fa5-42e8-a834-84f979c4a551,7beef893-e2c9-41c7-903b-c8ce4fc89172,71.458984375
+AHU-J1-5,723113,5,J1,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,87a4c84d-6df2-49f8-807c-cc3951f344de,7beef893-e2c9-41c7-903b-c8ce4fc89172,54.646484375
+AHU-J1-5,723113,5,J1,analog-input 15,Space Temperature Active,degrees-fahrenheit,050d576a-04b1-4161-8a0f-a0c0bf596d8f,7beef893-e2c9-41c7-903b-c8ce4fc89172,77.115234375
+AHU-J1-5,723113,5,J1,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,4d3c06fd-5efb-4ea0-8f8e-a73ab65b5edf,7beef893-e2c9-41c7-903b-c8ce4fc89172,90.052734375
+AHU-J1-5,723113,5,J1,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,ce3561c0-a9f7-4dfe-94bc-6f479864325d,7beef893-e2c9-41c7-903b-c8ce4fc89172,0.0
+AHU-J1-5,723113,5,J1,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,359d396c-d46e-40e4-a98b-f814819e8949,7beef893-e2c9-41c7-903b-c8ce4fc89172,72.501953125
+AHU-J1-5,723113,5,J1,analog-input 28,Duct Static Pressure Active,inches-of-water,fa7349ff-03ce-4950-a37c-09607d84576b,7beef893-e2c9-41c7-903b-c8ce4fc89172,1.032470703125
+AHU-J2-5,723114,5,J2,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,adb600a3-4aba-4385-ab98-7f2d84803c93,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,77.677734375
+AHU-J2-5,723114,5,J2,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,1caba290-587d-4426-b049-5bf66c0ae463,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,84.759765625
+AHU-J2-5,723114,5,J2,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,8ce30c96-d8ca-4a3f-9a2b-9885f062d137,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,84.705078125
+AHU-J2-5,723114,5,J2,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,a0803a38-dc5d-4340-a13d-f4f5c198a51f,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,56.763671875
+AHU-J2-5,723114,5,J2,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,3df849b8-87cf-4d1d-aa1a-11b202fdd587,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,54.224609375
+AHU-J2-5,723114,5,J2,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,6f95cda2-6f88-4e1d-b95b-35be806d0f01,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,41.212890625
+AHU-J2-5,723114,5,J2,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,34b22003-8e7b-45dd-adf7-1632b32e77a7,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,77.095703125
+AHU-J2-5,723114,5,J2,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,d29f1209-6da7-409e-ab53-2d64fb1228c8,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,80.740234375
+AHU-J2-5,723114,5,J2,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,d896f707-1bb1-46f5-8d7e-62cf606a488a,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,90.259765625
+AHU-J2-5,723114,5,J2,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,be7a8bfb-fd0a-4c14-9c38-dda5260bb7fe,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,73.533203125
+AHU-J2-5,723114,5,J2,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,15d84da2-a83d-42eb-9f19-a84aede06dc8,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,56.658203125
+AHU-J2-5,723114,5,J2,analog-input 15,Space Temperature Active,degrees-fahrenheit,d50e2f53-7efc-4910-8a01-0649e5b7a96c,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,76.791015625
+AHU-J2-5,723114,5,J2,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,e3e7d7f3-f1b4-494d-9ff5-20d6c2e013b1,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,89.853515625
+AHU-J2-5,723114,5,J2,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,42f1005d-a11e-42f2-a2b8-233227cb75c7,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,0.0
+AHU-J2-5,723114,5,J2,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,d02a4e92-286c-4a26-be55-139e6426dc88,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,72.501953125
+AHU-J2-5,723114,5,J2,analog-input 28,Duct Static Pressure Active,inches-of-water,d8f9878b-41a1-458a-a363-92c97b89670e,fc3ebd54-66af-4957-8f2b-a6b4eb23c79c,1.029296875
+AHU-J1-4,723116,4,J1,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,a5d27dd6-6704-4406-b2a9-c94b13f40a8d,36040ae9-def0-42c1-a9dd-fe1f160998ac,78.740234375
+AHU-J1-4,723116,4,J1,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,f08c7bc9-1a65-4c91-a54a-1573be7ac1f6,36040ae9-def0-42c1-a9dd-fe1f160998ac,79.455078125
+AHU-J1-4,723116,4,J1,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,33563070-00c0-4595-bf36-16c04e2d3762,36040ae9-def0-42c1-a9dd-fe1f160998ac,79.103515625
+AHU-J1-4,723116,4,J1,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,b4ec9c0c-d24c-44ec-aaa4-de4944106e8a,36040ae9-def0-42c1-a9dd-fe1f160998ac,58.693359375
+AHU-J1-4,723116,4,J1,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,5d7fe39b-7b43-40c0-90a0-fc8c89989d33,36040ae9-def0-42c1-a9dd-fe1f160998ac,50.021484375
+AHU-J1-4,723116,4,J1,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,10436378-21a4-4662-a607-52d07d2225c9,36040ae9-def0-42c1-a9dd-fe1f160998ac,55.861328125
+AHU-J1-4,723116,4,J1,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,d8f2ebd4-2db9-4003-a621-a32089231c57,36040ae9-def0-42c1-a9dd-fe1f160998ac,78.029296875
+AHU-J1-4,723116,4,J1,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,a550f0e9-5a50-49de-b629-4a30d3ef81cc,36040ae9-def0-42c1-a9dd-fe1f160998ac,92.798828125
+AHU-J1-4,723116,4,J1,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,d8e7ee42-7d60-42ed-b1ee-cd9b9a329f73,36040ae9-def0-42c1-a9dd-fe1f160998ac,78.951171875
+AHU-J1-4,723116,4,J1,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,ed9d8790-d388-440a-98bc-5d5554a52eb4,36040ae9-def0-42c1-a9dd-fe1f160998ac,72.896484375
+AHU-J1-4,723116,4,J1,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,bbef40db-a5ff-46eb-8c7e-279aecb29231,36040ae9-def0-42c1-a9dd-fe1f160998ac,59.177734375
+AHU-J1-4,723116,4,J1,analog-input 15,Space Temperature Active,degrees-fahrenheit,9a35d5f6-2f71-4f1c-a0bf-f15cc8e1dd51,36040ae9-def0-42c1-a9dd-fe1f160998ac,76.189453125
+AHU-J1-4,723116,4,J1,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,54d9bebf-2333-46a3-b534-fa126bcdcca8,36040ae9-def0-42c1-a9dd-fe1f160998ac,89.349609375
+AHU-J1-4,723116,4,J1,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,f358e49e-e21e-4fb3-a311-6ef7f5e559b2,36040ae9-def0-42c1-a9dd-fe1f160998ac,0.0
+AHU-J1-4,723116,4,J1,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,4062d9f5-7924-4dd8-ae74-5a3476422cf5,36040ae9-def0-42c1-a9dd-fe1f160998ac,72.501953125
+AHU-J1-4,723116,4,J1,analog-input 28,Duct Static Pressure Active,inches-of-water,77b8228c-1c55-46c7-8905-53d14873740f,36040ae9-def0-42c1-a9dd-fe1f160998ac,1.028564453125
+AHU-J2-4,723117,4,J2,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,2bb48e0f-2861-48b2-b9fd-fbc23806d3d5,6cd06ece-48de-4610-8bfa-9b57f6fe3355,77.416015625
+AHU-J2-4,723117,4,J2,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,9a1c716d-fd2c-478a-b857-5d3444fd330c,6cd06ece-48de-4610-8bfa-9b57f6fe3355,83.630859375
+AHU-J2-4,723117,4,J2,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,e52bd665-3ee3-4fd3-bfeb-033441aed998,6cd06ece-48de-4610-8bfa-9b57f6fe3355,84.271484375
+AHU-J2-4,723117,4,J2,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,dcf99c60-c69d-426d-8ede-261ca8612252,6cd06ece-48de-4610-8bfa-9b57f6fe3355,57.955078125
+AHU-J2-4,723117,4,J2,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,7d68b8b6-b1ff-40d1-982a-c75eef4938fc,6cd06ece-48de-4610-8bfa-9b57f6fe3355,42.236328125
+AHU-J2-4,723117,4,J2,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,1c498138-3b31-4d86-85dc-7a213cf52448,6cd06ece-48de-4610-8bfa-9b57f6fe3355,60.099609375
+AHU-J2-4,723117,4,J2,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,d8568384-d1ca-4a10-95a9-52a3fc03fa16,6cd06ece-48de-4610-8bfa-9b57f6fe3355,78.220703125
+AHU-J2-4,723117,4,J2,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,49a3753d-1c9e-4632-959f-81cada682bf9,6cd06ece-48de-4610-8bfa-9b57f6fe3355,85.982421875
+AHU-J2-4,723117,4,J2,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,aeffd9c3-7610-485c-a540-92c5cfce5bc0,6cd06ece-48de-4610-8bfa-9b57f6fe3355,85.283203125
+AHU-J2-4,723117,4,J2,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,94d7ca02-ce6f-48af-bf37-6ea237c26d7c,6cd06ece-48de-4610-8bfa-9b57f6fe3355,73.529296875
+AHU-J2-4,723117,4,J2,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,51cc18d1-5aae-46a4-ba71-5fc39a79b662,6cd06ece-48de-4610-8bfa-9b57f6fe3355,51.107421875
+AHU-J2-4,723117,4,J2,analog-input 15,Space Temperature Active,degrees-fahrenheit,fab30dc3-9848-4623-99de-5fb55db207c3,6cd06ece-48de-4610-8bfa-9b57f6fe3355,76.978515625
+AHU-J2-4,723117,4,J2,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,40bead09-bdb2-4693-9987-1cdd74008cc9,6cd06ece-48de-4610-8bfa-9b57f6fe3355,88.701171875
+AHU-J2-4,723117,4,J2,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,877c9bb8-ea9c-422d-80ab-64a235fd1ce5,6cd06ece-48de-4610-8bfa-9b57f6fe3355,0.0
+AHU-J2-4,723117,4,J2,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,f9e1de93-619d-43c9-b096-e7eec87a4d7d,6cd06ece-48de-4610-8bfa-9b57f6fe3355,72.501953125
+AHU-J2-4,723117,4,J2,analog-input 28,Duct Static Pressure Active,inches-of-water,f043c30a-77e8-4ac1-9f37-109a714e462b,6cd06ece-48de-4610-8bfa-9b57f6fe3355,1.142578125
+AHU-J1-3,723119,3,J1,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,0b1f17c9-72a3-4737-bc28-fac477d54ecb,9fddfa82-2403-4ac3-84a2-d7fed64d0399,79.376953125
+AHU-J1-3,723119,3,J1,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,d16c08af-a282-4888-b480-92c9f0713ba0,9fddfa82-2403-4ac3-84a2-d7fed64d0399,79.685546875
+AHU-J1-3,723119,3,J1,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,1d945ed8-6d28-4153-bfa5-95704a1d5242,9fddfa82-2403-4ac3-84a2-d7fed64d0399,79.693359375
+AHU-J1-3,723119,3,J1,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,85546c31-3225-4b1b-881f-0fb1f5bdfa94,9fddfa82-2403-4ac3-84a2-d7fed64d0399,45.916015625
+AHU-J1-3,723119,3,J1,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,38bcb1b0-312b-4cc4-9828-c84bf612bd59,9fddfa82-2403-4ac3-84a2-d7fed64d0399,59.564453125
+AHU-J1-3,723119,3,J1,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,711426fb-0f57-4d7a-a3a6-58a8f0777108,9fddfa82-2403-4ac3-84a2-d7fed64d0399,56.705078125
+AHU-J1-3,723119,3,J1,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,e2708d39-a760-4e90-aa8f-4879551eddcd,9fddfa82-2403-4ac3-84a2-d7fed64d0399,87.533203125
+AHU-J1-3,723119,3,J1,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,3700ea4a-17d2-471f-9638-7f69dc19ae50,9fddfa82-2403-4ac3-84a2-d7fed64d0399,78.701171875
+AHU-J1-3,723119,3,J1,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,39c25679-ff40-4f64-ba02-4698e84f2599,9fddfa82-2403-4ac3-84a2-d7fed64d0399,78.314453125
+AHU-J1-3,723119,3,J1,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,3eed1ff9-8ac2-47f1-81fd-6053397f7776,9fddfa82-2403-4ac3-84a2-d7fed64d0399,73.162109375
+AHU-J1-3,723119,3,J1,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,d7fe0aac-01e1-42e2-8f9b-03de94625560,9fddfa82-2403-4ac3-84a2-d7fed64d0399,58.685546875
+AHU-J1-3,723119,3,J1,analog-input 15,Space Temperature Active,degrees-fahrenheit,c830856f-95da-4901-ba5e-8c6bcbe34e11,9fddfa82-2403-4ac3-84a2-d7fed64d0399,77.005859375
+AHU-J1-3,723119,3,J1,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,27a6d76d-bd45-4193-bdf7-2fb6abf91182,9fddfa82-2403-4ac3-84a2-d7fed64d0399,89.654296875
+AHU-J1-3,723119,3,J1,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,f9be800b-135f-4fc5-b468-eadd97ab7b08,9fddfa82-2403-4ac3-84a2-d7fed64d0399,0.0
+AHU-J1-3,723119,3,J1,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,ce7515ef-7e4c-4356-b54e-a3eb57ab10a5,9fddfa82-2403-4ac3-84a2-d7fed64d0399,72.501953125
+AHU-J1-3,723119,3,J1,analog-input 28,Duct Static Pressure Active,inches-of-water,c7eb7d60-34d4-492a-903a-c11f75bebdef,9fddfa82-2403-4ac3-84a2-d7fed64d0399,1.45361328125
+AHU-J2-3,723120,3,J2,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,be1dc806-39c7-44fa-8713-73499d5cfbf8,b8f6a776-fac9-4b37-891a-23ea18705f20,77.037109375
+AHU-J2-3,723120,3,J2,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,588f14f8-1c8d-4e1e-aa21-d43707dc6fa4,b8f6a776-fac9-4b37-891a-23ea18705f20,77.794921875
+AHU-J2-3,723120,3,J2,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,524ea711-9af4-4f0a-9086-665a1701f33e,b8f6a776-fac9-4b37-891a-23ea18705f20,78.080078125
+AHU-J2-3,723120,3,J2,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,a7e15dbc-2437-478f-a5f7-03c24a0a42eb,b8f6a776-fac9-4b37-891a-23ea18705f20,32.787109375
+AHU-J2-3,723120,3,J2,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,bf225510-f656-4bae-bf6b-10d659f76d36,b8f6a776-fac9-4b37-891a-23ea18705f20,53.166015625
+AHU-J2-3,723120,3,J2,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,a24dedbd-6fb1-4ff0-af2d-1a05522e66db,b8f6a776-fac9-4b37-891a-23ea18705f20,57.548828125
+AHU-J2-3,723120,3,J2,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,33aa6252-a845-4aab-9bae-460c26ffd671,b8f6a776-fac9-4b37-891a-23ea18705f20,89.923828125
+AHU-J2-3,723120,3,J2,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,395bfba5-2590-4013-9266-845a793d8d2b,b8f6a776-fac9-4b37-891a-23ea18705f20,77.994140625
+AHU-J2-3,723120,3,J2,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,e2536d99-d3d6-4681-9020-cb71d89e1fd8,b8f6a776-fac9-4b37-891a-23ea18705f20,77.095703125
+AHU-J2-3,723120,3,J2,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,b3ff97fd-0de9-432a-8d16-b0ec61f95c77,b8f6a776-fac9-4b37-891a-23ea18705f20,74.490234375
+AHU-J2-3,723120,3,J2,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,5a983606-f4db-422a-8525-e2d7d4a7b95d,b8f6a776-fac9-4b37-891a-23ea18705f20,57.919921875
+AHU-J2-3,723120,3,J2,analog-input 15,Space Temperature Active,degrees-fahrenheit,aa89a2b8-2c69-4b3b-92a8-8663c05bcfd4,b8f6a776-fac9-4b37-891a-23ea18705f20,77.029296875
+AHU-J2-3,723120,3,J2,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,41ab148e-e601-4d7f-bc82-f48b7caee72b,b8f6a776-fac9-4b37-891a-23ea18705f20,90.302734375
+AHU-J2-3,723120,3,J2,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,199b835f-51b9-47c2-8a76-0bb1703d5f2f,b8f6a776-fac9-4b37-891a-23ea18705f20,0.0
+AHU-J2-3,723120,3,J2,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,5013ce36-1be8-43b5-8623-e60aab04e6a1,b8f6a776-fac9-4b37-891a-23ea18705f20,72.501953125
+AHU-J2-3,723120,3,J2,analog-input 28,Duct Static Pressure Active,inches-of-water,64c171d5-accf-4d99-9ff3-8944fdd7ae47,b8f6a776-fac9-4b37-891a-23ea18705f20,1.66455078125
+AHU J1-2,723122,2,J1,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,cc106f9f-ef44-4c05-8687-7829722c0ca8,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,78.533203125
+AHU J1-2,723122,2,J1,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,937de66d-22eb-4fa7-9dfd-dc4b7aa2fd7c,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,77.837890625
+AHU J1-2,723122,2,J1,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,f51c9896-88c8-4c99-903f-a75b3fe9ec9f,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,77.736328125
+AHU J1-2,723122,2,J1,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,186fc0d6-08e7-4ce5-af22-f9c5142c3526,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,57.943359375
+AHU J1-2,723122,2,J1,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,b194f741-d57a-4539-900c-55b8192a3018,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,49.697265625
+AHU J1-2,723122,2,J1,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,d1f2c4b2-ad47-4b40-9945-78031173ea25,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,56.931640625
+AHU J1-2,723122,2,J1,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,8199285e-9206-4ca3-bdc9-b9676fddec0e,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,78.826171875
+AHU J1-2,723122,2,J1,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,be033146-aa17-4e15-80d6-af3d17cbd040,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,89.779296875
+AHU J1-2,723122,2,J1,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,661da13c-d638-4d90-9038-3d872d8dd97d,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,79.048828125
+AHU J1-2,723122,2,J1,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,3deecdc8-e133-4329-9924-add901516e2d,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,74.330078125
+AHU J1-2,723122,2,J1,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,876d83b7-caec-4d0a-b4f4-0d0836f22770,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,59.666015625
+AHU J1-2,723122,2,J1,analog-input 15,Space Temperature Active,degrees-fahrenheit,620cead6-6693-4f89-86ec-7f1b722083b8,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,77.037109375
+AHU J1-2,723122,2,J1,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,4ff3e5a2-84b1-43a0-857e-4e59ac450091,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,89.603515625
+AHU J1-2,723122,2,J1,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,f2915ec5-47b0-42d7-b951-8375db63af15,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,0.0
+AHU J1-2,723122,2,J1,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,06e48b0c-4735-4da2-97d5-8f67e36815fc,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,72.501953125
+AHU J1-2,723122,2,J1,analog-input 28,Duct Static Pressure Active,inches-of-water,60b5ce8c-358b-435e-a7a3-b20cf6fa5c59,c52a28dd-8a5b-4c22-93c1-f1b1bac100ad,1.37646484375
+AHU-J2-2,723123,2,J2,analog-input 35,Condenser Water Entering Temperature,degrees-fahrenheit,a4b07c94-a161-4512-bc06-cc9b4547c211,04586eee-1ebd-4e49-a117-a8d9db894a6b,78.705078125
+AHU-J2-2,723123,2,J2,analog-input 46,Condenser Water Leaving Temperature Active,degrees-fahrenheit,0c219703-5579-42d7-984a-23b6b0a0626b,04586eee-1ebd-4e49-a117-a8d9db894a6b,79.955078125
+AHU-J2-2,723123,2,J2,analog-input 47,Condenser Water Temperature Local,degrees-fahrenheit,20f98188-7452-4c4a-864e-5ad589e2a3b6,04586eee-1ebd-4e49-a117-a8d9db894a6b,79.630859375
+AHU-J2-2,723123,2,J2,analog-input 38,Evaporator Leaving Temperature Circuit 1,degrees-fahrenheit,66fb3d74-e79b-436f-9918-e9bd8edcfdf4,04586eee-1ebd-4e49-a117-a8d9db894a6b,59.111328125
+AHU-J2-2,723123,2,J2,analog-input 39,Evaporator Leaving Temperature Circuit 2,degrees-fahrenheit,8cd1bfb6-de76-4644-9fb3-e0adaf8f9d6b,04586eee-1ebd-4e49-a117-a8d9db894a6b,49.794921875
+AHU-J2-2,723123,2,J2,analog-input 40,Evaporator Leaving Temperature Circuit 3,degrees-fahrenheit,7a5c3a98-a55c-4e3c-9f24-869cc94b81fc,04586eee-1ebd-4e49-a117-a8d9db894a6b,56.583984375
+AHU-J2-2,723123,2,J2,analog-input 42,Condensing Saturated Temperature Circuit 1,degrees-fahrenheit,3a37843e-822b-4619-88ea-0cdbfa4b519d,04586eee-1ebd-4e49-a117-a8d9db894a6b,78.533203125
+AHU-J2-2,723123,2,J2,analog-input 43,Condensing Saturated Temperature Circuit 2,degrees-fahrenheit,39818524-7efa-4850-9ef2-2495bf814814,04586eee-1ebd-4e49-a117-a8d9db894a6b,90.392578125
+AHU-J2-2,723123,2,J2,analog-input 44,Condensing Saturated Temperature Circuit 3,degrees-fahrenheit,76cf3bae-8879-462b-853d-8c30a3d5cbf1,04586eee-1ebd-4e49-a117-a8d9db894a6b,78.951171875
+AHU-J2-2,723123,2,J2,analog-input 25,Mixed Air Temperature,degrees-fahrenheit,a4767148-2fda-4185-96b6-9b3146075004,04586eee-1ebd-4e49-a117-a8d9db894a6b,75.126953125
+AHU-J2-2,723123,2,J2,analog-input 24,Discharge Air Temperature Active,degrees-fahrenheit,ee0fbff6-63db-48a1-b3fd-31d2beb14379,04586eee-1ebd-4e49-a117-a8d9db894a6b,59.666015625
+AHU-J2-2,723123,2,J2,analog-input 15,Space Temperature Active,degrees-fahrenheit,19a8674f-e3f7-4ebe-97b8-594ba58cf189,04586eee-1ebd-4e49-a117-a8d9db894a6b,77.005859375
+AHU-J2-2,723123,2,J2,analog-input 18,Outdoor Air Temperature Active,degrees-fahrenheit,c5ddce74-8ac2-43ad-a2ca-855a62ed6d3c,04586eee-1ebd-4e49-a117-a8d9db894a6b,90.556640625
+AHU-J2-2,723123,2,J2,analog-input 52,Discharge Air Temperature Setpoint Active,degrees-fahrenheit,935d39f7-85ec-4b33-8cd3-75ee5537bd93,04586eee-1ebd-4e49-a117-a8d9db894a6b,0.0
+AHU-J2-2,723123,2,J2,analog-input 50,Space Temperature Setpoint Active,degrees-fahrenheit,bee5068a-f12c-4e8f-a4c1-c229b6ebac54,04586eee-1ebd-4e49-a117-a8d9db894a6b,72.501953125
+AHU-J2-2,723123,2,J2,analog-input 28,Duct Static Pressure Active,inches-of-water,c9e02f46-846b-4400-a08a-2cee4a50137e,04586eee-1ebd-4e49-a117-a8d9db894a6b,1.255615234375
