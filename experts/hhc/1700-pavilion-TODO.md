@@ -84,6 +84,44 @@ AFTER    352 devices · 1,599 sensors · 574/574 occupancy · 0 errors   <- 100%
 ---
 
 
+## ✅ 08/31 — CORRECTED: the portal DOES reach the BMS, but not for the booked duration
+
+⚠️ **The 08/30 finding below is WITHDRAWN.** It analysed 187 of 292 zones and used the wrong ones
+for Summerlin Gallery. Erik challenged it; he was right.
+
+**The BAS Nav tree groups every VAV by tenant/suite** — see `1700-bas-tenant-tree.md`. Reached via
+LogMeIn → Px View. That is the mapping we could not rebuild from ProptechOS.
+
+**Suite 120 = Summerlin Gallery = 2 VAVs only:** `vav1_05` (device 10105), `vav1_23` (device 1033).
+The 15-zone "Howard Hughes Holdings" group is **Suite 250**, a different tenant.
+
+```
+SUNDAY   $450 / 07:00-17:00   vav1_23 on 06:56 -> off 10:04  (3h08 of 10h) · vav1_05 never on
+SATURDAY $180 / 13:00-17:00   vav1_23 on 06:10 -> off 17:07  (covers it)   · vav1_05 off 13:12
+```
+
+- The portal **does** reach the BMS — Sunday had no base schedule and vav1_23 came on at 06:56,
+  four minutes before a 07:00 booking.
+- The **duration is not honoured** — that is the actual defect.
+- It is **not Bypass**: neither zone entered state 3, the request shows as *Occupied*.
+  BypassTime is 30 min on one and 480 on the other. **The dashboard's Bypass-based detection
+  design will not work.**
+- Physically partial: vav1_05 held 68-70 °F regardless, which is why nobody complained.
+
+- [ ] **E** — finish the mapping: expand tenant folders on floors 2, 3, 4, 6, 7 + TouchstoneLiving,
+      or export (right-click floor → Export → "Object to oBIX"; ⚠️ writes to the REMOTE machine).
+- [ ] **C** — then confirm on floor 7: Snell & Wilmer is the whole floor, zero ambiguity.
+- [ ] **C** — apply the mapping. `PATCH /sensor/{id}` with `/isMountedInBuildingComponent`
+      is confirmed working (405 on a bad path, 409 on a bad value).
+- [ ] **C** — rewrite the dashboard brief: detection must be "Occupied outside the base schedule",
+      not Bypass.
+- [ ] ⚠️ **Nothing to Josh or Courtney until the mapping is finished.**
+
+⚠️ Floor 5 trap: `vav5_3` (Bessemer) and `vav-5-3` (ER Injury) are different boxes. BACnet renders
+both "VAV 5-3", so the 187 already-mapped zones may already be crossed.
+
+---
+
 ## 🔴 08/30 — SATURDAY RECONCILIATION: the tenant portal is not reaching the BMS
 
 First hard evidence, both failure modes in one day. Every tenant's Saturday on/off mapped:
