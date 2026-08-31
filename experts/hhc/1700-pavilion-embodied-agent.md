@@ -229,8 +229,46 @@ same group from the roster and **record the swap in the report**, once.
 ## [THE FULL ROSTER]
 
 `1700-embodied-zone-bindings.csv` — 286 zones, each with `temp_sensorId`,
-`damper_sensorId`, `occ_sensorId`, BACnet name/description, IP, and the
-ProptechOS zone as recorded. Use it to expand from a sentinel finding.
+`damper_sensorId`, `occ_sensorId`, BACnet name/description, IP, the ProptechOS
+zone as recorded, and a `floor` with its `floor_source`. Use it to expand from
+a sentinel finding.
+
+### The `floor` column, and how much to trust each value
+
+Floor is the safe unit of reporting here, because tenant attribution is not
+settled and floor mostly is. **253 of 286 zones have one. Trust it according to
+`floor_source`:**
+
+```
+bacnet-desc          193   the box's own description says it — "VAV 5-1",
+                           "Wynn VAV 10-19", "vav_500_5_1". Strongest.
+bas-tenant            39   the Niagara BAS nav tree puts this tenant on
+                           this floor. Strong: the BAS tree is the authority.
+subnet-inferred       16   every zone on this subnet with a known floor agrees
+                           on one floor, so the rest of the block follows.
+                           Only .1 .2 .3 .4 .5 .6 qualify. Weakest — say
+                           "floor 3 (inferred)" if the floor carries the point.
+oteam-6845-proposed    5   floor implied by a remap still under review.
+                           Provisional. These are the five MP Materials boxes.
+unknown               33   all MECH. ROOM zones on 192.168.0.x / 192.168.7.x.
+                           Report these by device only.
+```
+
+⚠️ **`192.168.0.x` and `192.168.7.x` are deliberately refused.** They carry
+more than one floor each (.0 → floors 9 and 10; .7 → floors 7, 8 and 9), so the
+block rule does not hold and inventing a floor there would be exactly the
+IP-range auto-match that produced nonsense in the remap work — Touchstone's
+block swallowed 91 sensors that were not theirs. **Only contiguous blocks
+anchored on an already-correct assignment are safe.**
+
+⚠️ **A bare `VAV-7` is a box number, not a floor.** Ghost Beverages (floor 6)
+and Howard Hughes Holdings (floor 2) both number their boxes `VAV-1 … VAV-10`.
+Reading those as floors put 15 zones on the wrong floor on the first pass.
+
+⚠️ **Floor 8 is nearly invisible to you — 5 zones in the roster against ~34
+boxes in the BAS** (`vav_MP_8_01..34`, MP Materials = Genea Suite 800, a real
+tenant that has paid for after-hours). Do not report floor 8 as quiet; report
+it as unmonitored.
 
 ### ⚠️ The tenant attribution in that file is 187 of 286, and it is not settled
 

@@ -1,287 +1,287 @@
-device,ip,bacnet_name,bacnet_desc,p8s_zone_as_recorded,attributed,temp_sensorId,damper_sensorId,occ_sensorId
-device 50551,192.168.5.51,ECY-VAV-D02A0F,VAV 5-1,Bessemer Trust (Bessemer Group),yes,93745a21-8360-489b-bba9-0bb5515a2826,42b6ee31-54db-4e0d-9786-96314ed364e0,91cca859-6630-4a72-89b8-b956ce3f6a75
-device 50561,192.168.5.61,ECY-VAV-237100,VAV 5-11,Bessemer Trust (Bessemer Group),yes,0d9748b1-2e66-4143-a754-f7ec06f7683f,66e48bb6-4706-43dc-8013-9ca54af0ba1c,02f2fd01-5995-4f94-b7c9-2b9c2205d1fe
-device 50562,192.168.5.62,ECY-VAV-CFECDF,VAV 5-12,Bessemer Trust (Bessemer Group),yes,f8a14839-5aad-4059-a224-ada2fd5d9013,b91ac802-5219-4173-81d4-e52e688a6b0f,bcb79927-20ed-47c0-9015-d6d0914ccd61
-device 50563,192.168.5.63,ECY-VAV-C23169,VAV 5-13,Bessemer Trust (Bessemer Group),yes,3c019802-c920-4254-acf8-fd3d7e865af3,d060a730-1859-4e40-a7d7-0467364546da,9cc43626-e1e7-4027-856b-befb981fe3a6
-device 50552,192.168.5.52,ECY-VAV-C3ABF9,VAV 5-2,Bessemer Trust (Bessemer Group),yes,ae90f62d-b47e-4998-ac9b-25d957a4a2ae,941feac9-5a47-4b1b-a0b0-2bdc280ddabe,68a95c1f-208d-408c-9a83-d692fb71ac4e
-device 50553,192.168.5.53,ECY-VAV-C05D03,VAV 5-3,Bessemer Trust (Bessemer Group),yes,ed3f494d-908c-4141-8a5f-b222194b07b0,11c2dc83-fb77-4bca-a467-845eea83a6fe,2db8bae9-b26f-4492-b15f-984fe954ab88
-device 50554,192.168.5.54,ECY-VAV-CFECD6,VAV 5-4,Bessemer Trust (Bessemer Group),yes,597adbc4-839f-4aa9-9c40-cb6530facbbc,6111980a-563b-4446-8263-ff8e6d3b9700,5062d8d3-047f-408e-a7bf-ea8011ffaa85
-device 50555,192.168.5.55,ECY-VAV-2330BD,VAV 5-5,Bessemer Trust (Bessemer Group),yes,4570a341-7c68-4af4-8a4e-ed9062b7710e,a6a14852-70f9-48b4-8e34-f0c349b3e5fb,a7732d9a-ee8c-4869-bcb7-a1c586c4ee6e
-device 50557,192.168.5.57,ECY-VAV-1673C2,VAV 5-7,Bessemer Trust (Bessemer Group),yes,d990d982-7c19-4c5e-ad3d-ba7d0c885f81,89ca367d-b5a9-4422-bc44-87319414e8dd,3b17e997-3ead-49ce-8a20-5348c54c7a15
-device 50558,192.168.5.58,ECY-VAV-D18D74,VAV 5-8,Bessemer Trust (Bessemer Group),yes,a77a82da-ce8c-4edf-9219-8b819a1ba250,e5728571-4f56-43c4-905d-14e6350918ee,8399714d-b8f9-4001-9af4-70e82f6ab517
-device 50559,192.168.5.59,ECY-VAV-D0062A,VAV 5-9,Bessemer Trust (Bessemer Group),yes,de1a92f4-9089-4c34-ae02-beb882fd6b4e,9f3f3bcd-2eb3-473d-8afb-1ce298f0f680,f0529089-0b48-4cea-b860-aa53b05226f2
-device 50556,192.168.5.56,ECY-VAV-D1A08E,VAV-5-6,Bessemer Trust (Bessemer Group),yes,2f074cef-cf34-42a7-b82c-d7d3a70b2b03,4bde7fdd-001b-46d7-b138-89c6ee24069b,ac53555b-db52-432e-a1b2-5e698fe17fc8
-device 3141,192.168.3.141,ECY-VAV-3E1D7A,,"Bruin Capital Partners, LLC",yes,5d8b8701-1339-4910-97d6-87080407d1e2,e34b33cc-dd8c-4c8c-9c31-10d52a15e4bf,eeef6ff2-5fd0-462e-8469-64241ded453e
-device 3142,192.168.3.142,ECY-VAV-3E25FC,,"Bruin Capital Partners, LLC",yes,66225ccf-1a8e-4020-bb99-d897c5a1cad9,126e9459-59aa-43e3-865c-decbb06858a1,fd55ca78-4c2d-46aa-972b-3a0b99442213
-device 3143,192.168.3.143,ECY-VAV-391EC0,,"Bruin Capital Partners, LLC",yes,a593d074-7447-48ad-a4b7-e237cebdc240,91f28b04-f521-4aba-88de-b60d6d08e0a1,966202d5-ef75-4680-94ca-0ae4fd4c9716
-device 3144,192.168.3.144,ECY-VAV-E11C01,,"Bruin Capital Partners, LLC",yes,646947ef-ae70-464e-a23d-9d17f66fb229,bb63fc39-e1a8-4d9e-8344-75428b5ef3c8,08d6edc1-491d-4f39-87f5-4066f37435b5
-device 3145,192.168.3.145,ECY-VAV-3E4075,,"Bruin Capital Partners, LLC",yes,0f750dbc-6f2d-4321-a246-ce2221d0ee92,8fc497e5-6da6-4502-acc6-f491aaaefecf,69b474d7-c91c-4282-8de9-681accb3b13f
-device 3146,192.168.3.146,ECY-VAV-8058C5,,"Bruin Capital Partners, LLC",yes,fc9a26f5-1153-4a6e-ad30-c8c61fd34354,7fdbb454-fde4-4f43-bd92-e9e7890573f1,5c86b85b-2de9-47b9-91a3-ab85291db5ab
-device 3147,192.168.3.147,ECY-VAV-3E406C,,"Bruin Capital Partners, LLC",yes,ea9d7713-0460-48ed-9df6-b71988f019c8,d5574558-24e9-4a44-8680-097357b6ee18,e97b2a5b-a58e-4d0e-ab42-b77c155939da
-device 3148,192.168.3.148,ECY-VAV-6FF993,,"Bruin Capital Partners, LLC",yes,eafc8722-3727-4a4a-aa3e-505ea07e9ee1,a171370d-cc97-4770-8674-75133d5656ee,1cd61b54-be03-4fec-9b97-75a4c8a29083
-device 3149,192.168.3.149,ECY-VAV-392403,,"Bruin Capital Partners, LLC",yes,bf49bcf2-45eb-4c76-911f-d52e78296c75,764641fe-a7ee-4e9d-b174-dff31bcbf822,2c8733d2-9e84-4af2-ba43-46a0b7f66d33
-device 230031,192.168.4.21,VAV_4_1A,VAV-4-1A,Capital Gurus,yes,f159d79d-08fd-415b-945f-4393182a7d92,882bf692-824f-4bde-8222-6045714f0b89,e0de1599-83dc-4f81-bbc4-8e0b9ba79399
-device 36013,192.168.4.22,VAV_4_2A,VAV-4-2A,Capital Gurus,yes,a4a537e3-1160-45c4-a49b-f1d6d885c063,0e2d7c3d-2acf-4d1b-b587-a49094ac02df,ecb4d2b4-fdcf-4211-8333-e7c93ef350cf
-device 26031,192.168.4.23,VAV_4_3A,VAV-4-3A,Capital Gurus,yes,783b15cd-f746-41ef-a2cb-c6a2fecc54c9,bc3ce523-a706-4b6b-b948-5a1eb3f4022f,62ce4a42-a4c2-4826-86c3-6400a724ca0e
-device 228028,192.168.4.24,VAV_4_4A,VAV-4-4A,Capital Gurus,yes,e64219d5-1c1d-4c84-a7c4-a12149820e54,e58b1991-6920-4fb1-bd26-45875bdd8e5e,5aabc373-66cf-42f2-b1ec-8608fbc98545
-device 40109,192.168.4.25,VAV_4_5A,VAV-4-5A,Capital Gurus,yes,328860c2-de02-49d3-b1c6-690d8a423886,6d57875a-060e-4e02-b8ff-4f30d5c32456,d0e6d723-ca66-4295-8d5b-94067644b3ec
-device 50051,192.168.5.151,VAV_500_5_1,VAV_500_5_1,Clark Hill,yes,a9965477-1b17-41c1-ab44-27380b9bbed5,76899963-af3d-451b-8494-be102c35c7ae,f65b35a6-a3cb-4cad-9b45-8d5712eca5fd
-device 50052,192.168.5.152,VAV_500_5_2,VAV_500_5_2,Clark Hill,yes,08c70eb2-f72c-4567-b9c1-3b925a9a98a0,f1e14587-b289-4d8a-958d-2f938b4662ca,cefa7eb6-babe-441d-a110-0a0fa796e21e
-device 50053,192.168.5.153,VAV_500_5_3,VAV_500_5_3,Clark Hill,yes,2d706987-4f7a-4942-85ed-e3c5cf48ae41,9829ddb5-cbe5-48c3-98db-6953d7f5b40f,a1a2d330-f357-4fa0-88b4-4d2e6b92812f
-device 50054,192.168.5.154,VAV_500_5_4,VAV_500_5_4,Clark Hill,yes,30a4cf33-4a3b-4a2d-b186-f710a5f2783f,77399b0b-b8e7-41ff-aa52-bf6be4d7db7f,52070241-9625-4c82-95b3-68a4da30deb9
-device 50055,192.168.5.155,ECY-VAV-164098,VAV_500_5_5,Clark Hill,yes,d2d5daa4-4d96-4662-a4dd-d9100135ae60,88f6b324-c38b-4ed0-9939-a03735b3ca45,2bb6017f-328d-471a-9132-b89d17a6fa06
-device 50056,192.168.5.156,VAV_500_5_6,VAV_500_5_6,Clark Hill,yes,b99c5252-870a-44f7-b934-396ffce7ee4c,26a6b16d-252b-4fb5-9a40-b1f93d785303,0c1848d1-866f-4ed1-b563-b0e25ac67301
-device 50057,192.168.5.157,VAV_500_5_7,VAV_500_5_7,Clark Hill,yes,5ec1a445-0d62-4011-be4b-e0ca377b34ee,30a5e15d-2128-45a6-bdf4-3ab70264aa42,49bc1fe9-ebd9-4597-b313-ac2ad969d0f7
-device 50058,192.168.5.158,VAV_500_5_8,VAV_500_5_8,Clark Hill,yes,95cd3fe9-b907-4afc-bfef-b7fbf4a70b9f,f5e4d73f-c24b-47a0-aced-52bf2d79e8f9,26f550a8-f94d-4a31-a7b6-1cc618a5e88b
-device 50059,192.168.5.159,VAV_500_5_9,VAV_500_5_9,Clark Hill,yes,b0ea9108-b6bf-4dd1-8b08-f8fd63b01576,44d12d98-38f0-4c07-b32e-c27f84d547fd,a663f3f5-3faa-402d-b520-07497003f85b
-device 11018,192.168.3.61,VAV-3-61,Vocational Rm 103,Dr. Snyder Cosmetic Dentistry,yes,55447559-168c-4cd0-8392-bf2d58e17a1a,eb205e28-1646-452f-8f03-6a3e66251bf0,00a0146c-0013-4533-b610-b1509980a673
-device 5161,192.168.5.161,VAV-5-1,VAV-5-1,ER Injury Attorneys,yes,c9a2b476-f48c-40a0-a03f-0a163e62bfd2,32e8eb22-cd06-4e3f-9fe9-15472e388775,e7c3bd5f-50a3-4fd1-8c7d-5b6468d48878
-device 5170,192.168.5.170,VAV-5-10,VAV-5-10,ER Injury Attorneys,yes,5b9d404c-f73a-4bd1-a88c-1f15a8fac7a6,0fd496b5-b7e9-4e86-9f3e-0faa126a56f8,182539e1-ce7d-4e52-9745-a70b43c8115c
-device 5171,192.168.5.171,VAV-5-11,VAV-5-11,ER Injury Attorneys,yes,5c243f38-f99c-4e39-ab14-b455255bfa4f,45aa3ea8-81a7-4366-93e7-76cd0ab9a27f,c1871e48-821a-46b5-a447-47da08c20844
-device 5172,192.168.5.172,VAV-5-12,VAV-5-12,ER Injury Attorneys,yes,81fcdae6-18dd-4764-b2ec-ff6638bb4b91,f3105d4e-6560-4f6b-9708-1e7a7ac88914,c9a01aaf-6980-49e0-9369-66cb7d95a30c
-device 5162,192.168.5.162,VAV-5-2,VAV-5-2,ER Injury Attorneys,yes,d5d2d333-ee08-4710-b222-b1f2f4fe5005,67d0e974-cf49-4df6-b09b-78f9aba1ee70,076e3812-74d8-48b7-b388-456d11709163
-device 5164,192.168.5.164,VAV-5-4,VAV-5-4,ER Injury Attorneys,yes,a151ac2c-7b21-4046-8267-dbd0984a28cb,db680692-de19-493e-82d9-cacb01394982,b04a4ce0-418d-4e8c-b7e1-d5fa699a93ff
-device 5165,192.168.5.165,VAV-5-5,VAV-5-5,ER Injury Attorneys,yes,7f331558-716f-4f2f-b382-9d98a4dcfe17,c720ac02-98cf-46be-ba26-64b8c394dd97,8dc6e3a4-28ac-40b6-81e7-f7a729ed7756
-device 5166,192.168.5.166,VAV-5-6,VAV-5-6,ER Injury Attorneys,yes,3e27d931-b478-4d73-a40d-e8655f0b4ffc,f83daeb8-e261-4def-9e80-839f16c2a4ff,4e96c7f6-3eea-496f-8582-979ad4c576e6
-device 5167,192.168.5.167,VAV-5-7,VAV-5-7,ER Injury Attorneys,yes,56956660-351f-4c34-b12c-b5ec1c15cac9,702211d8-cbc6-41dc-b603-8c450bdeef25,63860ff9-78e8-489e-bd80-51374aca4108
-device 5169,192.168.5.169,VAV-5-9,VAV-5-9,ER Injury Attorneys,yes,bbeaebd4-d7fa-4ff5-8977-359adb423f7b,b9b75d0d-f6a0-4043-b851-07574c7fed47,b98886e5-efbb-4e24-8ff5-eef9fcbac2cd
-device 3051,192.168.3.51,ECY-VAV-64F86C,VAV 3-51,Edelman Financial (Edelman Financial Engines),yes,f4a114ff-1357-4dc6-88b3-989ac4aa99fc,6dffd67a-8968-46b8-b3d3-3401665a27e2,7f174434-a155-4711-bae4-51223ae0fee9
-device 3052,192.168.3.52,ECY-VAV-FECE11,VAV 3-52,Edelman Financial (Edelman Financial Engines),yes,d1a62ba3-2fa6-4462-83d5-81978dd1eb86,4822e498-2b8b-4a23-8c17-3cc94a5cbd15,1536cea7-b039-4ce1-adbe-76b82df43df8
-device 3053,192.168.3.53,ECY-VAV-E187C7,VAV 3-53,Edelman Financial (Edelman Financial Engines),yes,f950f025-1a91-481e-800d-73598533e356,0959daec-89aa-40d3-b409-ce29a97cabac,d8361391-0496-4f99-95b7-fc8c71f77129
-device 3054,192.168.3.54,ECY-VAV-99DD67,VAV-3-54,Edelman Financial (Edelman Financial Engines),yes,48f82723-930c-41bb-be4e-7c12e9c3185e,2a52a5d9-90c0-40cd-999a-1f2504f5f5e4,2e8a6cd8-89ab-4760-ab7d-cfe5863c3343
-device 104012,192.168.6.81,ECY-VAV-168259,VAV-1,Ghost Beverages,yes,d99ba5d4-8db5-445c-9998-cd26a7065792,0fd70df2-34bb-430a-aed5-c1f7bc469bde,a964097a-fde5-4ba2-9b53-170504cffb3d
-device 131162,192.168.6.90,ECY-VAV-1661FB,VAV-10,Ghost Beverages,yes,4d4865ac-4051-45f4-b11e-00870e69a6c6,45d8275f-24b4-4997-96cb-77634eba40a7,bcfa87ed-e5e6-4d2a-8db2-6d502a305a73
-device 90231,192.168.6.91,ECY-VAV-5288F3,VAV-11,Ghost Beverages,yes,982eb7cc-f7e3-47c8-af28-adcf86ed7d1c,d34c25fd-0bc1-4fc1-9008-82a8c596c251,5f785cb0-8837-40a1-a6d2-73f91d39b2dc
-device 156056,192.168.6.82,ECY-VAV-16677A,VAV-2,Ghost Beverages,yes,18072939-927b-429b-880e-01dd5af4bef5,50e63fbb-1f9b-44b8-be20-73a1acc331fa,8648c267-8894-4ea5-b545-f6d06c594cb7
-device 91079,192.168.6.83,ECY-VAV-0C2A6C,VAV-3,Ghost Beverages,yes,fffbc50a-4555-4266-ac36-3267c7abb65c,2b668cf1-499b-4c6a-82ca-57f5d758c164,ba11ea61-592e-4a1a-964e-afd155287eea
-device 49055,192.168.6.84,ECY-VAV-165709,VAV-4,Ghost Beverages,yes,2d2e7279-ccca-4668-8b54-8e63a0b862ba,5d4b4eef-860b-46a5-b626-ddd9278c5a20,d2f54495-0b64-4dfb-852e-1b89da327158
-device 48024,192.168.6.85,ECY-VAV-168B14,VAV-5,Ghost Beverages,yes,bdda9b45-6e9a-415f-9eb0-138846d7e4de,485b7f84-edf5-4320-bdab-db9c9c0d5998,f8d346bb-66d8-4924-8ed2-f3c9596afd4c
-device 177173,192.168.6.86,ECY-VAV-16822F,VAV-6,Ghost Beverages,yes,c67471ab-e9f6-47b4-8e1e-ddcf765626d1,05ea241f-d1e5-4ce2-b82c-14177ad24d3a,8bbf66d5-5b5d-4b4d-9087-ab63e67cf63c
-device 601929,192.168.6.92,ECY-VAV-D89D9C,VAV-6-08,Ghost Beverages,yes,bfdeb75c-2928-40a3-adf1-ea462af42f62,602c37ef-0a79-4930-a65d-a95959f103ee,6b6c18dd-d0ca-4c7b-aeec-19cf216843be
-device 241244,192.168.6.88,ECY-VAV-168235,VAV-8,Ghost Beverages,yes,4e325448-a3ff-44aa-b21e-d3d1e03d0b22,d06e49fb-0c11-40f9-9778-b6340357afc3,afc47404-3031-42c3-8d1f-33ad77d1952f
-device 131004,192.168.6.89,ECY-VAV-168247,VAV-9,Ghost Beverages,yes,4d6dd678-5d31-40bb-8007-154b4cfee31d,5122b2e8-deff-4d76-80fd-b76322b1e143,45876bc6-8eff-47e5-a051-59cc42013a5d
-device 6051,192.168.6.51,ECY-VAV-996A17,VAV 6-1,Hearst Healthcare (Hearst Healthcare Holdings.),yes,8667f508-2812-4c70-aa57-e5f76f9c2cfc,d7e862ce-a41a-4c72-9786-1cadd3ea6845,29a2cae4-27ce-4a32-b791-d2cbc7c38650
-device 6053,192.168.6.53,ECY-VAV-5A3518,VAV 6-3,Hearst Healthcare (Hearst Healthcare Holdings.),yes,0376e85e-7e65-4597-94b6-695b702a5006,4d736258-29fc-46c2-8044-f8bfec452761,9253e6af-3bd4-4f0b-ba93-c6d5b3cd0bb5
-device 6054,192.168.6.54,ECY-VAV-5A4544,VAV 6-4,Hearst Healthcare (Hearst Healthcare Holdings.),yes,63896efe-fb65-4ddb-bf41-3be955a45040,830b5827-dd19-4980-b0d6-2916b9ff8663,e4aac336-3746-496f-8697-040bd8eaa515
-device 6055,192.168.6.55,ECY-VAV-828BE1,VAV 6-5,Hearst Healthcare (Hearst Healthcare Holdings.),yes,d970ec09-ac9b-4dbd-a2da-99adfd37873e,d056155b-f717-49e2-9550-8871717f7217,fa9f9049-59d0-4449-b232-d8a1119375b6
-device 6056,192.168.6.56,ECY-VAV-D84DD8,VAV 6-6,Hearst Healthcare (Hearst Healthcare Holdings.),yes,760ca541-d29e-4e03-84fd-09a21e9b09c9,4d92f0d9-8235-4078-971d-70eb5f1b2949,fe78cd64-1af9-429e-bbb1-cb0227c2f917
-device 6057,192.168.6.57,ECY-VAV-99C91B,VAV 6-7,Hearst Healthcare (Hearst Healthcare Holdings.),yes,11c58f18-c2e7-4ac8-8a3b-72c8076c7cf0,91df9614-074b-4a26-9dc5-cfcf6535d9a0,3f00ccd2-1481-4057-ad23-1ccbc1d85559
-device 6058,192.168.6.58,ECY-VAV-9960C3,VAV 6-8,Hearst Healthcare (Hearst Healthcare Holdings.),yes,0fc3e48a-db75-47ef-9693-1b67a3c457ff,8569ecfb-e27e-48c8-800d-d329ee0c57f5,1a0a3603-06c2-4376-891e-e88567a48ca5
-device 2063,192.168.2.63,ECY-VAV-523667,VAV 2-13,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,45799ca8-ea87-45bb-a003-7acd179fb311,0717cc85-ec26-43c6-a331-42761854e003,80ef907d-325b-4d34-83fd-e9f4b317fb39
-device 2064,192.168.2.64,ECY-VAV-5229D4,VAV 2-14,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,21fccf75-f83b-43e4-b11f-be1d7180edde,546d7ab8-8f3b-4349-9dc4-0af6052f6558,a607097a-8892-43d5-8e77-65528d587fe9
-device 2065,192.168.2.65,ECY-VAV-528893,VAV 2-15,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,33b29bcf-1346-4489-8ff5-25c19d72b75a,fec237a4-9d8e-4f06-bb10-f002dde34f81,56067916-02a6-4461-bdee-0ae45ad9ee16
-device 2066,192.168.2.66,ECY-VAV-2-16,VAV 2-16,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,96574971-b1f4-42f7-82c6-0ae80dfee05e,33bba47a-438e-4ec3-875a-786e74decc7a,52390683-2c54-46ea-a48c-76ce785f25ea
-device 2067,192.168.2.67,ECY-VAV-529046,VAV 2-17,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,c741042a-8bf9-4e18-8cbb-22f0bf2fe7ae,76e1616d-8a4f-47c2-ab4f-800525b0f900,dee395f9-f8b1-49d0-a2db-f0adc580f24f
-device 2009,192.168.2.59,ECY-VAV-2-9E,VAV 2-9E,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,3da1769d-83f7-4e96-be5d-ea53bdea7961,ab38ca71-d03f-4e50-928d-e8a3e475126e,53fc30d4-1acf-40a2-9469-83b0d49b6b19
-device 15092,192.168.2.51,ECY-VAV-524339,VAV-1,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,38097758-7647-409c-b860-1a667ba91203,a47d3f92-d349-4cbe-b148-189c825b8216,602af125-0761-440c-bac2-547369e931e6
-device 202154,192.168.2.60,ECY-VAV-523655,VAV-10,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,99e6204c-1040-4d55-b5d1-cc86cfd721fc,734e79c9-da7f-4712-8200-90761b92e7aa,2ae665d9-775f-4e3b-aad1-0677eca8e200
-device 155231,192.168.2.68,ECY-VAV-527EFA,VAV-2-18,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,638f1abb-e813-460a-ab96-b0b850e0d2c6,4d70f185-d7ef-4875-9447-4505a519c572,572616db-44e7-4e79-bb17-42767a514e7b
-device 20108,192.168.2.58,ECY-VAV-D89651,VAV-2-8E,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,e3efb232-6ce2-4669-aa43-f3d3071be6d9,12c74dce-1782-4207-a4b8-3303ddb3cb64,2aca1bd9-31a7-4959-a2ed-3bd20b6b7329
-device 193165,192.168.2.53,ECY-VAV-1440D6,VAV-3,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,59127c8f-f873-4ec5-94a0-7025283000e5,42c36951-a7b7-4380-b5bd-119e01b9e816,7b73fcfc-8d80-47b4-a212-9edfa5cdea9c
-device 220155,192.168.2.54,ECY-VAV-5288B1,VAV-4,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,52ddc819-96c9-444c-96d1-d1b54e09179d,18741488-514d-4a8d-bd42-7bc552333972,3cfb98b9-2e16-433a-ac52-06cddc1f6fcb
-device 74109,192.168.2.55,ECY-VAV-529E08,VAV-5,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,6853d56f-ea0a-4b19-a681-f36cb2a5e2cd,cb400cca-595b-46b0-885d-1a7d4f153d6f,c495dd5e-c9d4-46da-8ef8-482850ddbfca
-device 126235,192.168.2.56,ECY-VAV-529000,VAV-6,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,f4489a9c-78ec-4b3a-b66d-54d71df3740a,989d00f3-5abe-44f1-adc9-87ab3a4a70a3,ff1f51ae-0154-4c76-952b-2701495bb205
-device 20107,192.168.2.69,ECY-VAV-D89DD2,VAV-7,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,e220d3b9-b077-4cb0-b5ae-d80e274b371f,83473961-1346-4ceb-ac21-c8caba659a7a,9a776389-9266-439e-89d0-24016abbfd22
-device 11031,192.168.6.97,VAV_6_1A,VAV 6-1 A,Malibu Management Inc.,yes,9cc3cc0e-27cc-47e7-8bc7-23fc9e35ad37,867110a9-3c3d-4cbe-833e-fabc3203afd1,9d34c987-6f79-4f5b-9557-282e60a50648
-device 84120,192.168.6.98,ECY-VAV-1434F7,VAV 6-2 A,Malibu Management Inc.,yes,c3b311a5-aade-47ab-944d-31ac66aa19ba,4039063e-a533-4f16-a799-ca16af99d0ea,1fe10d10-b5d4-4525-86a6-fcdbf3540251
-device 93139,192.168.6.94,ECY-VAV-1426ED,VAV 6-4 A,Malibu Management Inc.,yes,2436ab78-c2c0-4469-aca7-59f953f3a604,49f1841b-542f-4c24-9ce1-cc2657e05834,36c124d8-440a-4ced-87e0-397cd03052f2
-device 20216,192.168.6.95,ECY-VAV-562523,VAV 6-5 A,Malibu Management Inc.,yes,d21e7c4d-3f7e-420a-8ef1-d7ef4c06682e,93ccd607-0391-48b3-873d-335479dc6ef2,7604fa0a-4e09-45ca-9e66-3da1f7c60cdb
-device 30112,192.168.3.112,ECY-VAV-58F0A9,Conference C.O.,Mass Mutual (Massachusetts Mutual Life Insurance Company),yes,3d442356-a376-4f95-a8e2-a2e23784a2ef,2ee99879-b268-4b2d-acb6-377d4ddeb1a8,9b03583e-78c6-4a20-a810-0ca63a51fe35
-device 30111,192.168.3.111,ECY-VAV-58E8BD,North West Office,Mass Mutual (Massachusetts Mutual Life Insurance Company),yes,414a50ae-2052-4385-bafb-56a222ec4d37,7a0f9eda-7f0a-42b5-b8b2-0fb76099376d,897e0b62-7017-45c3-829d-8918aa0a1e67
-device 30114,192.168.3.114,ECY-VAV-E9C675,South Offices,Mass Mutual (Massachusetts Mutual Life Insurance Company),yes,ad3199d0-7517-428b-a49d-d3cf2802772f,27783766-0797-4487-8ef0-b1a75e59ecfc,f34a00f9-f915-4c2d-b307-e2ee829dbb89
-device 30116,192.168.3.116,ECY-VAV-9471B1,Waiting Area,Mass Mutual (Massachusetts Mutual Life Insurance Company),yes,5c3218fd-0f55-4106-b6fe-f73da6a7a1b7,43d4c7fc-fc81-4efb-ab75-45131e684856,fdbbce45-7e49-4c2f-b6d8-fe32848bfed6
-device 30113,192.168.3.113,ECY-VAV-94718A,West Offices C.O.,Mass Mutual (Massachusetts Mutual Life Insurance Company),yes,81e481d9-c36e-40c2-9ac6-3e63667b7660,2fd3cad8-d232-49a5-b287-8ff8d261c590,61dd0e10-ea07-495b-b137-441a4dc8c747
-device 165194,192.168.4.78,ECY-VAV-163747,VAV 4-08 (E),New York Life Insurance,yes,bbb8d9ab-84b2-4b6b-80f0-802dff5d9b3c,16b284d0-1971-4039-be20-da9ee10bb3e4,33cbedee-415a-4a8f-92ea-0cda2cf6d9a1
-device 143004,192.168.4.71,ECY-VAV-149341,VAV 4-1,New York Life Insurance,yes,b1ecc0a1-4253-4b3f-a372-77056529b38f,0ead4f21-3ac6-4103-ba95-a575b6500105,d61b3e2b-b87c-42b1-babe-5725e87a4747
-device 68229,192.168.4.80,ECY-VAV-5519EA,VAV 4-10,New York Life Insurance,yes,fdf6011c-b59f-4a34-93ed-825b3d6f09b4,2f33b891-21e1-43c2-9071-202026925802,d603e33a-b065-447f-9598-2e19cc0d0098
-device 97147,192.168.4.82,ECY-VAV-166A11,VAV 4-12,New York Life Insurance,yes,f93a77c9-61c5-4ef6-8c56-c2da4646ad38,520db444-f9b3-4b68-863d-7c3902c29c91,c852887a-cc67-462c-b0e3-dd2a84741f0f
-device 52139,192.168.4.83,ECY-VAV-535EB0,VAV 4-13,New York Life Insurance,yes,da7c979b-fea1-40de-837a-caa899136f1a,2ad40cbf-50ad-47e6-8081-7a58babaf97d,17846e6e-9431-4c52-92d5-4a225f0fecee
-device 58192,192.168.4.72,ECY-VAV-166777,VAV 4-2,New York Life Insurance,yes,f8abae8c-a43c-4282-a0de-b941acabcf7e,87dd32c7-8d68-413d-8046-2da4425dc365,3ce2e696-429d-4c8b-948d-c39ffb2c7e81
-device 63230,192.168.4.73,ECY-VAV-14A574,VAV 4-3,New York Life Insurance,yes,9d4b5521-6047-45f4-ae93-3662d140666e,523933d6-a909-4dcd-8a43-9e8355fbfd6f,8c392148-f13b-430c-9288-7f063588609e
-device 40094,192.168.4.75,ECY-VAV-14A556,VAV 4-5,New York Life Insurance,yes,78cf9051-e28f-4cd2-9a91-64961096deaa,225f0188-cb27-4d09-9531-d4029527f77e,85348311-9aad-4138-9c22-26212543803d
-device 233157,192.168.4.77,ECY-VAV-163720,VAV 4-7,New York Life Insurance,yes,2bb7eca9-7909-4d90-97fd-c7b683770ccc,402d46fc-6884-4168-8955-2ab8a7cdd980,43feabbd-5919-4f1f-b471-be6b1a897f81
-device 145109,192.168.4.79,ECY-VAV-167395,VAV 4-9,New York Life Insurance,yes,13834203-c848-4aea-a925-bf390236ec3d,936bd225-cfaf-4961-ac3c-051affad57d1,23c59049-653a-42a5-b3ba-61f60edc1a74
-device 161100,192.168.4.81,ECY-VAV-162B59,VAV 4-11,New York Life Insurance,yes,ef0b585c-65b1-4c9b-86e2-d5ee82c92613,be8039c5-0cde-4f37-ae8f-f26da4490ec1,7b325622-f75f-449c-aaec-1e0cd70cbb05
-device 203233,192.168.4.61,ECY-VAV-FACA55,VAV-61,Northmarq (Northmarq Capital),yes,d4466c29-ef36-4748-8c5f-329714cec707,d3f32af8-35bb-4b13-9e3b-f0554a630070,2ac7f188-5b1c-4586-9a7c-f64db46b632a
-device 24057,192.168.4.62,ECY-VAV-F952B6,VAV-62,Northmarq (Northmarq Capital),yes,daaa4911-4c3d-4e5d-9d96-257f315eead7,64f94019-cd1c-4459-b3c1-9d53a4fafefc,6df9b151-9bb5-4ca4-8d57-43033f276a17
-device 149027,192.168.4.63,ECY-VAV-231800,VAV-63,Northmarq (Northmarq Capital),yes,cdc2f00d-67ad-48bb-a97c-8934340fc6c4,bb7537f5-4698-4cfb-8221-bc0f3c4df4c9,87e3fd9c-2824-4470-a2c4-e602165e1b0c
-device 190148,192.168.4.64,ECY-VAV-245183,VAV-64,Northmarq (Northmarq Capital),yes,8756b2b3-a5db-4ec5-afb5-090707f47000,ad1fceb9-93c2-482e-88f5-86bee7a3b6aa,592a8c5a-8885-4fb1-af53-0bac45096510
-device 20131,192.168.4.65,ECY-VAV-F560FD,VAV-65,Northmarq (Northmarq Capital),yes,9c4ee462-19b2-436e-b206-83c99891e10b,1936580e-97f2-42ed-939e-717775c111ba,529eb13f-0eb8-4da4-81fc-19fe4e326161
-device 187215,192.168.4.66,ECY-VAV-F95FA0,VAV-66,Northmarq (Northmarq Capital),yes,f018917e-c69a-4b3a-9fb1-3e9c44d8f2ca,74683dea-8943-4854-bb3b-b8636911c353,fe3f1353-ad12-4123-9996-fa33c79469ed
-device 15085,192.168.4.51,ECY-VAV-52625F,VAV-4-1,"PNC Bank, National Association",yes,58444efe-fbc5-4157-bc21-acb04548beac,0d5f4add-d56d-4ada-ac85-4f2e9df0aafa,c14f08e8-59ce-4017-8aa2-fee3a24b5a6a
-device 101081,192.168.4.60,ECY-VAV-52360D,VAV-4-10,"PNC Bank, National Association",yes,71f80752-b628-439a-8a2c-9c47c52db742,c1b12e00-12f8-41c2-95a0-d1c5da73c8f4,b51f505d-b010-49d8-8023-81042156084e
-device 109033,192.168.4.67,ECY-VAV-132F88,VAV-4-11,"PNC Bank, National Association",yes,9a27f88f-95a8-4e57-9b5c-e0f5744fdad5,89785298-4fa8-4b59-b65c-e04a5d83544d,f31d3231-0797-4921-a36d-28ccc700e007
-device 1,192.168.4.68,ECY-VAV-529547,VAV-4-12,"PNC Bank, National Association",yes,f974c9e6-a7ce-4323-abd9-2aa7c116672a,721ff2f7-2989-4bd0-a035-f96b2feda9df,30ff171a-72ce-4278-9fef-1fefb750001d
-device 103100,192.168.4.52,ECY-VAV-5224FA,VAV-4-2,"PNC Bank, National Association",yes,4b207a08-7754-4f47-b26a-ed18854079f8,4476015c-4e9e-4156-823c-39cc00b46d44,9d47faad-5b62-4a8f-8b37-d655ba5a6416
-device 107195,192.168.4.53,ECY-VAV-527ED6,VAV-4-3,"PNC Bank, National Association",yes,34b160f0-24cd-4c68-82fa-96a6ff775e4c,e267bd90-4165-49ec-a4f7-620ab487dbc5,ded29544-ab85-4b88-86f5-509c96f31a3f
-device 242229,192.168.4.55,ECY-VAV-52626B,VAV-4-5,"PNC Bank, National Association",yes,e366f31e-3c55-4f9b-af8d-e5053d3223be,4ab69940-5a31-47ce-8c48-619a6174acfc,bc1a824c-56fc-49f6-a852-794c7bcd44e6
-device 153046,192.168.4.56,ECY-VAV-52905E,VAV-4-6,"PNC Bank, National Association",yes,b469055c-fc5a-41e7-bb88-2a4a62708e2e,91032c3e-4990-4b68-9d50-d458fc118115,c2d8cf58-20c3-4cf3-b87b-24acb771d813
-device 250200,192.168.4.57,ECY-VAV-1D7AF3,VAV-4-7,"PNC Bank, National Association",yes,28495f7d-3acf-4f4b-b52b-4fc9576d3620,3d96161e-3daf-4f29-82a6-74c6755559e0,0bb564ce-ff51-44d5-b536-0b224f3fc235
-device 240066,192.168.4.58,ECY-VAV-524300,VAV-4-8,"PNC Bank, National Association",yes,97f2f60d-0d97-4654-9563-f77fc161197e,9ae55d8e-990d-4399-a7ec-8ab737b4a8a0,27a57cc2-cfc5-4760-a525-6b8dfe788df4
-device 79246,192.168.4.59,ECY-VAV-527EA0,VAV-4-9,"PNC Bank, National Association",yes,287141ad-6fa5-4f19-80e7-75ec5b226d27,015bf862-3315-4870-b3d1-7e6711e0d73d,b1dd038d-5949-4ed6-9757-f2349ec71724
-device 30108,192.168.3.31,VAV3_01,VAV-3-01,"Rimini Street, Inc.",yes,a20a825d-f9d9-4f22-8d3b-4f09f287c0a7,7a802a14-7d91-42da-9214-93a51af661f0,d1fd9fe5-de52-4d1d-bfba-0b15ec15fba4
-device 3032,192.168.3.32,VAV3_02,VAV-3-02,"Rimini Street, Inc.",yes,550f80dd-a05f-4862-b71b-ce877d6b1049,28d8c35f-2a17-46f2-a901-c35075e0099d,d4895124-435f-4b99-8aa3-8fc9b6c63606
-device 17223,192.168.3.33,VAV3_03,VAV-3-03,"Rimini Street, Inc.",yes,80e94b1d-ff09-4bfe-8317-b7e5736e6901,aba7eb18-2c4a-4181-8ab1-575e44d4de04,98579475-7dc4-499e-be79-4c4b621e40e8
-device 3035,192.168.3.35,VAV3_05,VAV-3-05,"Rimini Street, Inc.",yes,34ed6b03-fdbd-4a91-af1c-959b97eda5a2,5d787fba-8b09-487b-8f47-b142892bac08,f7082fdc-c3be-400c-b59d-f78e57b968f2
-device 3036,192.168.3.36,VAV3_06,VAV-3-06,"Rimini Street, Inc.",yes,06c00197-1122-4b52-a78c-1aa33533997f,31edc6f7-bbf1-4056-b645-0c8575343ac7,1744dd5a-b0aa-4bba-b24d-d1d6fa7fa53e
-device 118010,192.168.7.49,VAV 7-23,,Snell & Wilmer,yes,74ad1fb5-e6f8-4725-a782-740eb99dd92f,8e9f00ef-70c8-46ac-b78c-94dfb607753e,295159ba-350b-4cb5-93a2-4c642e3d60f1
-device 28046,192.168.7.51,ECY-VAV-25B842,VAV 7-1,Snell & Wilmer,yes,7aefffc0-5fa5-49c8-b250-406fa4222ef7,4e26570e-13ac-47a6-bf59-17f475e1596d,043ed2b0-d2f5-4360-8bc7-0e40454e079c
-device 241198,192.168.7.60,ECY-VAV-25A615,VAV 7-10,Snell & Wilmer,yes,4a7a1cb7-b90c-4cbc-b75a-4b40cd8a18c6,cfa8a821-bb5a-4e9b-a8f3-5a6045f9f958,56c6f7fb-969a-4d9c-9f1b-9d3c0d451d53
-device 37244,192.168.7.61,ECY-VAV-25B33E,VAV 7-11,Snell & Wilmer,yes,a57b4cc6-cbb0-4d46-85b9-d9842160ee51,8d4639f3-32a0-4222-a25e-f2c357ef4086,38f5190d-b1cc-4573-90fa-498ba17699c7
-device 153067,192.168.7.62,ECY-VAV-F70D94,VAV 7-12,Snell & Wilmer,yes,c78070b7-cf8e-47f4-a1ab-0c9e85e47fe8,b0c7b1e8-b023-4061-bb90-d5b5eb606401,49a568fc-53b3-409d-8895-b3e7f80018f0
-device 34138,192.168.7.63,ECY-VAV-259AF3,VAV 7-13,Snell & Wilmer,yes,098cd1d3-8c42-41c4-9826-530b4019d6b1,92ac7bd6-13f1-47bf-8758-9c7d0963c04c,4182d21a-c8cd-4528-b043-04aa4fb57b48
-device 95166,192.168.7.64,ECY-VAV-8D9479,VAV 7-14,Snell & Wilmer,yes,f293c8ae-c327-4665-89c6-9ab747a5a6f1,874471fe-0958-4cb1-9d2d-29cb5317fef2,8ab0f4e2-f386-4873-a552-0e0d2dcd9779
-device 234161,192.168.7.65,ECY-VAV-25B80F,VAV 7-15,Snell & Wilmer,yes,e4169b89-1369-4d70-84a2-188b4bb7bc90,f1c73f52-a728-4478-81c5-c7b393d8e2a4,5a0b396c-4fa9-4586-870a-803c3f186525
-device 322999,192.168.7.66,ECY-VAV-8D9461,VAV 7-16,Snell & Wilmer,yes,0eed93f3-d0c8-463b-a7b5-7a5a79a0d3cb,5347735a-997d-4f73-bfd9-17043de4cd6b,ea2b80b2-6d5d-4764-bbb8-b9a538d04a92
-device 132213,192.168.7.67,ECY-VAV-25AEA3,VAV 7-17,Snell & Wilmer,yes,be8ebea9-972c-429c-b2f4-45e5b951cdf7,be910d6b-5ea2-4d72-9521-7377da690865,bf60e740-ecc9-4ba8-a561-1249f60310b7
-device 82120,192.168.7.68,ECY-VAV-8DCE80,VAV 7-18,Snell & Wilmer,yes,9dd34918-eacd-4cf2-a8fd-b58822d1223f,d85f2560-e98f-44b5-a417-9579712f067a,4a38b85a-d400-4794-a85f-f51e24c82a0f
-device 40200,192.168.7.69,ECY-VAV-230A71,VAV 7-19,Snell & Wilmer,yes,492ff820-83b2-402e-8456-4613bfae2dc4,5f93ef85-06ee-47e0-b4d0-d4a1b1c5ec8a,547e6654-1b72-4e2a-b82c-21552edcfad6
-device 164131,192.168.7.52,ECY-VAV-28E092,VAV 7-2,Snell & Wilmer,yes,0b872f02-8b9e-4c59-83d6-c62cb56fcfc5,2bbcb5ef-0c59-4759-9772-f500967ff5fd,c90c6c7e-0154-42d9-b7d1-144dc2fc5d06
-device 169142,192.168.7.72,ECY-VAV-25A078,VAV 7-22,Snell & Wilmer,yes,be93574e-39e6-46c8-bdac-ddd9b3cca4a0,0f1e9cb8-73ea-41cd-8836-0305340bac63,3b5b5b50-d5d0-464f-b210-17ca785ced73
-device 39151,192.168.7.53,ECY-VAV-25A01E,VAV 7-3,Snell & Wilmer,yes,609b3d52-af18-4de8-bde8-08db863eed71,e2095f23-8ee2-467a-a821-6d5ba8e11ab2,22b56a84-1e28-49bf-ac65-6ac9e827b30a
-device 53036,192.168.7.55,ECY-VAV-234FAD,VAV 7-5,Snell & Wilmer,yes,15a8abf2-3457-4f24-9d8a-c5c430bc4814,cc7597e2-7c14-4ba3-8b36-6af3d2c7559c,a8bba228-dd2f-4e23-8789-e4f9614d5967
-device 70106,192.168.7.56,ECY-VAV-FFEB26,VAV 7-6,Snell & Wilmer,yes,eb4d2893-fa04-459b-a07d-29651968ef91,542f2777-e8b8-4539-8c1b-209917499529,438dec40-6f0c-46ed-b6df-8cb2c4749010
-device 70107,192.168.7.57,ECY-VAV-D863FF,VAV 7-7,Snell & Wilmer,yes,f1f4ae92-ebc6-41e8-95eb-bb70cbb55459,05c3c792-237f-4911-b055-743e80823623,32317c6e-fc43-4069-b3fe-5d6af32ff8a3
-device 70108,192.168.7.58,ECY-VAV-E2C7E8,VAV 7-8,Snell & Wilmer,yes,7195277f-7cc3-43c4-9cbc-635ec0cf166a,f868217b-6076-418a-9168-85c974d54d2b,3a678cf3-440b-4eac-9ae2-68d5ada5d3a5
-device 70109,192.168.7.59,ECY-VAV-E16D55,VAV 7-9,Snell & Wilmer,yes,8466412a-255e-4a57-82f7-ec7ac7ec65e2,92089aba-3693-4cd4-a62a-4bc87f3071e5,6e2952ea-48f5-4ab0-84e9-69578d540715
-device 70105,192.168.7.73,VAV-7-25,VAV-7-25,Snell & Wilmer,yes,f15734ea-7f60-472f-ba5e-f6d1d74bedac,ed55db95-351a-48fc-9642-b3d16390812a,5ef7de04-678d-48eb-8b43-15f4147f0a5f
-device 204136,192.168.7.71,ECY-VAV-8D9407,VAV 7-21,Snell & Wilmer,yes,c18cc834-e3f4-4c18-acdb-fea71e1ae7b7,1798ee78-091c-4fa8-b3ff-02bb435a1ee6,9da70c7d-5f7f-4685-956c-3225be9ddd46
-device 13101,192.168.2.75,VAV_2_2A,VAV-2-2A,TSG Consumer Partners,yes,736927c7-a005-4f44-a2d9-fcd94f51debd,fcb2e845-df88-4e09-93db-2eb3415edb5d,7a287c36-8dd2-4b9e-b335-1ec139d6474e
-device 70024,192.168.2.76,VAV_2_3A,VAV-2-3A,TSG Consumer Partners,yes,77e67dc8-8508-41e2-832f-60b8789eb09e,30348bd4-c19c-4c0a-953b-7c7cf84ab22d,59e56d96-589a-47c7-b39e-1e27e98215d5
-device 6207,192.168.2.77,VAV_2_4,VAV-2-4,TSG Consumer Partners,yes,edac1a52-57b2-44cd-b689-72db44ab159a,a3826dc9-b9f1-4416-9d43-6cff98846810,fb35a664-394b-4600-8d6b-ffc17b422f5c
-device 40148,192.168.2.78,VAV_2_5,VAV-2-5,TSG Consumer Partners,yes,7fce52cb-e45e-4c40-a30f-b8c9b87ec0aa,98f63520-f8cb-4eeb-9481-035d23e64713,d31cacf8-491a-4c2c-ad39-dda1682ad714
-device 188154,192.168.3.81,ECY-VAV-1434FD,VAV-3-1A,The Cirrus Company,yes,d7edd88b-313a-45dc-90a4-295936b44b4a,658370c0-3933-4716-8fe4-078db8043556,dcfbe22f-714b-41f4-a72d-02021adf289d
-device 233181,192.168.3.82,ECY-VAV-1440DC,VAV-3-2A,The Cirrus Company,yes,293d168f-9aac-4e81-b6b9-16e6c984caa0,b794f895-e1e8-49cb-a268-629cf009942c,4374dd9f-9b14-4882-854b-10517a4013cc
-device 128053,192.168.3.84,ECY-VAV-14398C,VAV-3-4A,The Cirrus Company,yes,4f0d3c11-6165-4db6-9c23-80dabe369524,1fb842e3-39bc-4fe2-8f3f-15dfe0797132,74b7c9a3-0405-47b9-a68e-7af2b9f05207
-device 88139,192.168.3.83,ECY-VAV-CC01D1,VAV-3-3A,The Cirrus Company,yes,16c2cdab-db3e-45e2-9599-3cb8297cca6d,c1dbf9fd-09a3-4a17-96f1-94b0b5b8b90b,04dd2cf3-5ba1-4101-9634-e86041d86be9
-device 6080,192.168.6.80,ECY-VAV-233BD6,VAV 6-10,The Northern Trust (The Northern Trust Company),yes,24058988-eab3-4a5e-a1e4-44074da8b851,7a61e76d-993d-4ca4-98cb-346ebb918828,2b80953a-ad5a-4a52-ae37-92597a00e3b4
-device 6072,192.168.6.72,ECY-VAV-F9F52E,VAV 6-2,The Northern Trust (The Northern Trust Company),yes,5731462a-a4ee-40cf-8457-533f847dbc41,5551cb0d-815e-4c00-92d8-21e10549b04c,8e7b8cd5-47e1-4e81-a051-c157d18c89e1
-device 6073,192.168.6.73,ECY-VAV-54E79B,VAV 6-3,The Northern Trust (The Northern Trust Company),yes,b8297837-cc37-4a3f-a7fe-49d3b79aa7e0,00d7edf9-af87-4c14-a2c8-d2e1ddf84a44,0b0db077-8cd5-41e4-a9d6-783ad6634829
-device 6074,192.168.6.74,ECY-VAV-23D92C,VAV 6-4,The Northern Trust (The Northern Trust Company),yes,03ac1b5f-ccde-4035-ac9c-12eb6061f2b0,76debd71-df57-422b-8cd5-4816c9138d98,99c654d8-0c9b-47e6-9f19-e47b4514fd20
-device 6076,192.168.6.76,ECY-VAV-F55452,VAV 6-6,The Northern Trust (The Northern Trust Company),yes,f4d193bd-1317-4593-9405-1690ccea5298,2fd3633c-8c65-40e8-ad28-0a121f5080c5,202d6901-8875-4ba4-a1d3-78e91e2ba772
-device 6077,192.168.6.77,ECY-VAV-551EFA,VAV 6-7,The Northern Trust (The Northern Trust Company),yes,96fbdfce-dbf9-466b-b99b-31da5dddd928,96947b6f-65b8-4adb-927e-53ddc1a7f037,3d124292-3e67-48d5-8534-acce567ff685
-device 6079,192.168.6.79,ECY-VAV-5514D1,VAV 6-9,The Northern Trust (The Northern Trust Company),yes,a051d651-41cc-44fb-bc05-9655f9815ff5,25d1e89d-7fe3-47b9-9649-4e610a620366,7e942caf-2f49-4c1a-b7fe-dc3e65cc58d8
-device 6078,192.168.6.78,VAV-6-78,VAV-6-78,The Northern Trust (The Northern Trust Company),yes,11e15101-53fd-4114-a96b-e3feba72632a,5892c4fa-3c31-4f4b-9e76-978d52b1503b,48ce752b-ca8a-4a69-9294-7c1a067c3748
-device 212038,192.168.7.90,VAV 9-1,VAV 9-1,Touchstone Living,yes,f254c813-a9d5-4972-82f8-96ba6a262b74,02571129-850d-4e7e-a6d0-83013a694840,1c098096-c2cd-4a96-93bc-1ec2ddb2615f
-device 109054,192.168.7.99,VAV 9-11,VAV 9-11,Touchstone Living,yes,7c5d8bd7-3587-4866-a4db-b10d60c96d4d,c140222a-057e-4da3-8507-e83a31b9289b,1962e307-6269-4da4-ae1c-5abca67aacbc
-device 33243,192.168.7.100,VAV 9-12,VAV 9-12,Touchstone Living,yes,1a7bf988-a6f7-4099-92db-8e3dfdf777f1,39358e38-c3cf-4daa-be82-5602d544ee96,97d0a7b1-a87a-4fd2-84ed-b82f1daa9ca8
-device 131109,192.168.7.101,VAV 9-13,VAV 9-13,Touchstone Living,yes,aea77476-b974-4895-b59e-e4222a1e8517,2056b20c-f293-4901-a7e4-387ee7ccfad1,1fe266fc-3670-433b-a006-675ac406d1e3
-device 206109,192.168.7.102,VAV 9-14,VAV 9-14,Touchstone Living,yes,33515d25-4644-46d8-b9d1-34cabd2915e0,8dbffbbb-51c3-4177-9f43-1ab67be3e8a6,895dd564-e04e-48c6-b5af-c83baa3981ec
-device 69028,192.168.7.91,VAV 9-2,VAV 9-2,Touchstone Living,yes,f7786c1a-3773-48b8-a7df-142d20951aef,d29573e0-87a4-41db-aa19-c2636166d5cc,205f25a2-78cf-49f8-9463-d7a96b21f11e
-device 160251,192.168.7.92,VAV 9-3,VAV 9-3,Touchstone Living,yes,df75db98-d836-4132-a521-a9c5e43e0e79,495ecf40-1350-43c1-918d-db9e54c38eaf,950384a1-af83-43a1-a30d-9c72c9ab3350
-device 65199,192.168.7.94,VAV 9-5,VAV 9-5,Touchstone Living,yes,504f9b4d-a0f7-48fb-b01e-bc39078fb023,4691d039-e87e-41b4-9154-8ac2c1f0d0f6,4337f398-543a-45f2-8ee3-91323504494c
-device 155188,192.168.7.95,VAV 9-6,VAV 9-6,Touchstone Living,yes,339a4132-6cd4-44d9-9532-3101b9d7a6f6,70c32d9f-962b-4d3a-a640-5a909b0685a2,9a690fc7-0e49-4d65-9950-a53445336d92
-device 32023,192.168.7.96,VAV 9-7,VAV 9-7,Touchstone Living,yes,d49bc11c-9981-4865-bdd9-ddc8f81c1c0e,b239c59d-171b-4f1f-9953-53bf37b4eb16,c2a4075d-1bd5-463d-b08c-4d53d12a94b6
-device 90108,192.168.0.18,VAV 9-8,VAV 9-8,Touchstone Living,yes,1a692a87-a4bd-4ce1-9308-9408a8d085d3,fee3c8d4-cfd8-47bf-a142-bf7d3a842674,2764be10-350d-4c8d-8608-44da8cac396a
-device 32054,192.168.7.97,VAV 9-9,VAV 9-9,Touchstone Living,yes,55e09961-333f-4584-bc38-4b341a94d619,f7039cfb-edec-4152-98b8-e0cd9151dfea,8828096e-01f9-4c49-8f1d-21b2cce1f50f
-device 62,192.168.0.62,>uWynn VAV 9-12,Wynn VAV 9-12,"Wynn Design & Development, LLC",yes,db11d4ae-cdb2-44ee-a74d-82508d495084,67ef4d3b-c734-4be8-a625-8e110ea20c51,44c161b5-cd19-4c30-bcd6-182a6bb8c9b7
-device 9051,192.168.0.51,Wynn VAV 9-1,Wynn VAV 9-1,"Wynn Design & Development, LLC",yes,b4c9030d-5cf2-4029-b98f-cd02d7b729c2,b77460b0-46bf-4a96-9d9b-c1188dc2a3e2,e64e72b2-f926-4305-9b50-763fd7c13cf3
-device 60,192.168.0.60,Wynn VAV 9-10,Wynn VAV 9-10,"Wynn Design & Development, LLC",yes,95f8b0bc-648e-4bfe-bcea-a4a41f0f8b19,e94ac016-7648-464d-ae61-8f00ff1a6fea,73e0d6ae-0926-4285-9b0e-3e1415b23f75
-device 61,192.168.0.61,Wynn VAV 9-11,Wynn VAV 9-11,"Wynn Design & Development, LLC",yes,1cf78647-a29b-426e-8633-e355a2f7d224,a807dac5-a044-48e0-8a6a-a02039ef6f57,823124a2-2a42-461f-870e-c80f236ae957
-device 63,192.168.0.63,Wynn VAV 9-13,Wynn VAV 9-13,"Wynn Design & Development, LLC",yes,46c0bf1b-7f7c-48b4-a997-d1722105a9a1,eb8b765b-0475-4889-93fc-482ea3d85061,807f661b-e991-40d6-9253-d08c538146d9
-device 52,192.168.0.52,Wynn VAV 9-2,Wynn VAV 9-2,"Wynn Design & Development, LLC",yes,eefd4b16-d9cf-4314-87e1-ee0c361aaaa2,00f25df9-40c5-46b1-b0b1-bbfca9a8dce7,d036dfe0-c3b9-4b26-9fa3-cd85bd5b12b7
-device 53,192.168.0.53,Wynn VAV 9-3,Wynn VAV 9-3,"Wynn Design & Development, LLC",yes,ed89f5b2-a709-4740-8efd-d3e601dcc72f,1873dd07-2cea-41ef-b78a-8f4cc353e9d0,c71b616e-e4ad-40a4-9d7e-caeda7bd6597
-device 55,192.168.0.55,Wynn VAV 9-5,Wynn VAV 9-5,"Wynn Design & Development, LLC",yes,06269da6-b4a0-459c-bc6f-6655a250f68a,074e2657-e90f-4a82-9ca5-134a47fc3662,ecc0c455-346c-4b94-994c-8c0397a5753e
-device 56,192.168.0.56,Wynn VAV 9-6,Wynn VAV 9-6,"Wynn Design & Development, LLC",yes,15aaa382-2c02-4f11-ab37-0d53ca2c5bcd,77b0460a-3047-4d1b-b234-54c5361538b2,90dff0f7-e479-42fa-ac1f-1c6482f689a0
-device 57,192.168.0.57,Wynn VAV 9-7,Wynn VAV 9-7,"Wynn Design & Development, LLC",yes,2c0c1af6-bf0f-4389-b402-1a3567584b4d,279dc881-5a8a-444f-88c8-ff3734d4aa08,1b7387f8-9715-42ac-9dd4-7d7342ba8e56
-device 58,192.168.0.58,Wynn VAV 9-8,Wynn VAV 9-8,"Wynn Design & Development, LLC",yes,6d323823-f3a9-49bf-95da-594a4953d4fc,c5a6c78c-1d1c-4d05-af03-5ce9ff839fc0,a0a18b8a-9d6d-4417-97d2-15409925b4bb
-device 59,192.168.0.59,Wynn VAV 9-9,Wynn VAV 9-9,"Wynn Design & Development, LLC",yes,c36ccc85-9223-4cc3-a259-b3efab1fa3aa,8bfac83a-937b-488c-95cd-bd066f634a6d,3f92290c-3184-4ab8-baf8-eacf4b5c745b
-device 10101,192.168.1.11,ECY-VAV-FECE38,,MECH. ROOM,no,6d35ad8f-f6f1-472c-bb95-fdd98598858c,1ebdb381-6601-4ee1-9078-330d8052bec3,99a8656c-d0f9-4fdd-a042-5d80ff246f54
-device 10104,192.168.1.14,ECY-VAV-7CDC58,,MECH. ROOM,no,c572ed19-3ff2-4c68-bf77-b3509fbf9fe0,287a3b35-7793-4016-8986-d6d873d45d73,35675f73-58f3-40f3-b6f7-e60f2f86f92b
-device 10109,192.168.1.19,ECY-VAV-FF15B1,,MECH. ROOM,no,5d0db96b-a6e2-4dde-9432-94fd47dc2a46,617783b2-e44a-4c08-8fde-ce0b7a667097,84f2ff90-d915-4283-9f54-f31e1488fd1a
-device 10110,192.168.1.20,ECY-VAV-FF22C5,,MECH. ROOM,no,0da2bea9-7ec2-48ad-a4b8-fc4311b7f2f4,72811320-5bbb-40ff-9fed-f36ec33a0853,449f2f5a-370d-4da6-9494-ebcbf15a4f80
-device 10111,192.168.1.21,ECY-VAV-7C9D69,,MECH. ROOM,no,4fbcfdee-debc-40af-bf96-8408ecd576a6,5d501dc4-57cb-435d-9577-f0356c4a61ae,f28ab84f-3ce9-457f-96fb-8ff7aa89bc0a
-device 10112,192.168.1.22,ECY-VAV-D88BDB,,MECH. ROOM,no,cbb5913f-9d10-46f5-a3f6-b6c01d452ed6,4007f635-1476-4edc-9937-f0053e1a6570,73fdcd60-70e7-4398-b7f4-b63c10dc89ad
-device 10113,192.168.1.23,ECY-VAV-E123FA,,MECH. ROOM,no,c58fbe08-af78-4d69-96b7-c2b0cd23093a,5abcc0ee-71f2-438c-b37b-b890a8a3928b,95ecdda5-6cea-492c-bc0b-8869cdcd7bca
-device 60104,192.168.6.14,ECY-VAV-D4C6F0,,MECH. ROOM,no,3fb9dc09-11cf-40f9-b9b6-67e7790c4ff2,03300f57-68c5-4f57-975a-2ec93ae87f41,9388b1cd-ab8e-4f95-88b2-cb9380bc354b
-device 60105,192.168.6.15,ECY-VAV-E1F0B5,,MECH. ROOM,no,68be29d1-efd9-4ffc-9d99-fba3e589c4fb,a494dfeb-3684-477d-ba32-55c41775d419,ddcb98ef-32f8-4706-ae06-66305a7a6f23
-device 7151,192.168.7.151,ECY-VAV-823FE2,,MECH. ROOM,no,fe27d31a-bdb3-469b-9c57-0213fdd5c1bf,977001c6-e612-4759-841c-f6f1484b4891,4103b195-64f3-431f-bcb3-a640cf0dc22f
-device 7152,192.168.7.152,ECY-VAV-59306F,,MECH. ROOM,no,32c747ed-e351-4fe2-bdd8-64e5f0528f12,b12bfd85-ffa8-40b1-b797-96fe946fb740,f8e8834b-792a-4264-8e80-20ceabf2354e
-device 7153,192.168.7.153,ECY-VAV-FD617C,,MECH. ROOM,no,a9a3e070-f221-4d5f-8d06-42647633a9e5,af645d52-48c7-4032-8747-721ed19014fe,1c87d70b-a19d-40d2-b03a-400b15e34510
-device 7156,192.168.7.156,ECY-VAV-0B6931,,MECH. ROOM,no,7bec0827-cd78-4ae5-987f-54a7ecdf2183,df768178-c9df-4bfe-8516-93aec2659940,63bdc3fb-40ee-44b7-ae93-fe0e74b0b106
-device 7157,192.168.7.157,ECY-VAV-94785F,,MECH. ROOM,no,81dfa778-9451-4cdc-b098-6e04b0d234ab,4654fd07-7465-44b7-8382-acb1560cc553,642a9ade-2f5f-4941-b3ca-7cb26fa0a05c
-device 7158,192.168.7.158,ECY-VAV-58F480,,MECH. ROOM,no,56bc76eb-a9ba-4a3d-b178-2d1633aeb3dd,15107636-fbe7-4535-9f65-d693c45b174e,b414dc67-a475-448c-836d-faca212b8dbe
-device 7159,192.168.7.159,ECY-VAV-58E8ED,,MECH. ROOM,no,d10c536d-3426-4f0a-8773-fd84bdc4078f,38468e3c-8d8c-478f-9ddc-c54548f01ac6,831a34d6-6e26-4873-a2e3-c62b22506c1e
-device 7160,192.168.7.160,ECY-VAV-947871,,MECH. ROOM,no,6f034972-a278-4564-8752-34b0cbb6c7fa,b4fcbfe5-b948-4d35-a8d4-20ca2c4c6f6a,f788dbeb-d1f3-498b-9906-ba0f9893084e
-device 7161,192.168.7.161,ECY-VAV-58F0DC,,MECH. ROOM,no,84b3e21c-0d29-43eb-a406-2fabb7248641,32270c2d-4b77-44d7-aa11-29f616e11b17,f2e8f4b4-3150-4cc3-8ec5-f92ffb5e1495
-device 7162,192.168.7.162,ECY-VAV-FEFF4C,,MECH. ROOM,no,5be9466d-44fe-4b6d-8b3d-2ef6ef3778f4,701a4fc6-f668-4718-80ee-e61b3e080107,784b579a-8dad-4fec-b4eb-ef2c44ea7688
-device 7164,192.168.7.164,ECY-VAV-58F4BA,,MECH. ROOM,no,a716e32b-1b11-4470-af13-8c11429bd965,d5bc589e-df15-4a55-944c-e8873a887434,77b7c38f-5646-4eb1-a594-a0799ba2f2a4
-device 7165,192.168.7.165,ECY-VAV-39161A,,MECH. ROOM,no,e7a7d4a7-ff04-4dfd-8092-0f0146374ef0,f388b260-b507-449f-83bd-060a64d71baa,1c28ab33-ab8f-4903-b712-49e80f22dcd3
-device 7166,192.168.7.166,ECY-VAV-58E284,,MECH. ROOM,no,39682790-3680-4ac8-b07a-78e570e308e9,3c9e2420-5884-4e2d-8fd2-f8f2d4bff946,a92261fc-1534-40b0-95a9-0eda3c44d311
-device 7167,192.168.7.167,ECY-VAV-393ADA,,MECH. ROOM,no,c4e51e9c-3e9d-458a-959c-34aa9e390f54,15c52dbf-2eac-4c18-812c-87b2399f63b9,f826bab6-9319-4a5d-baa3-4d79ae0c2a2d
-device 7168,192.168.7.168,ECY-VAV-59304B,,MECH. ROOM,no,46f2fc30-0428-4f38-9d20-d6db617a2b66,f39d22ef-e547-4bd2-8a43-d10b2ab000c5,702fe679-bbb5-41d7-8e76-57e4c3d8c7b1
-device 7169,192.168.7.169,ECY-VAV-391AE2,,MECH. ROOM,no,4305ccc4-5e2f-4bed-92cf-6de556495a8e,49b65fb2-bfff-40e2-953a-0d7d3bb5b807,0157acba-7477-43ac-8b71-a571b17a4975
-device 7170,192.168.7.170,ECY-VAV-391605,,MECH. ROOM,no,344dc315-ba25-426a-82a0-155aca1e9ea7,0dc14a6e-5b65-459b-a263-526251906348,ecf5c295-685e-4ac9-8567-16c2c81f8545
-device 7171,192.168.7.171,ECY-VAV-58E2F9,,MECH. ROOM,no,6d9d8780-7b26-430f-a32f-e643e8de352e,7ca2dcaf-8165-4be5-871e-3183c4b80050,699de79c-6e6b-462a-8ddc-ff6c31a4322c
-device 7172,192.168.7.172,ECY-VAV-F1C7F1,,MECH. ROOM,no,73255aa4-3405-4f2e-bd17-87d2195829a4,da113ba8-d38e-482d-afcb-923bbfd2e0cb,616b3f60-54f1-41b4-baa3-2cff13d45f43
-device 7173,192.168.7.173,ECY-VAV-FA4478,,MECH. ROOM,no,0e42e3f8-d549-45da-b624-9394e54aa0a5,70de3b6b-bc3e-48f5-9b87-bf8064cb824f,f5470357-a18f-49d4-9fca-3be252da21c3
-device 7174,192.168.7.174,ECY-VAV-5901E6,,MECH. ROOM,no,ce1f6d74-cf64-484a-9b62-094bfe7dae74,ccacdd19-9c5a-4da4-be27-bcafd456022a,04dbd4b0-70e7-4187-a596-4a0881548861
-device 7176,192.168.7.176,ECY-VAV-58F0FA,,MECH. ROOM,no,b3832739-fe6b-40ba-bab5-b408100f3cd5,fea4a192-5556-44e5-9b89-60a4df0dcd65,59617179-2ca1-4ec4-b1da-219546c21da4
-device 7177,192.168.7.177,ECY-VAV-3D0CE6,,MECH. ROOM,no,1514b5ea-fcb1-4dad-9805-2230a6caa80c,e86990d2-0d53-4554-bb26-96399e9ea460,bf2f08b9-cd1a-4b36-a6d0-4d30358d6550
-device 7178,192.168.7.178,ECY-VAV-E9D368,,MECH. ROOM,no,d3e7e07f-c0b5-4d41-ae5a-87c505ab1e69,0dfc40f0-f2c3-40be-a087-719d95dbe348,8a4c23b6-3836-4c63-a33a-514ded8ac519
-device 7180,192.168.7.180,ECY-VAV-FA5E28,,MECH. ROOM,no,b3cf3bed-88c9-45e8-9ab5-053d8e1ff082,58b1fb54-0102-4e2d-a979-f837da47bd9c,2bec369a-f61e-4f63-a776-6bda9c2b2e30
-device 7181,192.168.7.181,ECY-VAV-E9BB1D,,MECH. ROOM,no,25e97f1f-c934-4e4f-a74c-c02b330cc0d0,3987bff1-c962-46a5-afdf-c443394719a3,59d0945f-6b29-445d-bcbf-09b4897d8a79
-device 7182,192.168.7.182,ECY-VAV-FBFA0F,,MECH. ROOM,no,c71b7454-da87-4eb9-a6a5-62a559e081fb,1410a7fc-d294-4ff8-8408-73e5a15aadb6,174b45bd-d79b-406c-965b-b0abaf6f053e
-device 7183,192.168.7.183,ECY-VAV-FBF5B9,,MECH. ROOM,no,5df83c94-3e63-483b-a1dd-e151bf706cc4,13f09fa3-9a82-4595-b271-4d758807cc75,89f4d134-f700-47b4-9fc1-6a8bea77e6f2
-device 7184,192.168.7.184,ECY-VAV-FA63EC,,MECH. ROOM,no,c118448c-f218-4a79-a70c-5c90da1fc5d4,33442f51-aca0-4003-8875-f05347ecae35,69e1374c-5e1a-487d-9f60-d0af5bb88feb
-device 16000,192.168.6.93,M>uECY-VAV-142D80,VAV 6-3 A,MECH. ROOM,no,e0722122-bf37-443e-af28-ab68a4f9ec09,650b8275-51d1-45c2-b050-88f6cb602852,e3c72826-acbc-4dc7-aa79-86a1fe49a1d1
-device 20148,192.168.0.66,VAV 9-16,Offices 923-925,MECH. ROOM,no,f9c16f8d-22ed-420e-b53f-461094441bf8,6f973a2f-d482-4b9e-834c-456513df99e7,37819e13-6181-4b8a-b66c-a794003cb412
-device 97105,192.168.0.67,VAV 9-17,Offices 927-930,MECH. ROOM,no,a4e64d62-a81d-4284-a751-794e9935d176,d27d27ca-4c10-453e-8162-e47ecc256021,5fb37767-39a5-41bf-a4d0-819d00dcf485
-device 35149,192.168.0.64,VAV 9-14,Open Office,MECH. ROOM,no,26d9de9b-2e87-46c9-8b31-b51fb892480d,f52e05c6-bd0f-472c-b319-1c47e55ab73b,7ec781cd-f25d-45bc-a4a2-d1c8d0082e12
-device 45243,192.168.0.65,VAV 9-15,Open Office,MECH. ROOM,no,aa9ffbc5-8b10-4634-b8a4-8fe33d37eab5,45760609-355f-4c9f-bd82-ea59fc1c7c94,c9f79fb8-4040-4bb3-b325-ea941afa0091
-device 30109,192.168.3.19,ECY-VAV-7CDC34,Open Offices,MECH. ROOM,no,2f6c8a17-37f8-43a4-b1f6-8282836f6168,b5a1a8dd-6b74-45e0-9bc4-3c72dec8097e,7337b3ca-0136-4884-b973-a0c42d9d0e06
-device 30115,192.168.3.115,ECY-VAV-58E8C3,South West Office,MECH. ROOM,no,c3da7536-3e0c-4b7e-af60-98df578bdd06,2ad2ed11-52b7-4172-93ac-c913100575ec,c3cc65ed-3739-4377-9800-be82f86b07d3
-device 1033,192.168.1.33,VAV 1-23,VAV 1-23,MECH. ROOM,no,381a32c7-3890-4b83-8c24-38f65b04f2f1,d041ce60-a34e-4e6e-93b2-aa30887838a4,654d09f0-1f4b-4b76-8416-25ff4833f124
-device 10105,192.168.1.15,VAV 1-5,VAV 1-5,MECH. ROOM,no,3c0a8ab0-27d5-4db3-ba17-dc1e98f69a39,e814fce1-4d02-4034-957e-96525b517a40,b52b4c34-f882-4a6b-8c22-471e72bcee05
-device 10106,192.168.1.16,VAV 1-6,VAV 1-6,MECH. ROOM,no,86d7aa46-e094-4bc9-b43b-a03d900a8cff,238be876-41fd-4bba-8b29-e2d34d967b5c,33c132c6-159a-45b2-8f37-1a835aa6cbd9
-device 40176,192.168.4.76,ECY-VAV-D875C3,VAV 4-6,MECH. ROOM,no,c2b29387-4bb6-41bb-83fe-a2fe34aa8f12,51106e76-cd56-4fa8-b852-c398c34eef4c,f51ab2bb-f926-4b79-a55e-c28a21f7dd5a
-device 50560,192.168.5.60,ECY-VAV-2096BA,VAV 5-10,MECH. ROOM,no,0e297dd0-b84d-4c51-8029-002c509b8a85,89338012-2b06-4917-b853-35fc0368e990,64e9ca00-8ca6-4661-a3a0-f658437d9af3
-device 6071,192.168.6.71,ECY-VAV-55016C,VAV 6-1,MECH. ROOM,no,ad0e3b27-34f7-4f9b-a2a5-21cd6f45a5d4,8faa9bd3-3c04-4b23-977c-cc250083f693,b371e060-755a-4ce8-8ca0-1c8116e15127
-device 6052,192.168.6.52,ECY-VAV-9965B8,VAV 6-2,MECH. ROOM,no,2dff83fb-b2fb-4b67-b14a-db442ff0bbcd,a312cb0b-8329-4c15-a4d3-efa4dc14a3ed,2bab5eb6-01ad-4673-b66e-8f5db4b7d233
-device 6075,192.168.6.75,ECY-VAV-55238C,VAV 6-5,MECH. ROOM,no,89912ac8-0fa5-4719-9805-efdfb7019d9c,a63652b7-10e7-43a3-a890-9d7dbf5aa503,38fbd024-578c-4eef-b468-7c24a2d9a414
-device 60109,192.168.6.96,ECY-VAV-D83C5B,VAV 6-6A,MECH. ROOM,no,b90b7c2c-c46e-4c0a-b563-25d28c9557bd,7a7aa447-2fc3-4b8e-955e-f3ac257f2ac6,780b9e2e-18a3-4a57-a334-425fd78f4e8b
-device 18173,192.168.7.70,ECY-VAV-B7414B,VAV 7-20,MECH. ROOM,no,73bcd4ab-f6bd-4b28-ae46-e6effa168664,c9070899-997c-42fa-8605-4f85eb3026de,3d8492a2-33be-4bef-9bc6-9fe21f235cea
-device 130212,192.168.7.54,ECY-VAV-259ACC,VAV 7-4,MECH. ROOM,no,00966522-83a0-4479-b412-4e56cc6da2c8,367f70ad-bd6f-4b42-bd51-7e4dd55181ca,388d1657-f51e-4050-84af-8f0cd277340e
-device 220219,192.168.7.98,VAV 9-10,VAV 9-10,MECH. ROOM,no,b5359019-acf0-465c-8efb-61642915adec,76fd032a-f5eb-4a8f-a1b7-fc67668c4e7c,4df1162c-24a3-4e46-ae40-f45137ff0309
-device 22039,192.168.7.93,VAV 9-4,VAV 9-4,MECH. ROOM,no,f322e7fa-4176-47ea-a774-99b5c52833f9,ed38e87b-1132-4e03-96a4-1c0e729a5af3,90cb55c9-fa08-4869-a180-6a8cd15ec7b3
-device 7186,192.168.7.186,ECY-VAV-58E2BD,VAV-13,MECH. ROOM,no,a0db29a4-89ef-4150-92d1-f95296853c07,023a80d4-4802-42f6-9b7a-2e5a1f8902b8,318a4057-c588-4743-bfa8-9a0bffcb94b6
-device 7185,192.168.7.185,ECY-VAV-0F5028,VAV-25,MECH. ROOM,no,f709adb5-3511-4b50-bd37-99aec54e9a37,dbd92283-b9a7-41d3-8240-d8376cdf8085,768057bc-fd7a-4285-9b16-2ea4ad683397
-device 7179,192.168.7.179,ECY-VAV-58E896,VAV-29,MECH. ROOM,no,1a1e794d-a24f-4c76-b1d0-276b695d220b,77bfe5b0-e1c6-497f-acff-d366a79a4ddc,dc18681e-dc22-4c35-b685-ddc211d8d170
-device 7155,192.168.7.155,ECY-VAV-59063C,VAV-4,MECH. ROOM,no,a2b3ecd1-ccd5-48cc-ac1c-31dc2cd521f5,2cc32848-30e2-4de1-aac8-5d62a3b221b6,7004d63c-b053-48bd-a7c6-47ef6d785132
-device 6104,192.168.4.54,,VAV-4-4,MECH. ROOM,no,6b77523d-caca-41d5-b987-0bf5b28dc12e,e9e845dd-371c-436a-8bba-58b06a6a2e59,af5aca19-cb12-49b4-becc-765e762c82f7
-device 7154,192.168.7.154,ECY-VAV-FA4472,VAV-5,MECH. ROOM,no,2795c6b3-3d91-4724-9978-289b343dfe87,08e5f7f1-9c34-4867-abb3-ec8dae15798b,85e27e94-965d-4e0b-905b-9522b539ffb2
-device 5163,192.168.5.163,VAV-5-3,VAV-5-3,MECH. ROOM,no,faee5a40-2cc4-499a-b4bf-a0892f76c1f8,faf9cff7-b3bc-4e5a-b30a-ad70569dd62c,6d7cd038-89df-4a43-a74b-a416759ee307
-device 5168,192.168.5.168,VAV-5-8,VAV-5-8,MECH. ROOM,no,3b34f979-822b-4916-94b9-e610b0dfeaa6,6d32f7d9-0cf3-4629-af8a-3eaa78f3a446,43aab541-6f69-4d67-b69c-7d9da18f50c7
-device 141141,192.168.6.87,ECY-VAV-168847,VAV-7,MECH. ROOM,no,82e20b6a-34eb-4f62-9d1e-c814da0e7e78,13cec7bc-da6b-4657-8fcb-51c668556780,c7c34e31-abe5-496c-9a98-f03fa82136b1
-device 3101,192.168.3.101,ECY-VAV-5874C2,VAV-PCI-3-1,MECH. ROOM,no,c2d31e34-2516-4aa1-8a58-6d68ca7acc87,dde73b65-c56e-45be-b033-fc0da75c27ed,9c22de62-c97f-4418-b5a5-4ed6eee218b0
-device 5101,192.168.5.101,ECY-VAV-3D12CB,VAV-PCI-5-1,MECH. ROOM,no,c06d4f22-5787-4667-bc3f-f7b0fd813147,b879d50e-7e5b-45dd-ac48-f06ab63a799c,ff9675a2-60a1-4521-a093-048052f29e94
-device 219020,192.168.1.54,VAV-1-21,Break Area,TENANT SPACE,no,98c198c3-b417-4653-a5e0-6294df795c5f,1904fd61-c8ea-4920-be49-8c53dcc3f1ca,45ce636a-c065-4621-a220-7f17e3073623
-device 7017,192.168.1.53,VAV-1-20,Conference Rm102,TENANT SPACE,no,34e8d3fd-7fb4-4f49-9de6-2d258d03f48d,aa33ac1c-053b-4f55-b6af-52b3e891fd7f,9e09735c-13f1-4f25-ae49-65987a8768f9
-device 193231,192.168.2.70,ECY-VAV-6D292D,VAV-2-1,TENANT SPACE,no,104f6d0c-7f36-4c9a-8845-360b9cc27036,8940bca7-75bb-4772-9dc2-ae914f9669b5,65b93dff-a51a-4e2b-afb2-ed55ab0c20c1
-device 20106,192.168.2.71,VAV-2-2,VAV-2-2,TENANT SPACE,no,4741ddf4-273e-4721-b48f-544e07e4ddfe,8b54380c-1774-4c0c-8c25-b9cd245a7137,49d72385-012b-480a-9ba0-9944ed83cfed
-device 151,192.168.0.151,Wynn VAV 10-1,Wynn VAV 10-1,TENANT SPACE,no,dc10c4ff-d4b5-42a5-a305-9ec4f9a66fdf,90085056-9e48-47a1-a914-ce6c1d8c9e75,2c4e0e65-ade2-48a9-80b0-655893477590
-device 160,192.168.0.160,Wynn VAV 10-10,Wynn VAV 10-10,TENANT SPACE,no,6818e015-8053-4c50-8bed-95ce794f726b,6630d1dd-6d10-4816-9f2d-dd6edd3dd2a8,fc709825-f30d-4d0f-ae36-715f8781a8a6
-device 161,192.168.0.161,Wynn VAV 10-11,Wynn VAV 10-11,TENANT SPACE,no,dcc264a5-d861-48d6-94f8-54c6637c4713,6957d7ad-bee5-4512-902d-8d0aced99faa,01cfd613-d5e0-416f-bdb5-d2f744e4c67e
-device 162,192.168.0.162,Wynn VAV 10-12,Wynn VAV 10-12,TENANT SPACE,no,d60e2d87-f9c8-472d-ad08-cbaa5d931778,707dd9ee-b69d-4241-b616-7f149315a2e2,f8ff66dd-259b-42be-879b-fd49f535751c
-device 163,192.168.0.163,Wynn VAV 10-13,Wynn VAV 10-13,TENANT SPACE,no,8655431b-aca5-4970-ae5f-6c03137d5db5,379d2c60-5af6-4d40-9cc2-30d8fa1f1ee3,b8f4f71f-9733-4d20-beae-41d43a65a274
-device 164,192.168.0.164,Wynn VAV 10-14,Wynn VAV 10-14,TENANT SPACE,no,7bab8df7-d916-4d84-a4ed-6b09bef30d77,7f31ed60-6366-4fd9-84a4-b6de1f021a45,f6028561-d12e-4af8-9405-ed2e92592aef
-device 165,192.168.0.165,Wynn VAV 10-15,Wynn VAV 10-15,TENANT SPACE,no,65ca8cc4-9946-43af-b617-2909899bb9a2,b2e858bf-b7f6-46b4-9baa-40e0b35702de,a307b34a-f799-4ba1-b07d-a33fd2432b34
-device 166,192.168.0.166,Wynn VAV 10-16,Wynn VAV 10-16,TENANT SPACE,no,2c0cdb47-14b2-46ad-aa53-0ae34a99ca95,53b9bed0-bd07-44b7-8238-3da68c73eb17,18ce6268-f4b6-4d91-8250-9e5d66e25cb5
-device 167,192.168.0.167,Wynn VAV 10-17,Wynn VAV 10-17,TENANT SPACE,no,5c385973-cda3-4d68-906e-c8438b0f77c9,05ca635f-5aed-4e0e-b60f-46a978181d54,9e6dfa48-7004-4ccf-816c-a41d60379f97
-device 168,192.168.0.168,Wynn VAV 10-18,Wynn VAV 10-18,TENANT SPACE,no,c41f7e3d-e3d7-43d3-9e59-782aec804305,d83728ed-8ee2-41a4-bdf7-8eede4a7aa6a,e2d2a085-af1d-4d0f-81cc-120a0639f3f1
-device 169,192.168.0.169,Wynn VAV 10-19,Wynn VAV 10-19,TENANT SPACE,no,e83d853d-51e9-4563-a362-a583cd19ab52,60c45ef2-60c7-4499-81ca-167cfac20258,5ea95545-75d2-487a-a15e-60f9e3e1209e
-device 152,192.168.0.152,Wynn VAV 10-2,Wynn VAV 10-2,TENANT SPACE,no,aab38128-e972-412e-87c1-5694ea53ed4e,93d76e5a-3f87-4bc4-9c8e-c2fc91c2e6f6,06ccbbdb-e5b3-4126-ba57-16f1c894b717
-device 170,192.168.0.170,Wynn VAV 10-20,Wynn VAV 10-20,TENANT SPACE,no,df2d24f3-22f1-40aa-95c0-e8536babb1f0,890d9f3a-74d2-4a12-bae0-e15ed07124e8,da6984e5-4bfa-42c6-a37e-deee7ba9de38
-device 171,192.168.0.171,Wynn VAV 10-21,Wynn VAV 10-21,TENANT SPACE,no,ffe10e9b-738d-4066-802b-19ad323625b6,b06e22d2-a0c0-400a-bbe4-b87b913aef33,7f77d060-adef-438c-b0ab-cfe1219a9f91
-device 172,192.168.0.172,Wynn VAV 10-22,Wynn VAV 10-22,TENANT SPACE,no,c3e04550-622e-429b-8a01-dba29b64d126,9bc0d16f-caa3-4051-af0e-d50ad1c72168,94d1e586-12da-4111-b70e-6edb9cb7b470
-device 173,192.168.0.173,Wynn VAV 10-23,Wynn VAV 10-23,TENANT SPACE,no,c48b1729-4c7b-4c91-9663-60702265f376,983da5ab-4276-4740-81c7-849b7110efd0,05811dc3-b685-419a-9a32-90f6aa1e6eda
-device 174,192.168.0.174,Wynn VAV 10-24,Wynn VAV 10-24,TENANT SPACE,no,cbc750c4-f48a-44a3-ac02-2bffcd5bea61,dd1a3d96-f4d7-4026-aea6-f88babac583d,ef838b03-f761-4688-8074-972500714733
-device 175,192.168.0.175,Wynn VAV 10-25,Wynn VAV 10-25,TENANT SPACE,no,41f00a14-282b-412b-939c-d2163e8d78aa,f0387b67-6706-488f-965a-fb4eac85c6e1,fc9fa82e-c6e8-4f21-8c81-2ef6c834349a
-device 176,192.168.0.176,Wynn VAV 10-26,Wynn VAV 10-26,TENANT SPACE,no,a902f300-c8c4-4b05-abbd-c734c5dada4f,cbeb483b-b7af-4879-82df-c4a510368dd1,0ae68531-d470-450a-83ba-d3fbaf5a175d
-device 181,192.168.0.181,Wynn VAV 10-31,Wynn VAV 10-31,TENANT SPACE,no,4d5b98fd-75b8-4643-a218-cab01bfa6153,f87c29cf-27be-4335-b804-673a7b1ee2d7,e7324487-3a5e-4e10-b857-bf23c26d9ef6
-device 183,192.168.0.183,Wynn VAV 10-33,Wynn VAV 10-33,TENANT SPACE,no,13c75bd8-ecef-49cc-95eb-7705a12bd0bf,3891a547-3577-4674-804b-5378b68b26cb,e4dc24a0-ebb2-4481-9ec7-16175a12ec35
-device 184,192.168.0.184,Wynn VAV 10-34,Wynn VAV 10-34,TENANT SPACE,no,1c1b3834-a4d6-4533-b122-a8edf8916612,f742a67f-d6c9-4fde-8d3c-0006be4087f0,21365964-ccc7-4387-ab04-5a774830b0db
-device 154,192.168.0.154,Wynn VAV 10-4,Wynn VAV 10-4,TENANT SPACE,no,7fc6344f-f072-4b0e-8570-2514e230ed9f,99c242a9-3da5-4ee7-a8fa-f2832188498e,26f7549e-1d8b-4132-9ed0-0776d5e270fc
-device 156,192.168.0.156,Wynn VAV 10-6,Wynn VAV 10-6,TENANT SPACE,no,a4ebefbc-a0aa-49c3-be2c-dc79aa51373f,2bee778b-389c-4f7f-ad45-b0bdbe272485,fabc3ca1-b827-4ffe-8c06-9809f5627369
-device 158,192.168.0.158,Wynn VAV 10-8,Wynn VAV 10-8,TENANT SPACE,no,a925d335-5e6b-48e6-be0a-fae6819de7f9,4ae42619-047a-4d51-a59e-d8d6cd2e5ac2,7d327cf1-cd5b-4257-9d4d-e22da17ab323
-device 159,192.168.0.159,Wynn VAV 10-9,Wynn VAV 10-9,TENANT SPACE,no,5a279548-c2ff-41ea-9fa6-fbc690965bef,80c910a3-714d-43ef-9755-32bfc9fc4a8b,79b5ab5b-4285-49d0-98e7-2cbf8d008e8d
+device,ip,bacnet_name,bacnet_desc,p8s_zone_as_recorded,attributed,temp_sensorId,damper_sensorId,occ_sensorId,floor,floor_source
+device 50551,192.168.5.51,ECY-VAV-D02A0F,VAV 5-1,Bessemer Trust (Bessemer Group),yes,93745a21-8360-489b-bba9-0bb5515a2826,42b6ee31-54db-4e0d-9786-96314ed364e0,91cca859-6630-4a72-89b8-b956ce3f6a75,5,bacnet-desc
+device 50561,192.168.5.61,ECY-VAV-237100,VAV 5-11,Bessemer Trust (Bessemer Group),yes,0d9748b1-2e66-4143-a754-f7ec06f7683f,66e48bb6-4706-43dc-8013-9ca54af0ba1c,02f2fd01-5995-4f94-b7c9-2b9c2205d1fe,5,bacnet-desc
+device 50562,192.168.5.62,ECY-VAV-CFECDF,VAV 5-12,Bessemer Trust (Bessemer Group),yes,f8a14839-5aad-4059-a224-ada2fd5d9013,b91ac802-5219-4173-81d4-e52e688a6b0f,bcb79927-20ed-47c0-9015-d6d0914ccd61,5,bacnet-desc
+device 50563,192.168.5.63,ECY-VAV-C23169,VAV 5-13,Bessemer Trust (Bessemer Group),yes,3c019802-c920-4254-acf8-fd3d7e865af3,d060a730-1859-4e40-a7d7-0467364546da,9cc43626-e1e7-4027-856b-befb981fe3a6,5,bacnet-desc
+device 50552,192.168.5.52,ECY-VAV-C3ABF9,VAV 5-2,Bessemer Trust (Bessemer Group),yes,ae90f62d-b47e-4998-ac9b-25d957a4a2ae,941feac9-5a47-4b1b-a0b0-2bdc280ddabe,68a95c1f-208d-408c-9a83-d692fb71ac4e,5,bacnet-desc
+device 50553,192.168.5.53,ECY-VAV-C05D03,VAV 5-3,Bessemer Trust (Bessemer Group),yes,ed3f494d-908c-4141-8a5f-b222194b07b0,11c2dc83-fb77-4bca-a467-845eea83a6fe,2db8bae9-b26f-4492-b15f-984fe954ab88,5,bacnet-desc
+device 50554,192.168.5.54,ECY-VAV-CFECD6,VAV 5-4,Bessemer Trust (Bessemer Group),yes,597adbc4-839f-4aa9-9c40-cb6530facbbc,6111980a-563b-4446-8263-ff8e6d3b9700,5062d8d3-047f-408e-a7bf-ea8011ffaa85,5,bacnet-desc
+device 50555,192.168.5.55,ECY-VAV-2330BD,VAV 5-5,Bessemer Trust (Bessemer Group),yes,4570a341-7c68-4af4-8a4e-ed9062b7710e,a6a14852-70f9-48b4-8e34-f0c349b3e5fb,a7732d9a-ee8c-4869-bcb7-a1c586c4ee6e,5,bacnet-desc
+device 50557,192.168.5.57,ECY-VAV-1673C2,VAV 5-7,Bessemer Trust (Bessemer Group),yes,d990d982-7c19-4c5e-ad3d-ba7d0c885f81,89ca367d-b5a9-4422-bc44-87319414e8dd,3b17e997-3ead-49ce-8a20-5348c54c7a15,5,bacnet-desc
+device 50558,192.168.5.58,ECY-VAV-D18D74,VAV 5-8,Bessemer Trust (Bessemer Group),yes,a77a82da-ce8c-4edf-9219-8b819a1ba250,e5728571-4f56-43c4-905d-14e6350918ee,8399714d-b8f9-4001-9af4-70e82f6ab517,5,bacnet-desc
+device 50559,192.168.5.59,ECY-VAV-D0062A,VAV 5-9,Bessemer Trust (Bessemer Group),yes,de1a92f4-9089-4c34-ae02-beb882fd6b4e,9f3f3bcd-2eb3-473d-8afb-1ce298f0f680,f0529089-0b48-4cea-b860-aa53b05226f2,5,bacnet-desc
+device 50556,192.168.5.56,ECY-VAV-D1A08E,VAV-5-6,Bessemer Trust (Bessemer Group),yes,2f074cef-cf34-42a7-b82c-d7d3a70b2b03,4bde7fdd-001b-46d7-b138-89c6ee24069b,ac53555b-db52-432e-a1b2-5e698fe17fc8,5,bacnet-desc
+device 3141,192.168.3.141,ECY-VAV-3E1D7A,,"Bruin Capital Partners, LLC",yes,5d8b8701-1339-4910-97d6-87080407d1e2,e34b33cc-dd8c-4c8c-9c31-10d52a15e4bf,eeef6ff2-5fd0-462e-8469-64241ded453e,3,bas-tenant
+device 3142,192.168.3.142,ECY-VAV-3E25FC,,"Bruin Capital Partners, LLC",yes,66225ccf-1a8e-4020-bb99-d897c5a1cad9,126e9459-59aa-43e3-865c-decbb06858a1,fd55ca78-4c2d-46aa-972b-3a0b99442213,3,bas-tenant
+device 3143,192.168.3.143,ECY-VAV-391EC0,,"Bruin Capital Partners, LLC",yes,a593d074-7447-48ad-a4b7-e237cebdc240,91f28b04-f521-4aba-88de-b60d6d08e0a1,966202d5-ef75-4680-94ca-0ae4fd4c9716,3,bas-tenant
+device 3144,192.168.3.144,ECY-VAV-E11C01,,"Bruin Capital Partners, LLC",yes,646947ef-ae70-464e-a23d-9d17f66fb229,bb63fc39-e1a8-4d9e-8344-75428b5ef3c8,08d6edc1-491d-4f39-87f5-4066f37435b5,3,bas-tenant
+device 3145,192.168.3.145,ECY-VAV-3E4075,,"Bruin Capital Partners, LLC",yes,0f750dbc-6f2d-4321-a246-ce2221d0ee92,8fc497e5-6da6-4502-acc6-f491aaaefecf,69b474d7-c91c-4282-8de9-681accb3b13f,3,bas-tenant
+device 3146,192.168.3.146,ECY-VAV-8058C5,,"Bruin Capital Partners, LLC",yes,fc9a26f5-1153-4a6e-ad30-c8c61fd34354,7fdbb454-fde4-4f43-bd92-e9e7890573f1,5c86b85b-2de9-47b9-91a3-ab85291db5ab,3,bas-tenant
+device 3147,192.168.3.147,ECY-VAV-3E406C,,"Bruin Capital Partners, LLC",yes,ea9d7713-0460-48ed-9df6-b71988f019c8,d5574558-24e9-4a44-8680-097357b6ee18,e97b2a5b-a58e-4d0e-ab42-b77c155939da,3,bas-tenant
+device 3148,192.168.3.148,ECY-VAV-6FF993,,"Bruin Capital Partners, LLC",yes,eafc8722-3727-4a4a-aa3e-505ea07e9ee1,a171370d-cc97-4770-8674-75133d5656ee,1cd61b54-be03-4fec-9b97-75a4c8a29083,3,bas-tenant
+device 3149,192.168.3.149,ECY-VAV-392403,,"Bruin Capital Partners, LLC",yes,bf49bcf2-45eb-4c76-911f-d52e78296c75,764641fe-a7ee-4e9d-b174-dff31bcbf822,2c8733d2-9e84-4af2-ba43-46a0b7f66d33,3,bas-tenant
+device 230031,192.168.4.21,VAV_4_1A,VAV-4-1A,Capital Gurus,yes,f159d79d-08fd-415b-945f-4393182a7d92,882bf692-824f-4bde-8222-6045714f0b89,e0de1599-83dc-4f81-bbc4-8e0b9ba79399,4,bacnet-desc
+device 36013,192.168.4.22,VAV_4_2A,VAV-4-2A,Capital Gurus,yes,a4a537e3-1160-45c4-a49b-f1d6d885c063,0e2d7c3d-2acf-4d1b-b587-a49094ac02df,ecb4d2b4-fdcf-4211-8333-e7c93ef350cf,4,bacnet-desc
+device 26031,192.168.4.23,VAV_4_3A,VAV-4-3A,Capital Gurus,yes,783b15cd-f746-41ef-a2cb-c6a2fecc54c9,bc3ce523-a706-4b6b-b948-5a1eb3f4022f,62ce4a42-a4c2-4826-86c3-6400a724ca0e,4,bacnet-desc
+device 228028,192.168.4.24,VAV_4_4A,VAV-4-4A,Capital Gurus,yes,e64219d5-1c1d-4c84-a7c4-a12149820e54,e58b1991-6920-4fb1-bd26-45875bdd8e5e,5aabc373-66cf-42f2-b1ec-8608fbc98545,4,bacnet-desc
+device 40109,192.168.4.25,VAV_4_5A,VAV-4-5A,Capital Gurus,yes,328860c2-de02-49d3-b1c6-690d8a423886,6d57875a-060e-4e02-b8ff-4f30d5c32456,d0e6d723-ca66-4295-8d5b-94067644b3ec,4,bacnet-desc
+device 50051,192.168.5.151,VAV_500_5_1,VAV_500_5_1,Clark Hill,yes,a9965477-1b17-41c1-ab44-27380b9bbed5,76899963-af3d-451b-8494-be102c35c7ae,f65b35a6-a3cb-4cad-9b45-8d5712eca5fd,5,bacnet-desc
+device 50052,192.168.5.152,VAV_500_5_2,VAV_500_5_2,Clark Hill,yes,08c70eb2-f72c-4567-b9c1-3b925a9a98a0,f1e14587-b289-4d8a-958d-2f938b4662ca,cefa7eb6-babe-441d-a110-0a0fa796e21e,5,bacnet-desc
+device 50053,192.168.5.153,VAV_500_5_3,VAV_500_5_3,Clark Hill,yes,2d706987-4f7a-4942-85ed-e3c5cf48ae41,9829ddb5-cbe5-48c3-98db-6953d7f5b40f,a1a2d330-f357-4fa0-88b4-4d2e6b92812f,5,bacnet-desc
+device 50054,192.168.5.154,VAV_500_5_4,VAV_500_5_4,Clark Hill,yes,30a4cf33-4a3b-4a2d-b186-f710a5f2783f,77399b0b-b8e7-41ff-aa52-bf6be4d7db7f,52070241-9625-4c82-95b3-68a4da30deb9,5,bacnet-desc
+device 50055,192.168.5.155,ECY-VAV-164098,VAV_500_5_5,Clark Hill,yes,d2d5daa4-4d96-4662-a4dd-d9100135ae60,88f6b324-c38b-4ed0-9939-a03735b3ca45,2bb6017f-328d-471a-9132-b89d17a6fa06,5,bacnet-desc
+device 50056,192.168.5.156,VAV_500_5_6,VAV_500_5_6,Clark Hill,yes,b99c5252-870a-44f7-b934-396ffce7ee4c,26a6b16d-252b-4fb5-9a40-b1f93d785303,0c1848d1-866f-4ed1-b563-b0e25ac67301,5,bacnet-desc
+device 50057,192.168.5.157,VAV_500_5_7,VAV_500_5_7,Clark Hill,yes,5ec1a445-0d62-4011-be4b-e0ca377b34ee,30a5e15d-2128-45a6-bdf4-3ab70264aa42,49bc1fe9-ebd9-4597-b313-ac2ad969d0f7,5,bacnet-desc
+device 50058,192.168.5.158,VAV_500_5_8,VAV_500_5_8,Clark Hill,yes,95cd3fe9-b907-4afc-bfef-b7fbf4a70b9f,f5e4d73f-c24b-47a0-aced-52bf2d79e8f9,26f550a8-f94d-4a31-a7b6-1cc618a5e88b,5,bacnet-desc
+device 50059,192.168.5.159,VAV_500_5_9,VAV_500_5_9,Clark Hill,yes,b0ea9108-b6bf-4dd1-8b08-f8fd63b01576,44d12d98-38f0-4c07-b32e-c27f84d547fd,a663f3f5-3faa-402d-b520-07497003f85b,5,bacnet-desc
+device 11018,192.168.3.61,VAV-3-61,Vocational Rm 103,Dr. Snyder Cosmetic Dentistry,yes,55447559-168c-4cd0-8392-bf2d58e17a1a,eb205e28-1646-452f-8f03-6a3e66251bf0,00a0146c-0013-4533-b610-b1509980a673,3,bas-tenant
+device 5161,192.168.5.161,VAV-5-1,VAV-5-1,ER Injury Attorneys,yes,c9a2b476-f48c-40a0-a03f-0a163e62bfd2,32e8eb22-cd06-4e3f-9fe9-15472e388775,e7c3bd5f-50a3-4fd1-8c7d-5b6468d48878,5,bacnet-desc
+device 5170,192.168.5.170,VAV-5-10,VAV-5-10,ER Injury Attorneys,yes,5b9d404c-f73a-4bd1-a88c-1f15a8fac7a6,0fd496b5-b7e9-4e86-9f3e-0faa126a56f8,182539e1-ce7d-4e52-9745-a70b43c8115c,5,bacnet-desc
+device 5171,192.168.5.171,VAV-5-11,VAV-5-11,ER Injury Attorneys,yes,5c243f38-f99c-4e39-ab14-b455255bfa4f,45aa3ea8-81a7-4366-93e7-76cd0ab9a27f,c1871e48-821a-46b5-a447-47da08c20844,5,bacnet-desc
+device 5172,192.168.5.172,VAV-5-12,VAV-5-12,ER Injury Attorneys,yes,81fcdae6-18dd-4764-b2ec-ff6638bb4b91,f3105d4e-6560-4f6b-9708-1e7a7ac88914,c9a01aaf-6980-49e0-9369-66cb7d95a30c,5,bacnet-desc
+device 5162,192.168.5.162,VAV-5-2,VAV-5-2,ER Injury Attorneys,yes,d5d2d333-ee08-4710-b222-b1f2f4fe5005,67d0e974-cf49-4df6-b09b-78f9aba1ee70,076e3812-74d8-48b7-b388-456d11709163,5,bacnet-desc
+device 5164,192.168.5.164,VAV-5-4,VAV-5-4,ER Injury Attorneys,yes,a151ac2c-7b21-4046-8267-dbd0984a28cb,db680692-de19-493e-82d9-cacb01394982,b04a4ce0-418d-4e8c-b7e1-d5fa699a93ff,5,bacnet-desc
+device 5165,192.168.5.165,VAV-5-5,VAV-5-5,ER Injury Attorneys,yes,7f331558-716f-4f2f-b382-9d98a4dcfe17,c720ac02-98cf-46be-ba26-64b8c394dd97,8dc6e3a4-28ac-40b6-81e7-f7a729ed7756,5,bacnet-desc
+device 5166,192.168.5.166,VAV-5-6,VAV-5-6,ER Injury Attorneys,yes,3e27d931-b478-4d73-a40d-e8655f0b4ffc,f83daeb8-e261-4def-9e80-839f16c2a4ff,4e96c7f6-3eea-496f-8582-979ad4c576e6,5,bacnet-desc
+device 5167,192.168.5.167,VAV-5-7,VAV-5-7,ER Injury Attorneys,yes,56956660-351f-4c34-b12c-b5ec1c15cac9,702211d8-cbc6-41dc-b603-8c450bdeef25,63860ff9-78e8-489e-bd80-51374aca4108,5,bacnet-desc
+device 5169,192.168.5.169,VAV-5-9,VAV-5-9,ER Injury Attorneys,yes,bbeaebd4-d7fa-4ff5-8977-359adb423f7b,b9b75d0d-f6a0-4043-b851-07574c7fed47,b98886e5-efbb-4e24-8ff5-eef9fcbac2cd,5,bacnet-desc
+device 3051,192.168.3.51,ECY-VAV-64F86C,VAV 3-51,Edelman Financial (Edelman Financial Engines),yes,f4a114ff-1357-4dc6-88b3-989ac4aa99fc,6dffd67a-8968-46b8-b3d3-3401665a27e2,7f174434-a155-4711-bae4-51223ae0fee9,3,bacnet-desc
+device 3052,192.168.3.52,ECY-VAV-FECE11,VAV 3-52,Edelman Financial (Edelman Financial Engines),yes,d1a62ba3-2fa6-4462-83d5-81978dd1eb86,4822e498-2b8b-4a23-8c17-3cc94a5cbd15,1536cea7-b039-4ce1-adbe-76b82df43df8,3,bacnet-desc
+device 3053,192.168.3.53,ECY-VAV-E187C7,VAV 3-53,Edelman Financial (Edelman Financial Engines),yes,f950f025-1a91-481e-800d-73598533e356,0959daec-89aa-40d3-b409-ce29a97cabac,d8361391-0496-4f99-95b7-fc8c71f77129,3,bacnet-desc
+device 3054,192.168.3.54,ECY-VAV-99DD67,VAV-3-54,Edelman Financial (Edelman Financial Engines),yes,48f82723-930c-41bb-be4e-7c12e9c3185e,2a52a5d9-90c0-40cd-999a-1f2504f5f5e4,2e8a6cd8-89ab-4760-ab7d-cfe5863c3343,3,bacnet-desc
+device 104012,192.168.6.81,ECY-VAV-168259,VAV-1,Ghost Beverages,yes,d99ba5d4-8db5-445c-9998-cd26a7065792,0fd70df2-34bb-430a-aed5-c1f7bc469bde,a964097a-fde5-4ba2-9b53-170504cffb3d,6,bas-tenant
+device 131162,192.168.6.90,ECY-VAV-1661FB,VAV-10,Ghost Beverages,yes,4d4865ac-4051-45f4-b11e-00870e69a6c6,45d8275f-24b4-4997-96cb-77634eba40a7,bcfa87ed-e5e6-4d2a-8db2-6d502a305a73,6,bas-tenant
+device 90231,192.168.6.91,ECY-VAV-5288F3,VAV-11,Ghost Beverages,yes,982eb7cc-f7e3-47c8-af28-adcf86ed7d1c,d34c25fd-0bc1-4fc1-9008-82a8c596c251,5f785cb0-8837-40a1-a6d2-73f91d39b2dc,6,bas-tenant
+device 156056,192.168.6.82,ECY-VAV-16677A,VAV-2,Ghost Beverages,yes,18072939-927b-429b-880e-01dd5af4bef5,50e63fbb-1f9b-44b8-be20-73a1acc331fa,8648c267-8894-4ea5-b545-f6d06c594cb7,6,bas-tenant
+device 91079,192.168.6.83,ECY-VAV-0C2A6C,VAV-3,Ghost Beverages,yes,fffbc50a-4555-4266-ac36-3267c7abb65c,2b668cf1-499b-4c6a-82ca-57f5d758c164,ba11ea61-592e-4a1a-964e-afd155287eea,6,bas-tenant
+device 49055,192.168.6.84,ECY-VAV-165709,VAV-4,Ghost Beverages,yes,2d2e7279-ccca-4668-8b54-8e63a0b862ba,5d4b4eef-860b-46a5-b626-ddd9278c5a20,d2f54495-0b64-4dfb-852e-1b89da327158,6,bas-tenant
+device 48024,192.168.6.85,ECY-VAV-168B14,VAV-5,Ghost Beverages,yes,bdda9b45-6e9a-415f-9eb0-138846d7e4de,485b7f84-edf5-4320-bdab-db9c9c0d5998,f8d346bb-66d8-4924-8ed2-f3c9596afd4c,6,bas-tenant
+device 177173,192.168.6.86,ECY-VAV-16822F,VAV-6,Ghost Beverages,yes,c67471ab-e9f6-47b4-8e1e-ddcf765626d1,05ea241f-d1e5-4ce2-b82c-14177ad24d3a,8bbf66d5-5b5d-4b4d-9087-ab63e67cf63c,6,bas-tenant
+device 601929,192.168.6.92,ECY-VAV-D89D9C,VAV-6-08,Ghost Beverages,yes,bfdeb75c-2928-40a3-adf1-ea462af42f62,602c37ef-0a79-4930-a65d-a95959f103ee,6b6c18dd-d0ca-4c7b-aeec-19cf216843be,6,bacnet-desc
+device 241244,192.168.6.88,ECY-VAV-168235,VAV-8,Ghost Beverages,yes,4e325448-a3ff-44aa-b21e-d3d1e03d0b22,d06e49fb-0c11-40f9-9778-b6340357afc3,afc47404-3031-42c3-8d1f-33ad77d1952f,6,bas-tenant
+device 131004,192.168.6.89,ECY-VAV-168247,VAV-9,Ghost Beverages,yes,4d6dd678-5d31-40bb-8007-154b4cfee31d,5122b2e8-deff-4d76-80fd-b76322b1e143,45876bc6-8eff-47e5-a051-59cc42013a5d,6,bas-tenant
+device 6051,192.168.6.51,ECY-VAV-996A17,VAV 6-1,Hearst Healthcare (Hearst Healthcare Holdings.),yes,8667f508-2812-4c70-aa57-e5f76f9c2cfc,d7e862ce-a41a-4c72-9786-1cadd3ea6845,29a2cae4-27ce-4a32-b791-d2cbc7c38650,6,bacnet-desc
+device 6053,192.168.6.53,ECY-VAV-5A3518,VAV 6-3,Hearst Healthcare (Hearst Healthcare Holdings.),yes,0376e85e-7e65-4597-94b6-695b702a5006,4d736258-29fc-46c2-8044-f8bfec452761,9253e6af-3bd4-4f0b-ba93-c6d5b3cd0bb5,6,bacnet-desc
+device 6054,192.168.6.54,ECY-VAV-5A4544,VAV 6-4,Hearst Healthcare (Hearst Healthcare Holdings.),yes,63896efe-fb65-4ddb-bf41-3be955a45040,830b5827-dd19-4980-b0d6-2916b9ff8663,e4aac336-3746-496f-8697-040bd8eaa515,6,bacnet-desc
+device 6055,192.168.6.55,ECY-VAV-828BE1,VAV 6-5,Hearst Healthcare (Hearst Healthcare Holdings.),yes,d970ec09-ac9b-4dbd-a2da-99adfd37873e,d056155b-f717-49e2-9550-8871717f7217,fa9f9049-59d0-4449-b232-d8a1119375b6,6,bacnet-desc
+device 6056,192.168.6.56,ECY-VAV-D84DD8,VAV 6-6,Hearst Healthcare (Hearst Healthcare Holdings.),yes,760ca541-d29e-4e03-84fd-09a21e9b09c9,4d92f0d9-8235-4078-971d-70eb5f1b2949,fe78cd64-1af9-429e-bbb1-cb0227c2f917,6,bacnet-desc
+device 6057,192.168.6.57,ECY-VAV-99C91B,VAV 6-7,Hearst Healthcare (Hearst Healthcare Holdings.),yes,11c58f18-c2e7-4ac8-8a3b-72c8076c7cf0,91df9614-074b-4a26-9dc5-cfcf6535d9a0,3f00ccd2-1481-4057-ad23-1ccbc1d85559,6,bacnet-desc
+device 6058,192.168.6.58,ECY-VAV-9960C3,VAV 6-8,Hearst Healthcare (Hearst Healthcare Holdings.),yes,0fc3e48a-db75-47ef-9693-1b67a3c457ff,8569ecfb-e27e-48c8-800d-d329ee0c57f5,1a0a3603-06c2-4376-891e-e88567a48ca5,6,bacnet-desc
+device 2063,192.168.2.63,ECY-VAV-523667,VAV 2-13,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,45799ca8-ea87-45bb-a003-7acd179fb311,0717cc85-ec26-43c6-a331-42761854e003,80ef907d-325b-4d34-83fd-e9f4b317fb39,2,bacnet-desc
+device 2064,192.168.2.64,ECY-VAV-5229D4,VAV 2-14,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,21fccf75-f83b-43e4-b11f-be1d7180edde,546d7ab8-8f3b-4349-9dc4-0af6052f6558,a607097a-8892-43d5-8e77-65528d587fe9,2,bacnet-desc
+device 2065,192.168.2.65,ECY-VAV-528893,VAV 2-15,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,33b29bcf-1346-4489-8ff5-25c19d72b75a,fec237a4-9d8e-4f06-bb10-f002dde34f81,56067916-02a6-4461-bdee-0ae45ad9ee16,2,bacnet-desc
+device 2066,192.168.2.66,ECY-VAV-2-16,VAV 2-16,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,96574971-b1f4-42f7-82c6-0ae80dfee05e,33bba47a-438e-4ec3-875a-786e74decc7a,52390683-2c54-46ea-a48c-76ce785f25ea,2,bacnet-desc
+device 2067,192.168.2.67,ECY-VAV-529046,VAV 2-17,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,c741042a-8bf9-4e18-8cbb-22f0bf2fe7ae,76e1616d-8a4f-47c2-ab4f-800525b0f900,dee395f9-f8b1-49d0-a2db-f0adc580f24f,2,bacnet-desc
+device 2009,192.168.2.59,ECY-VAV-2-9E,VAV 2-9E,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,3da1769d-83f7-4e96-be5d-ea53bdea7961,ab38ca71-d03f-4e50-928d-e8a3e475126e,53fc30d4-1acf-40a2-9469-83b0d49b6b19,2,bacnet-desc
+device 15092,192.168.2.51,ECY-VAV-524339,VAV-1,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,38097758-7647-409c-b860-1a667ba91203,a47d3f92-d349-4cbe-b148-189c825b8216,602af125-0761-440c-bac2-547369e931e6,2,bas-tenant
+device 202154,192.168.2.60,ECY-VAV-523655,VAV-10,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,99e6204c-1040-4d55-b5d1-cc86cfd721fc,734e79c9-da7f-4712-8200-90761b92e7aa,2ae665d9-775f-4e3b-aad1-0677eca8e200,2,bas-tenant
+device 155231,192.168.2.68,ECY-VAV-527EFA,VAV-2-18,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,638f1abb-e813-460a-ab96-b0b850e0d2c6,4d70f185-d7ef-4875-9447-4505a519c572,572616db-44e7-4e79-bb17-42767a514e7b,2,bacnet-desc
+device 20108,192.168.2.58,ECY-VAV-D89651,VAV-2-8E,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,e3efb232-6ce2-4669-aa43-f3d3071be6d9,12c74dce-1782-4207-a4b8-3303ddb3cb64,2aca1bd9-31a7-4959-a2ed-3bd20b6b7329,2,bacnet-desc
+device 193165,192.168.2.53,ECY-VAV-1440D6,VAV-3,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,59127c8f-f873-4ec5-94a0-7025283000e5,42c36951-a7b7-4380-b5bd-119e01b9e816,7b73fcfc-8d80-47b4-a212-9edfa5cdea9c,2,bas-tenant
+device 220155,192.168.2.54,ECY-VAV-5288B1,VAV-4,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,52ddc819-96c9-444c-96d1-d1b54e09179d,18741488-514d-4a8d-bd42-7bc552333972,3cfb98b9-2e16-433a-ac52-06cddc1f6fcb,2,bas-tenant
+device 74109,192.168.2.55,ECY-VAV-529E08,VAV-5,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,6853d56f-ea0a-4b19-a681-f36cb2a5e2cd,cb400cca-595b-46b0-885d-1a7d4f153d6f,c495dd5e-c9d4-46da-8ef8-482850ddbfca,2,bas-tenant
+device 126235,192.168.2.56,ECY-VAV-529000,VAV-6,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,f4489a9c-78ec-4b3a-b66d-54d71df3740a,989d00f3-5abe-44f1-adc9-87ab3a4a70a3,ff1f51ae-0154-4c76-952b-2701495bb205,2,bas-tenant
+device 20107,192.168.2.69,ECY-VAV-D89DD2,VAV-7,Howard Hughes Holdings (Howard Hughes Management Services Company),yes,e220d3b9-b077-4cb0-b5ae-d80e274b371f,83473961-1346-4ceb-ac21-c8caba659a7a,9a776389-9266-439e-89d0-24016abbfd22,2,bas-tenant
+device 11031,192.168.6.97,VAV_6_1A,VAV 6-1 A,Malibu Management Inc.,yes,9cc3cc0e-27cc-47e7-8bc7-23fc9e35ad37,867110a9-3c3d-4cbe-833e-fabc3203afd1,9d34c987-6f79-4f5b-9557-282e60a50648,6,bacnet-desc
+device 84120,192.168.6.98,ECY-VAV-1434F7,VAV 6-2 A,Malibu Management Inc.,yes,c3b311a5-aade-47ab-944d-31ac66aa19ba,4039063e-a533-4f16-a799-ca16af99d0ea,1fe10d10-b5d4-4525-86a6-fcdbf3540251,6,bacnet-desc
+device 93139,192.168.6.94,ECY-VAV-1426ED,VAV 6-4 A,Malibu Management Inc.,yes,2436ab78-c2c0-4469-aca7-59f953f3a604,49f1841b-542f-4c24-9ce1-cc2657e05834,36c124d8-440a-4ced-87e0-397cd03052f2,6,bacnet-desc
+device 20216,192.168.6.95,ECY-VAV-562523,VAV 6-5 A,Malibu Management Inc.,yes,d21e7c4d-3f7e-420a-8ef1-d7ef4c06682e,93ccd607-0391-48b3-873d-335479dc6ef2,7604fa0a-4e09-45ca-9e66-3da1f7c60cdb,6,bacnet-desc
+device 30112,192.168.3.112,ECY-VAV-58F0A9,Conference C.O.,Mass Mutual (Massachusetts Mutual Life Insurance Company),yes,3d442356-a376-4f95-a8e2-a2e23784a2ef,2ee99879-b268-4b2d-acb6-377d4ddeb1a8,9b03583e-78c6-4a20-a810-0ca63a51fe35,3,bas-tenant
+device 30111,192.168.3.111,ECY-VAV-58E8BD,North West Office,Mass Mutual (Massachusetts Mutual Life Insurance Company),yes,414a50ae-2052-4385-bafb-56a222ec4d37,7a0f9eda-7f0a-42b5-b8b2-0fb76099376d,897e0b62-7017-45c3-829d-8918aa0a1e67,3,bas-tenant
+device 30114,192.168.3.114,ECY-VAV-E9C675,South Offices,Mass Mutual (Massachusetts Mutual Life Insurance Company),yes,ad3199d0-7517-428b-a49d-d3cf2802772f,27783766-0797-4487-8ef0-b1a75e59ecfc,f34a00f9-f915-4c2d-b307-e2ee829dbb89,3,bas-tenant
+device 30116,192.168.3.116,ECY-VAV-9471B1,Waiting Area,Mass Mutual (Massachusetts Mutual Life Insurance Company),yes,5c3218fd-0f55-4106-b6fe-f73da6a7a1b7,43d4c7fc-fc81-4efb-ab75-45131e684856,fdbbce45-7e49-4c2f-b6d8-fe32848bfed6,3,bas-tenant
+device 30113,192.168.3.113,ECY-VAV-94718A,West Offices C.O.,Mass Mutual (Massachusetts Mutual Life Insurance Company),yes,81e481d9-c36e-40c2-9ac6-3e63667b7660,2fd3cad8-d232-49a5-b287-8ff8d261c590,61dd0e10-ea07-495b-b137-441a4dc8c747,3,bas-tenant
+device 165194,192.168.4.78,ECY-VAV-163747,VAV 4-08 (E),New York Life Insurance,yes,bbb8d9ab-84b2-4b6b-80f0-802dff5d9b3c,16b284d0-1971-4039-be20-da9ee10bb3e4,33cbedee-415a-4a8f-92ea-0cda2cf6d9a1,4,bacnet-desc
+device 143004,192.168.4.71,ECY-VAV-149341,VAV 4-1,New York Life Insurance,yes,b1ecc0a1-4253-4b3f-a372-77056529b38f,0ead4f21-3ac6-4103-ba95-a575b6500105,d61b3e2b-b87c-42b1-babe-5725e87a4747,4,bacnet-desc
+device 68229,192.168.4.80,ECY-VAV-5519EA,VAV 4-10,New York Life Insurance,yes,fdf6011c-b59f-4a34-93ed-825b3d6f09b4,2f33b891-21e1-43c2-9071-202026925802,d603e33a-b065-447f-9598-2e19cc0d0098,4,bacnet-desc
+device 97147,192.168.4.82,ECY-VAV-166A11,VAV 4-12,New York Life Insurance,yes,f93a77c9-61c5-4ef6-8c56-c2da4646ad38,520db444-f9b3-4b68-863d-7c3902c29c91,c852887a-cc67-462c-b0e3-dd2a84741f0f,4,bacnet-desc
+device 52139,192.168.4.83,ECY-VAV-535EB0,VAV 4-13,New York Life Insurance,yes,da7c979b-fea1-40de-837a-caa899136f1a,2ad40cbf-50ad-47e6-8081-7a58babaf97d,17846e6e-9431-4c52-92d5-4a225f0fecee,4,bacnet-desc
+device 58192,192.168.4.72,ECY-VAV-166777,VAV 4-2,New York Life Insurance,yes,f8abae8c-a43c-4282-a0de-b941acabcf7e,87dd32c7-8d68-413d-8046-2da4425dc365,3ce2e696-429d-4c8b-948d-c39ffb2c7e81,4,bacnet-desc
+device 63230,192.168.4.73,ECY-VAV-14A574,VAV 4-3,New York Life Insurance,yes,9d4b5521-6047-45f4-ae93-3662d140666e,523933d6-a909-4dcd-8a43-9e8355fbfd6f,8c392148-f13b-430c-9288-7f063588609e,4,bacnet-desc
+device 40094,192.168.4.75,ECY-VAV-14A556,VAV 4-5,New York Life Insurance,yes,78cf9051-e28f-4cd2-9a91-64961096deaa,225f0188-cb27-4d09-9531-d4029527f77e,85348311-9aad-4138-9c22-26212543803d,4,bacnet-desc
+device 233157,192.168.4.77,ECY-VAV-163720,VAV 4-7,New York Life Insurance,yes,2bb7eca9-7909-4d90-97fd-c7b683770ccc,402d46fc-6884-4168-8955-2ab8a7cdd980,43feabbd-5919-4f1f-b471-be6b1a897f81,4,bacnet-desc
+device 145109,192.168.4.79,ECY-VAV-167395,VAV 4-9,New York Life Insurance,yes,13834203-c848-4aea-a925-bf390236ec3d,936bd225-cfaf-4961-ac3c-051affad57d1,23c59049-653a-42a5-b3ba-61f60edc1a74,4,bacnet-desc
+device 161100,192.168.4.81,ECY-VAV-162B59,VAV 4-11,New York Life Insurance,yes,ef0b585c-65b1-4c9b-86e2-d5ee82c92613,be8039c5-0cde-4f37-ae8f-f26da4490ec1,7b325622-f75f-449c-aaec-1e0cd70cbb05,4,bacnet-desc
+device 203233,192.168.4.61,ECY-VAV-FACA55,VAV-61,Northmarq (Northmarq Capital),yes,d4466c29-ef36-4748-8c5f-329714cec707,d3f32af8-35bb-4b13-9e3b-f0554a630070,2ac7f188-5b1c-4586-9a7c-f64db46b632a,4,bas-tenant
+device 24057,192.168.4.62,ECY-VAV-F952B6,VAV-62,Northmarq (Northmarq Capital),yes,daaa4911-4c3d-4e5d-9d96-257f315eead7,64f94019-cd1c-4459-b3c1-9d53a4fafefc,6df9b151-9bb5-4ca4-8d57-43033f276a17,4,bas-tenant
+device 149027,192.168.4.63,ECY-VAV-231800,VAV-63,Northmarq (Northmarq Capital),yes,cdc2f00d-67ad-48bb-a97c-8934340fc6c4,bb7537f5-4698-4cfb-8221-bc0f3c4df4c9,87e3fd9c-2824-4470-a2c4-e602165e1b0c,4,bas-tenant
+device 190148,192.168.4.64,ECY-VAV-245183,VAV-64,Northmarq (Northmarq Capital),yes,8756b2b3-a5db-4ec5-afb5-090707f47000,ad1fceb9-93c2-482e-88f5-86bee7a3b6aa,592a8c5a-8885-4fb1-af53-0bac45096510,4,bas-tenant
+device 20131,192.168.4.65,ECY-VAV-F560FD,VAV-65,Northmarq (Northmarq Capital),yes,9c4ee462-19b2-436e-b206-83c99891e10b,1936580e-97f2-42ed-939e-717775c111ba,529eb13f-0eb8-4da4-81fc-19fe4e326161,4,bas-tenant
+device 187215,192.168.4.66,ECY-VAV-F95FA0,VAV-66,Northmarq (Northmarq Capital),yes,f018917e-c69a-4b3a-9fb1-3e9c44d8f2ca,74683dea-8943-4854-bb3b-b8636911c353,fe3f1353-ad12-4123-9996-fa33c79469ed,4,bas-tenant
+device 15085,192.168.4.51,ECY-VAV-52625F,VAV-4-1,"PNC Bank, National Association",yes,58444efe-fbc5-4157-bc21-acb04548beac,0d5f4add-d56d-4ada-ac85-4f2e9df0aafa,c14f08e8-59ce-4017-8aa2-fee3a24b5a6a,4,bacnet-desc
+device 101081,192.168.4.60,ECY-VAV-52360D,VAV-4-10,"PNC Bank, National Association",yes,71f80752-b628-439a-8a2c-9c47c52db742,c1b12e00-12f8-41c2-95a0-d1c5da73c8f4,b51f505d-b010-49d8-8023-81042156084e,4,bacnet-desc
+device 109033,192.168.4.67,ECY-VAV-132F88,VAV-4-11,"PNC Bank, National Association",yes,9a27f88f-95a8-4e57-9b5c-e0f5744fdad5,89785298-4fa8-4b59-b65c-e04a5d83544d,f31d3231-0797-4921-a36d-28ccc700e007,4,bacnet-desc
+device 1,192.168.4.68,ECY-VAV-529547,VAV-4-12,"PNC Bank, National Association",yes,f974c9e6-a7ce-4323-abd9-2aa7c116672a,721ff2f7-2989-4bd0-a035-f96b2feda9df,30ff171a-72ce-4278-9fef-1fefb750001d,4,bacnet-desc
+device 103100,192.168.4.52,ECY-VAV-5224FA,VAV-4-2,"PNC Bank, National Association",yes,4b207a08-7754-4f47-b26a-ed18854079f8,4476015c-4e9e-4156-823c-39cc00b46d44,9d47faad-5b62-4a8f-8b37-d655ba5a6416,4,bacnet-desc
+device 107195,192.168.4.53,ECY-VAV-527ED6,VAV-4-3,"PNC Bank, National Association",yes,34b160f0-24cd-4c68-82fa-96a6ff775e4c,e267bd90-4165-49ec-a4f7-620ab487dbc5,ded29544-ab85-4b88-86f5-509c96f31a3f,4,bacnet-desc
+device 242229,192.168.4.55,ECY-VAV-52626B,VAV-4-5,"PNC Bank, National Association",yes,e366f31e-3c55-4f9b-af8d-e5053d3223be,4ab69940-5a31-47ce-8c48-619a6174acfc,bc1a824c-56fc-49f6-a852-794c7bcd44e6,4,bacnet-desc
+device 153046,192.168.4.56,ECY-VAV-52905E,VAV-4-6,"PNC Bank, National Association",yes,b469055c-fc5a-41e7-bb88-2a4a62708e2e,91032c3e-4990-4b68-9d50-d458fc118115,c2d8cf58-20c3-4cf3-b87b-24acb771d813,4,bacnet-desc
+device 250200,192.168.4.57,ECY-VAV-1D7AF3,VAV-4-7,"PNC Bank, National Association",yes,28495f7d-3acf-4f4b-b52b-4fc9576d3620,3d96161e-3daf-4f29-82a6-74c6755559e0,0bb564ce-ff51-44d5-b536-0b224f3fc235,4,bacnet-desc
+device 240066,192.168.4.58,ECY-VAV-524300,VAV-4-8,"PNC Bank, National Association",yes,97f2f60d-0d97-4654-9563-f77fc161197e,9ae55d8e-990d-4399-a7ec-8ab737b4a8a0,27a57cc2-cfc5-4760-a525-6b8dfe788df4,4,bacnet-desc
+device 79246,192.168.4.59,ECY-VAV-527EA0,VAV-4-9,"PNC Bank, National Association",yes,287141ad-6fa5-4f19-80e7-75ec5b226d27,015bf862-3315-4870-b3d1-7e6711e0d73d,b1dd038d-5949-4ed6-9757-f2349ec71724,4,bacnet-desc
+device 30108,192.168.3.31,VAV3_01,VAV-3-01,"Rimini Street, Inc.",yes,a20a825d-f9d9-4f22-8d3b-4f09f287c0a7,7a802a14-7d91-42da-9214-93a51af661f0,d1fd9fe5-de52-4d1d-bfba-0b15ec15fba4,3,bacnet-desc
+device 3032,192.168.3.32,VAV3_02,VAV-3-02,"Rimini Street, Inc.",yes,550f80dd-a05f-4862-b71b-ce877d6b1049,28d8c35f-2a17-46f2-a901-c35075e0099d,d4895124-435f-4b99-8aa3-8fc9b6c63606,3,bacnet-desc
+device 17223,192.168.3.33,VAV3_03,VAV-3-03,"Rimini Street, Inc.",yes,80e94b1d-ff09-4bfe-8317-b7e5736e6901,aba7eb18-2c4a-4181-8ab1-575e44d4de04,98579475-7dc4-499e-be79-4c4b621e40e8,3,bacnet-desc
+device 3035,192.168.3.35,VAV3_05,VAV-3-05,"Rimini Street, Inc.",yes,34ed6b03-fdbd-4a91-af1c-959b97eda5a2,5d787fba-8b09-487b-8f47-b142892bac08,f7082fdc-c3be-400c-b59d-f78e57b968f2,3,bacnet-desc
+device 3036,192.168.3.36,VAV3_06,VAV-3-06,"Rimini Street, Inc.",yes,06c00197-1122-4b52-a78c-1aa33533997f,31edc6f7-bbf1-4056-b645-0c8575343ac7,1744dd5a-b0aa-4bba-b24d-d1d6fa7fa53e,3,bacnet-desc
+device 118010,192.168.7.49,VAV 7-23,,Snell & Wilmer,yes,74ad1fb5-e6f8-4725-a782-740eb99dd92f,8e9f00ef-70c8-46ac-b78c-94dfb607753e,295159ba-350b-4cb5-93a2-4c642e3d60f1,7,bas-tenant
+device 28046,192.168.7.51,ECY-VAV-25B842,VAV 7-1,Snell & Wilmer,yes,7aefffc0-5fa5-49c8-b250-406fa4222ef7,4e26570e-13ac-47a6-bf59-17f475e1596d,043ed2b0-d2f5-4360-8bc7-0e40454e079c,7,bacnet-desc
+device 241198,192.168.7.60,ECY-VAV-25A615,VAV 7-10,Snell & Wilmer,yes,4a7a1cb7-b90c-4cbc-b75a-4b40cd8a18c6,cfa8a821-bb5a-4e9b-a8f3-5a6045f9f958,56c6f7fb-969a-4d9c-9f1b-9d3c0d451d53,7,bacnet-desc
+device 37244,192.168.7.61,ECY-VAV-25B33E,VAV 7-11,Snell & Wilmer,yes,a57b4cc6-cbb0-4d46-85b9-d9842160ee51,8d4639f3-32a0-4222-a25e-f2c357ef4086,38f5190d-b1cc-4573-90fa-498ba17699c7,7,bacnet-desc
+device 153067,192.168.7.62,ECY-VAV-F70D94,VAV 7-12,Snell & Wilmer,yes,c78070b7-cf8e-47f4-a1ab-0c9e85e47fe8,b0c7b1e8-b023-4061-bb90-d5b5eb606401,49a568fc-53b3-409d-8895-b3e7f80018f0,7,bacnet-desc
+device 34138,192.168.7.63,ECY-VAV-259AF3,VAV 7-13,Snell & Wilmer,yes,098cd1d3-8c42-41c4-9826-530b4019d6b1,92ac7bd6-13f1-47bf-8758-9c7d0963c04c,4182d21a-c8cd-4528-b043-04aa4fb57b48,7,bacnet-desc
+device 95166,192.168.7.64,ECY-VAV-8D9479,VAV 7-14,Snell & Wilmer,yes,f293c8ae-c327-4665-89c6-9ab747a5a6f1,874471fe-0958-4cb1-9d2d-29cb5317fef2,8ab0f4e2-f386-4873-a552-0e0d2dcd9779,7,bacnet-desc
+device 234161,192.168.7.65,ECY-VAV-25B80F,VAV 7-15,Snell & Wilmer,yes,e4169b89-1369-4d70-84a2-188b4bb7bc90,f1c73f52-a728-4478-81c5-c7b393d8e2a4,5a0b396c-4fa9-4586-870a-803c3f186525,7,bacnet-desc
+device 322999,192.168.7.66,ECY-VAV-8D9461,VAV 7-16,Snell & Wilmer,yes,0eed93f3-d0c8-463b-a7b5-7a5a79a0d3cb,5347735a-997d-4f73-bfd9-17043de4cd6b,ea2b80b2-6d5d-4764-bbb8-b9a538d04a92,7,bacnet-desc
+device 132213,192.168.7.67,ECY-VAV-25AEA3,VAV 7-17,Snell & Wilmer,yes,be8ebea9-972c-429c-b2f4-45e5b951cdf7,be910d6b-5ea2-4d72-9521-7377da690865,bf60e740-ecc9-4ba8-a561-1249f60310b7,7,bacnet-desc
+device 82120,192.168.7.68,ECY-VAV-8DCE80,VAV 7-18,Snell & Wilmer,yes,9dd34918-eacd-4cf2-a8fd-b58822d1223f,d85f2560-e98f-44b5-a417-9579712f067a,4a38b85a-d400-4794-a85f-f51e24c82a0f,7,bacnet-desc
+device 40200,192.168.7.69,ECY-VAV-230A71,VAV 7-19,Snell & Wilmer,yes,492ff820-83b2-402e-8456-4613bfae2dc4,5f93ef85-06ee-47e0-b4d0-d4a1b1c5ec8a,547e6654-1b72-4e2a-b82c-21552edcfad6,7,bacnet-desc
+device 164131,192.168.7.52,ECY-VAV-28E092,VAV 7-2,Snell & Wilmer,yes,0b872f02-8b9e-4c59-83d6-c62cb56fcfc5,2bbcb5ef-0c59-4759-9772-f500967ff5fd,c90c6c7e-0154-42d9-b7d1-144dc2fc5d06,7,bacnet-desc
+device 169142,192.168.7.72,ECY-VAV-25A078,VAV 7-22,Snell & Wilmer,yes,be93574e-39e6-46c8-bdac-ddd9b3cca4a0,0f1e9cb8-73ea-41cd-8836-0305340bac63,3b5b5b50-d5d0-464f-b210-17ca785ced73,7,bacnet-desc
+device 39151,192.168.7.53,ECY-VAV-25A01E,VAV 7-3,Snell & Wilmer,yes,609b3d52-af18-4de8-bde8-08db863eed71,e2095f23-8ee2-467a-a821-6d5ba8e11ab2,22b56a84-1e28-49bf-ac65-6ac9e827b30a,7,bacnet-desc
+device 53036,192.168.7.55,ECY-VAV-234FAD,VAV 7-5,Snell & Wilmer,yes,15a8abf2-3457-4f24-9d8a-c5c430bc4814,cc7597e2-7c14-4ba3-8b36-6af3d2c7559c,a8bba228-dd2f-4e23-8789-e4f9614d5967,7,bacnet-desc
+device 70106,192.168.7.56,ECY-VAV-FFEB26,VAV 7-6,Snell & Wilmer,yes,eb4d2893-fa04-459b-a07d-29651968ef91,542f2777-e8b8-4539-8c1b-209917499529,438dec40-6f0c-46ed-b6df-8cb2c4749010,7,bacnet-desc
+device 70107,192.168.7.57,ECY-VAV-D863FF,VAV 7-7,Snell & Wilmer,yes,f1f4ae92-ebc6-41e8-95eb-bb70cbb55459,05c3c792-237f-4911-b055-743e80823623,32317c6e-fc43-4069-b3fe-5d6af32ff8a3,7,bacnet-desc
+device 70108,192.168.7.58,ECY-VAV-E2C7E8,VAV 7-8,Snell & Wilmer,yes,7195277f-7cc3-43c4-9cbc-635ec0cf166a,f868217b-6076-418a-9168-85c974d54d2b,3a678cf3-440b-4eac-9ae2-68d5ada5d3a5,7,bacnet-desc
+device 70109,192.168.7.59,ECY-VAV-E16D55,VAV 7-9,Snell & Wilmer,yes,8466412a-255e-4a57-82f7-ec7ac7ec65e2,92089aba-3693-4cd4-a62a-4bc87f3071e5,6e2952ea-48f5-4ab0-84e9-69578d540715,7,bacnet-desc
+device 70105,192.168.7.73,VAV-7-25,VAV-7-25,Snell & Wilmer,yes,f15734ea-7f60-472f-ba5e-f6d1d74bedac,ed55db95-351a-48fc-9642-b3d16390812a,5ef7de04-678d-48eb-8b43-15f4147f0a5f,7,bacnet-desc
+device 204136,192.168.7.71,ECY-VAV-8D9407,VAV 7-21,Snell & Wilmer,yes,c18cc834-e3f4-4c18-acdb-fea71e1ae7b7,1798ee78-091c-4fa8-b3ff-02bb435a1ee6,9da70c7d-5f7f-4685-956c-3225be9ddd46,7,bacnet-desc
+device 13101,192.168.2.75,VAV_2_2A,VAV-2-2A,TSG Consumer Partners,yes,736927c7-a005-4f44-a2d9-fcd94f51debd,fcb2e845-df88-4e09-93db-2eb3415edb5d,7a287c36-8dd2-4b9e-b335-1ec139d6474e,2,bacnet-desc
+device 70024,192.168.2.76,VAV_2_3A,VAV-2-3A,TSG Consumer Partners,yes,77e67dc8-8508-41e2-832f-60b8789eb09e,30348bd4-c19c-4c0a-953b-7c7cf84ab22d,59e56d96-589a-47c7-b39e-1e27e98215d5,2,bacnet-desc
+device 6207,192.168.2.77,VAV_2_4,VAV-2-4,TSG Consumer Partners,yes,edac1a52-57b2-44cd-b689-72db44ab159a,a3826dc9-b9f1-4416-9d43-6cff98846810,fb35a664-394b-4600-8d6b-ffc17b422f5c,2,bacnet-desc
+device 40148,192.168.2.78,VAV_2_5,VAV-2-5,TSG Consumer Partners,yes,7fce52cb-e45e-4c40-a30f-b8c9b87ec0aa,98f63520-f8cb-4eeb-9481-035d23e64713,d31cacf8-491a-4c2c-ad39-dda1682ad714,2,bacnet-desc
+device 188154,192.168.3.81,ECY-VAV-1434FD,VAV-3-1A,The Cirrus Company,yes,d7edd88b-313a-45dc-90a4-295936b44b4a,658370c0-3933-4716-8fe4-078db8043556,dcfbe22f-714b-41f4-a72d-02021adf289d,3,bacnet-desc
+device 233181,192.168.3.82,ECY-VAV-1440DC,VAV-3-2A,The Cirrus Company,yes,293d168f-9aac-4e81-b6b9-16e6c984caa0,b794f895-e1e8-49cb-a268-629cf009942c,4374dd9f-9b14-4882-854b-10517a4013cc,3,bacnet-desc
+device 128053,192.168.3.84,ECY-VAV-14398C,VAV-3-4A,The Cirrus Company,yes,4f0d3c11-6165-4db6-9c23-80dabe369524,1fb842e3-39bc-4fe2-8f3f-15dfe0797132,74b7c9a3-0405-47b9-a68e-7af2b9f05207,3,bacnet-desc
+device 88139,192.168.3.83,ECY-VAV-CC01D1,VAV-3-3A,The Cirrus Company,yes,16c2cdab-db3e-45e2-9599-3cb8297cca6d,c1dbf9fd-09a3-4a17-96f1-94b0b5b8b90b,04dd2cf3-5ba1-4101-9634-e86041d86be9,3,bacnet-desc
+device 6080,192.168.6.80,ECY-VAV-233BD6,VAV 6-10,The Northern Trust (The Northern Trust Company),yes,24058988-eab3-4a5e-a1e4-44074da8b851,7a61e76d-993d-4ca4-98cb-346ebb918828,2b80953a-ad5a-4a52-ae37-92597a00e3b4,6,bacnet-desc
+device 6072,192.168.6.72,ECY-VAV-F9F52E,VAV 6-2,The Northern Trust (The Northern Trust Company),yes,5731462a-a4ee-40cf-8457-533f847dbc41,5551cb0d-815e-4c00-92d8-21e10549b04c,8e7b8cd5-47e1-4e81-a051-c157d18c89e1,6,bacnet-desc
+device 6073,192.168.6.73,ECY-VAV-54E79B,VAV 6-3,The Northern Trust (The Northern Trust Company),yes,b8297837-cc37-4a3f-a7fe-49d3b79aa7e0,00d7edf9-af87-4c14-a2c8-d2e1ddf84a44,0b0db077-8cd5-41e4-a9d6-783ad6634829,6,bacnet-desc
+device 6074,192.168.6.74,ECY-VAV-23D92C,VAV 6-4,The Northern Trust (The Northern Trust Company),yes,03ac1b5f-ccde-4035-ac9c-12eb6061f2b0,76debd71-df57-422b-8cd5-4816c9138d98,99c654d8-0c9b-47e6-9f19-e47b4514fd20,6,bacnet-desc
+device 6076,192.168.6.76,ECY-VAV-F55452,VAV 6-6,The Northern Trust (The Northern Trust Company),yes,f4d193bd-1317-4593-9405-1690ccea5298,2fd3633c-8c65-40e8-ad28-0a121f5080c5,202d6901-8875-4ba4-a1d3-78e91e2ba772,6,bacnet-desc
+device 6077,192.168.6.77,ECY-VAV-551EFA,VAV 6-7,The Northern Trust (The Northern Trust Company),yes,96fbdfce-dbf9-466b-b99b-31da5dddd928,96947b6f-65b8-4adb-927e-53ddc1a7f037,3d124292-3e67-48d5-8534-acce567ff685,6,bacnet-desc
+device 6079,192.168.6.79,ECY-VAV-5514D1,VAV 6-9,The Northern Trust (The Northern Trust Company),yes,a051d651-41cc-44fb-bc05-9655f9815ff5,25d1e89d-7fe3-47b9-9649-4e610a620366,7e942caf-2f49-4c1a-b7fe-dc3e65cc58d8,6,bacnet-desc
+device 6078,192.168.6.78,VAV-6-78,VAV-6-78,The Northern Trust (The Northern Trust Company),yes,11e15101-53fd-4114-a96b-e3feba72632a,5892c4fa-3c31-4f4b-9e76-978d52b1503b,48ce752b-ca8a-4a69-9294-7c1a067c3748,6,bacnet-desc
+device 212038,192.168.7.90,VAV 9-1,VAV 9-1,Touchstone Living,yes,f254c813-a9d5-4972-82f8-96ba6a262b74,02571129-850d-4e7e-a6d0-83013a694840,1c098096-c2cd-4a96-93bc-1ec2ddb2615f,9,bacnet-desc
+device 109054,192.168.7.99,VAV 9-11,VAV 9-11,Touchstone Living,yes,7c5d8bd7-3587-4866-a4db-b10d60c96d4d,c140222a-057e-4da3-8507-e83a31b9289b,1962e307-6269-4da4-ae1c-5abca67aacbc,9,bacnet-desc
+device 33243,192.168.7.100,VAV 9-12,VAV 9-12,Touchstone Living,yes,1a7bf988-a6f7-4099-92db-8e3dfdf777f1,39358e38-c3cf-4daa-be82-5602d544ee96,97d0a7b1-a87a-4fd2-84ed-b82f1daa9ca8,9,bacnet-desc
+device 131109,192.168.7.101,VAV 9-13,VAV 9-13,Touchstone Living,yes,aea77476-b974-4895-b59e-e4222a1e8517,2056b20c-f293-4901-a7e4-387ee7ccfad1,1fe266fc-3670-433b-a006-675ac406d1e3,9,bacnet-desc
+device 206109,192.168.7.102,VAV 9-14,VAV 9-14,Touchstone Living,yes,33515d25-4644-46d8-b9d1-34cabd2915e0,8dbffbbb-51c3-4177-9f43-1ab67be3e8a6,895dd564-e04e-48c6-b5af-c83baa3981ec,9,bacnet-desc
+device 69028,192.168.7.91,VAV 9-2,VAV 9-2,Touchstone Living,yes,f7786c1a-3773-48b8-a7df-142d20951aef,d29573e0-87a4-41db-aa19-c2636166d5cc,205f25a2-78cf-49f8-9463-d7a96b21f11e,9,bacnet-desc
+device 160251,192.168.7.92,VAV 9-3,VAV 9-3,Touchstone Living,yes,df75db98-d836-4132-a521-a9c5e43e0e79,495ecf40-1350-43c1-918d-db9e54c38eaf,950384a1-af83-43a1-a30d-9c72c9ab3350,9,bacnet-desc
+device 65199,192.168.7.94,VAV 9-5,VAV 9-5,Touchstone Living,yes,504f9b4d-a0f7-48fb-b01e-bc39078fb023,4691d039-e87e-41b4-9154-8ac2c1f0d0f6,4337f398-543a-45f2-8ee3-91323504494c,9,bacnet-desc
+device 155188,192.168.7.95,VAV 9-6,VAV 9-6,Touchstone Living,yes,339a4132-6cd4-44d9-9532-3101b9d7a6f6,70c32d9f-962b-4d3a-a640-5a909b0685a2,9a690fc7-0e49-4d65-9950-a53445336d92,9,bacnet-desc
+device 32023,192.168.7.96,VAV 9-7,VAV 9-7,Touchstone Living,yes,d49bc11c-9981-4865-bdd9-ddc8f81c1c0e,b239c59d-171b-4f1f-9953-53bf37b4eb16,c2a4075d-1bd5-463d-b08c-4d53d12a94b6,9,bacnet-desc
+device 90108,192.168.0.18,VAV 9-8,VAV 9-8,Touchstone Living,yes,1a692a87-a4bd-4ce1-9308-9408a8d085d3,fee3c8d4-cfd8-47bf-a142-bf7d3a842674,2764be10-350d-4c8d-8608-44da8cac396a,9,bacnet-desc
+device 32054,192.168.7.97,VAV 9-9,VAV 9-9,Touchstone Living,yes,55e09961-333f-4584-bc38-4b341a94d619,f7039cfb-edec-4152-98b8-e0cd9151dfea,8828096e-01f9-4c49-8f1d-21b2cce1f50f,9,bacnet-desc
+device 62,192.168.0.62,>uWynn VAV 9-12,Wynn VAV 9-12,"Wynn Design & Development, LLC",yes,db11d4ae-cdb2-44ee-a74d-82508d495084,67ef4d3b-c734-4be8-a625-8e110ea20c51,44c161b5-cd19-4c30-bcd6-182a6bb8c9b7,9,bacnet-desc
+device 9051,192.168.0.51,Wynn VAV 9-1,Wynn VAV 9-1,"Wynn Design & Development, LLC",yes,b4c9030d-5cf2-4029-b98f-cd02d7b729c2,b77460b0-46bf-4a96-9d9b-c1188dc2a3e2,e64e72b2-f926-4305-9b50-763fd7c13cf3,9,bacnet-desc
+device 60,192.168.0.60,Wynn VAV 9-10,Wynn VAV 9-10,"Wynn Design & Development, LLC",yes,95f8b0bc-648e-4bfe-bcea-a4a41f0f8b19,e94ac016-7648-464d-ae61-8f00ff1a6fea,73e0d6ae-0926-4285-9b0e-3e1415b23f75,9,bacnet-desc
+device 61,192.168.0.61,Wynn VAV 9-11,Wynn VAV 9-11,"Wynn Design & Development, LLC",yes,1cf78647-a29b-426e-8633-e355a2f7d224,a807dac5-a044-48e0-8a6a-a02039ef6f57,823124a2-2a42-461f-870e-c80f236ae957,9,bacnet-desc
+device 63,192.168.0.63,Wynn VAV 9-13,Wynn VAV 9-13,"Wynn Design & Development, LLC",yes,46c0bf1b-7f7c-48b4-a997-d1722105a9a1,eb8b765b-0475-4889-93fc-482ea3d85061,807f661b-e991-40d6-9253-d08c538146d9,9,bacnet-desc
+device 52,192.168.0.52,Wynn VAV 9-2,Wynn VAV 9-2,"Wynn Design & Development, LLC",yes,eefd4b16-d9cf-4314-87e1-ee0c361aaaa2,00f25df9-40c5-46b1-b0b1-bbfca9a8dce7,d036dfe0-c3b9-4b26-9fa3-cd85bd5b12b7,9,bacnet-desc
+device 53,192.168.0.53,Wynn VAV 9-3,Wynn VAV 9-3,"Wynn Design & Development, LLC",yes,ed89f5b2-a709-4740-8efd-d3e601dcc72f,1873dd07-2cea-41ef-b78a-8f4cc353e9d0,c71b616e-e4ad-40a4-9d7e-caeda7bd6597,9,bacnet-desc
+device 55,192.168.0.55,Wynn VAV 9-5,Wynn VAV 9-5,"Wynn Design & Development, LLC",yes,06269da6-b4a0-459c-bc6f-6655a250f68a,074e2657-e90f-4a82-9ca5-134a47fc3662,ecc0c455-346c-4b94-994c-8c0397a5753e,9,bacnet-desc
+device 56,192.168.0.56,Wynn VAV 9-6,Wynn VAV 9-6,"Wynn Design & Development, LLC",yes,15aaa382-2c02-4f11-ab37-0d53ca2c5bcd,77b0460a-3047-4d1b-b234-54c5361538b2,90dff0f7-e479-42fa-ac1f-1c6482f689a0,9,bacnet-desc
+device 57,192.168.0.57,Wynn VAV 9-7,Wynn VAV 9-7,"Wynn Design & Development, LLC",yes,2c0c1af6-bf0f-4389-b402-1a3567584b4d,279dc881-5a8a-444f-88c8-ff3734d4aa08,1b7387f8-9715-42ac-9dd4-7d7342ba8e56,9,bacnet-desc
+device 58,192.168.0.58,Wynn VAV 9-8,Wynn VAV 9-8,"Wynn Design & Development, LLC",yes,6d323823-f3a9-49bf-95da-594a4953d4fc,c5a6c78c-1d1c-4d05-af03-5ce9ff839fc0,a0a18b8a-9d6d-4417-97d2-15409925b4bb,9,bacnet-desc
+device 59,192.168.0.59,Wynn VAV 9-9,Wynn VAV 9-9,"Wynn Design & Development, LLC",yes,c36ccc85-9223-4cc3-a259-b3efab1fa3aa,8bfac83a-937b-488c-95cd-bd066f634a6d,3f92290c-3184-4ab8-baf8-eacf4b5c745b,9,bacnet-desc
+device 10101,192.168.1.11,ECY-VAV-FECE38,,MECH. ROOM,no,6d35ad8f-f6f1-472c-bb95-fdd98598858c,1ebdb381-6601-4ee1-9078-330d8052bec3,99a8656c-d0f9-4fdd-a042-5d80ff246f54,1,subnet-inferred
+device 10104,192.168.1.14,ECY-VAV-7CDC58,,MECH. ROOM,no,c572ed19-3ff2-4c68-bf77-b3509fbf9fe0,287a3b35-7793-4016-8986-d6d873d45d73,35675f73-58f3-40f3-b6f7-e60f2f86f92b,1,subnet-inferred
+device 10109,192.168.1.19,ECY-VAV-FF15B1,,MECH. ROOM,no,5d0db96b-a6e2-4dde-9432-94fd47dc2a46,617783b2-e44a-4c08-8fde-ce0b7a667097,84f2ff90-d915-4283-9f54-f31e1488fd1a,1,subnet-inferred
+device 10110,192.168.1.20,ECY-VAV-FF22C5,,MECH. ROOM,no,0da2bea9-7ec2-48ad-a4b8-fc4311b7f2f4,72811320-5bbb-40ff-9fed-f36ec33a0853,449f2f5a-370d-4da6-9494-ebcbf15a4f80,1,subnet-inferred
+device 10111,192.168.1.21,ECY-VAV-7C9D69,,MECH. ROOM,no,4fbcfdee-debc-40af-bf96-8408ecd576a6,5d501dc4-57cb-435d-9577-f0356c4a61ae,f28ab84f-3ce9-457f-96fb-8ff7aa89bc0a,1,subnet-inferred
+device 10112,192.168.1.22,ECY-VAV-D88BDB,,MECH. ROOM,no,cbb5913f-9d10-46f5-a3f6-b6c01d452ed6,4007f635-1476-4edc-9937-f0053e1a6570,73fdcd60-70e7-4398-b7f4-b63c10dc89ad,1,subnet-inferred
+device 10113,192.168.1.23,ECY-VAV-E123FA,,MECH. ROOM,no,c58fbe08-af78-4d69-96b7-c2b0cd23093a,5abcc0ee-71f2-438c-b37b-b890a8a3928b,95ecdda5-6cea-492c-bc0b-8869cdcd7bca,1,subnet-inferred
+device 60104,192.168.6.14,ECY-VAV-D4C6F0,,MECH. ROOM,no,3fb9dc09-11cf-40f9-b9b6-67e7790c4ff2,03300f57-68c5-4f57-975a-2ec93ae87f41,9388b1cd-ab8e-4f95-88b2-cb9380bc354b,6,subnet-inferred
+device 60105,192.168.6.15,ECY-VAV-E1F0B5,,MECH. ROOM,no,68be29d1-efd9-4ffc-9d99-fba3e589c4fb,a494dfeb-3684-477d-ba32-55c41775d419,ddcb98ef-32f8-4706-ae06-66305a7a6f23,6,subnet-inferred
+device 7151,192.168.7.151,ECY-VAV-823FE2,,MECH. ROOM,no,fe27d31a-bdb3-469b-9c57-0213fdd5c1bf,977001c6-e612-4759-841c-f6f1484b4891,4103b195-64f3-431f-bcb3-a640cf0dc22f,,unknown
+device 7152,192.168.7.152,ECY-VAV-59306F,,MECH. ROOM,no,32c747ed-e351-4fe2-bdd8-64e5f0528f12,b12bfd85-ffa8-40b1-b797-96fe946fb740,f8e8834b-792a-4264-8e80-20ceabf2354e,,unknown
+device 7153,192.168.7.153,ECY-VAV-FD617C,,MECH. ROOM,no,a9a3e070-f221-4d5f-8d06-42647633a9e5,af645d52-48c7-4032-8747-721ed19014fe,1c87d70b-a19d-40d2-b03a-400b15e34510,,unknown
+device 7156,192.168.7.156,ECY-VAV-0B6931,,MECH. ROOM,no,7bec0827-cd78-4ae5-987f-54a7ecdf2183,df768178-c9df-4bfe-8516-93aec2659940,63bdc3fb-40ee-44b7-ae93-fe0e74b0b106,,unknown
+device 7157,192.168.7.157,ECY-VAV-94785F,,MECH. ROOM,no,81dfa778-9451-4cdc-b098-6e04b0d234ab,4654fd07-7465-44b7-8382-acb1560cc553,642a9ade-2f5f-4941-b3ca-7cb26fa0a05c,,unknown
+device 7158,192.168.7.158,ECY-VAV-58F480,,MECH. ROOM,no,56bc76eb-a9ba-4a3d-b178-2d1633aeb3dd,15107636-fbe7-4535-9f65-d693c45b174e,b414dc67-a475-448c-836d-faca212b8dbe,,unknown
+device 7159,192.168.7.159,ECY-VAV-58E8ED,,MECH. ROOM,no,d10c536d-3426-4f0a-8773-fd84bdc4078f,38468e3c-8d8c-478f-9ddc-c54548f01ac6,831a34d6-6e26-4873-a2e3-c62b22506c1e,,unknown
+device 7160,192.168.7.160,ECY-VAV-947871,,MECH. ROOM,no,6f034972-a278-4564-8752-34b0cbb6c7fa,b4fcbfe5-b948-4d35-a8d4-20ca2c4c6f6a,f788dbeb-d1f3-498b-9906-ba0f9893084e,,unknown
+device 7161,192.168.7.161,ECY-VAV-58F0DC,,MECH. ROOM,no,84b3e21c-0d29-43eb-a406-2fabb7248641,32270c2d-4b77-44d7-aa11-29f616e11b17,f2e8f4b4-3150-4cc3-8ec5-f92ffb5e1495,,unknown
+device 7162,192.168.7.162,ECY-VAV-FEFF4C,,MECH. ROOM,no,5be9466d-44fe-4b6d-8b3d-2ef6ef3778f4,701a4fc6-f668-4718-80ee-e61b3e080107,784b579a-8dad-4fec-b4eb-ef2c44ea7688,,unknown
+device 7164,192.168.7.164,ECY-VAV-58F4BA,,MECH. ROOM,no,a716e32b-1b11-4470-af13-8c11429bd965,d5bc589e-df15-4a55-944c-e8873a887434,77b7c38f-5646-4eb1-a594-a0799ba2f2a4,,unknown
+device 7165,192.168.7.165,ECY-VAV-39161A,,MECH. ROOM,no,e7a7d4a7-ff04-4dfd-8092-0f0146374ef0,f388b260-b507-449f-83bd-060a64d71baa,1c28ab33-ab8f-4903-b712-49e80f22dcd3,,unknown
+device 7166,192.168.7.166,ECY-VAV-58E284,,MECH. ROOM,no,39682790-3680-4ac8-b07a-78e570e308e9,3c9e2420-5884-4e2d-8fd2-f8f2d4bff946,a92261fc-1534-40b0-95a9-0eda3c44d311,,unknown
+device 7167,192.168.7.167,ECY-VAV-393ADA,,MECH. ROOM,no,c4e51e9c-3e9d-458a-959c-34aa9e390f54,15c52dbf-2eac-4c18-812c-87b2399f63b9,f826bab6-9319-4a5d-baa3-4d79ae0c2a2d,,unknown
+device 7168,192.168.7.168,ECY-VAV-59304B,,MECH. ROOM,no,46f2fc30-0428-4f38-9d20-d6db617a2b66,f39d22ef-e547-4bd2-8a43-d10b2ab000c5,702fe679-bbb5-41d7-8e76-57e4c3d8c7b1,,unknown
+device 7169,192.168.7.169,ECY-VAV-391AE2,,MECH. ROOM,no,4305ccc4-5e2f-4bed-92cf-6de556495a8e,49b65fb2-bfff-40e2-953a-0d7d3bb5b807,0157acba-7477-43ac-8b71-a571b17a4975,,unknown
+device 7170,192.168.7.170,ECY-VAV-391605,,MECH. ROOM,no,344dc315-ba25-426a-82a0-155aca1e9ea7,0dc14a6e-5b65-459b-a263-526251906348,ecf5c295-685e-4ac9-8567-16c2c81f8545,,unknown
+device 7171,192.168.7.171,ECY-VAV-58E2F9,,MECH. ROOM,no,6d9d8780-7b26-430f-a32f-e643e8de352e,7ca2dcaf-8165-4be5-871e-3183c4b80050,699de79c-6e6b-462a-8ddc-ff6c31a4322c,,unknown
+device 7172,192.168.7.172,ECY-VAV-F1C7F1,,MECH. ROOM,no,73255aa4-3405-4f2e-bd17-87d2195829a4,da113ba8-d38e-482d-afcb-923bbfd2e0cb,616b3f60-54f1-41b4-baa3-2cff13d45f43,,unknown
+device 7173,192.168.7.173,ECY-VAV-FA4478,,MECH. ROOM,no,0e42e3f8-d549-45da-b624-9394e54aa0a5,70de3b6b-bc3e-48f5-9b87-bf8064cb824f,f5470357-a18f-49d4-9fca-3be252da21c3,,unknown
+device 7174,192.168.7.174,ECY-VAV-5901E6,,MECH. ROOM,no,ce1f6d74-cf64-484a-9b62-094bfe7dae74,ccacdd19-9c5a-4da4-be27-bcafd456022a,04dbd4b0-70e7-4187-a596-4a0881548861,,unknown
+device 7176,192.168.7.176,ECY-VAV-58F0FA,,MECH. ROOM,no,b3832739-fe6b-40ba-bab5-b408100f3cd5,fea4a192-5556-44e5-9b89-60a4df0dcd65,59617179-2ca1-4ec4-b1da-219546c21da4,,unknown
+device 7177,192.168.7.177,ECY-VAV-3D0CE6,,MECH. ROOM,no,1514b5ea-fcb1-4dad-9805-2230a6caa80c,e86990d2-0d53-4554-bb26-96399e9ea460,bf2f08b9-cd1a-4b36-a6d0-4d30358d6550,,unknown
+device 7178,192.168.7.178,ECY-VAV-E9D368,,MECH. ROOM,no,d3e7e07f-c0b5-4d41-ae5a-87c505ab1e69,0dfc40f0-f2c3-40be-a087-719d95dbe348,8a4c23b6-3836-4c63-a33a-514ded8ac519,,unknown
+device 7180,192.168.7.180,ECY-VAV-FA5E28,,MECH. ROOM,no,b3cf3bed-88c9-45e8-9ab5-053d8e1ff082,58b1fb54-0102-4e2d-a979-f837da47bd9c,2bec369a-f61e-4f63-a776-6bda9c2b2e30,,unknown
+device 7181,192.168.7.181,ECY-VAV-E9BB1D,,MECH. ROOM,no,25e97f1f-c934-4e4f-a74c-c02b330cc0d0,3987bff1-c962-46a5-afdf-c443394719a3,59d0945f-6b29-445d-bcbf-09b4897d8a79,,unknown
+device 7182,192.168.7.182,ECY-VAV-FBFA0F,,MECH. ROOM,no,c71b7454-da87-4eb9-a6a5-62a559e081fb,1410a7fc-d294-4ff8-8408-73e5a15aadb6,174b45bd-d79b-406c-965b-b0abaf6f053e,,unknown
+device 7183,192.168.7.183,ECY-VAV-FBF5B9,,MECH. ROOM,no,5df83c94-3e63-483b-a1dd-e151bf706cc4,13f09fa3-9a82-4595-b271-4d758807cc75,89f4d134-f700-47b4-9fc1-6a8bea77e6f2,,unknown
+device 7184,192.168.7.184,ECY-VAV-FA63EC,,MECH. ROOM,no,c118448c-f218-4a79-a70c-5c90da1fc5d4,33442f51-aca0-4003-8875-f05347ecae35,69e1374c-5e1a-487d-9f60-d0af5bb88feb,,unknown
+device 16000,192.168.6.93,M>uECY-VAV-142D80,VAV 6-3 A,MECH. ROOM,no,e0722122-bf37-443e-af28-ab68a4f9ec09,650b8275-51d1-45c2-b050-88f6cb602852,e3c72826-acbc-4dc7-aa79-86a1fe49a1d1,6,bacnet-desc
+device 20148,192.168.0.66,VAV 9-16,Offices 923-925,MECH. ROOM,no,f9c16f8d-22ed-420e-b53f-461094441bf8,6f973a2f-d482-4b9e-834c-456513df99e7,37819e13-6181-4b8a-b66c-a794003cb412,,unknown
+device 97105,192.168.0.67,VAV 9-17,Offices 927-930,MECH. ROOM,no,a4e64d62-a81d-4284-a751-794e9935d176,d27d27ca-4c10-453e-8162-e47ecc256021,5fb37767-39a5-41bf-a4d0-819d00dcf485,,unknown
+device 35149,192.168.0.64,VAV 9-14,Open Office,MECH. ROOM,no,26d9de9b-2e87-46c9-8b31-b51fb892480d,f52e05c6-bd0f-472c-b319-1c47e55ab73b,7ec781cd-f25d-45bc-a4a2-d1c8d0082e12,,unknown
+device 45243,192.168.0.65,VAV 9-15,Open Office,MECH. ROOM,no,aa9ffbc5-8b10-4634-b8a4-8fe33d37eab5,45760609-355f-4c9f-bd82-ea59fc1c7c94,c9f79fb8-4040-4bb3-b325-ea941afa0091,,unknown
+device 30109,192.168.3.19,ECY-VAV-7CDC34,Open Offices,MECH. ROOM,no,2f6c8a17-37f8-43a4-b1f6-8282836f6168,b5a1a8dd-6b74-45e0-9bc4-3c72dec8097e,7337b3ca-0136-4884-b973-a0c42d9d0e06,3,subnet-inferred
+device 30115,192.168.3.115,ECY-VAV-58E8C3,South West Office,MECH. ROOM,no,c3da7536-3e0c-4b7e-af60-98df578bdd06,2ad2ed11-52b7-4172-93ac-c913100575ec,c3cc65ed-3739-4377-9800-be82f86b07d3,3,subnet-inferred
+device 1033,192.168.1.33,VAV 1-23,VAV 1-23,MECH. ROOM,no,381a32c7-3890-4b83-8c24-38f65b04f2f1,d041ce60-a34e-4e6e-93b2-aa30887838a4,654d09f0-1f4b-4b76-8416-25ff4833f124,1,bacnet-desc
+device 10105,192.168.1.15,VAV 1-5,VAV 1-5,MECH. ROOM,no,3c0a8ab0-27d5-4db3-ba17-dc1e98f69a39,e814fce1-4d02-4034-957e-96525b517a40,b52b4c34-f882-4a6b-8c22-471e72bcee05,1,bacnet-desc
+device 10106,192.168.1.16,VAV 1-6,VAV 1-6,MECH. ROOM,no,86d7aa46-e094-4bc9-b43b-a03d900a8cff,238be876-41fd-4bba-8b29-e2d34d967b5c,33c132c6-159a-45b2-8f37-1a835aa6cbd9,1,bacnet-desc
+device 40176,192.168.4.76,ECY-VAV-D875C3,VAV 4-6,MECH. ROOM,no,c2b29387-4bb6-41bb-83fe-a2fe34aa8f12,51106e76-cd56-4fa8-b852-c398c34eef4c,f51ab2bb-f926-4b79-a55e-c28a21f7dd5a,4,bacnet-desc
+device 50560,192.168.5.60,ECY-VAV-2096BA,VAV 5-10,MECH. ROOM,no,0e297dd0-b84d-4c51-8029-002c509b8a85,89338012-2b06-4917-b853-35fc0368e990,64e9ca00-8ca6-4661-a3a0-f658437d9af3,5,bacnet-desc
+device 6071,192.168.6.71,ECY-VAV-55016C,VAV 6-1,MECH. ROOM,no,ad0e3b27-34f7-4f9b-a2a5-21cd6f45a5d4,8faa9bd3-3c04-4b23-977c-cc250083f693,b371e060-755a-4ce8-8ca0-1c8116e15127,6,bacnet-desc
+device 6052,192.168.6.52,ECY-VAV-9965B8,VAV 6-2,MECH. ROOM,no,2dff83fb-b2fb-4b67-b14a-db442ff0bbcd,a312cb0b-8329-4c15-a4d3-efa4dc14a3ed,2bab5eb6-01ad-4673-b66e-8f5db4b7d233,6,bacnet-desc
+device 6075,192.168.6.75,ECY-VAV-55238C,VAV 6-5,MECH. ROOM,no,89912ac8-0fa5-4719-9805-efdfb7019d9c,a63652b7-10e7-43a3-a890-9d7dbf5aa503,38fbd024-578c-4eef-b468-7c24a2d9a414,6,bacnet-desc
+device 60109,192.168.6.96,ECY-VAV-D83C5B,VAV 6-6A,MECH. ROOM,no,b90b7c2c-c46e-4c0a-b563-25d28c9557bd,7a7aa447-2fc3-4b8e-955e-f3ac257f2ac6,780b9e2e-18a3-4a57-a334-425fd78f4e8b,6,bacnet-desc
+device 18173,192.168.7.70,ECY-VAV-B7414B,VAV 7-20,MECH. ROOM,no,73bcd4ab-f6bd-4b28-ae46-e6effa168664,c9070899-997c-42fa-8605-4f85eb3026de,3d8492a2-33be-4bef-9bc6-9fe21f235cea,7,bacnet-desc
+device 130212,192.168.7.54,ECY-VAV-259ACC,VAV 7-4,MECH. ROOM,no,00966522-83a0-4479-b412-4e56cc6da2c8,367f70ad-bd6f-4b42-bd51-7e4dd55181ca,388d1657-f51e-4050-84af-8f0cd277340e,7,bacnet-desc
+device 220219,192.168.7.98,VAV 9-10,VAV 9-10,MECH. ROOM,no,b5359019-acf0-465c-8efb-61642915adec,76fd032a-f5eb-4a8f-a1b7-fc67668c4e7c,4df1162c-24a3-4e46-ae40-f45137ff0309,9,bacnet-desc
+device 22039,192.168.7.93,VAV 9-4,VAV 9-4,MECH. ROOM,no,f322e7fa-4176-47ea-a774-99b5c52833f9,ed38e87b-1132-4e03-96a4-1c0e729a5af3,90cb55c9-fa08-4869-a180-6a8cd15ec7b3,9,bacnet-desc
+device 7186,192.168.7.186,ECY-VAV-58E2BD,VAV-13,MECH. ROOM,no,a0db29a4-89ef-4150-92d1-f95296853c07,023a80d4-4802-42f6-9b7a-2e5a1f8902b8,318a4057-c588-4743-bfa8-9a0bffcb94b6,8,oteam-6845-proposed
+device 7185,192.168.7.185,ECY-VAV-0F5028,VAV-25,MECH. ROOM,no,f709adb5-3511-4b50-bd37-99aec54e9a37,dbd92283-b9a7-41d3-8240-d8376cdf8085,768057bc-fd7a-4285-9b16-2ea4ad683397,8,oteam-6845-proposed
+device 7179,192.168.7.179,ECY-VAV-58E896,VAV-29,MECH. ROOM,no,1a1e794d-a24f-4c76-b1d0-276b695d220b,77bfe5b0-e1c6-497f-acff-d366a79a4ddc,dc18681e-dc22-4c35-b685-ddc211d8d170,8,oteam-6845-proposed
+device 7155,192.168.7.155,ECY-VAV-59063C,VAV-4,MECH. ROOM,no,a2b3ecd1-ccd5-48cc-ac1c-31dc2cd521f5,2cc32848-30e2-4de1-aac8-5d62a3b221b6,7004d63c-b053-48bd-a7c6-47ef6d785132,8,oteam-6845-proposed
+device 6104,192.168.4.54,,VAV-4-4,MECH. ROOM,no,6b77523d-caca-41d5-b987-0bf5b28dc12e,e9e845dd-371c-436a-8bba-58b06a6a2e59,af5aca19-cb12-49b4-becc-765e762c82f7,4,bacnet-desc
+device 7154,192.168.7.154,ECY-VAV-FA4472,VAV-5,MECH. ROOM,no,2795c6b3-3d91-4724-9978-289b343dfe87,08e5f7f1-9c34-4867-abb3-ec8dae15798b,85e27e94-965d-4e0b-905b-9522b539ffb2,8,oteam-6845-proposed
+device 5163,192.168.5.163,VAV-5-3,VAV-5-3,MECH. ROOM,no,faee5a40-2cc4-499a-b4bf-a0892f76c1f8,faf9cff7-b3bc-4e5a-b30a-ad70569dd62c,6d7cd038-89df-4a43-a74b-a416759ee307,5,bacnet-desc
+device 5168,192.168.5.168,VAV-5-8,VAV-5-8,MECH. ROOM,no,3b34f979-822b-4916-94b9-e610b0dfeaa6,6d32f7d9-0cf3-4629-af8a-3eaa78f3a446,43aab541-6f69-4d67-b69c-7d9da18f50c7,5,bacnet-desc
+device 141141,192.168.6.87,ECY-VAV-168847,VAV-7,MECH. ROOM,no,82e20b6a-34eb-4f62-9d1e-c814da0e7e78,13cec7bc-da6b-4657-8fcb-51c668556780,c7c34e31-abe5-496c-9a98-f03fa82136b1,6,subnet-inferred
+device 3101,192.168.3.101,ECY-VAV-5874C2,VAV-PCI-3-1,MECH. ROOM,no,c2d31e34-2516-4aa1-8a58-6d68ca7acc87,dde73b65-c56e-45be-b033-fc0da75c27ed,9c22de62-c97f-4418-b5a5-4ed6eee218b0,3,subnet-inferred
+device 5101,192.168.5.101,ECY-VAV-3D12CB,VAV-PCI-5-1,MECH. ROOM,no,c06d4f22-5787-4667-bc3f-f7b0fd813147,b879d50e-7e5b-45dd-ac48-f06ab63a799c,ff9675a2-60a1-4521-a093-048052f29e94,5,subnet-inferred
+device 219020,192.168.1.54,VAV-1-21,Break Area,TENANT SPACE,no,98c198c3-b417-4653-a5e0-6294df795c5f,1904fd61-c8ea-4920-be49-8c53dcc3f1ca,45ce636a-c065-4621-a220-7f17e3073623,1,subnet-inferred
+device 7017,192.168.1.53,VAV-1-20,Conference Rm102,TENANT SPACE,no,34e8d3fd-7fb4-4f49-9de6-2d258d03f48d,aa33ac1c-053b-4f55-b6af-52b3e891fd7f,9e09735c-13f1-4f25-ae49-65987a8768f9,1,subnet-inferred
+device 193231,192.168.2.70,ECY-VAV-6D292D,VAV-2-1,TENANT SPACE,no,104f6d0c-7f36-4c9a-8845-360b9cc27036,8940bca7-75bb-4772-9dc2-ae914f9669b5,65b93dff-a51a-4e2b-afb2-ed55ab0c20c1,2,bacnet-desc
+device 20106,192.168.2.71,VAV-2-2,VAV-2-2,TENANT SPACE,no,4741ddf4-273e-4721-b48f-544e07e4ddfe,8b54380c-1774-4c0c-8c25-b9cd245a7137,49d72385-012b-480a-9ba0-9944ed83cfed,2,bacnet-desc
+device 151,192.168.0.151,Wynn VAV 10-1,Wynn VAV 10-1,TENANT SPACE,no,dc10c4ff-d4b5-42a5-a305-9ec4f9a66fdf,90085056-9e48-47a1-a914-ce6c1d8c9e75,2c4e0e65-ade2-48a9-80b0-655893477590,10,bacnet-desc
+device 160,192.168.0.160,Wynn VAV 10-10,Wynn VAV 10-10,TENANT SPACE,no,6818e015-8053-4c50-8bed-95ce794f726b,6630d1dd-6d10-4816-9f2d-dd6edd3dd2a8,fc709825-f30d-4d0f-ae36-715f8781a8a6,10,bacnet-desc
+device 161,192.168.0.161,Wynn VAV 10-11,Wynn VAV 10-11,TENANT SPACE,no,dcc264a5-d861-48d6-94f8-54c6637c4713,6957d7ad-bee5-4512-902d-8d0aced99faa,01cfd613-d5e0-416f-bdb5-d2f744e4c67e,10,bacnet-desc
+device 162,192.168.0.162,Wynn VAV 10-12,Wynn VAV 10-12,TENANT SPACE,no,d60e2d87-f9c8-472d-ad08-cbaa5d931778,707dd9ee-b69d-4241-b616-7f149315a2e2,f8ff66dd-259b-42be-879b-fd49f535751c,10,bacnet-desc
+device 163,192.168.0.163,Wynn VAV 10-13,Wynn VAV 10-13,TENANT SPACE,no,8655431b-aca5-4970-ae5f-6c03137d5db5,379d2c60-5af6-4d40-9cc2-30d8fa1f1ee3,b8f4f71f-9733-4d20-beae-41d43a65a274,10,bacnet-desc
+device 164,192.168.0.164,Wynn VAV 10-14,Wynn VAV 10-14,TENANT SPACE,no,7bab8df7-d916-4d84-a4ed-6b09bef30d77,7f31ed60-6366-4fd9-84a4-b6de1f021a45,f6028561-d12e-4af8-9405-ed2e92592aef,10,bacnet-desc
+device 165,192.168.0.165,Wynn VAV 10-15,Wynn VAV 10-15,TENANT SPACE,no,65ca8cc4-9946-43af-b617-2909899bb9a2,b2e858bf-b7f6-46b4-9baa-40e0b35702de,a307b34a-f799-4ba1-b07d-a33fd2432b34,10,bacnet-desc
+device 166,192.168.0.166,Wynn VAV 10-16,Wynn VAV 10-16,TENANT SPACE,no,2c0cdb47-14b2-46ad-aa53-0ae34a99ca95,53b9bed0-bd07-44b7-8238-3da68c73eb17,18ce6268-f4b6-4d91-8250-9e5d66e25cb5,10,bacnet-desc
+device 167,192.168.0.167,Wynn VAV 10-17,Wynn VAV 10-17,TENANT SPACE,no,5c385973-cda3-4d68-906e-c8438b0f77c9,05ca635f-5aed-4e0e-b60f-46a978181d54,9e6dfa48-7004-4ccf-816c-a41d60379f97,10,bacnet-desc
+device 168,192.168.0.168,Wynn VAV 10-18,Wynn VAV 10-18,TENANT SPACE,no,c41f7e3d-e3d7-43d3-9e59-782aec804305,d83728ed-8ee2-41a4-bdf7-8eede4a7aa6a,e2d2a085-af1d-4d0f-81cc-120a0639f3f1,10,bacnet-desc
+device 169,192.168.0.169,Wynn VAV 10-19,Wynn VAV 10-19,TENANT SPACE,no,e83d853d-51e9-4563-a362-a583cd19ab52,60c45ef2-60c7-4499-81ca-167cfac20258,5ea95545-75d2-487a-a15e-60f9e3e1209e,10,bacnet-desc
+device 152,192.168.0.152,Wynn VAV 10-2,Wynn VAV 10-2,TENANT SPACE,no,aab38128-e972-412e-87c1-5694ea53ed4e,93d76e5a-3f87-4bc4-9c8e-c2fc91c2e6f6,06ccbbdb-e5b3-4126-ba57-16f1c894b717,10,bacnet-desc
+device 170,192.168.0.170,Wynn VAV 10-20,Wynn VAV 10-20,TENANT SPACE,no,df2d24f3-22f1-40aa-95c0-e8536babb1f0,890d9f3a-74d2-4a12-bae0-e15ed07124e8,da6984e5-4bfa-42c6-a37e-deee7ba9de38,10,bacnet-desc
+device 171,192.168.0.171,Wynn VAV 10-21,Wynn VAV 10-21,TENANT SPACE,no,ffe10e9b-738d-4066-802b-19ad323625b6,b06e22d2-a0c0-400a-bbe4-b87b913aef33,7f77d060-adef-438c-b0ab-cfe1219a9f91,10,bacnet-desc
+device 172,192.168.0.172,Wynn VAV 10-22,Wynn VAV 10-22,TENANT SPACE,no,c3e04550-622e-429b-8a01-dba29b64d126,9bc0d16f-caa3-4051-af0e-d50ad1c72168,94d1e586-12da-4111-b70e-6edb9cb7b470,10,bacnet-desc
+device 173,192.168.0.173,Wynn VAV 10-23,Wynn VAV 10-23,TENANT SPACE,no,c48b1729-4c7b-4c91-9663-60702265f376,983da5ab-4276-4740-81c7-849b7110efd0,05811dc3-b685-419a-9a32-90f6aa1e6eda,10,bacnet-desc
+device 174,192.168.0.174,Wynn VAV 10-24,Wynn VAV 10-24,TENANT SPACE,no,cbc750c4-f48a-44a3-ac02-2bffcd5bea61,dd1a3d96-f4d7-4026-aea6-f88babac583d,ef838b03-f761-4688-8074-972500714733,10,bacnet-desc
+device 175,192.168.0.175,Wynn VAV 10-25,Wynn VAV 10-25,TENANT SPACE,no,41f00a14-282b-412b-939c-d2163e8d78aa,f0387b67-6706-488f-965a-fb4eac85c6e1,fc9fa82e-c6e8-4f21-8c81-2ef6c834349a,10,bacnet-desc
+device 176,192.168.0.176,Wynn VAV 10-26,Wynn VAV 10-26,TENANT SPACE,no,a902f300-c8c4-4b05-abbd-c734c5dada4f,cbeb483b-b7af-4879-82df-c4a510368dd1,0ae68531-d470-450a-83ba-d3fbaf5a175d,10,bacnet-desc
+device 181,192.168.0.181,Wynn VAV 10-31,Wynn VAV 10-31,TENANT SPACE,no,4d5b98fd-75b8-4643-a218-cab01bfa6153,f87c29cf-27be-4335-b804-673a7b1ee2d7,e7324487-3a5e-4e10-b857-bf23c26d9ef6,10,bacnet-desc
+device 183,192.168.0.183,Wynn VAV 10-33,Wynn VAV 10-33,TENANT SPACE,no,13c75bd8-ecef-49cc-95eb-7705a12bd0bf,3891a547-3577-4674-804b-5378b68b26cb,e4dc24a0-ebb2-4481-9ec7-16175a12ec35,10,bacnet-desc
+device 184,192.168.0.184,Wynn VAV 10-34,Wynn VAV 10-34,TENANT SPACE,no,1c1b3834-a4d6-4533-b122-a8edf8916612,f742a67f-d6c9-4fde-8d3c-0006be4087f0,21365964-ccc7-4387-ab04-5a774830b0db,10,bacnet-desc
+device 154,192.168.0.154,Wynn VAV 10-4,Wynn VAV 10-4,TENANT SPACE,no,7fc6344f-f072-4b0e-8570-2514e230ed9f,99c242a9-3da5-4ee7-a8fa-f2832188498e,26f7549e-1d8b-4132-9ed0-0776d5e270fc,10,bacnet-desc
+device 156,192.168.0.156,Wynn VAV 10-6,Wynn VAV 10-6,TENANT SPACE,no,a4ebefbc-a0aa-49c3-be2c-dc79aa51373f,2bee778b-389c-4f7f-ad45-b0bdbe272485,fabc3ca1-b827-4ffe-8c06-9809f5627369,10,bacnet-desc
+device 158,192.168.0.158,Wynn VAV 10-8,Wynn VAV 10-8,TENANT SPACE,no,a925d335-5e6b-48e6-be0a-fae6819de7f9,4ae42619-047a-4d51-a59e-d8d6cd2e5ac2,7d327cf1-cd5b-4257-9d4d-e22da17ab323,10,bacnet-desc
+device 159,192.168.0.159,Wynn VAV 10-9,Wynn VAV 10-9,TENANT SPACE,no,5a279548-c2ff-41ea-9fa6-fbc690965bef,80c910a3-714d-43ef-9755-32bfc9fc4a8b,79b5ab5b-4285-49d0-98e7-2cbf8d008e8d,10,bacnet-desc

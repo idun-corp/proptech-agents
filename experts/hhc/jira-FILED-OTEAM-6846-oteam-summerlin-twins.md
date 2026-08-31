@@ -77,16 +77,35 @@ Same class as the Meridian "10 storeys to create" bug (OTEAM-6716) — numbers i
 equipment ids, not floor numbers — except inverted: here the floor **is** in the name and was
 discarded. **16 AHU + 8 FPT twins to re-place.**
 
-## C · ⚠️ Dedupe contract — the one thing that can go wrong
+## C · Dedupe — handled on our side, one heads-up for OTEAM-6740
 
-The 96 rows in (A) are **inside OTEAM-6740's scope** (currently Backlog, not started). If we create them and the bulk load later runs
-against the current v5 CSV, **it will create them again.**
+The 96 rows in (A) are inside OTEAM-6740's scope (currently Backlog, not started), so it is worth
+being explicit about how we avoid creating them twice. **This does not block anything.**
 
-`existing_sensor_twin_id` must be re-derived against the live model before OTEAM-6740 runs — the
-same dedupe step the Meridian v4 handoff did for all 658 live twins. Either we regenerate v5's
-column after our run and re-upload, or it is re-derived at your end.
+**On our side — a step in our own script, not a decision for anyone.** The API supports alias
+lookup directly:
 
-**Oksana — which do you prefer?** This is the only real risk in us doing it ourselves.
+```
+GET /json/sensor?aliases=<comma-separated alias URIs>&alias_ns_ids=e02cfd90-2ddb-40e2-b878-e435948536e9
+```
+
+We query the 96 alias URIs first and skip any that already exist. Idempotent by construction, and it
+re-runs safely.
+
+**The one heads-up:** after our write, `existing_sensor_twin_id` in handoff v5 is **stale for those
+96 rows** — the CSV was built 07/05. `onboard_bacnet.py` checks whether the *building* exists but
+does not do a per-sensor alias lookup before creating, so a bulk load driven purely off the stale
+CSV column would recreate them. Re-deriving that column against the live model before the bulk run
+fixes it — the same dedupe step the Meridian v4 handoff did for all 658 live twins.
+
+**Oksana — no action needed now.** We will regenerate the column after our write and say so on this
+ticket, so v5 is correct by the time OTEAM-6740 runs. Flagging it only so it is on the record.
+
+**Open (empirical, we will answer it ourselves):** whether ProptechOS *enforces* alias uniqueness
+within a namespace, or whether it is a convention the writer maintains. The convention doc says
+site-tags "must be globally unique across HHH PO so aliases don't collide", which reads like a rule
+for the writer rather than a database constraint. We will find out on the first write by attempting
+one create twice, and record the answer here.
 
 ## D · Question: should `analog-output` readings be `Sensor`?
 
