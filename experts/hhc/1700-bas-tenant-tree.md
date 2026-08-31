@@ -112,3 +112,26 @@ BACnet Object_Name/Description cannot resolve these — the BAS hierarchy is the
 
 ## Still collapsed (floor 2)
 `Suite_250`, `Suite260`, `TSGConsumer` — contents unknown.
+
+---
+
+## Floor 2, resolved — and a correction
+
+```
+Suite_250      vav2_1 .. vav2_18                              18
+Suite260       VAV_2_1, VAV_2_2, VAV_2_3                       3
+TSGConsumer    VAV_2_5, VAV_2_2A, VAV_2_3A, VAV_2_4, VAV_2_1A  5   (P8S has 4, +1)
+HowardHughes   STILL COLLAPSED — contents unknown
+floor level    ahu2_1, exh_cav2_1/2, osa_cav2_3, vav2_4..vav2_9
+```
+
+⚠️ **Correction to the earlier entry:** I recorded `vav2_1..vav2_18` under **HowardHughes**. A
+clearer screenshot shows that list belongs to **Suite_250**, and `HowardHughes` is a *separate,
+still-collapsed folder*. Genea's Suite 250 tenant is "Howard Hughes", so these two folders may be
+duplicates, or one may be legacy — **do not map either until HowardHughes is expanded.**
+
+⚠️ **`Suite260` (3 VAVs) does not appear in Genea's Areas export at all.** Either a tenant with no
+lease area configured in Genea, or a vacant/reconfigured suite. Worth asking about.
+
+⚠️ More name collisions on this floor: `Suite_250/vav2_4..9` vs floor-level `vav2_4..9`, and
+`TSGConsumer/VAV_2_4` vs `Suite_250/vav2_4`. Path remains the only unique key.
