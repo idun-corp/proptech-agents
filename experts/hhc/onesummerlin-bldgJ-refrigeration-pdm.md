@@ -2,9 +2,18 @@
 
 ## [VERSION]
 
-Version:  0.2 (pilot — every trend baseline self-calibrates over the first 30 days)
+Version:  0.3 (pilot — every trend baseline self-calibrates over the first 30 days)
 Created:  08/31/2026
-Updated:  08/31/2026 — v0.2, after the first live data pull (256 bindings + 1,311
+Updated:  08/31/2026 — v0.3, after a 7-day / 26,202-circuit-sample replay:
+          (a) **Rule 1 must normalise by CONCURRENCY.** Pooled approach falls
+              11.23 → 5.02 → 4.21 °F as 1 → 2 → 3 circuits run on a unit. The raw
+              per-unit ranking was almost entirely an artifact of how many circuits
+              each unit habitually runs. See RULE 1.
+          (b) GATE 1 threshold 5.0 confirmed on 26,202 samples; added an
+              INDETERMINATE band.
+          (c) GATE 2 confirmed with measured numbers.
+          (d) Calibration baselines recorded in KNOWN ISSUES.
+          08/31/2026 — v0.2, after the first live data pull (256 bindings + 1,311
           building-wide + 24 h history on two units):
           (a) **GATE 1 REWRITTEN.** v0.1 gated on `CondSat − CW LEAVING > 1.50 °F`.
               Both halves were wrong. Reference is now **CW ENTERING**, threshold
@@ -329,9 +338,17 @@ units but are NOT onboarded.** You have no direct run-state point. OTEAM-6846 fi
 Derive circuit run state as:
 
 ```
-circuit N is RUNNING  when  CondSat(N) − Condenser Water ENTERING Temperature  >  5.0 °F
-circuit N is OFF      when  that difference is <= 5.0 °F
+let  lift = CondSat(N) − Condenser Water ENTERING Temperature
+
+lift >  5.0 °F        circuit N is RUNNING
+lift <  3.0 °F        circuit N is OFF
+3.0 <= lift <= 5.0    INDETERMINATE — exclude the circuit from this tick, count it
 ```
+
+**Confirmed on 26,202 circuit-samples over 7 days (08/24–08/31):** 79.0 % below 5.0,
+21.0 % at or above, and only **0.31 % within ±0.5 °F of the 5.0 line** — the sparsest
+region of the distribution. The 3.0–7.0 transition zone holds **1.86 %** of samples, which
+is why it gets its own band rather than being forced to a call.
 
 A running circuit must reject heat, so its saturated condensing temperature rises well
 above the water it rejects into. An idle circuit's refrigerant equilibrates to the loop.
@@ -385,11 +402,20 @@ entering-to-leaving rise.
 
 ## [GATE 2 — WORKING DAY AND OCCUPIED HOURS]
 
-**The plant is genuinely off at night and at weekends.** A full 24 h pull covering Sunday
-08/30 (12:00Z 08/30 → 12:00Z 08/31, i.e. 05:00–05:00 PDT) found **zero running circuits on
-both units sampled**, 243 and 246 circuit-samples respectively. At 12:44 UTC Monday —
-**05:44 PDT** — circuits were running on all 15 reporting units. Plant start is early morning
-local.
+**The plant is genuinely off at night and at weekends.** Measured over 7 days, all 15
+reporting units, share of circuit-samples running:
+
+```
+Mon 08/24  31.6 %      Fri 08/28  26.8 %
+Tue 08/25  31.3 %      Sat 08/29  16.0 %
+Wed 08/26  28.4 %      Sun 08/30   0.0 %   <-- 0 of 3,813 samples
+Thu 08/27  26.9 %
+```
+
+By hour: **zero running from 02:00 to 10:00 UTC** (19:00–03:00 PDT); 28–46 % from 12:00 to
+00:00 UTC. The plant runs approximately **05:00–18:00 PDT on weekdays**, reduced Saturday,
+**completely off Sunday**. The 3:00 PM PT tick lands at 22:00 UTC, 37 % running — a good
+sampling point, confirmed.
 
 - On a weekend or before the morning start, **all-idle is NORMAL**. Make no staging or
   capacity judgement; say so explicitly rather than reporting a fault.
@@ -409,6 +435,22 @@ circuit 1 apparent approach +10.39. **An agent without Rule 7 would report it as
 running machine.** Exclude it from every rule and name it as excluded. This is the 1201
 device-11004 pattern (11 days frozen while every tick called it "idle").
 
+### Calibration baselines — 7 days, 08/24–08/31, NOT findings
+
+Single-circuit-basis condenser approach, weekdays, RUNNING only. **13 units have enough
+single-circuit samples; the fleet median is 11.31 °F.** Eleven sit in 9.90–12.13. Two do not:
+
+```
+AHU J2-9   16.88 °F   +5.57 vs median   n=85
+AHU-J2-4    4.62 °F   −6.69 vs median   n=48
+```
+
+⚠️ **Neither is a finding and neither may be reported as one.** Seven days is not the 30 the
+trend rules require; there is no per-circuit load signal onboarded, so concurrency is a coarse
+proxy; and n is small. A high single-circuit approach is the fouling *shape*, and a low one may
+equally be a leaving-water sensor reading oddly. **Carry both as CALIBRATING watch items** and
+say explicitly that the basis is 7 days.
+
 Building-wide context from the same sweep, for calibrating Rule 7 — **not** this agent's
 findings to report: 1,046 of 1,311 live Bldg J sensors fresh under 1 h; 23 stale over 7 days
 (22 of them AHU-J2-2); **242 have never reported at all, of which 219 are the VAV `Space_Temp`
@@ -427,10 +469,33 @@ condenser approach = CondSat(N) − Condenser Water Leaving Temperature Active
 are deliberately opposite. Inverting the condenser one makes fouling look like improvement —
 that bug shipped in 1201 PdM v0.1.
 
-- Compute per circuit, per unit, RUNNING hours only.
-- Expected magnitude 3–10 °F, smaller at light load.
-- **CALIBRATING until 30 days** of ledger exist. Then flag a circuit whose 7-day mean approach
-  has risen more than **2.0 °F** above its own 30-day baseline, at comparable air-side load.
+⚠️ **NEVER compare approach across units without holding CONCURRENCY constant.** Measured
+over 7 days, pooled across all 15 reporting units, weekdays, RUNNING circuits only:
+
+```
+1 circuit running on the unit    mean approach 11.23 °F    n=1,376
+2 circuits running               mean approach  5.02 °F    n=2,850
+3 circuits running               mean approach  4.21 °F    n=  660
+```
+
+Approach **falls** as the unit loads up, because the metric subtracts *leaving* water and
+leaving water rises with the heat the siblings reject. So a unit that habitually runs three
+circuits will always look "better" than one that runs one, and **an unnormalised ranking
+measures habit, not condenser condition.**
+
+Raw unit means over the same week spanned 4.00–11.47 °F and were **almost entirely explained
+by concurrency** — AHU J1-2 (4.00) ran 3 circuits nearly continuously; AHU-J1-5 (11.47) ran
+one. Normalised to the single-circuit basis the fleet collapses to **9.90–12.13 °F for 11 of
+13 units**. This is the 1700 Pavilion lesson reproduced exactly: five findings there died to
+load normalisation, and the whole of this ranking would have been a sixth.
+
+- Compute per circuit, per unit, RUNNING hours only, weekdays only (GATE 2).
+- **Bucket every sample by the number of circuits running on that unit at that instant, and
+  only ever compare like with like.** The 1-circuit bucket is the cleanest basis.
+- Expected magnitude on the 1-circuit basis: fleet median **11.31 °F**.
+- **CALIBRATING until 30 days** of ledger exist. Then flag a circuit whose 7-day mean, in a
+  given concurrency bucket, has risen more than **2.0 °F** above its own 30-day baseline in
+  that same bucket.
 - Rising approach = condenser tube fouling, scaling, or non-condensables. On a shared loop,
   **fouling is per-unit; loop degradation is fleet-wide.** Rule 2 separates them.
 
