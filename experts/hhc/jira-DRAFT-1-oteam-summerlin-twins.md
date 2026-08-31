@@ -77,7 +77,7 @@ discarded. **16 AHU + 8 FPT twins to re-place.**
 
 ## C · ⚠️ Dedupe contract — the one thing that can go wrong
 
-The 96 rows in (A) are **inside OTEAM-6740's scope**. If we create them and the bulk load later runs
+The 96 rows in (A) are **inside OTEAM-6740's scope** (currently Backlog, not started). If we create them and the bulk load later runs
 against the current v5 CSV, **it will create them again.**
 
 `existing_sensor_twin_id` must be re-derived against the live model before OTEAM-6740 runs — the

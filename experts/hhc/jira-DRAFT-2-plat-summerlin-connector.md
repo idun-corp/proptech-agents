@@ -53,7 +53,8 @@ Only run state for the window separated a real precursor from stagnant water.
 
 Condenser approach is `CondSat − CW leaving`. `CondSat` is proposed at **900s**, `CW leaving` at
 **60s**. Per the tier table in the connector playbook, compressor-circuit temperatures belong in the
-**1-min** tier — the saturated condensing temps look mis-tiered.
+**1-min** tier — the saturated condensing temps look mis-tiered. (Per-tag polling rates landed with
+**PLAT-5554**, closed Done 2026-08-01, so the connector supports this.)
 
 **Ask: 60s for `analog-input 42/43/44`** (48 rows). Tolerable for a daily PdM either way; raising it
 because it will bite anything hourly.
@@ -66,17 +67,21 @@ the 96 run-state rows takes it to **484, +24.7%**.
 **Please confirm against the measured cycle** from `/opt/proptechos/<connector>/log/log.log` rather
 than my arithmetic — the playbook is explicit that headroom is measured, not projected.
 
-### A4 — two cautions on this PEG specifically
+### A4 — two notes on this PEG specifically
 
-- The **watchdog on HHHEG-002 is stopped and disabled deliberately** (PLAT-5578 storm). The
-  handover says do not start it.
 - A connector restart briefly drops **all 22 campus buildings**, not just Bldg J. Worth timing.
+- ⚠️ **The watchdog on HHHEG-002 has been stopped and disabled since 2026-07-05**, deliberately,
+  because of the PLAT-5578 restart storm — and the One Summerlin handover still says *"do NOT start
+  it"*. **PLAT-5578 was closed Done on 2026-07-30.** If the fix is deployed on this PEG, that
+  standing instruction is stale and the watchdog has been off for two months for no reason.
 
-### A5 — question back
+  This is not a theoretical risk: 1700 Pavilion lost a whole building for **6 hours** at its first
+  reboot in 73 days because connector auto-start had silently lapsed. The Bldg J connector was
+  `systemctl enable`d on 07-05, so boot recovery is covered — but runtime crash recovery is still
+  only `Restart=on-failure` (approx. 5 retries) without the watchdog.
 
-**Does the connector deployed on HHHEG-002 have the per-sensor `pollingPeriod` support from
-PLAT-5554?** The whole cadence plan in A1/A2 assumes it. If not, the tiers collapse to one period
-and we should talk about which.
+  **Marichka — is the PLAT-5578 fix on HHHEG-002, and can the watchdog go back on?** Worth doing in
+  the same visit as the config regen rather than as a separate intervention.
 
 ---
 
