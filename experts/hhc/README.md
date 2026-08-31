@@ -27,7 +27,10 @@ the building's site folder on Drive for the write-up).
 | `1700-pavilion-daily-manual-check.md` | v0.2, manual daily data-loss backstop | Sensor UUIDs, building ID, **PEG host + SSH user** |
 | `onesummerlin-bldgJ-refrigeration-pdm.md` | v0.1 pilot, One Summerlin Bldg J — daily refrigeration PdM over 16 self-contained units / 48 circuits | Full sensor UUID map (256), building + PO IDs, names, BACnet instances |
 | `onesummerlin-bldgJ-refrigeration-bindings.csv` | The 256-row binding table the spec's map is generated from | Sensor + device UUIDs, vendor point names, sample values |
-| `jira-DRAFT-summerlin-agent-data-asks.md` | What the Summerlin agents need from onboarding — three comments on EXISTING tickets plus one new placement defect. Supersedes two drafts that wrongly proposed new tickets | Building UUIDs, device instances |
+| [1700-pavilion-embodied-agent.md](1700-pavilion-embodied-agent.md) | 1700 Pavilion | The **occupied** building, not the plant — zone comfort, schedule behaviour, electricity, and an explicit daily statement of which senses the building does not have. Instantiates `embodied/buidling-base.md`, replacing its CO2/humidity/TVOC/water sections, which have no counterpart here. **v0.1, not deployed** — blocked on two bindings | Sensor UUIDs, building + PO IDs, tenant names |
+| `1700-embodied-zone-bindings.csv` | The 286-zone roster behind that spec — temp / damper / occupancy sensor per zone | Sensor UUIDs, tenant names, **BACnet device IPs** |
+| `jira-DRAFT-1-oteam-summerlin-twins.md` | Ticket 1/2 — ProptechOS twin work: 96 run-state twins + 24 storey fixes in-house at Bldg J, the OTEAM-6740 dedupe contract, Two Summerlin twin-property fixes | Building UUIDs, device instances |
+| `jira-DRAFT-2-plat-summerlin-connector.md` | Ticket 2/2 — PEG connector config for Marichka: Bldg J wave/cadence reorder, run the Two Summerlin W0 batch | Building UUIDs, PEG + connector names |
 | `agent-dispatch-sms.md` | Shared reference — how an agent sends SMS/EMAIL/service object (v5.6.3) | None — dispatch never exposes recipients to the LLM |
 
 ⚠️ **Two files above now carry more than sensor identity.** `1700-pavilion-no-data-sms-alert.md`
@@ -36,6 +39,12 @@ and `1700-pavilion-daily-manual-check.md` contain the **PEG host, port and SSH u
 outside the exception as originally granted below ("Not in here, and must stay out: IP
 addresses, hostnames, PEG identities"). **Strip those before this merges** — they belong in the
 site folder on Drive. The containment check in step 4 does not catch them.
+
+⚠️ **And two CSVs carry BACnet device IPs.** `1700-zone-remap-FULL.csv` and
+`1700-embodied-zone-bindings.csv` both have an `ip` column of RFC1918 addresses on the customer's
+own BAS network. Same rule, same fix: strip the column, or move the file to the site folder on
+Drive, before this merges. Neither the agent spec nor the remap review needs the IP to work — it
+is there because it made the derivation auditable.
 
 **Note also:** this folder is no longer only chiller agents — 1700 Pavilion is a water-side
 plant with no chillers. The folder name and the heading above are both stale.
