@@ -1,3 +1,5 @@
+# PLAT-5788 — FILED 2026-08-31 — https://idun.atlassian.net/browse/PLAT-5788
+
 # TICKET 2 of 2 — PEG connector config (PLAT → Marichka)
 
 **Issue type:** Task · **Project:** PLAT · **Epic:** OTEAM-5539 / OTEAM-5554

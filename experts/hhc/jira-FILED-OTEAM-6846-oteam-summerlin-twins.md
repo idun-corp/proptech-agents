@@ -1,3 +1,5 @@
+# OTEAM-6846 — FILED 2026-08-31 — https://idun.atlassian.net/browse/OTEAM-6846
+
 # TICKET 1 of 2 — ProptechOS twins (OTEAM)
 
 **Issue type:** Task · **Project:** OTEAM · **Epic:** OTEAM-5539 (One Summerlin)

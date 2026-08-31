@@ -29,8 +29,8 @@ the building's site folder on Drive for the write-up).
 | `onesummerlin-bldgJ-refrigeration-bindings.csv` | The 256-row binding table the spec's map is generated from | Sensor + device UUIDs, vendor point names, sample values |
 | [1700-pavilion-embodied-agent.md](1700-pavilion-embodied-agent.md) | 1700 Pavilion | The **occupied** building, not the plant — zone comfort, schedule behaviour, electricity, and an explicit daily statement of which senses the building does not have. Instantiates `embodied/buidling-base.md`, replacing its CO2/humidity/TVOC/water sections, which have no counterpart here. **v0.1, not deployed** — blocked on two bindings | Sensor UUIDs, building + PO IDs, tenant names |
 | `1700-embodied-zone-bindings.csv` | The 286-zone roster behind that spec — temp / damper / occupancy sensor per zone | Sensor UUIDs, tenant names, **BACnet device IPs** |
-| `jira-DRAFT-1-oteam-summerlin-twins.md` | Ticket 1/2 — ProptechOS twin work: 96 run-state twins + 24 storey fixes in-house at Bldg J, the OTEAM-6740 dedupe contract, Two Summerlin twin-property fixes | Building UUIDs, device instances |
-| `jira-DRAFT-2-plat-summerlin-connector.md` | Ticket 2/2 — PEG connector config for Marichka: Bldg J wave/cadence reorder, run the Two Summerlin W0 batch | Building UUIDs, PEG + connector names |
+| `jira-FILED-OTEAM-6846-oteam-summerlin-twins.md` | **OTEAM-6846** (filed 08/31) — ProptechOS twin work: 96 run-state twins + 24 storey fixes in-house at Bldg J, the OTEAM-6740 dedupe contract, Two Summerlin twin-property fixes | Building UUIDs, device instances |
+| `jira-FILED-PLAT-5788-plat-summerlin-connector.md` | **PLAT-5788** (filed 08/31) — PEG connector config for Marichka: Bldg J wave/cadence reorder, run the Two Summerlin W0 batch | Building UUIDs, PEG + connector names |
 | `agent-dispatch-sms.md` | Shared reference — how an agent sends SMS/EMAIL/service object (v5.6.3) | None — dispatch never exposes recipients to the LLM |
 
 ⚠️ **Two files above now carry more than sensor identity.** `1700-pavilion-no-data-sms-alert.md`
