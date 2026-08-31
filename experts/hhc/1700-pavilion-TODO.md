@@ -86,7 +86,7 @@ AFTER    352 devices · 1,599 sensors · 574/574 occupancy · 0 errors   <- 100%
 
 ## 🆕 08/31 — EMBODIED BUILDING AGENT drafted, blocked on two bindings
 
-`1700-pavilion-embodied-agent.md` v0.3 + `1700-embodied-zone-bindings.csv` (286 zones).
+`1700-pavilion-embodied-agent.md` v0.4 + `1700-embodied-zone-bindings.csv` (286 zones).
 The first 1700 agent that watches the **occupied** building rather than the plant: zone
 comfort, schedule behaviour, electricity, and a printed daily statement of which senses
 this building does not have. **Daily 06:00 PT, exception-based** — silent one-liner unless a rule
@@ -100,6 +100,25 @@ agent's output — no report store, no run-history tool, and `get-service-object
 on-demand escalation, never a daily habit. The agent instead prints a `NOT MINE TODAY` line
 naming what the specialists own, and aggregation happens in the reader's inbox.
 
+### ✅ FIRST LIVE RUN 08/31 07:09 PT — it works, and it cost too much
+
+63 calls, **742k tokens, 14m19s** to produce fourteen lines of finding. Three real findings
+on the first morning, two of them new classes: **slow startup pulldown** (5 zones 45-80 min
+to band, worst Hearst Healthcare 82.4 -> 77.6 F at +79 min), a **cold-side excursion**
+(Summerlin Gallery VAV 1-5, 67-69 F for 90 min - nothing at this building has ever looked
+below the band), and **Snell & Wilmer released for the first time in 23 days**.
+Also observed: **weekday occupied-start is 05:09-05:24 PT, not the ~06:10 on record** - that
+06:10 was a Saturday figure. Thresholds table corrected.
+
+**v0.4 fixes what the run exposed:** verdict-first report capped at 20 lines · sentinel sweep
+must use hourly aggregation, never raw series (~92 points/sensor was the whole cost) · the
+daily `SENSES DARK` and `WATER: ⚪` recitals are gone · a single amber is MINOR, not SEVERE
+(v0.3 sent a probably-transient pulldown as `[Severe]`) · Rule 1 gains the cold side and a
+pulldown-vs-steady-state split. Target now 40 calls / 250k tokens.
+
+- [ ] **C · Confirm v0.4 lands under budget** on the next run, and that the report fits 20 lines.
+- [ ] **E · Does the 05:09 start need chasing?** Either the BAS weekday schedule changed or it
+      was never 06:10. Cheap to settle and it feeds Rule 3's outside-schedule maths.
 - [~] **C · PM1 + PM2 total-power sensorIds.** Rule 4 (electricity) is ⚪ until these are
       bound. `popularName` is null on all 54 meter sensors (**OTEAM-6827**) so they cannot
       be resolved by name — needs device + littera. The two PAC3220s are at
