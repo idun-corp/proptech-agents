@@ -1,0 +1,133 @@
+change,device,instance,objectId,objectName,current_batch,current_poll_s,new_poll_s
+cadence 900s -> 60s,AHU-J1-9,723101,analog-input 42,Condensing Saturated Temperature Circuit 1,W0-smoke,900,60
+cadence 900s -> 60s,AHU-J1-9,723101,analog-input 43,Condensing Saturated Temperature Circuit 2,W0-smoke,900,60
+cadence 900s -> 60s,AHU-J1-9,723101,analog-input 44,Condensing Saturated Temperature Circuit 3,W0-smoke,900,60
+cadence 900s -> 60s,AHU J2-9,723102,analog-input 42,Condensing Saturated Temperature Circuit 1,W0-smoke,900,60
+cadence 900s -> 60s,AHU J2-9,723102,analog-input 43,Condensing Saturated Temperature Circuit 2,W0-smoke,900,60
+cadence 900s -> 60s,AHU J2-9,723102,analog-input 44,Condensing Saturated Temperature Circuit 3,W0-smoke,900,60
+cadence 900s -> 60s,AHU J1-8,723104,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU J1-8,723104,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU J1-8,723104,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU J2-8,723105,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU J2-8,723105,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU J2-8,723105,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-7,723107,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-7,723107,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-7,723107,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-7,723108,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-7,723108,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-7,723108,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-6,723110,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-6,723110,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-6,723110,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-6,723111,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-6,723111,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-6,723111,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-5,723113,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-5,723113,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-5,723113,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-5,723114,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-5,723114,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-5,723114,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-4,723116,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-4,723116,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-4,723116,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-4,723117,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-4,723117,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-4,723117,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-3,723119,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-3,723119,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU-J1-3,723119,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-3,723120,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-3,723120,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-3,723120,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU J1-2,723122,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU J1-2,723122,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU J1-2,723122,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-2,723123,analog-input 42,Condensing Saturated Temperature Circuit 1,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-2,723123,analog-input 43,Condensing Saturated Temperature Circuit 2,W1-operational,900,60
+cadence 900s -> 60s,AHU-J2-2,723123,analog-input 44,Condensing Saturated Temperature Circuit 3,W1-operational,900,60
+wave W2-status -> W1-operational,AHU J1-8,723104,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU J1-8,723104,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU J1-8,723104,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU J1-8,723104,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU J1-8,723104,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU J1-8,723104,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU J2-8,723105,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU J2-8,723105,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU J2-8,723105,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU J2-8,723105,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU J2-8,723105,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU J2-8,723105,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-7,723107,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-7,723107,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-7,723107,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-7,723107,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-7,723107,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-7,723107,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-7,723108,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-7,723108,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-7,723108,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-7,723108,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-7,723108,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-7,723108,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-6,723110,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-6,723110,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-6,723110,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-6,723110,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-6,723110,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-6,723110,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-6,723111,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-6,723111,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-6,723111,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-6,723111,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-6,723111,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-6,723111,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-5,723113,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-5,723113,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-5,723113,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-5,723113,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-5,723113,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-5,723113,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-5,723114,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-5,723114,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-5,723114,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-5,723114,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-5,723114,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-5,723114,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-4,723116,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-4,723116,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-4,723116,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-4,723116,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-4,723116,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-4,723116,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-4,723117,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-4,723117,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-4,723117,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-4,723117,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-4,723117,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-4,723117,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-3,723119,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-3,723119,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-3,723119,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-3,723119,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J1-3,723119,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J1-3,723119,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-3,723120,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-3,723120,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-3,723120,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-3,723120,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-3,723120,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-3,723120,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU J1-2,723122,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU J1-2,723122,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU J1-2,723122,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU J1-2,723122,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU J1-2,723122,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU J1-2,723122,multi-state-input 41,Supply Fan Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-2,723123,multi-state-input 19,Application Mode Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-2,723123,multi-state-input 25,Cool Output 1,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-2,723123,multi-state-input 26,Cool Output 2,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-2,723123,multi-state-input 27,Cool Output 3,W2-status,900,900
+wave W2-status -> W1-operational,AHU-J2-2,723123,multi-state-input 35,Primary Filter Status,W2-status,300,300
+wave W2-status -> W1-operational,AHU-J2-2,723123,multi-state-input 41,Supply Fan Status,W2-status,300,300

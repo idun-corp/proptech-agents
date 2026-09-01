@@ -1,0 +1,74 @@
+action,building,building_uuid,vbc_name,vbc_scope,tags_net_new,tags_already_live,devices,existing_mount_uuids,storey_uuid,placement_confidence,placement_source
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,3rd Floor,suite,1287,111,28,,acf5861a-1021-4136-960a-c576b264729b,suite:1398,ebo-vav-summary:1398
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 900 (Gallard Spahr),suite,1239,104,18,,c5b8b053-fd71-404e-948b-72e261151a4a,suite:1343,ebo-vav-summary:1343
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,7th Floor,suite,893,76,19,,4a301d69-7caa-4846-851d-8bc46d394bb0,suite:969,ebo-vav-summary:969
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 650,suite,828,72,18,,d80224b6-efd2-46de-9479-718f526abdbb,suite:900,ebo-vav-summary:900
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 500,suite,782,68,17,,c7c95c1c-f210-4cbe-a88a-7c1829b120e8,suite:850,ebo-vav-summary:850
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 750,suite,423,36,9,,4a301d69-7caa-4846-851d-8bc46d394bb0,suite:459,ebo-vav-summary:459
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,2nd Floor,suite,376,32,8,,7281e29f-60ad-4b8e-94e7-d71952423175,suite:408,ebo-vav-summary:408
+CREATE,Building I,0b48fab1-bbb0-47f9-ac40-9a0609caf1ae,BACnet at Building I,building,349,37,10,,,building:386,building-vbc:386
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 930,suite,329,28,7,,c5b8b053-fd71-404e-948b-72e261151a4a,suite:357,ebo-vav-summary:357
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 680,suite,322,28,7,,d80224b6-efd2-46de-9479-718f526abdbb,suite:350,ebo-vav-summary:350
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 550,suite,276,24,6,,c7c95c1c-f210-4cbe-a88a-7c1829b120e8,suite:300,ebo-vav-summary:300
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 670,suite,276,24,6,,d80224b6-efd2-46de-9479-718f526abdbb,suite:300,ebo-vav-summary:300
+CREATE,Building G,2f01d2b1-dd62-4635-bed6-766a2baff274,BACnet at Building G,building,238,6,7,,,building:244,building-vbc:244
+CREATE,Building L,e6f8d1d1-77fc-442d-b0be-6aa5edf9beba,BACnet at Building L,building,225,21,7,,,building:246,building-vbc:246
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 270,suite,188,16,4,,7281e29f-60ad-4b8e-94e7-d71952423175,suite:204,ebo-vav-summary:204
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 260,suite,188,16,4,,7281e29f-60ad-4b8e-94e7-d71952423175,suite:204,ebo-vav-summary:204
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 240,suite,188,16,4,,7281e29f-60ad-4b8e-94e7-d71952423175,suite:204,ebo-vav-summary:204
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 770,suite,188,16,4,,4a301d69-7caa-4846-851d-8bc46d394bb0,suite:204,ebo-vav-summary:204
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 530,suite,184,16,4,,c7c95c1c-f210-4cbe-a88a-7c1829b120e8,suite:200,ebo-vav-summary:200
+CREATE,Building D1/D2,2b136fc1-403d-42dd-a64e-a5da3a1b7c6a,BACnet at Building D1-D2,building,152,6,6,,,building:158,building-vbc:158
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 210,suite,141,12,3,,7281e29f-60ad-4b8e-94e7-d71952423175,suite:153,ebo-vav-summary:153
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 200,suite,141,12,3,,7281e29f-60ad-4b8e-94e7-d71952423175,suite:153,ebo-vav-summary:153
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 290,suite,141,12,3,,7281e29f-60ad-4b8e-94e7-d71952423175,suite:153,ebo-vav-summary:153
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 280,suite,141,12,3,,7281e29f-60ad-4b8e-94e7-d71952423175,suite:153,ebo-vav-summary:153
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 250,suite,141,12,3,,7281e29f-60ad-4b8e-94e7-d71952423175,suite:153,ebo-vav-summary:153
+CREATE,Building K2,3b2f9e3a-1517-40b8-8ddc-da23bdf6076c,BACnet at Building K2,building,104,4,4,,,building:108,building-vbc:108
+CREATE,Building P,a8c4f375-ba1f-454a-bb09-71561c319dc6,BACnet at Building P,building,104,4,4,,,building:108,building-vbc:108
+CREATE,Building F,d70548ae-be2d-4499-8340-09246f19b702,BACnet at Building F,building,103,4,4,,,building:107,building-vbc:107
+CREATE,Building B,fa63079d-bc6a-46c3-a78c-372a47c690c7,BACnet at Building B,building,80,3,3,,,building:83,building-vbc:83
+CREATE,Building E,d3312e9c-4fa0-46f6-96df-01ed5614d779,BACnet at Building E,building,80,3,3,,,building:83,building-vbc:83
+CREATE,Building Q,576319d4-0d04-4046-9986-a79a5a73f36c,BACnet at Building Q,building,79,3,3,,,building:82,building-vbc:82
+CREATE,Building H,cff88e29-459c-4ecb-b917-afde8fd326c0,BACnet at Building H,building,78,3,3,,,building:81,building-vbc:81
+CREATE,Building N,f55ce12a-7157-4852-9c48-f39a28d9d4b2,BACnet at Building N,building,74,3,3,,,building:77,building-vbc:77
+CREATE,Building M,3c3d1049-0a0f-4fc0-ba49-d8947f092c30,BACnet at Building M,building,54,2,2,,,building:56,building-vbc:56
+CREATE,Building T,b66085c8-d17f-4729-88a2-10acbc47c5c6,BACnet at Building T1-T3,building,52,2,2,,,building:54,building-vbc:54
+CREATE,Building O,70ee3e14-00f2-471c-bccd-2b04e4619891,BACnet at Building O,building,52,2,2,,,building:54,building-vbc:54
+CREATE,Building 3,67329de8-bcb2-4bcd-bdf1-443ee9187359,BACnet at Building 3,building,52,2,2,,,building:54,building-vbc:54
+CREATE,Building 6,c10e7b82-75ce-4db4-a0c3-7523995f487d,BACnet at Building 6,building,52,2,2,,,building:54,building-vbc:54
+CREATE,Building K1,39fe4a39-c2bc-47e3-9824-532d3ed6e5c8,BACnet at Building K1,building,51,2,2,,,building:53,building-vbc:53
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Floor 9 Lobby,suite,46,3,1,,c5b8b053-fd71-404e-948b-72e261151a4a,suite:49,ebo-vav-summary:49
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Floor 8 Lobby,suite,46,3,1,,c69378cc-3323-4d88-b1b8-6d3c3fbf2a2c,suite:49,ebo-vav-summary:49
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Floor 7 Lobby,suite,46,3,1,,4a301d69-7caa-4846-851d-8bc46d394bb0,suite:49,ebo-vav-summary:49
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Floor 6 Lobby,suite,46,3,1,,d80224b6-efd2-46de-9479-718f526abdbb,suite:49,ebo-vav-summary:49
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Floor 5 Lobby,suite,46,3,1,,c7c95c1c-f210-4cbe-a88a-7c1829b120e8,suite:49,ebo-vav-summary:49
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Floor 4 Lobby,suite,46,3,1,,50896040-c08a-4126-b8d0-8749cee078af,suite:49,ebo-vav-summary:49
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Floor 3 Lobby,suite,46,3,1,,acf5861a-1021-4136-960a-c576b264729b,suite:49,ebo-vav-summary:49
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Floor 2 Lobby,suite,46,3,1,,7281e29f-60ad-4b8e-94e7-d71952423175,suite:49,ebo-vav-summary:49
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,,,42,0,1,,,none:42,unplaced:42
+CREATE,Building S,b419bb67-e846-4fb9-b490-0c0ac9e6f834,BACnet at Building S,building,24,1,1,,,building:25,building-vbc:25
+CREATE,Building R,1dd93985-e292-4464-80a8-6c13ea5cb764,BACnet at Building R,building,24,1,1,,,building:25,building-vbc:25
+CREATE,Building 6,c10e7b82-75ce-4db4-a0c3-7523995f487d,6A (West Junior Anchor),building,24,1,1,,,building:25,building-vbc:25
+CREATE,Building 6,c10e7b82-75ce-4db4-a0c3-7523995f487d,6D (East Junior Anchor),building,24,1,1,,,building:25,building-vbc:25
+CREATE,Building 8B,a56ab5cf-bc82-43fd-9284-38638bc6485a,BACnet at Building 8B,building,24,1,1,,,building:25,building-vbc:25
+CREATE,One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Central Plant,building,2,0,1,,,building:2,building-vbc:2
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,LEVEL 02,storey,471,188,14,5b64b08c-858c-495b-8872-04131d4bd263,7281e29f-60ad-4b8e-94e7-d71952423175,high:659,connector_twinid:659
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,LEVEL 01,storey,391,183,12,45110f4c-8f96-4152-aa8e-635d961a5dcb,e6e51244-0b11-4b23-9ee3-12b464aa9297,high:574,connector_twinid:574
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 480,suite,230,20,5,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,"low:150,medium:100",ebo-4thflr-plan-2026-07-05:250
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 450,suite,230,20,5,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,medium:250,ebo-4thflr-plan-2026-07-05:250
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 420,suite,184,16,4,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,medium:200,ebo-4thflr-plan-2026-07-05:200
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 400,suite,184,16,4,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,medium:200,ebo-4thflr-plan-2026-07-05:200
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 430,suite,184,16,4,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,medium:200,ebo-4thflr-plan-2026-07-05:200
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 470,suite,138,12,3,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,medium:150,ebo-4thflr-plan-2026-07-05:150
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 425,suite,138,12,3,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,"medium:100,low:50",ebo-4thflr-plan-2026-07-05:150
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,LEVEL 03,storey,129,7,4,4828ae20-1a19-41a3-8b9e-f6e3609fc8d2,acf5861a-1021-4136-960a-c576b264729b,high:136,connector_twinid:136
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,LEVEL 05,storey,120,9,3,421f83c8-4f47-4e42-9663-a8d3eb5c8fbc,c7c95c1c-f210-4cbe-a88a-7c1829b120e8,high:129,connector_twinid:129
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 410,suite,92,8,2,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,medium:100,ebo-4thflr-plan-2026-07-05:100
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 460,suite,92,8,2,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,medium:100,ebo-4thflr-plan-2026-07-05:100
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 440,suite,92,8,2,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,medium:100,ebo-4thflr-plan-2026-07-05:100
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,LEVEL 04,storey,74,5,2,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,high:79,connector_twinid:79
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,LEVEL 08,storey,47,4,1,20eba8db-17da-4588-b415-5e016bdfd681,c69378cc-3323-4d88-b1b8-6d3c3fbf2a2c,high:51,connector_twinid:51
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,LEVEL 07,storey,47,4,1,c6a90682-3328-4fdd-8624-6fe947b80a33,4a301d69-7caa-4846-851d-8bc46d394bb0,high:51,connector_twinid:51
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,LEVEL 06,storey,47,4,1,d58bab6d-1bb9-4a8f-bda2-ecdecc65d310,d80224b6-efd2-46de-9479-718f526abdbb,high:51,connector_twinid:51
+UPDATE (mount exists),One Summerlin (Bldg J),623a9f1d-3506-4144-b82b-ad46430e48b3,Suite 435,suite,46,4,1,24d5409c-3053-4306-97b6-d06c84590117,50896040-c08a-4126-b8d0-8749cee078af,medium:50,ebo-4thflr-plan-2026-07-05:50
