@@ -1,0 +1,46 @@
+# The prompt folders (embodied/, experts/, skills/) and CATALOGUE.md are generated from the ProptechOS
+# agent prompt store, which is the only place prompts are edited. This fetches the store's public
+# export - published prompts, public fields only - and commits whatever changed.
+#
+# Scheduled workflows in a public repository are disabled by GitHub after 60 days without repository
+# activity, and this one only commits when the store changed. If the catalogue stops updating, check
+# the Actions tab and re-enable it - or dispatch it after publishing a change.
+name: Generate from the prompt store
+
+on:
+  schedule:
+    - cron: "15 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-from-prompt-store
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      EXPORT_URL: https://idun-multi-functions-p8s-api.azurewebsites.net/api/agents/prompts/export
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch the public export
+        run: curl --fail --silent --show-error --retry 3 --retry-all-errors "$EXPORT_URL" --output "$RUNNER_TEMP/export.json"
+
+      - name: Replace the generated files
+        run: python3 .github/scripts/apply_export.py "$RUNNER_TEMP/export.json"
+
+      - name: Commit if anything changed
+        run: |
+          git add --all
+          if git diff --cached --quiet; then
+            echo "Nothing changed in the prompt store."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit --message "Regenerate from the ProptechOS agent prompt store"
+          git push

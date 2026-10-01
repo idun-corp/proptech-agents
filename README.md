@@ -25,15 +25,16 @@ No setup, tools, or dependencies required — just text prompts ready to use or 
 
 ---
 
+## Generated content
+
+The prompts in `/embodied`, `/experts` and `/skills`, and [`CATALOGUE.md`](CATALOGUE.md), are **generated** from ProptechOS's internal prompt store, nightly. Edits to them here are overwritten. To suggest a change or a new agent, please **open an Issue** instead.
+
+---
+
 ## Contributing
 We welcome contributions from everyone — proptech professionals, data scientists, AI developers, and partners.
 
-You can:
-- Propose new prompts or improvements.  
-- Add more experts or embodied agents.  
-- Refine clarity, scope, or safety guidance.
-
-To contribute, please open an **Issue** or **Pull Request** in this repository.
+You can propose new prompts, improvements, or refinements to clarity, scope or safety guidance. Because the prompt folders are generated, please do this by opening an **Issue** in this repository.
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) and our [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) for details.
 

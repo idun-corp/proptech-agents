@@ -8,17 +8,9 @@ We welcome contributions from proptech professionals, AI developers, and partner
 
 ## How to contribute
 
-1. **Fork** this repository.  
-2. **Create a branch** for your contribution.  
-   ```bash
-   git checkout -b add-new-expert-agent
-3. **Add or edit prompts** under /experts or /embodied.
-- Keep prompt files clear and self-contained.
-- Include brief comments explaining intent, context, or safety guidance.
-4. ** Commit with a descriptive message:**
-   ```bash
-   git commit -m "Add energy optimization expert agent prompt"
-5. **Open a Pull Request** describing your changes.
+The prompts in `/embodied`, `/experts` and `/skills` are generated from ProptechOS's internal prompt store, so a pull request that edits them would be overwritten by the next generation run.
+
+Instead, **open an Issue** describing the new agent or the change you'd like - the prompt text, the intent and context, and any safety guidance. We review it and publish it through the store.
 
 ### Guidelines
 
