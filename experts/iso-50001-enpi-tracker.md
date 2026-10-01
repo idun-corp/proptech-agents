@@ -1,3 +1,63 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Energy consumption",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ],
+            "history": {
+              "ideal": "P12M",
+              "minimum": "P3M"
+            }
+          },
+          {
+            "label": "Tommestok energy signature",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Outdoor temperature (HDD/CDD normalisation)",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Occupancy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence",
+          "http://proptechos.com/ontology/extension/OccupancyDensity"
+        ]
+      },
+      {
+        "label": "Power",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      }
+    ],
+    "notes": "Floor area, equipment change dates and production metrics are building facts or external records and are not modelled."
+  }
+---
+
 # ISO 50001 Energy Performance Indicator Tracker
 
 ## [ROLE & CONTEXT]

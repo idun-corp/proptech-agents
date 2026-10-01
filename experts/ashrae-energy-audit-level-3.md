@@ -1,3 +1,99 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Sub-metered energy",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ],
+            "min": 2,
+            "history": {
+              "ideal": "P12M",
+              "minimum": "P12M"
+            },
+            "resolution": {
+              "ideal": "PT15M",
+              "minimum": "PT1H"
+            }
+          },
+          {
+            "label": "Energy signature",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Electric power",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      },
+      {
+        "label": "Heating supply and return temperature",
+        "kind": "sensor",
+        "all": [
+          {
+            "quantityKind": [
+              "https://w3id.org/rec/core/Temperature"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/DistrictHeatingFlow",
+              "https://w3id.org/rec/device/PrimaryHeatingFlow",
+              "https://w3id.org/rec/device/SecondaryHeatingFlow"
+            ]
+          },
+          {
+            "quantityKind": [
+              "https://w3id.org/rec/core/Temperature"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/DistrictHeatingReturn",
+              "https://w3id.org/rec/device/PrimaryHeatingReturn",
+              "https://w3id.org/rec/device/SecondaryHeatingReturn"
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Local electricity production",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "https://w3id.org/rec/core/ActiveEnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy",
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridLocalProduction"
+        ]
+      }
+    ],
+    "notes": "Equipment specifications, tariffs, financial parameters and emission factors are not building sensor data and are left out."
+  }
+---
+
 # ASHRAE Energy Audit Level III Detailed Analysis
 
 ## [ROLE & CONTEXT]

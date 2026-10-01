@@ -1,3 +1,96 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Sub-metered energy",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ],
+            "min": 2,
+            "history": {
+              "ideal": "P12M",
+              "minimum": "P12M"
+            }
+          },
+          {
+            "label": "Energy signature",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Electric power",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      },
+      {
+        "label": "Supply air temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/SupplyAir"
+        ]
+      },
+      {
+        "label": "Valve position",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/ValvePosition"
+        ]
+      },
+      {
+        "label": "Damper position",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/DamperPosition"
+        ]
+      },
+      {
+        "label": "Fan or pump speed",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/RotationSpeed",
+          "http://proptechos.com/ontology/extension/ModulationLevel"
+        ]
+      },
+      {
+        "label": "Occupancy or CO2",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence",
+          "https://w3id.org/rec/core/CO2"
+        ]
+      }
+    ],
+    "notes": "Equipment inventory, tariffs and costs are not building sensor data. Lighting end-use is expected as a sub-meter inside the energy requirement."
+  }
+---
+
 # ASHRAE Energy Audit Level II Survey & Analysis
 
 ## [ROLE & CONTEXT]

@@ -1,3 +1,34 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [],
+    "want": [
+      {
+        "label": "Device alarms",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/AlarmMajor",
+          "https://w3id.org/rec/core/AlarmMinor",
+          "https://w3id.org/rec/core/AlarmSevere",
+          "http://proptechos.com/ontology/extension/CapabilityTypeAlarm"
+        ]
+      },
+      {
+        "label": "Room temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/IndoorAir"
+        ],
+        "scope": "room"
+      }
+    ],
+    "notes": "Operates on ServiceObjects (alarms, fault reports, work orders) in the platform, not on building sensor data, so nothing is a hard need. Alarm signals and room temperature (to judge worsening) only improve results."
+  }
+---
+
 # ALARM & SERVICE OBJECT CONSOLIDATOR
 
 ## [ROLE & CONTEXT]

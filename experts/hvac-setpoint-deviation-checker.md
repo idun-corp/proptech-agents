@@ -1,3 +1,34 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Room temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/IndoorAir"
+        ],
+        "scope": "room"
+      },
+      {
+        "label": "Room temperature setpoint",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpoint",
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpointValue",
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "scope": "room"
+      }
+    ],
+    "want": [],
+    "notes": "Persistence check uses 7 days of history, but without it rooms are downgraded to MINOR rather than failing, so history is not a hard requirement."
+  }
+---
+
 # HVAC Setpoint Deviation Checker
 
 ## [ROLE & CONTEXT]

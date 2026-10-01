@@ -1,3 +1,93 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Energy meters",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ]
+          },
+          {
+            "label": "Energy signature analysis",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "District heating energy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictHeatingFlow",
+          "https://w3id.org/rec/device/PrimaryHeatingFlow",
+          "https://w3id.org/rec/device/DistrictHeatingReturn",
+          "https://w3id.org/rec/device/PrimaryHeatingReturn"
+        ]
+      },
+      {
+        "label": "District cooling energy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictCoolingFlow",
+          "https://w3id.org/rec/device/PrimaryCoolingFlow",
+          "https://w3id.org/rec/device/DistrictCoolingReturn",
+          "https://w3id.org/rec/device/PrimaryCoolingReturn"
+        ]
+      },
+      {
+        "label": "Electricity sub-metering",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActiveEnergyTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridIntake",
+          "https://w3id.org/rec/device/ElectricalGridInternal",
+          "https://w3id.org/rec/device/ElectricalGridTenant"
+        ]
+      },
+      {
+        "label": "On-site generation",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActiveEnergyTotal",
+          "https://w3id.org/rec/core/EnergyTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridLocalProduction"
+        ]
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      }
+    ],
+    "notes": "Floor area, operating hours and meter calibration data are model/metadata and not expressed."
+  }
+---
+
 # EN 16247 Energy Balance Compiler
 
 ## [ROLE & CONTEXT]

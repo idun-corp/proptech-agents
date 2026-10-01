@@ -1,3 +1,47 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Water meter readings",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Volume",
+              "https://w3id.org/rec/core/Flow",
+              "https://qudt.org/vocab/quantitykind/MassFlowRate"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/ColdWaterFlow",
+              "http://proptechos.com/ontology/extension/InternalColdWater",
+              "http://proptechos.com/ontology/extension/TenantColdWater",
+              "https://w3id.org/rec/device/HotWaterFlow",
+              "http://proptechos.com/ontology/extension/InternalHotWater",
+              "http://proptechos.com/ontology/extension/TenantHotWater"
+            ],
+            "history": {
+              "ideal": "P35D",
+              "minimum": "P7D"
+            },
+            "resolution": {
+              "ideal": "PT1H",
+              "minimum": "P1D"
+            }
+          },
+          {
+            "label": "Water consumption analysis",
+            "kind": "tommestok",
+            "analysis": "WATER_CONSUMPTION_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [],
+    "notes": "Single need: water meter consumption (cumulative volume or flow). Hourly data gives full analysis; daily data gives volume-only analysis, so daily is accepted as minimum resolution. Insufficient history yields a DATA ISSUE report rather than failure, hence the permissive minimum history."
+  }
+---
+
 # WATER LEAK DETECTOR
 
 ## [ROLE & CONTEXT]

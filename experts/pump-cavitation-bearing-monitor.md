@@ -1,3 +1,78 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Pump motor current or power",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Current",
+              "https://w3id.org/rec/core/CurrentL1",
+              "https://w3id.org/rec/core/CurrentL2",
+              "https://w3id.org/rec/core/CurrentL3",
+              "https://w3id.org/rec/core/ActivePowerTotal",
+              "http://proptechos.com/ontology/extension/PowerTotal"
+            ]
+          },
+          {
+            "label": "Pump flow and differential pressure",
+            "kind": "sensor",
+            "all": [
+              {
+                "quantityKind": [
+                  "https://w3id.org/rec/core/Flow",
+                  "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                ]
+              },
+              {
+                "quantityKind": [
+                  "http://proptechos.com/ontology/extension/DifferentialPressure"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Pump speed",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/RotationSpeed",
+          "https://w3id.org/rec/core/PowerFrequency",
+          "https://w3id.org/rec/core/Speed"
+        ]
+      },
+      {
+        "label": "Vibration",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://qudt.org/vocab/quantitykind/Acceleration"
+        ]
+      },
+      {
+        "label": "Pump flow",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Flow",
+          "https://qudt.org/vocab/quantitykind/MassFlowRate"
+        ]
+      },
+      {
+        "label": "Pump differential pressure",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/DifferentialPressure"
+        ]
+      }
+    ],
+    "notes": "No vibration velocity quantity kind exists in the vocabulary; Acceleration is the closest. Pump design point and bearing type are metadata."
+  }
+---
+
 # PUMP CAVITATION & BEARING MONITOR
 
 ## [ROLE & CONTEXT]

@@ -1,3 +1,89 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Energy meters",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ]
+          },
+          {
+            "label": "Energy signature analysis",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "District heating energy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictHeatingFlow",
+          "https://w3id.org/rec/device/PrimaryHeatingFlow",
+          "https://w3id.org/rec/device/DistrictHeatingReturn",
+          "https://w3id.org/rec/device/PrimaryHeatingReturn"
+        ]
+      },
+      {
+        "label": "District cooling energy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictCoolingFlow",
+          "https://w3id.org/rec/device/PrimaryCoolingFlow",
+          "https://w3id.org/rec/device/DistrictCoolingReturn",
+          "https://w3id.org/rec/device/PrimaryCoolingReturn"
+        ]
+      },
+      {
+        "label": "Fuel / gas consumption",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Volume",
+          "https://w3id.org/rec/core/EnergyTotal",
+          "https://w3id.org/rec/core/Flow"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Fuel",
+          "http://proptechos.com/ontology/extension/FuelOil",
+          "http://proptechos.com/ontology/extension/CityGas",
+          "http://proptechos.com/ontology/extension/Gas_Meter",
+          "http://proptechos.com/ontology/extension/InternalGas"
+        ]
+      },
+      {
+        "label": "Emissions / carbon intensity",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CO2e",
+          "http://proptechos.com/ontology/extension/CarbonIntensity"
+        ]
+      },
+      {
+        "label": "Refrigerant inventory and top-up records",
+        "kind": "external",
+        "system": "refrigerant log / maintenance system"
+      }
+    ],
+    "notes": "Emission factors and refrigerant charges are external reference data."
+  }
+---
+
 # GHG Climate Auditor (DK)
 
 ## [ROLE & CONTEXT]

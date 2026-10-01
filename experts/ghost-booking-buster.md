@@ -1,3 +1,30 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Room booking system",
+        "kind": "external",
+        "system": "room booking system"
+      },
+      {
+        "label": "Meeting room presence",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence"
+        ],
+        "scope": "room",
+        "roomType": [
+          "https://w3id.org/rec/building/ConferenceRoom"
+        ]
+      }
+    ],
+    "want": [],
+    "notes": "Vocabulary has only ConferenceRoom as a meeting-room type; no separate meeting room/board room type. Room type, capacity and grace period are twin metadata, not modelled as data."
+  }
+---
+
 # GHOST BOOKING BUSTER
 
 ## [ROLE & CONTEXT]

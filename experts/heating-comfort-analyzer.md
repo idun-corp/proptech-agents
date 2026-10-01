@@ -1,3 +1,46 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Room temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/IndoorAir"
+        ],
+        "scope": "room",
+        "min": 5
+      },
+      {
+        "label": "Room temperature setpoint",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpoint",
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpointValue",
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "scope": "room",
+        "min": 5
+      }
+    ],
+    "want": [
+      {
+        "label": "Tenant temperature adjustment (offset)",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpointValue",
+          "http://proptechos.com/ontology/extension/CapabilityTypeParameterValue"
+        ],
+        "scope": "room"
+      }
+    ],
+    "notes": "The tenant adjustment offset on the room controller has no dedicated quantity kind; approximated with setpoint/parameter value kinds. The agent needs at least 5 rooms with sensors to classify sentiment. Hourly history for deviating rooms is only used for verification."
+  }
+---
+
 # HEATING COMFORT ANALYZER
 
 ## [ROLE & CONTEXT]

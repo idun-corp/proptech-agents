@@ -1,3 +1,59 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Room presence / occupancy",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Presence",
+              "http://proptechos.com/ontology/extension/AreaPresence"
+            ],
+            "scope": "room"
+          },
+          {
+            "label": "Door open/close counters",
+            "kind": "sensor",
+            "quantityKind": [
+              "http://proptechos.com/ontology/extension/State",
+              "http://proptechos.com/ontology/extension/OnOffState"
+            ],
+            "placementContext": [
+              "http://proptechos.com/ontology/extension/Door"
+            ]
+          },
+          {
+            "label": "Room booking system",
+            "kind": "external",
+            "system": "room booking system"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Toilet door open counters",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/State",
+          "http://proptechos.com/ontology/extension/OnOffState"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Door"
+        ],
+        "scope": "room",
+        "roomType": [
+          "https://w3id.org/rec/building/Toilet",
+          "https://w3id.org/rec/building/DisabledToilet"
+        ]
+      }
+    ],
+    "notes": "Access control badge swipes are not in the vocabulary."
+  }
+---
+
 # USAGE-BASED CLEANING SCHEDULER
 
 ## [ROLE & CONTEXT]

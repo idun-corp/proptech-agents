@@ -1,3 +1,55 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Room temperature, CO2 or humidity",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Temperature",
+              "https://w3id.org/rec/core/CO2",
+              "https://w3id.org/rec/core/Humidity"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/IndoorAir"
+            ],
+            "scope": "room"
+          },
+          {
+            "label": "Indoor climate analysis",
+            "kind": "tommestok",
+            "analysis": "INDOOR_CLIMATE_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Occupancy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence"
+        ]
+      },
+      {
+        "label": "Supply airflow",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Flow",
+          "https://qudt.org/vocab/quantitykind/MassFlowRate"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/SupplyAir"
+        ]
+      }
+    ],
+    "notes": "Need is any one of room temperature, CO2 or humidity (the agent checks whichever sensors exist). Room area and type are building-model facts and omitted."
+  }
+---
+
 # INDOOR CLIMATE REVIEWER
 
 ## [ROLE & CONTEXT]

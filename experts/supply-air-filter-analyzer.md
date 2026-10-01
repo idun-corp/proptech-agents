@@ -1,3 +1,54 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Supply airflow and filter pressure drop",
+            "kind": "sensor",
+            "all": [
+              {
+                "quantityKind": [
+                  "https://w3id.org/rec/core/Flow"
+                ],
+                "placementContext": [
+                  "https://w3id.org/rec/device/SupplyAir"
+                ]
+              },
+              {
+                "quantityKind": [
+                  "http://proptechos.com/ontology/extension/DifferentialPressure",
+                  "https://w3id.org/rec/core/Pressure"
+                ],
+                "placementContext": [
+                  "http://proptechos.com/ontology/extension/SupplyAirFilter",
+                  "https://w3id.org/rec/device/SupplyAir"
+                ]
+              }
+            ],
+            "history": {
+              "ideal": "P30D",
+              "minimum": "P7D"
+            },
+            "resolution": {
+              "ideal": "PT1H",
+              "minimum": "PT1H"
+            }
+          },
+          {
+            "label": "Tommestok supply air filter prediction",
+            "kind": "tommestok",
+            "analysis": "SUPPLY_AIR_FILTER_PREDICTION"
+          }
+        ]
+      }
+    ],
+    "want": [],
+    "notes": "Needs paired supply airflow and differential pressure from the same AHU; pairing by AHU cannot be expressed. Pressure placement is permissive (SupplyAir or SupplyAirFilter). Resolution minimum PT1H taken from the prompt's hourly data."
+  }
+---
+
 # SUPPLY AIR FILTER ANALYZER
 
 ## [ROLE & CONTEXT]

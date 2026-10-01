@@ -1,3 +1,31 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Energy meters",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "https://w3id.org/rec/core/ActiveEnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Power meters",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      }
+    ],
+    "notes": "Meter inventory, calibration dates, sub-meter coverage vs main meters and data completeness are metadata or derived quality measures and cannot be expressed. Having more than one energy meter (sub-metering) raises the audit level but is not required."
+  }
+---
+
 # ISO 50002 Audit Data Quality Monitor
 
 ## [ROLE & CONTEXT]

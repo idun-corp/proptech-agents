@@ -1,3 +1,131 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Compressor power with chilled water supply and return temperature",
+            "kind": "sensor",
+            "all": [
+              {
+                "quantityKind": [
+                  "https://w3id.org/rec/core/ActivePowerTotal",
+                  "http://proptechos.com/ontology/extension/PowerTotal"
+                ]
+              },
+              {
+                "quantityKind": [
+                  "https://w3id.org/rec/core/Temperature"
+                ],
+                "placementContext": [
+                  "http://proptechos.com/ontology/extension/ChillerSecondaryCoolingFlow",
+                  "https://w3id.org/rec/device/SecondaryCoolingFlow",
+                  "http://proptechos.com/ontology/extension/Cooling"
+                ]
+              },
+              {
+                "quantityKind": [
+                  "https://w3id.org/rec/core/Temperature"
+                ],
+                "placementContext": [
+                  "http://proptechos.com/ontology/extension/ChillerSecondaryCoolingReturn",
+                  "https://w3id.org/rec/device/SecondaryCoolingReturn",
+                  "http://proptechos.com/ontology/extension/Cooling"
+                ]
+              }
+            ],
+            "history": {
+              "ideal": "P28D",
+              "minimum": "P7D"
+            },
+            "resolution": {
+              "ideal": "PT15M",
+              "minimum": "PT1H"
+            }
+          },
+          {
+            "label": "Compressor power with cooling thermal power",
+            "kind": "sensor",
+            "all": [
+              {
+                "quantityKind": [
+                  "https://w3id.org/rec/core/ActivePowerTotal",
+                  "http://proptechos.com/ontology/extension/PowerTotal"
+                ]
+              },
+              {
+                "quantityKind": [
+                  "http://proptechos.com/ontology/extension/ThermalPower"
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Chiller COP",
+            "kind": "sensor",
+            "quantityKind": [
+              "http://proptechos.com/ontology/extension/CoefficientOfPerformance"
+            ]
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Chilled water flow",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Flow",
+          "https://qudt.org/vocab/quantitykind/MassFlowRate"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/ChillerSecondaryCoolingFlow",
+          "https://w3id.org/rec/device/SecondaryCoolingFlow",
+          "http://proptechos.com/ontology/extension/Cooling",
+          "http://proptechos.com/ontology/extension/ChillerSecondaryCoolingReturn",
+          "https://w3id.org/rec/device/SecondaryCoolingReturn",
+          "http://proptechos.com/ontology/extension/Cooling"
+        ]
+      },
+      {
+        "label": "Condenser water temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/CondenserWaterFlow",
+          "http://proptechos.com/ontology/extension/CondenserWaterReturn",
+          "http://proptechos.com/ontology/extension/ChillerHeatRejectionWaterFlow",
+          "http://proptechos.com/ontology/extension/ChillerHeatRejectionWaterReturn"
+        ]
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Refrigerant pressure",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Pressure"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/EvaporatorRefrigerantInlet"
+        ]
+      }
+    ],
+    "notes": "Flow is a want because cooling load can come from thermal power or a COP value directly; without a flow meter the cooling-side calculation depends on the alternative paths. Design capacity and baseline are not sensor data."
+  }
+---
+
 # CHILLER PLANT EFFICIENCY MONITOR
 
 ## [ROLE & CONTEXT]

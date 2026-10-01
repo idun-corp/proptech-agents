@@ -1,3 +1,46 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "VVC (hot water circulation) return temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/HotWaterReturn"
+        ],
+        "resolution": {
+          "ideal": "PT15M",
+          "minimum": "PT1H"
+        }
+      }
+    ],
+    "want": [
+      {
+        "label": "VVC supply temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/HotWaterFlow"
+        ]
+      },
+      {
+        "label": "VVC pump status",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/OnOffState",
+          "http://proptechos.com/ontology/extension/State"
+        ]
+      }
+    ],
+    "notes": "No dedicated VVC placement exists; HotWaterReturn is used. Hot water tank temperature not separately expressible."
+  }
+---
+
 # VVC TEMPERATURE MONITOR (SE)
 
 ## [ROLE & CONTEXT]

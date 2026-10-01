@@ -1,3 +1,77 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Energy meters (electricity, heating, cooling)",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ],
+            "history": {
+              "ideal": "P12M",
+              "minimum": "P12M"
+            }
+          },
+          {
+            "label": "Tommestok energy signature",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Electricity energy meter",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "https://w3id.org/rec/core/ActiveEnergyTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridIntake",
+          "https://w3id.org/rec/device/ElectricalGridInternal",
+          "https://w3id.org/rec/device/ElectricalGridTenant"
+        ]
+      },
+      {
+        "label": "District heating energy meter",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictHeatingFlow",
+          "https://w3id.org/rec/device/PrimaryHeatingFlow",
+          "https://w3id.org/rec/device/DistrictHeatingReturn",
+          "https://w3id.org/rec/device/PrimaryHeatingReturn"
+        ]
+      },
+      {
+        "label": "District cooling energy meter",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictCoolingFlow",
+          "https://w3id.org/rec/device/PrimaryCoolingFlow",
+          "https://w3id.org/rec/device/DistrictCoolingReturn",
+          "https://w3id.org/rec/device/PrimaryCoolingReturn"
+        ]
+      }
+    ],
+    "notes": "Floor area (Atemp/LOA), climate zone and building class are building-model facts and left out."
+  }
+---
+
 # EU TAXONOMY TRACKER (EU)
 
 ## [ROLE & CONTEXT]

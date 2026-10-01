@@ -1,3 +1,40 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "CO2",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/CO2"
+        ],
+        "history": {
+          "ideal": "P7D",
+          "minimum": "P3D"
+        }
+      }
+    ],
+    "want": [
+      {
+        "label": "Humidity",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Humidity"
+        ]
+      },
+      {
+        "label": "Presence / occupancy (to confirm unoccupied nights)",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence"
+        ]
+      }
+    ],
+    "notes": "Sensor calibration dates and AHU zone grouping are metadata, not expressible. Cross-sensor correlation needs 3 or more sensors per AHU zone but is secondary to the night baseline check."
+  }
+---
+
 # IAQ SENSOR DRIFT DETECTOR
 
 ## [ROLE & CONTEXT]

@@ -1,3 +1,62 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Mixing damper position",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/DamperPosition"
+        ]
+      },
+      {
+        "label": "Chiller status or power",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/OnOffState",
+          "http://proptechos.com/ontology/extension/State",
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Supply air temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/SupplyAir"
+        ]
+      },
+      {
+        "label": "Return air temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ExtractAir",
+          "https://w3id.org/rec/device/CirculationAir"
+        ]
+      }
+    ],
+    "notes": "No chiller placement context exists, so chiller status/power is matched by quantity kind only."
+  }
+---
+
 # FREE COOLING MAXIMIZER
 
 ## [ROLE & CONTEXT]

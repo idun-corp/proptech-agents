@@ -1,3 +1,29 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Valve position",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/ValvePosition"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Flow",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Flow",
+          "https://qudt.org/vocab/quantitykind/MassFlowRate"
+        ]
+      }
+    ],
+    "notes": "BMS schedule is not in the vocabulary."
+  }
+---
+
 # VALVE EXERCISER (MOTIONERING) (SE)
 
 ## [ROLE & CONTEXT]

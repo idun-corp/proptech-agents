@@ -1,3 +1,66 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "PV production",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal",
+          "https://w3id.org/rec/core/EnergyTotal",
+          "https://w3id.org/rec/core/ActiveEnergyTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridLocalProduction"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Solar irradiance",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/GlobalIrradiance",
+          "http://qudt.org/vocab/quantitykind/Irradiance",
+          "https://w3id.org/rec/core/SunshineTimePerHour"
+        ]
+      },
+      {
+        "label": "Weather data",
+        "kind": "external",
+        "system": "weather / irradiance API"
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "String / inverter currents",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Current",
+          "https://w3id.org/rec/core/CurrentL1",
+          "https://w3id.org/rec/core/CurrentL2",
+          "https://w3id.org/rec/core/CurrentL3",
+          "https://w3id.org/rec/core/Voltage"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridLocalProduction"
+        ],
+        "min": 2
+      }
+    ],
+    "notes": "Installed kWp, tilt and azimuth are metadata. Irradiance can come from a pyranometer or a weather API, so both are wants."
+  }
+---
+
 # SOLAR PV YIELD ANOMALY DETECTOR
 
 ## [ROLE & CONTEXT]

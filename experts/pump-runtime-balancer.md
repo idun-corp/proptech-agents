@@ -1,3 +1,49 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Pump run state",
+            "kind": "sensor",
+            "quantityKind": [
+              "http://proptechos.com/ontology/extension/OnOffState",
+              "http://proptechos.com/ontology/extension/State"
+            ],
+            "min": 2
+          },
+          {
+            "label": "Time in operation",
+            "kind": "tommestok",
+            "analysis": "TIME_IN_OPERATION"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Pump switch command",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/OnOffControl"
+        ]
+      },
+      {
+        "label": "Pump fault alarm",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/AlarmMajor",
+          "https://w3id.org/rec/core/AlarmMinor",
+          "https://w3id.org/rec/core/AlarmSevere",
+          "http://proptechos.com/ontology/extension/CapabilityTypeAlarm"
+        ]
+      }
+    ],
+    "notes": "No runtime-hours quantity kind in the vocabulary; run state (or Tommestok TIME_IN_OPERATION) is the closest. Pump pairing (A/B) is model structure."
+  }
+---
+
 # PUMP RUNTIME BALANCER
 
 ## [ROLE & CONTEXT]

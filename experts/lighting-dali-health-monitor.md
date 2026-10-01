@@ -1,3 +1,53 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Lighting device status or alarm",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/State",
+          "http://proptechos.com/ontology/extension/OnOffState",
+          "http://proptechos.com/ontology/extension/CapabilityTypeState",
+          "http://proptechos.com/ontology/extension/CapabilityTypeAlarm",
+          "https://w3id.org/rec/core/AlarmMajor",
+          "https://w3id.org/rec/core/AlarmMinor",
+          "https://w3id.org/rec/core/AlarmSevere"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Lighting",
+          "http://proptechos.com/ontology/extension/DeviceDiagnostic"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Lighting dimming level",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Level",
+          "http://proptechos.com/ontology/extension/ModulationLevel"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Lighting"
+        ]
+      },
+      {
+        "label": "Lighting power",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Lighting"
+        ]
+      }
+    ],
+    "notes": "DALI-specific lamp failure, driver failure, communication error and emergency test results have no dedicated quantity kinds; approximated by status and alarm kinds in lighting placement. Emergency battery test data is not expressible."
+  }
+---
+
 # LIGHTING / DALI HEALTH MONITOR
 
 ## [ROLE & CONTEXT]

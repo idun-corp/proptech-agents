@@ -1,3 +1,44 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Occupancy or presence",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Presence",
+              "http://proptechos.com/ontology/extension/AreaPresence",
+              "http://proptechos.com/ontology/extension/OccupancyDensity"
+            ],
+            "history": {
+              "ideal": "P3M",
+              "minimum": "P3M"
+            }
+          },
+          {
+            "label": "CO2 (occupancy proxy)",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/CO2"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/IndoorAir"
+            ],
+            "history": {
+              "ideal": "P3M",
+              "minimum": "P3M"
+            }
+          }
+        ]
+      }
+    ],
+    "want": [],
+    "notes": "Access control, Wi-Fi counting and design capacity are not expressible in the vocabulary (capacity is a building-model fact)."
+  }
+---
+
 # Underutilized Space Finder
 
 ## [ROLE & CONTEXT]

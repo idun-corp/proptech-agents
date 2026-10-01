@@ -1,3 +1,72 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Room temperature",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Temperature"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/IndoorAir"
+            ],
+            "scope": "room"
+          },
+          {
+            "label": "Indoor climate signature",
+            "kind": "tommestok",
+            "analysis": "INDOOR_CLIMATE_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Room temperature setpoint",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpoint",
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpointValue"
+        ]
+      },
+      {
+        "label": "Room CO2",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/CO2"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/IndoorAir"
+        ],
+        "scope": "room"
+      },
+      {
+        "label": "HVAC operating state",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/OnOffState",
+          "http://proptechos.com/ontology/extension/State",
+          "http://proptechos.com/ontology/extension/CapabilityTypeState"
+        ]
+      }
+    ],
+    "notes": "The complaint tickets (felanmalningar) are ServiceObjects, not building sensor data, so not modeled; facade orientation and AHU zone mapping are building-model facts."
+  }
+---
+
 # COMPLAINT PATTERN ANALYZER
 
 ## [ROLE & CONTEXT]

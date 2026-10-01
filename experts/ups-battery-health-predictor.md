@@ -1,3 +1,28 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Battery / UPS voltage",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Voltage"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Battery temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ]
+      }
+    ],
+    "notes": "Internal resistance, runtime test results and a UPS-specific placement are not in the vocabulary; voltage is matched building-wide and is therefore loose."
+  }
+---
+
 # UPS BATTERY HEALTH PREDICTOR
 
 ## [ROLE & CONTEXT]

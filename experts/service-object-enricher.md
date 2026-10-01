@@ -1,3 +1,78 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Any relevant telemetry",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature",
+          "https://w3id.org/rec/core/CO2",
+          "https://w3id.org/rec/core/Humidity",
+          "https://w3id.org/rec/core/Flow",
+          "https://w3id.org/rec/core/Pressure",
+          "http://proptechos.com/ontology/extension/DifferentialPressure",
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Room temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/IndoorAir"
+        ],
+        "scope": "room"
+      },
+      {
+        "label": "Room CO2 / air quality",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/CO2",
+          "https://w3id.org/rec/core/Humidity"
+        ],
+        "scope": "room"
+      },
+      {
+        "label": "Setpoints and actuator positions",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpoint",
+          "http://proptechos.com/ontology/extension/ValvePosition",
+          "http://proptechos.com/ontology/extension/DamperPosition",
+          "http://proptechos.com/ontology/extension/ModulationLevel"
+        ]
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Supply air temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/SupplyAir"
+        ]
+      }
+    ],
+    "notes": "ServiceObjects, assets, spaces and leases are twin entities, not data. Without telemetry the agent still runs and reports NO SENSOR COVERAGE, so the need is deliberately loose."
+  }
+---
+
 # SERVICE OBJECT ENRICHER
 
 ## [ROLE & CONTEXT]

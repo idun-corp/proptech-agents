@@ -1,3 +1,48 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Room airflow",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Flow",
+          "https://qudt.org/vocab/quantitykind/MassFlowRate"
+        ],
+        "scope": "room"
+      },
+      {
+        "label": "Room presence",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence"
+        ],
+        "scope": "room"
+      }
+    ],
+    "want": [
+      {
+        "label": "Damper position",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/DamperPosition"
+        ],
+        "scope": "room"
+      },
+      {
+        "label": "CO2",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/CO2"
+        ],
+        "scope": "room"
+      }
+    ],
+    "notes": "Both airflow and presence sensors are needed in the same room; the same-room pairing cannot be expressed, only that each exists in rooms. Room type and capacity are model facts and omitted."
+  }
+---
+
 # NIGHTTIME VENTILATION SAVER AGENT
 
 ## [ROLE & CONTEXT]

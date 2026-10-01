@@ -1,3 +1,55 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Electrical connection / switchgear temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/ElectricalGrid",
+          "https://w3id.org/rec/device/ElectricalGridIntake",
+          "https://w3id.org/rec/device/ElectricalGridInternal",
+          "https://w3id.org/rec/device/ElectricalGridTenant"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Phase currents",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/CurrentL1",
+          "https://w3id.org/rec/core/CurrentL2",
+          "https://w3id.org/rec/core/CurrentL3",
+          "https://w3id.org/rec/core/Current"
+        ]
+      },
+      {
+        "label": "Electrical room ambient temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/IndoorAir"
+        ]
+      },
+      {
+        "label": "Electrical power",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      }
+    ],
+    "notes": "Vocabulary has no placement context for switchgear/busbar/breaker; electrical grid placements are the closest. Component ratings are model data and not expressed."
+  }
+---
+
 # ELECTRICAL DISTRIBUTION THERMAL MONITOR
 
 ## [ROLE & CONTEXT]

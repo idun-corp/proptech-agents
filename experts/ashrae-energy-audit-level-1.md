@@ -1,3 +1,74 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Building energy meter",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ],
+            "history": {
+              "ideal": "P12M",
+              "minimum": "P12M"
+            }
+          },
+          {
+            "label": "Energy signature",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Electric power (baseload and peak)",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ],
+        "resolution": {
+          "ideal": "PT15M",
+          "minimum": "PT1H"
+        }
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Water consumption",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Volume",
+          "https://w3id.org/rec/core/Flow"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ColdWaterFlow",
+          "http://proptechos.com/ontology/extension/InternalColdWater",
+          "http://proptechos.com/ontology/extension/TenantColdWater",
+          "https://w3id.org/rec/device/HotWaterFlow",
+          "http://proptechos.com/ontology/extension/InternalHotWater",
+          "http://proptechos.com/ontology/extension/TenantHotWater"
+        ]
+      }
+    ],
+    "notes": "Floor area, building type, year built and operating hours are building-model facts and left out."
+  }
+---
+
 # ASHRAE Energy Audit Level I Walk-Through
 
 ## [ROLE & CONTEXT]

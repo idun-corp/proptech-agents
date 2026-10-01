@@ -1,3 +1,52 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Elevator status",
+            "kind": "sensor",
+            "quantityKind": [
+              "http://proptechos.com/ontology/extension/State",
+              "http://proptechos.com/ontology/extension/OnOffState",
+              "http://proptechos.com/ontology/extension/CapabilityTypeState"
+            ],
+            "placementContext": [
+              "http://proptechos.com/ontology/extension/Elevator"
+            ]
+          },
+          {
+            "label": "Elevator vendor status feed",
+            "kind": "external",
+            "system": "elevator vendor API (Kone, Otis, Schindler, TK Elevator)"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Elevator alarms",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/AlarmMajor",
+          "https://w3id.org/rec/core/AlarmMinor",
+          "https://w3id.org/rec/core/AlarmSevere"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Elevator"
+        ]
+      },
+      {
+        "label": "Vendor service response data",
+        "kind": "external",
+        "system": "elevator vendor API / service contract"
+      }
+    ],
+    "notes": "Contract SLA terms and technician response times are not building data."
+  }
+---
+
 # ELEVATOR AVAILABILITY LOGGER
 
 ## [ROLE & CONTEXT]

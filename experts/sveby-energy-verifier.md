@@ -1,3 +1,78 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Measured building energy",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ],
+            "history": {
+              "ideal": "P12M",
+              "minimum": "P12M"
+            }
+          },
+          {
+            "label": "Energy signature analysis",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "District heating energy",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/ThermalEnergy",
+          "https://w3id.org/rec/core/EnergyTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictHeatingFlow",
+          "https://w3id.org/rec/device/PrimaryHeatingFlow",
+          "https://w3id.org/rec/device/DistrictHeatingReturn",
+          "https://w3id.org/rec/device/PrimaryHeatingReturn"
+        ]
+      },
+      {
+        "label": "Electricity sub-metering",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActiveEnergyTotal",
+          "https://w3id.org/rec/core/EnergyTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridInternal",
+          "https://w3id.org/rec/device/ElectricalGridTenant",
+          "http://proptechos.com/ontology/extension/InternalBuildingOperationsMeter"
+        ]
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Design energy calculation",
+        "kind": "external",
+        "system": "energy simulation / BBR design calculation"
+      }
+    ],
+    "notes": "Design calculation, Atemp and year built are outside sensor data; the design calculation is a want because it cannot be checked in the twin. Degree-day weather data is external."
+  }
+---
+
 # SVEBY Energy Performance Verifier (SE)
 
 ## [ROLE & CONTEXT]

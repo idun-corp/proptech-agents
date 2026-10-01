@@ -1,3 +1,51 @@
+---
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Analog sensors (temperature, humidity, CO2, pressure)",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature",
+          "https://w3id.org/rec/core/Humidity",
+          "https://w3id.org/rec/core/CO2",
+          "https://w3id.org/rec/core/Pressure",
+          "http://proptechos.com/ontology/extension/DifferentialPressure"
+        ],
+        "history": {
+          "ideal": "P7D",
+          "minimum": "P2D"
+        },
+        "resolution": {
+          "ideal": "PT1H",
+          "minimum": "PT1H"
+        }
+      }
+    ],
+    "want": [
+      {
+        "label": "Occupancy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence"
+        ]
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      }
+    ],
+    "notes": "CO2 is also used for cross-validation inside the need list."
+  }
+---
+
 # SENSOR STUCK CHECK
 
 ## [ROLE & CONTEXT]
