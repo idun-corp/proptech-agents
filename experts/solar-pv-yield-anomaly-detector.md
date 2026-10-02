@@ -1,4 +1,13 @@
 ---
+title: "Solar PV Yield Anomaly Detector"
+summary: "Compares weather-normalised PV yield per inverter and string against expected output to flag faults, soiling, shading and degradation for building owners."
+domain: "Energy"
+scope: "building"
+cadence: "weekly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitoring-only analysis of inverter telemetry reported to operations staff; it makes no inverter changes and has no direct interaction with people."}
+saving: {"minutesPerRun": 45, "basis": "An energy engineer pulling a week of inverter, string and irradiance data, calculating performance ratios and comparing inverters for one PV system."}
+outcomes: {"format": "classification", "unit": "inverters", "labels": {"confirmed": "Fault", "minor": "Underperforming", "normal": "Normal", "dataIssue": "No data"}}
 dataNeeds: {
     "version": 1,
     "need": [

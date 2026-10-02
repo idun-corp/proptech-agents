@@ -1,4 +1,13 @@
 ---
+title: "Sensor Stuck Check"
+summary: "Detects analog sensors frozen at a fixed value by analysing 24 to 48 hours of variance, checking occupancy and related sensors before flagging."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses sensor data and alerts staff to faulty sensors; it takes no action and does not interact with tenants."}
+saving: {"minutesPerRun": 40, "basis": "A technician reviewing 48 hours of readings for a building's analog sensors and cross-checking suspicious ones against occupancy and CO2."}
+outcomes: {"format": "classification", "unit": "sensors", "labels": {"confirmed": "Stuck - confirmed", "minor": "Stuck - likely", "normal": "Normal", "dataIssue": "Data issues"}}
 dataNeeds: {
     "version": 1,
     "need": [

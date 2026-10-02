@@ -1,4 +1,13 @@
 ---
+title: "Ghost Booking Buster"
+summary: "Detects meeting room bookings where nobody shows up, releases the room for others and notifies the booker."
+domain: "Tenant Experience"
+scope: "building"
+cadence: "hourly"
+autonomy: "autonomous"
+aiAct: {"risk": "limited", "rationale": "Cancels bookings and sends notification messages directly to the people who booked, so it interacts with natural persons and falls under Art. 50 transparency; it has no safety function."}
+saving: {"minutesPerRun": 3, "basis": "A workplace coordinator checking the hour's room bookings against presence and releasing no-shows."}
+outcomes: {"format": "classification", "unit": "bookings", "labels": {"confirmed": "Ghost - released", "minor": "Late arrival", "normal": "Occupied", "dataIssue": "Sensor issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

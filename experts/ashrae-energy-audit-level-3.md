@@ -1,4 +1,13 @@
 ---
+title: "ASHRAE Energy Audit Level III Detailed Analysis"
+summary: "Builds investment-grade cases for capital energy measures with weather-normalised baselines, lifecycle cost, sensitivity and risk, for retrofit decisions."
+domain: "Energy"
+scope: "building"
+cadence: "on demand"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Performs financial and engineering analysis of retrofit options and reports to decision makers; takes no control actions and does not interact with natural persons."}
+saving: {"minutesPerRun": 1440, "basis": "An energy consultant calibrating baselines and building lifecycle cost, sensitivity and risk models for the capital ECMs of one building."}
+outcomes: {"format": "report", "unit": "ECMs"}
 dataNeeds: {
     "version": 1,
     "need": [

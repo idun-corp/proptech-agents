@@ -1,4 +1,13 @@
 ---
+title: "Enterprise Energy Aggregator (EKL / Energisyn) (Nordics)"
+summary: "Aggregates energy use across sites, buildings, processes and transport into an enterprise profile and tracks Nordic energy audit thresholds and deadlines."
+domain: "ESG & Compliance"
+scope: "portfolio"
+cadence: "monthly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Aggregates energy data and compliance status into reports for the organisation's staff; it takes no action and does not interact with natural persons."}
+saving: {"minutesPerRun": 300, "basis": "An energy or sustainability manager collecting site data per carrier, converting fuels to kWh, splitting by category and checking coverage and audit thresholds."}
+outcomes: {"format": "report", "unit": "enterprise energy profiles"}
 dataNeeds: {
     "version": 1,
     "need": [

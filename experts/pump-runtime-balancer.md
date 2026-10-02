@@ -1,4 +1,13 @@
 ---
+title: "Pump Runtime Balancer"
+summary: "Compares runtime hours of twin pump pairs and switches the active pump when the imbalance exceeds 50 hours, so wear is shared evenly."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Switches duty between redundant pumps with built-in safety checks and reverts on failure; it does not interact with people and is not a safety function, though it acts without per-action approval."}
+saving: {"minutesPerRun": 20, "basis": "A technician reading runtime counters and status for each pump pair in one building and switching the duty pump by hand when needed."}
+outcomes: {"format": "classification", "unit": "pump pairs", "labels": {"confirmed": "Imbalanced - switched", "minor": "Imbalanced - blocked", "normal": "Balanced", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

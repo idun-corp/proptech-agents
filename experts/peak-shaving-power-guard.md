@@ -1,4 +1,13 @@
 ---
+title: "Peak Shaving Agent"
+summary: "Predicts power peaks from metering and weather forecasts and sheds non-critical loads, such as EV charging, to stay below the monthly target."
+domain: "Energy"
+scope: "building"
+cadence: "hourly"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Autonomously curtails non-critical loads inside one building, excluding life safety and occupied zones; it does not supply or manage the grid. Borderline for Annex III electricity infrastructure, so confidence is low."}
+saving: {"minutesPerRun": 5, "basis": "An energy manager checking the hour's demand forecast against the monthly peak target and deciding on load shedding."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "Peak imminent", "minor": "Peak warning", "normal": "Normal", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

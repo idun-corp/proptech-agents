@@ -1,4 +1,13 @@
 ---
+title: "Water Leak Detector"
+summary: "Analyses water meter consumption against a 35-day baseline to detect leaks and high usage in one building per run."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses water meter data statistically and reports to a downstream routing agent and operations staff; it takes no action and does not interact with tenants."}
+saving: {"minutesPerRun": 30, "basis": "A technician reviewing five water meters' night and weekend flow and weekly volumes against four weeks of history and writing a short finding."}
+outcomes: {"format": "classification", "unit": "meters", "labels": {"confirmed": "Confirmed leaks", "minor": "Minor issues", "normal": "Normal", "dataIssue": "Data issues"}}
 dataNeeds: {
     "version": 1,
     "need": [

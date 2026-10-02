@@ -1,4 +1,13 @@
 ---
+title: "Night Setback Optimizer"
+summary: "Calculates the latest heating start time that reaches setpoint at occupancy start and adjusts the schedule using forecast and building time constant."
+domain: "Energy"
+scope: "building"
+cadence: "daily"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Adjusts heating start times within fixed safety bounds in an office building; it does not interact with people and is not a safety function, though it does act on building heating without per-action approval."}
+saving: {"minutesPerRun": 25, "basis": "An energy engineer comparing indoor temperature at occupancy start with the forecast and tuning the heating start time for one building's zones."}
+outcomes: {"format": "classification", "unit": "zones", "labels": {"confirmed": "Too early", "minor": "Too late", "normal": "Optimal", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

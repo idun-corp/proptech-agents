@@ -1,4 +1,13 @@
 ---
+title: "Pump Cavitation & Bearing Monitor"
+summary: "Detects cavitation, bearing wear and efficiency loss in circulation pumps from current, vibration and flow data, so repairs come before failure."
+domain: "Operations"
+scope: "building"
+cadence: "weekly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitors pump telemetry and reports maintenance needs to staff; it has no control over the pumps and is not a safety component."}
+saving: {"minutesPerRun": 60, "basis": "A technician comparing a week of motor current, vibration and flow data per speed bin against baseline for each pump in one building."}
+outcomes: {"format": "classification", "unit": "pumps", "labels": {"confirmed": "Critical", "minor": "Warning", "normal": "Normal", "dataIssue": "Data limited"}}
 dataNeeds: {
     "version": 1,
     "need": [

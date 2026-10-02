@@ -1,4 +1,13 @@
 ---
+title: "OVK Pre-Check (Airflow) (SE)"
+summary: "Runs a weekly off-hours airflow test on each air handling unit and compares it with the OVK-approved flow to show whether the building would pass inspection."
+domain: "ESG & Compliance"
+scope: "building"
+cadence: "weekly"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Temporarily ramps ventilation fans in unoccupied hours and reports compliance risk to staff; it is not a safety component of critical infrastructure, but it does actuate equipment without per-action approval."}
+saving: {"minutesPerRun": 90, "basis": "A ventilation technician ramping each air handling unit to reference speed, reading airflow and calculating deviation from the OVK protocol for one building."}
+outcomes: {"format": "classification", "unit": "AHUs", "labels": {"confirmed": "OVK risk - fail", "minor": "OVK risk - marginal", "normal": "OVK compliant", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

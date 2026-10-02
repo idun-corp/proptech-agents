@@ -1,4 +1,13 @@
 ---
+title: "Complaint Triage (Temperature)"
+summary: "Checks incoming too-cold and too-warm tickets against room sensors, auto-replies to phantom complaints and opens diagnostic work orders for real faults."
+domain: "Tenant Experience"
+scope: "room"
+cadence: "on demand"
+autonomy: "autonomous"
+aiAct: {"risk": "limited", "rationale": "Replies directly to tenants and auto-closes tickets, so Art. 50 transparency obligations apply; it does not control building systems and is not a safety component."}
+saving: {"minutesPerRun": 15, "basis": "A property manager or technician checking one ticket against room temperature, setpoint and actuator data, replying to the tenant and writing a work order if needed."}
+outcomes: {"format": "classification", "unit": "tickets", "labels": {"confirmed": "Valid - technical fault", "minor": "Valid - minor deviation", "normal": "Phantom - temp normal", "dataIssue": "Sensor conflict"}}
 dataNeeds: {
     "version": 1,
     "need": [

@@ -1,4 +1,13 @@
 ---
+title: "ASHRAE Energy Audit Level II Survey & Analysis"
+summary: "Breaks building energy use into end-uses and systems and compiles energy conservation measures with savings estimates and simple payback for owners."
+domain: "Energy"
+scope: "building"
+cadence: "on demand"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses sub-metered and BMS data and produces an audit report for owners and staff; takes no control actions and does not interact with natural persons."}
+saving: {"minutesPerRun": 960, "basis": "An energy engineer disaggregating sub-metered data into end-uses, profiling each system, and costing and ranking ECMs for one building."}
+outcomes: {"format": "report", "unit": "ECMs"}
 dataNeeds: {
     "version": 1,
     "need": [

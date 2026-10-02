@@ -1,4 +1,13 @@
 ---
+title: "EN 16247 Energy Balance Compiler"
+summary: "Compiles an audit-ready building energy balance across all carriers, with end-use breakdown, unaccounted energy and measurement gaps, aligned with EN 16247."
+domain: "ESG & Compliance"
+scope: "building"
+cadence: "monthly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Compiles and validates metering data into a report for energy staff and auditors; it takes no action and does not interact with natural persons."}
+saving: {"minutesPerRun": 240, "basis": "An energy auditor collecting twelve months of meter data for all carriers, validating it and building the input-output balance and end-use breakdown by hand."}
+outcomes: {"format": "report", "unit": "energy balances"}
 dataNeeds: {
     "version": 1,
     "need": [

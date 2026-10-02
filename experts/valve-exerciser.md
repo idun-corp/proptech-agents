@@ -1,4 +1,13 @@
 ---
+title: "Valve Exerciser (Motionering) (SE)"
+summary: "Cycles idle heating and cooling valves off-hours to keep them from seizing, verifies movement and proposes work orders for stuck valves."
+domain: "Operations"
+scope: "building"
+cadence: "weekly"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Exercises terminal heating and cooling valves during unoccupied hours as routine maintenance and does not interact with people. It commands actuators, but it is not a safety component of heating supply; borderline if read as controlling heating infrastructure."}
+saving: {"minutesPerRun": 90, "basis": "A BMS technician identifying idle valves, manually commanding each through its full range and checking feedback, and logging results for one building."}
+outcomes: {"format": "classification", "unit": "valves", "labels": {"confirmed": "Stuck", "minor": "Sluggish", "normal": "Healthy", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

@@ -1,4 +1,13 @@
 ---
+title: "SVEBY Energy Performance Verifier (SE)"
+summary: "Compares weather-normalised measured energy use with the design prediction per end-use, using the SVEBY method, and traces gaps to likely causes."
+domain: "Energy"
+scope: "building"
+cadence: "on demand"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses metered energy data and design figures and reports to engineers and owners; it controls nothing and does not interact with tenants."}
+saving: {"minutesPerRun": 240, "basis": "An energy engineer normalising 12 months of measured data, comparing it to the design calculation per end-use and writing a verification report for one building."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "Significant gap", "minor": "Minor gap", "normal": "Verified - on target", "dataIssue": "Cannot verify"}}
 dataNeeds: {
     "version": 1,
     "need": [

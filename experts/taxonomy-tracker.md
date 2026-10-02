@@ -1,4 +1,13 @@
 ---
+title: "EU Taxonomy Tracker (EU)"
+summary: "Tracks each building's rolling 12-month energy use per m2 against the EU Taxonomy NZEB threshold and warns when alignment is lost or at risk."
+domain: "ESG & Compliance"
+scope: "portfolio"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Reporting and alerting on energy metering data for sustainability staff; no actions on systems and no interaction with natural persons."}
+saving: {"minutesPerRun": 30, "basis": "A sustainability analyst summing 12 months of electricity, heating and cooling meters per building, normalising by floor area and checking against the threshold and trend."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "At risk", "minor": "Trending out", "normal": "On track", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

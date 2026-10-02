@@ -1,4 +1,13 @@
 ---
+title: "Nighttime Ventilation Saver Agent"
+summary: "Finds ventilation running in unoccupied rooms by comparing airflow with presence over 14 days, and estimates the wasted energy per building."
+domain: "Energy"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses airflow and presence sensor data and reports findings to a downstream routing agent; it makes no schedule changes and does not interact with tenants."}
+saving: {"minutesPerRun": 45, "basis": "An energy engineer pulling two weeks of airflow and presence data for a sample of rooms, calculating unoccupied airflow and writing up the waste."}
+outcomes: {"format": "classification", "unit": "rooms", "labels": {"confirmed": "High waste", "minor": "Minor waste", "normal": "Optimized", "dataIssue": "Data issues"}}
 dataNeeds: {
     "version": 1,
     "need": [

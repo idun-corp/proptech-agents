@@ -1,4 +1,13 @@
 ---
+title: "Indoor Climate Reviewer"
+summary: "Reviews temperature, CO2 and humidity in one building per run against fault thresholds and confirms only rooms with a recurring pattern in 30-day history."
+domain: "Tenant Experience"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses building sensor data and reports to operations staff for a downstream routing agent; it takes no action and does not interact with tenants."}
+saving: {"minutesPerRun": 40, "basis": "A technician checking current climate readings for a building's rooms, pulling 30-day history for those in breach and writing up the findings."}
+outcomes: {"format": "classification", "unit": "rooms", "labels": {"confirmed": "Confirmed fault", "minor": "Minor fault", "normal": "Normal", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

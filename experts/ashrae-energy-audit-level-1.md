@@ -1,4 +1,13 @@
 ---
+title: "ASHRAE Energy Audit Level I Walk-Through"
+summary: "Screens a building's energy data for benchmarking gaps, baseload and schedule waste, and low-cost savings, for owners deciding whether to go deeper."
+domain: "Energy"
+scope: "building"
+cadence: "on demand"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses utility and BMS data and reports recommendations to building owners and staff; takes no control actions and does not interact with natural persons."}
+saving: {"minutesPerRun": 240, "basis": "An energy engineer collecting 12 months of utility data, benchmarking EUI, analysing baseload and schedules, and writing a Level I audit report for one building."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "High savings potential", "minor": "Moderate savings potential", "normal": "Performing well", "dataIssue": "Data insufficient"}}
 dataNeeds: {
     "version": 1,
     "need": [

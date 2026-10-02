@@ -1,4 +1,13 @@
 ---
+title: "UPS Battery Health Predictor"
+summary: "Tracks UPS battery resistance, cell voltage, temperature and runtime tests to predict end of life so batteries are replaced before an outage exposes them."
+domain: "Operations"
+scope: "system"
+cadence: "monthly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitoring-only analysis of UPS telemetry reported to maintenance staff; it does not configure or test the UPS. The UPS can back safety systems but the agent is not a safety component."}
+saving: {"minutesPerRun": 25, "basis": "A technician collecting resistance, voltage, temperature and test data for one UPS, comparing it with baseline and extrapolating the trend."}
+outcomes: {"format": "classification", "unit": "UPS units", "labels": {"confirmed": "End of life", "minor": "Degraded", "normal": "Healthy", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

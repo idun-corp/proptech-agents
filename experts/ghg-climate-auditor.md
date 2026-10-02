@@ -1,4 +1,13 @@
 ---
+title: "GHG Climate Auditor (DK)"
+summary: "Compiles Scope 1 and Scope 2 greenhouse gas inventories and year-over-year trends for climate audits under Danish klimasyn and the GHG Protocol."
+domain: "ESG & Compliance"
+scope: "building"
+cadence: "yearly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Calculates emissions from energy, fuel and refrigerant data and produces reports for sustainability staff; no interaction with natural persons and no safety function."}
+saving: {"minutesPerRun": 240, "basis": "A sustainability or energy consultant collecting energy, fuel and refrigerant data, applying emission factors and writing the Scope 1 and 2 inventory for one building."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "Significant increase", "minor": "Increasing", "normal": "On track", "dataIssue": "Data gaps"}}
 dataNeeds: {
     "version": 1,
     "need": [

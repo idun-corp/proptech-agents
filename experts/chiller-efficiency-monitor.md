@@ -1,4 +1,13 @@
 ---
+title: "Chiller Plant Efficiency Monitor"
+summary: "Tracks chiller COP and approach temperatures by load bin, detects efficiency degradation and diagnoses fouling, refrigerant loss or wear for maintenance teams."
+domain: "Operations"
+scope: "system"
+cadence: "weekly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitors chiller telemetry and reports diagnoses to maintenance staff; it does not actuate the plant, so it is not a safety component, and does not interact with natural persons."}
+saving: {"minutesPerRun": 60, "basis": "A service technician or energy engineer pulling a week of chiller data, binning by load, calculating COP and approach temperatures, and diagnosing the cause."}
+outcomes: {"format": "classification", "unit": "chillers", "labels": {"confirmed": "Critical degradation", "minor": "Moderate degradation", "normal": "Normal", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

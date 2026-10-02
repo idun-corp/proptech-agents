@@ -1,4 +1,13 @@
 ---
+title: "Usage-Based Cleaning Scheduler"
+summary: "Turns the previous day's room usage into a daily cleaning task list that skips unused rooms and prioritises busy ones, pushed to the cleaning team."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Generates and pushes room-level cleaning tasks from aggregated usage counts without per-action approval. Tasks are driven by room use, not by assessing or managing individual workers."}
+saving: {"minutesPerRun": 40, "basis": "A facility coordinator reviewing usage data for all rooms in a building and drafting that day's cleaning plan by hand."}
+outcomes: {"format": "classification", "unit": "rooms", "labels": {"confirmed": "Priority clean", "minor": "Spot clean", "normal": "Standard clean", "dataIssue": "No data"}}
 dataNeeds: {
     "version": 1,
     "need": [

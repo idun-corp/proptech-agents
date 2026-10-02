@@ -1,4 +1,13 @@
 ---
+title: "Complaint Pattern Analyzer"
+summary: "Analyses the prior month's tenant complaints against weather, schedules and sensor data to find systemic causes behind recurring complaint clusters."
+domain: "Tenant Experience"
+scope: "building"
+cadence: "monthly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses historical complaint tickets and telemetry and reports patterns to operations staff; takes no action and does not interact with tenants."}
+saving: {"minutesPerRun": 180, "basis": "A property or operations manager categorising a month of complaint tickets, clustering them by zone and time, and cross-checking them against telemetry for one building."}
+outcomes: {"format": "classification", "unit": "patterns", "labels": {"confirmed": "Systemic pattern", "minor": "Emerging pattern", "normal": "Isolated", "dataIssue": "Data insufficient"}}
 dataNeeds: {
     "version": 1,
     "need": [

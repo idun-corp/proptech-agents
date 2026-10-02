@@ -1,4 +1,13 @@
 ---
+title: "Supply Air Filter Analyzer"
+summary: "Assesses supply air filter clogging in each air handling unit from pressure drop versus airflow and tells operations staff which filters to replace."
+domain: "Operations"
+scope: "system"
+cadence: "weekly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses AHU sensor data and reports to maintenance staff; it takes no action on the ventilation system and does not interact with tenants."}
+saving: {"minutesPerRun": 20, "basis": "A technician exporting 30 days of airflow and pressure data for one air handling unit and working out the filter resistance trend."}
+outcomes: {"format": "classification", "unit": "AHUs", "labels": {"confirmed": "Replace now", "minor": "Approaching limit", "normal": "Normal", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

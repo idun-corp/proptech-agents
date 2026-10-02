@@ -1,4 +1,13 @@
 ---
+title: "Service Object Enricher"
+summary: "Attaches relevant telemetry, similar past cases and asset, space and lease context to every new fault report, alarm or work order for whoever picks it up."
+domain: "Operations"
+scope: "building"
+cadence: "on demand"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Appends read-only context to internal service records for operations staff and never changes the original fields or routing; it does not interact with tenants."}
+saving: {"minutesPerRun": 10, "basis": "A technician or property manager looking up sensor data, similar past cases and asset and lease details for one new fault report by hand (the prompt cites 5-15 minutes)."}
+outcomes: {"format": "count", "unit": "service objects"}
 dataNeeds: {
     "version": 1,
     "need": [

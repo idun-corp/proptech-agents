@@ -1,4 +1,13 @@
 ---
+title: "District Heating Return Guard"
+summary: "Monitors primary return temperature in district heating substations and diagnoses causes of high return temperature before flow charges accrue."
+domain: "Energy"
+scope: "system"
+cadence: "hourly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses substation sensor data and reports to operations staff; it takes no control action on valves, pumps or heating curves, so it is not a safety component of the heating supply."}
+saving: {"minutesPerRun": 5, "basis": "An energy technician checking one substation's return temperature trend and deciding whether to act."}
+outcomes: {"format": "classification", "unit": "substations", "labels": {"confirmed": "Critical", "minor": "High return", "normal": "Normal", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

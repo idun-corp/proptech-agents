@@ -1,4 +1,13 @@
 ---
+title: "HVAC Setpoint Deviation Checker"
+summary: "Samples rooms in one building each run and flags those where actual temperature persistently deviates from setpoint, for a downstream routing agent."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Reads temperature and setpoint data and reports deviations; it changes no setpoints and does not interact with tenants."}
+saving: {"minutesPerRun": 30, "basis": "A technician comparing actual and setpoint temperatures for up to 30 rooms in the BMS and checking a week of history for the larger deviations."}
+outcomes: {"format": "classification", "unit": "rooms", "labels": {"confirmed": "Major deviation", "minor": "Minor deviation", "normal": "Normal", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

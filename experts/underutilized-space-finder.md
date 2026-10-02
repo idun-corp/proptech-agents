@@ -1,4 +1,13 @@
 ---
+title: "Underutilized Space Finder"
+summary: "Compares peak occupancy per zone with design capacity over three months to find space to sublet or consolidate, with the lease cost involved."
+domain: "Operations"
+scope: "portfolio"
+cadence: "monthly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses aggregated zone occupancy for property and facility managers; it makes no lease or space changes and does not act on individuals."}
+saving: {"minutesPerRun": 90, "basis": "A workplace or property analyst compiling three months of occupancy data per zone, comparing it with capacity and calculating unused area and lease cost."}
+outcomes: {"format": "classification", "unit": "zones", "labels": {"confirmed": "Underutilized - critical", "minor": "Underutilized - emerging", "normal": "Adequately used", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

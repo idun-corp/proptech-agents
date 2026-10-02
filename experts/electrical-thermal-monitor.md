@@ -1,4 +1,13 @@
 ---
+title: "Electrical Distribution Thermal Monitor"
+summary: "Checks switchgear and panel connection temperatures, phase imbalance and load to catch overheating connections before they cause failures or fires."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitors thermal and current data and reports to technicians; it performs no switching or load changes. Borderline only because it concerns electrical fire safety, but it is not a control component."}
+saving: {"minutesPerRun": 45, "basis": "An electrician or technician correlating connection temperatures with load, comparing phases and reviewing four-week trends across a building's panels."}
+outcomes: {"format": "classification", "unit": "connections", "labels": {"confirmed": "Critical", "minor": "Warning", "normal": "Normal", "dataIssue": "No data"}}
 dataNeeds: {
     "version": 1,
     "need": [

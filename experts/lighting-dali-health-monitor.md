@@ -1,4 +1,13 @@
 ---
+title: "Lighting / DALI Health Monitor"
+summary: "Detects lamp and driver failures, DALI communication faults and emergency lighting test failures from gateway data, and reports them to operations staff."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitors lighting device status and reports to staff; it does not control lighting or run emergency tests, so it is not itself a safety component, though it reports on fire-safety emergency lighting."}
+saving: {"minutesPerRun": 30, "basis": "A technician checking DALI gateway status, device counts per line and emergency test records for one building and listing failed units."}
+outcomes: {"format": "classification", "unit": "devices", "labels": {"confirmed": "Failure", "minor": "Degraded", "normal": "Normal", "dataIssue": "No data"}}
 dataNeeds: {
     "version": 1,
     "need": [

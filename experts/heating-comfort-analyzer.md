@@ -1,4 +1,13 @@
 ---
+title: "Heating Comfort Analyzer"
+summary: "Compares tenants' manual temperature adjustments with setpoint deviations in sampled rooms to show whether heating control is out of step with occupants."
+domain: "Tenant Experience"
+scope: "building"
+cadence: "on demand"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses room sensor data and reports to operations staff; it makes no setpoint changes and does not communicate with tenants."}
+saving: {"minutesPerRun": 45, "basis": "A building technician sampling room controllers, pulling a week of temperature history for deviating rooms and judging whether control matches tenant adjustments."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "Misaligned - action suggested", "minor": "Emerging misalignment", "normal": "Aligned", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [

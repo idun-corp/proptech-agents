@@ -1,4 +1,13 @@
 ---
+title: "Alarm & Service Object Consolidator"
+summary: "Deduplicates, correlates and suppresses chattering alarms, fault reports and work orders so operations staff see a clean stream of actionable incidents."
+domain: "Operations"
+scope: "building"
+cadence: "hourly"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Merges and links internal alarm records for operations staff without interacting with tenants; it never suppresses life-safety alarms and passes through anything uncertain, but it does close records without per-action approval."}
+saving: {"minutesPerRun": 5, "basis": "An operator triaging the last hour's new alarms and service objects for one building and merging duplicates."}
+outcomes: {"format": "count", "unit": "alarms"}
 dataNeeds: {
     "version": 1,
     "need": [],

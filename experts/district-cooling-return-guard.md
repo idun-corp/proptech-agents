@@ -1,4 +1,13 @@
 ---
+title: "District Cooling Return Guard"
+summary: "Monitors district cooling return temperature and delta-T in energy transfer stations and diagnoses low delta-T causes before utility penalties accrue."
+domain: "Energy"
+scope: "system"
+cadence: "hourly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses substation sensor data and reports to operations staff; it does not actuate valves or pumps and does not interact with natural persons."}
+saving: {"minutesPerRun": 5, "basis": "An energy technician checking one substation's return temperature trend and deciding whether to act."}
+outcomes: {"format": "classification", "unit": "energy transfer stations", "labels": {"confirmed": "Critical", "minor": "Low delta-T", "normal": "Normal", "dataIssue": "Data issue"}}
 dataNeeds: {
     "version": 1,
     "need": [
