@@ -8,6 +8,7 @@ autonomy: "supervised"
 aiAct: {"risk": "minimal", "rationale": "Analyses HVAC sensor data and proposes work orders for staff approval; it does not actuate dampers or chillers and does not interact with natural persons."}
 saving: {"minutesPerRun": 30, "basis": "An HVAC technician or energy engineer comparing outdoor temperature, chiller status and damper position for one air handling unit and estimating the waste."}
 outcomes: {"format": "classification", "unit": "air handling units", "labels": {"confirmed": "Wasting energy", "minor": "Suboptimal", "normal": "Optimized", "dataIssue": "Data issue"}}
+skills: ["human-in-the-loop"]
 dataNeeds: {
     "version": 1,
     "need": [

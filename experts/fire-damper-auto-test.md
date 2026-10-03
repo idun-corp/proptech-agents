@@ -8,6 +8,7 @@ autonomy: "autonomous"
 aiAct: {"risk": "minimal", "rationale": "Autonomously commands dampers during off-hours functional tests, but only exercises and logs them; it is not a control system for infrastructure supply. Borderline because it actuates fire safety equipment."}
 saving: {"minutesPerRun": 480, "basis": "A fire safety technician manually testing and timing each of the building's fire dampers and writing up the SBA journal entries."}
 outcomes: {"format": "classification", "unit": "dampers", "labels": {"confirmed": "Failed", "minor": "Slow", "normal": "Passed", "dataIssue": "Offline"}}
+skills: ["human-in-the-loop"]
 dataNeeds: {
     "version": 1,
     "need": [
