@@ -1,3 +1,39 @@
+---
+title: "Ghost Booking Buster"
+summary: "Detects meeting room bookings where nobody shows up, releases the room for others and notifies the booker."
+domain: "Tenant Experience"
+scope: "building"
+cadence: "hourly"
+autonomy: "autonomous"
+aiAct: {"risk": "limited", "rationale": "Cancels bookings and sends notification messages directly to the people who booked, so it interacts with natural persons and falls under Art. 50 transparency; it has no safety function."}
+saving: {"minutesPerRun": 3, "basis": "A workplace coordinator checking the hour's room bookings against presence and releasing no-shows."}
+outcomes: {"format": "classification", "unit": "bookings", "labels": {"confirmed": "Ghost - released", "minor": "Late arrival", "normal": "Occupied", "dataIssue": "Sensor issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Room booking system",
+        "kind": "external",
+        "system": "room booking system"
+      },
+      {
+        "label": "Meeting room presence",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence"
+        ],
+        "scope": "room",
+        "roomType": [
+          "https://w3id.org/rec/building/ConferenceRoom"
+        ]
+      }
+    ],
+    "want": [],
+    "notes": "Vocabulary has only ConferenceRoom as a meeting-room type; no separate meeting room/board room type. Room type, capacity and grace period are twin metadata, not modelled as data."
+  }
+---
+
 # GHOST BOOKING BUSTER
 
 ## [ROLE & CONTEXT]

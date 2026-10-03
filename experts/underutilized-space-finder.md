@@ -1,3 +1,53 @@
+---
+title: "Underutilized Space Finder"
+summary: "Compares peak occupancy per zone with design capacity over three months to find space to sublet or consolidate, with the lease cost involved."
+domain: "Operations"
+scope: "portfolio"
+cadence: "monthly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses aggregated zone occupancy for property and facility managers; it makes no lease or space changes and does not act on individuals."}
+saving: {"minutesPerRun": 90, "basis": "A workplace or property analyst compiling three months of occupancy data per zone, comparing it with capacity and calculating unused area and lease cost."}
+outcomes: {"format": "classification", "unit": "zones", "labels": {"confirmed": "Underutilized - critical", "minor": "Underutilized - emerging", "normal": "Adequately used", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Occupancy or presence",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Presence",
+              "http://proptechos.com/ontology/extension/AreaPresence",
+              "http://proptechos.com/ontology/extension/OccupancyDensity"
+            ],
+            "history": {
+              "ideal": "P3M",
+              "minimum": "P3M"
+            }
+          },
+          {
+            "label": "CO2 (occupancy proxy)",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/CO2"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/IndoorAir"
+            ],
+            "history": {
+              "ideal": "P3M",
+              "minimum": "P3M"
+            }
+          }
+        ]
+      }
+    ],
+    "want": [],
+    "notes": "Access control, Wi-Fi counting and design capacity are not expressible in the vocabulary (capacity is a building-model fact)."
+  }
+---
+
 # Underutilized Space Finder
 
 ## [ROLE & CONTEXT]

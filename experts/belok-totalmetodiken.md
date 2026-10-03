@@ -1,3 +1,65 @@
+---
+title: "BeLok Totalmetodiken ECM Packager (SE)"
+summary: "Bundles energy conservation measures into investment packages using the BeLok Total Method, with interaction-adjusted savings, package IRR and phasing."
+domain: "Energy"
+scope: "building"
+cadence: "on demand"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses an ECM inventory and financial inputs and reports package options to owners; takes no control actions and does not interact with natural persons."}
+saving: {"minutesPerRun": 480, "basis": "An energy engineer modelling measure interactions, assembling quick-win, standard and deep-renovation packages, and calculating IRR and NPV for one building."}
+outcomes: {"format": "report", "unit": "packages"}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Building energy meter",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ],
+            "history": {
+              "ideal": "P12M",
+              "minimum": "P12M"
+            }
+          },
+          {
+            "label": "Energy signature",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "End-use sub-metered energy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "https://w3id.org/rec/core/ActiveEnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "min": 2
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      }
+    ],
+    "notes": "Works mainly from an ECM inventory produced by other audits and from financial inputs, none of which is building sensor data; the building baseline energy is the only data need."
+  }
+---
+
 # BeLok Totalmetodiken ECM Packager (SE)
 
 ## [ROLE & CONTEXT]

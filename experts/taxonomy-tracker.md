@@ -1,3 +1,86 @@
+---
+title: "EU Taxonomy Tracker (EU)"
+summary: "Tracks each building's rolling 12-month energy use per m2 against the EU Taxonomy NZEB threshold and warns when alignment is lost or at risk."
+domain: "ESG & Compliance"
+scope: "portfolio"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Reporting and alerting on energy metering data for sustainability staff; no actions on systems and no interaction with natural persons."}
+saving: {"minutesPerRun": 30, "basis": "A sustainability analyst summing 12 months of electricity, heating and cooling meters per building, normalising by floor area and checking against the threshold and trend."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "At risk", "minor": "Trending out", "normal": "On track", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Energy meters (electricity, heating, cooling)",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ],
+            "history": {
+              "ideal": "P12M",
+              "minimum": "P12M"
+            }
+          },
+          {
+            "label": "Tommestok energy signature",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Electricity energy meter",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "https://w3id.org/rec/core/ActiveEnergyTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridIntake",
+          "https://w3id.org/rec/device/ElectricalGridInternal",
+          "https://w3id.org/rec/device/ElectricalGridTenant"
+        ]
+      },
+      {
+        "label": "District heating energy meter",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictHeatingFlow",
+          "https://w3id.org/rec/device/PrimaryHeatingFlow",
+          "https://w3id.org/rec/device/DistrictHeatingReturn",
+          "https://w3id.org/rec/device/PrimaryHeatingReturn"
+        ]
+      },
+      {
+        "label": "District cooling energy meter",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictCoolingFlow",
+          "https://w3id.org/rec/device/PrimaryCoolingFlow",
+          "https://w3id.org/rec/device/DistrictCoolingReturn",
+          "https://w3id.org/rec/device/PrimaryCoolingReturn"
+        ]
+      }
+    ],
+    "notes": "Floor area (Atemp/LOA), climate zone and building class are building-model facts and left out."
+  }
+---
+
 # EU TAXONOMY TRACKER (EU)
 
 ## [ROLE & CONTEXT]

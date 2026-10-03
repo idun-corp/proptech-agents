@@ -1,3 +1,43 @@
+---
+title: "Alarm & Service Object Consolidator"
+summary: "Deduplicates, correlates and suppresses chattering alarms, fault reports and work orders so operations staff see a clean stream of actionable incidents."
+domain: "Operations"
+scope: "building"
+cadence: "hourly"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Merges and links internal alarm records for operations staff without interacting with tenants; it never suppresses life-safety alarms and passes through anything uncertain, but it does close records without per-action approval."}
+saving: {"minutesPerRun": 5, "basis": "An operator triaging the last hour's new alarms and service objects for one building and merging duplicates."}
+outcomes: {"format": "count", "unit": "alarms"}
+dataNeeds: {
+    "version": 1,
+    "need": [],
+    "want": [
+      {
+        "label": "Device alarms",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/AlarmMajor",
+          "https://w3id.org/rec/core/AlarmMinor",
+          "https://w3id.org/rec/core/AlarmSevere",
+          "http://proptechos.com/ontology/extension/CapabilityTypeAlarm"
+        ]
+      },
+      {
+        "label": "Room temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/IndoorAir"
+        ],
+        "scope": "room"
+      }
+    ],
+    "notes": "Operates on ServiceObjects (alarms, fault reports, work orders) in the platform, not on building sensor data, so nothing is a hard need. Alarm signals and room temperature (to judge worsening) only improve results."
+  }
+---
+
 # ALARM & SERVICE OBJECT CONSOLIDATOR
 
 ## [ROLE & CONTEXT]

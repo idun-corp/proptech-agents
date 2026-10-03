@@ -1,3 +1,72 @@
+---
+title: "Free Cooling Maximizer"
+summary: "Detects chillers running when outdoor air is cold enough for free cooling and proposes damper investigations, with the wasted energy estimated."
+domain: "Energy"
+scope: "system"
+cadence: "daily"
+autonomy: "supervised"
+aiAct: {"risk": "minimal", "rationale": "Analyses HVAC sensor data and proposes work orders for staff approval; it does not actuate dampers or chillers and does not interact with natural persons."}
+saving: {"minutesPerRun": 30, "basis": "An HVAC technician or energy engineer comparing outdoor temperature, chiller status and damper position for one air handling unit and estimating the waste."}
+outcomes: {"format": "classification", "unit": "air handling units", "labels": {"confirmed": "Wasting energy", "minor": "Suboptimal", "normal": "Optimized", "dataIssue": "Data issue"}}
+skills: ["human-in-the-loop"]
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Mixing damper position",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/DamperPosition"
+        ]
+      },
+      {
+        "label": "Chiller status or power",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/OnOffState",
+          "http://proptechos.com/ontology/extension/State",
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Supply air temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/SupplyAir"
+        ]
+      },
+      {
+        "label": "Return air temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ExtractAir",
+          "https://w3id.org/rec/device/CirculationAir"
+        ]
+      }
+    ],
+    "notes": "No chiller placement context exists, so chiller status/power is matched by quantity kind only."
+  }
+---
+
 # FREE COOLING MAXIMIZER
 
 ## [ROLE & CONTEXT]

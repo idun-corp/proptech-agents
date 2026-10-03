@@ -1,3 +1,55 @@
+---
+title: "Heating Comfort Analyzer"
+summary: "Compares tenants' manual temperature adjustments with setpoint deviations in sampled rooms to show whether heating control is out of step with occupants."
+domain: "Tenant Experience"
+scope: "building"
+cadence: "on demand"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses room sensor data and reports to operations staff; it makes no setpoint changes and does not communicate with tenants."}
+saving: {"minutesPerRun": 45, "basis": "A building technician sampling room controllers, pulling a week of temperature history for deviating rooms and judging whether control matches tenant adjustments."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "Misaligned - action suggested", "minor": "Emerging misalignment", "normal": "Aligned", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Room temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/IndoorAir"
+        ],
+        "scope": "room",
+        "min": 5
+      },
+      {
+        "label": "Room temperature setpoint",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpoint",
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpointValue",
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "scope": "room",
+        "min": 5
+      }
+    ],
+    "want": [
+      {
+        "label": "Tenant temperature adjustment (offset)",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpointValue",
+          "http://proptechos.com/ontology/extension/CapabilityTypeParameterValue"
+        ],
+        "scope": "room"
+      }
+    ],
+    "notes": "The tenant adjustment offset on the room controller has no dedicated quantity kind; approximated with setpoint/parameter value kinds. The agent needs at least 5 rooms with sensors to classify sentiment. Hourly history for deviating rooms is only used for verification."
+  }
+---
+
 # HEATING COMFORT ANALYZER
 
 ## [ROLE & CONTEXT]

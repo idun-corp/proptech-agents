@@ -1,3 +1,74 @@
+---
+title: "Peak Shaving Agent"
+summary: "Predicts power peaks from metering and weather forecasts and sheds non-critical loads, such as EV charging, to stay below the monthly target."
+domain: "Energy"
+scope: "building"
+cadence: "hourly"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Autonomously curtails non-critical loads inside one building, excluding life safety and occupied zones; it does not supply or manage the grid. Borderline for Annex III electricity infrastructure, so confidence is low."}
+saving: {"minutesPerRun": 5, "basis": "An energy manager checking the hour's demand forecast against the monthly peak target and deciding on load shedding."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "Peak imminent", "minor": "Peak warning", "normal": "Normal", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Main building power",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridIntake",
+          "http://proptechos.com/ontology/extension/ElectricalGrid"
+        ],
+        "history": {
+          "ideal": "P30D",
+          "minimum": "P7D"
+        }
+      }
+    ],
+    "want": [
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Weather forecast",
+        "kind": "external",
+        "system": "weather forecast service"
+      },
+      {
+        "label": "EV charging power",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/ElectricalGridEV"
+        ]
+      },
+      {
+        "label": "Sheddable load controls",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/OnOffControl",
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpoint",
+          "http://proptechos.com/ontology/extension/ModulationLevel"
+        ]
+      }
+    ],
+    "notes": "Monthly peak target and peak windows are configuration, not data."
+  }
+---
+
 # Peak Shaving Agent
 
 ## [ROLE & CONTEXT]

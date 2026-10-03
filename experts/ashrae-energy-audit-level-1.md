@@ -1,3 +1,83 @@
+---
+title: "ASHRAE Energy Audit Level I Walk-Through"
+summary: "Screens a building's energy data for benchmarking gaps, baseload and schedule waste, and low-cost savings, for owners deciding whether to go deeper."
+domain: "Energy"
+scope: "building"
+cadence: "on demand"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses utility and BMS data and reports recommendations to building owners and staff; takes no control actions and does not interact with natural persons."}
+saving: {"minutesPerRun": 240, "basis": "An energy engineer collecting 12 months of utility data, benchmarking EUI, analysing baseload and schedules, and writing a Level I audit report for one building."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "High savings potential", "minor": "Moderate savings potential", "normal": "Performing well", "dataIssue": "Data insufficient"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Building energy meter",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ],
+            "history": {
+              "ideal": "P12M",
+              "minimum": "P12M"
+            }
+          },
+          {
+            "label": "Energy signature",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Electric power (baseload and peak)",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ],
+        "resolution": {
+          "ideal": "PT15M",
+          "minimum": "PT1H"
+        }
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Water consumption",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Volume",
+          "https://w3id.org/rec/core/Flow"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ColdWaterFlow",
+          "http://proptechos.com/ontology/extension/InternalColdWater",
+          "http://proptechos.com/ontology/extension/TenantColdWater",
+          "https://w3id.org/rec/device/HotWaterFlow",
+          "http://proptechos.com/ontology/extension/InternalHotWater",
+          "http://proptechos.com/ontology/extension/TenantHotWater"
+        ]
+      }
+    ],
+    "notes": "Floor area, building type, year built and operating hours are building-model facts and left out."
+  }
+---
+
 # ASHRAE Energy Audit Level I Walk-Through
 
 ## [ROLE & CONTEXT]

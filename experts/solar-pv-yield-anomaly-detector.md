@@ -1,3 +1,75 @@
+---
+title: "Solar PV Yield Anomaly Detector"
+summary: "Compares weather-normalised PV yield per inverter and string against expected output to flag faults, soiling, shading and degradation for building owners."
+domain: "Energy"
+scope: "building"
+cadence: "weekly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitoring-only analysis of inverter telemetry reported to operations staff; it makes no inverter changes and has no direct interaction with people."}
+saving: {"minutesPerRun": 45, "basis": "An energy engineer pulling a week of inverter, string and irradiance data, calculating performance ratios and comparing inverters for one PV system."}
+outcomes: {"format": "classification", "unit": "inverters", "labels": {"confirmed": "Fault", "minor": "Underperforming", "normal": "Normal", "dataIssue": "No data"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "PV production",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal",
+          "https://w3id.org/rec/core/EnergyTotal",
+          "https://w3id.org/rec/core/ActiveEnergyTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridLocalProduction"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Solar irradiance",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/GlobalIrradiance",
+          "http://qudt.org/vocab/quantitykind/Irradiance",
+          "https://w3id.org/rec/core/SunshineTimePerHour"
+        ]
+      },
+      {
+        "label": "Weather data",
+        "kind": "external",
+        "system": "weather / irradiance API"
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "String / inverter currents",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Current",
+          "https://w3id.org/rec/core/CurrentL1",
+          "https://w3id.org/rec/core/CurrentL2",
+          "https://w3id.org/rec/core/CurrentL3",
+          "https://w3id.org/rec/core/Voltage"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridLocalProduction"
+        ],
+        "min": 2
+      }
+    ],
+    "notes": "Installed kWp, tilt and azimuth are metadata. Irradiance can come from a pyranometer or a weather API, so both are wants."
+  }
+---
+
 # SOLAR PV YIELD ANOMALY DETECTOR
 
 ## [ROLE & CONTEXT]

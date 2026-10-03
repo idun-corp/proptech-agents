@@ -1,3 +1,62 @@
+---
+title: "Elevator Availability Logger"
+summary: "Logs elevator status changes, calculates monthly availability, MTBF and MTTR, and flags service contract SLA breaches for penalty claims."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "supervised"
+aiAct: {"risk": "minimal", "rationale": "Logs and reports elevator status to the property manager and proposes work orders for approval; it does not control elevators or interact with tenants."}
+saving: {"minutesPerRun": 40, "basis": "A property manager compiling downtime events from vendor portals, computing availability against the contract SLA and drafting a penalty claim."}
+outcomes: {"format": "classification", "unit": "elevators", "labels": {"confirmed": "SLA breach", "minor": "SLA at risk", "normal": "SLA compliant", "dataIssue": "Data issue"}}
+skills: ["human-in-the-loop"]
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Elevator status",
+            "kind": "sensor",
+            "quantityKind": [
+              "http://proptechos.com/ontology/extension/State",
+              "http://proptechos.com/ontology/extension/OnOffState",
+              "http://proptechos.com/ontology/extension/CapabilityTypeState"
+            ],
+            "placementContext": [
+              "http://proptechos.com/ontology/extension/Elevator"
+            ]
+          },
+          {
+            "label": "Elevator vendor status feed",
+            "kind": "external",
+            "system": "elevator vendor API (Kone, Otis, Schindler, TK Elevator)"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Elevator alarms",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/AlarmMajor",
+          "https://w3id.org/rec/core/AlarmMinor",
+          "https://w3id.org/rec/core/AlarmSevere"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Elevator"
+        ]
+      },
+      {
+        "label": "Vendor service response data",
+        "kind": "external",
+        "system": "elevator vendor API / service contract"
+      }
+    ],
+    "notes": "Contract SLA terms and technician response times are not building data."
+  }
+---
+
 # ELEVATOR AVAILABILITY LOGGER
 
 ## [ROLE & CONTEXT]

@@ -1,3 +1,40 @@
+---
+title: "ISO 50002 Audit Data Quality Monitor"
+summary: "Checks meter coverage, data completeness and calibration to score how ready a building is for an ISO 50002 energy audit and lists the gaps."
+domain: "ESG & Compliance"
+scope: "building"
+cadence: "monthly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitors metering infrastructure and data quality and reports to staff; it installs or reconfigures nothing and does not interact with natural persons."}
+saving: {"minutesPerRun": 150, "basis": "An energy auditor inventorying meters, checking 12 months of data completeness, cross-checking sub-meters against main meters and scoring readiness for one building."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "Not audit-ready", "minor": "Audit-ready Level 1 only", "normal": "Audit-ready Level 3"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Energy meters",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "https://w3id.org/rec/core/ActiveEnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Power meters",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      }
+    ],
+    "notes": "Meter inventory, calibration dates, sub-meter coverage vs main meters and data completeness are metadata or derived quality measures and cannot be expressed. Having more than one energy meter (sub-metering) raises the audit level but is not required."
+  }
+---
+
 # ISO 50002 Audit Data Quality Monitor
 
 ## [ROLE & CONTEXT]

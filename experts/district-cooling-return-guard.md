@@ -1,3 +1,92 @@
+---
+title: "District Cooling Return Guard"
+summary: "Monitors district cooling return temperature and delta-T in energy transfer stations and diagnoses low delta-T causes before utility penalties accrue."
+domain: "Energy"
+scope: "system"
+cadence: "hourly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses substation sensor data and reports to operations staff; it does not actuate valves or pumps and does not interact with natural persons."}
+saving: {"minutesPerRun": 5, "basis": "An energy technician checking one substation's return temperature trend and deciding whether to act."}
+outcomes: {"format": "classification", "unit": "energy transfer stations", "labels": {"confirmed": "Critical", "minor": "Low delta-T", "normal": "Normal", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Primary supply and return temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "all": [
+          {
+            "quantityKind": [
+              "https://w3id.org/rec/core/Temperature"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/DistrictCoolingFlow",
+              "https://w3id.org/rec/device/PrimaryCoolingFlow"
+            ]
+          },
+          {
+            "quantityKind": [
+              "https://w3id.org/rec/core/Temperature"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/DistrictCoolingReturn",
+              "https://w3id.org/rec/device/PrimaryCoolingReturn"
+            ]
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Primary flow",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Flow",
+          "https://qudt.org/vocab/quantitykind/MassFlowRate"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictCoolingFlow",
+          "https://w3id.org/rec/device/PrimaryCoolingFlow",
+          "https://w3id.org/rec/device/DistrictCoolingReturn",
+          "https://w3id.org/rec/device/PrimaryCoolingReturn"
+        ]
+      },
+      {
+        "label": "Secondary supply/return temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/SecondaryCoolingFlow",
+          "https://w3id.org/rec/device/SecondaryCoolingReturn"
+        ]
+      },
+      {
+        "label": "Control valve position",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/ValvePosition"
+        ]
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      }
+    ],
+    "notes": "Delta-T is computed from primary supply/return temperatures; no 'primary delta-T' needed as direct data."
+  }
+---
+
 # District Cooling Return Guard
 
 ## [ROLE & CONTEXT]
