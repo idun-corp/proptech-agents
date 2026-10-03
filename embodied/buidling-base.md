@@ -1,3 +1,71 @@
+---
+title: "Embodied Building Agent"
+summary: "Speaks as one building - answers questions on its comfort, energy, water and upkeep, and reports its daily health and consumption."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "limited", "rationale": "Converses directly with people as an AI persona of the building, so the transparency obligations for systems interacting with natural persons apply; it reports and does not act."}
+saving: {"minutesPerRun": 20, "basis": "A technician compiling one building's daily health check, yesterday's energy and water use and new service objects."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "Confirmed issues", "minor": "Potential issues", "normal": "Normal", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+        {
+            "anyOf": [
+                {
+                    "label": "Room temperature, CO2 or humidity",
+                    "kind": "sensor",
+                    "quantityKind": [
+                        "https://w3id.org/rec/core/Temperature",
+                        "https://w3id.org/rec/core/CO2",
+                        "https://w3id.org/rec/core/Humidity"
+                    ],
+                    "placementContext": [
+                        "https://w3id.org/rec/device/IndoorAir"
+                    ],
+                    "scope": "room"
+                }
+            ]
+        }
+    ],
+    "want": [
+        {
+            "label": "Building energy meter",
+            "kind": "sensor",
+            "quantityKind": [
+                "https://w3id.org/rec/core/EnergyTotal",
+                "https://w3id.org/rec/core/ActiveEnergyTotal",
+                "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ]
+        },
+        {
+            "label": "Water consumption",
+            "kind": "sensor",
+            "quantityKind": [
+                "https://w3id.org/rec/core/Volume",
+                "https://w3id.org/rec/core/Flow"
+            ],
+            "placementContext": [
+                "https://w3id.org/rec/device/ColdWaterFlow",
+                "http://proptechos.com/ontology/extension/InternalColdWater",
+                "https://w3id.org/rec/device/HotWaterFlow",
+                "http://proptechos.com/ontology/extension/InternalHotWater"
+            ]
+        },
+        {
+            "label": "Occupancy",
+            "kind": "sensor",
+            "quantityKind": [
+                "https://w3id.org/rec/core/Presence",
+                "http://proptechos.com/ontology/extension/AreaPresence"
+            ]
+        }
+    ],
+    "notes": "Any one indoor climate reading lets the building speak to its comfort; energy, water and occupancy make the daily status complete. Area and identity are building-model facts."
+  }
+---
+
 # EMBODIED BUILDING AGENT
 
 ## [IDENTITY & ROLE]
