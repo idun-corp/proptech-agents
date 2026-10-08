@@ -1,3 +1,47 @@
+---
+title: "Fire Damper Auto-Test (SBA) (SE)"
+summary: "Runs scheduled close-and-reopen tests of motorised fire dampers, logs results to the SBA journal and proposes work orders for dampers that fail."
+domain: "ESG & Compliance"
+scope: "building"
+cadence: "monthly"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Autonomously commands dampers during off-hours functional tests, but only exercises and logs them; it is not a control system for infrastructure supply. Borderline because it actuates fire safety equipment."}
+saving: {"minutesPerRun": 480, "basis": "A fire safety technician manually testing and timing each of the building's fire dampers and writing up the SBA journal entries."}
+outcomes: {"format": "classification", "unit": "dampers", "labels": {"confirmed": "Failed", "minor": "Slow", "normal": "Passed", "dataIssue": "Offline"}}
+skills: ["human-in-the-loop"]
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Damper actuator / position feedback",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/DamperPosition"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Damper open/closed state",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/State",
+          "http://proptechos.com/ontology/extension/OnOffState"
+        ]
+      },
+      {
+        "label": "Presence (to test when unoccupied)",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence"
+        ]
+      }
+    ],
+    "notes": "Vocabulary has no fire-damper or smoke-detector term; DamperPosition matches any damper. Fire alarm panel and SBA journal are not expressed."
+  }
+---
+
 # FIRE DAMPER AUTO-TEST (SBA) (SE)
 
 ## [ROLE & CONTEXT]

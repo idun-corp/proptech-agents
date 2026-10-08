@@ -1,3 +1,87 @@
+---
+title: "Pump Cavitation & Bearing Monitor"
+summary: "Detects cavitation, bearing wear and efficiency loss in circulation pumps from current, vibration and flow data, so repairs come before failure."
+domain: "Operations"
+scope: "building"
+cadence: "weekly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitors pump telemetry and reports maintenance needs to staff; it has no control over the pumps and is not a safety component."}
+saving: {"minutesPerRun": 60, "basis": "A technician comparing a week of motor current, vibration and flow data per speed bin against baseline for each pump in one building."}
+outcomes: {"format": "classification", "unit": "pumps", "labels": {"confirmed": "Critical", "minor": "Warning", "normal": "Normal", "dataIssue": "Data limited"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Pump motor current or power",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Current",
+              "https://w3id.org/rec/core/CurrentL1",
+              "https://w3id.org/rec/core/CurrentL2",
+              "https://w3id.org/rec/core/CurrentL3",
+              "https://w3id.org/rec/core/ActivePowerTotal",
+              "http://proptechos.com/ontology/extension/PowerTotal"
+            ]
+          },
+          {
+            "label": "Pump flow and differential pressure",
+            "kind": "sensor",
+            "all": [
+              {
+                "quantityKind": [
+                  "https://w3id.org/rec/core/Flow",
+                  "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                ]
+              },
+              {
+                "quantityKind": [
+                  "http://proptechos.com/ontology/extension/DifferentialPressure"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Pump speed",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/RotationSpeed",
+          "https://w3id.org/rec/core/PowerFrequency",
+          "https://w3id.org/rec/core/Speed"
+        ]
+      },
+      {
+        "label": "Vibration",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://qudt.org/vocab/quantitykind/Acceleration"
+        ]
+      },
+      {
+        "label": "Pump flow",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Flow",
+          "https://qudt.org/vocab/quantitykind/MassFlowRate"
+        ]
+      },
+      {
+        "label": "Pump differential pressure",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/DifferentialPressure"
+        ]
+      }
+    ],
+    "notes": "No vibration velocity quantity kind exists in the vocabulary; Acceleration is the closest. Pump design point and bearing type are metadata."
+  }
+---
+
 # PUMP CAVITATION & BEARING MONITOR
 
 ## [ROLE & CONTEXT]

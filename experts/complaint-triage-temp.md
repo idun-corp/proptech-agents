@@ -1,3 +1,78 @@
+---
+title: "Complaint Triage (Temperature)"
+summary: "Checks incoming too-cold and too-warm tickets against room sensors, auto-replies to phantom complaints and opens diagnostic work orders for real faults."
+domain: "Tenant Experience"
+scope: "room"
+cadence: "on demand"
+autonomy: "autonomous"
+aiAct: {"risk": "limited", "rationale": "Replies directly to tenants and auto-closes tickets, so Art. 50 transparency obligations apply; it does not control building systems and is not a safety component."}
+saving: {"minutesPerRun": 15, "basis": "A property manager or technician checking one ticket against room temperature, setpoint and actuator data, replying to the tenant and writing a work order if needed."}
+outcomes: {"format": "classification", "unit": "tickets", "labels": {"confirmed": "Valid - technical fault", "minor": "Valid - minor deviation", "normal": "Phantom - temp normal", "dataIssue": "Sensor conflict"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Room temperature",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Temperature"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/IndoorAir"
+            ],
+            "scope": "room"
+          },
+          {
+            "label": "Indoor climate signature",
+            "kind": "tommestok",
+            "analysis": "INDOOR_CLIMATE_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Room temperature setpoint",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpoint",
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpointValue"
+        ]
+      },
+      {
+        "label": "Heating or cooling valve position",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/ValvePosition"
+        ]
+      },
+      {
+        "label": "Supply air temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/SupplyAir"
+        ]
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      }
+    ],
+    "notes": "Tenant tickets are ServiceObjects, not sensor data. Lease comfort band is metadata."
+  }
+---
+
 # COMPLAINT TRIAGE (TEMPERATURE)
 
 ## [ROLE & CONTEXT]

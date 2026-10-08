@@ -1,3 +1,64 @@
+---
+title: "Electrical Distribution Thermal Monitor"
+summary: "Checks switchgear and panel connection temperatures, phase imbalance and load to catch overheating connections before they cause failures or fires."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitors thermal and current data and reports to technicians; it performs no switching or load changes. Borderline only because it concerns electrical fire safety, but it is not a control component."}
+saving: {"minutesPerRun": 45, "basis": "An electrician or technician correlating connection temperatures with load, comparing phases and reviewing four-week trends across a building's panels."}
+outcomes: {"format": "classification", "unit": "connections", "labels": {"confirmed": "Critical", "minor": "Warning", "normal": "Normal", "dataIssue": "No data"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Electrical connection / switchgear temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/ElectricalGrid",
+          "https://w3id.org/rec/device/ElectricalGridIntake",
+          "https://w3id.org/rec/device/ElectricalGridInternal",
+          "https://w3id.org/rec/device/ElectricalGridTenant"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Phase currents",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/CurrentL1",
+          "https://w3id.org/rec/core/CurrentL2",
+          "https://w3id.org/rec/core/CurrentL3",
+          "https://w3id.org/rec/core/Current"
+        ]
+      },
+      {
+        "label": "Electrical room ambient temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/IndoorAir"
+        ]
+      },
+      {
+        "label": "Electrical power",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      }
+    ],
+    "notes": "Vocabulary has no placement context for switchgear/busbar/breaker; electrical grid placements are the closest. Component ratings are model data and not expressed."
+  }
+---
+
 # ELECTRICAL DISTRIBUTION THERMAL MONITOR
 
 ## [ROLE & CONTEXT]

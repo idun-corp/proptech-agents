@@ -1,3 +1,72 @@
+---
+title: "ISO 50001 Energy Performance Indicator Tracker"
+summary: "Tracks normalised energy performance indicators against baselines, flags degradation and significant energy uses, and prepares management review data."
+domain: "Energy"
+scope: "building"
+cadence: "monthly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses energy metering data and reports to energy managers; it controls nothing and does not interact with natural persons."}
+saving: {"minutesPerRun": 180, "basis": "An energy engineer collecting metered data and weather variables, running the regression baseline and CUSUM and writing the monthly EnPI report for one facility."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "Significant degradation", "minor": "Degrading", "normal": "Improving", "dataIssue": "Baseline invalid"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Energy consumption",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ],
+            "history": {
+              "ideal": "P12M",
+              "minimum": "P3M"
+            }
+          },
+          {
+            "label": "Tommestok energy signature",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Outdoor temperature (HDD/CDD normalisation)",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Occupancy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence",
+          "http://proptechos.com/ontology/extension/OccupancyDensity"
+        ]
+      },
+      {
+        "label": "Power",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      }
+    ],
+    "notes": "Floor area, equipment change dates and production metrics are building facts or external records and are not modelled."
+  }
+---
+
 # ISO 50001 Energy Performance Indicator Tracker
 
 ## [ROLE & CONTEXT]

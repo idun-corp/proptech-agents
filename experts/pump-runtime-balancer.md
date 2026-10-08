@@ -1,3 +1,58 @@
+---
+title: "Pump Runtime Balancer"
+summary: "Compares runtime hours of twin pump pairs and switches the active pump when the imbalance exceeds 50 hours, so wear is shared evenly."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Switches duty between redundant pumps with built-in safety checks and reverts on failure; it does not interact with people and is not a safety function, though it acts without per-action approval."}
+saving: {"minutesPerRun": 20, "basis": "A technician reading runtime counters and status for each pump pair in one building and switching the duty pump by hand when needed."}
+outcomes: {"format": "classification", "unit": "pump pairs", "labels": {"confirmed": "Imbalanced - switched", "minor": "Imbalanced - blocked", "normal": "Balanced", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Pump run state",
+            "kind": "sensor",
+            "quantityKind": [
+              "http://proptechos.com/ontology/extension/OnOffState",
+              "http://proptechos.com/ontology/extension/State"
+            ],
+            "min": 2
+          },
+          {
+            "label": "Time in operation",
+            "kind": "tommestok",
+            "analysis": "TIME_IN_OPERATION"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Pump switch command",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/OnOffControl"
+        ]
+      },
+      {
+        "label": "Pump fault alarm",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/AlarmMajor",
+          "https://w3id.org/rec/core/AlarmMinor",
+          "https://w3id.org/rec/core/AlarmSevere",
+          "http://proptechos.com/ontology/extension/CapabilityTypeAlarm"
+        ]
+      }
+    ],
+    "notes": "No runtime-hours quantity kind in the vocabulary; run state (or Tommestok TIME_IN_OPERATION) is the closest. Pump pairing (A/B) is model structure."
+  }
+---
+
 # PUMP RUNTIME BALANCER
 
 ## [ROLE & CONTEXT]

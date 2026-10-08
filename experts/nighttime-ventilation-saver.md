@@ -1,3 +1,57 @@
+---
+title: "Nighttime Ventilation Saver Agent"
+summary: "Finds ventilation running in unoccupied rooms by comparing airflow with presence over 14 days, and estimates the wasted energy per building."
+domain: "Energy"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses airflow and presence sensor data and reports findings to a downstream routing agent; it makes no schedule changes and does not interact with tenants."}
+saving: {"minutesPerRun": 45, "basis": "An energy engineer pulling two weeks of airflow and presence data for a sample of rooms, calculating unoccupied airflow and writing up the waste."}
+outcomes: {"format": "classification", "unit": "rooms", "labels": {"confirmed": "High waste", "minor": "Minor waste", "normal": "Optimized", "dataIssue": "Data issues"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Room airflow",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Flow",
+          "https://qudt.org/vocab/quantitykind/MassFlowRate"
+        ],
+        "scope": "room"
+      },
+      {
+        "label": "Room presence",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence"
+        ],
+        "scope": "room"
+      }
+    ],
+    "want": [
+      {
+        "label": "Damper position",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/DamperPosition"
+        ],
+        "scope": "room"
+      },
+      {
+        "label": "CO2",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/CO2"
+        ],
+        "scope": "room"
+      }
+    ],
+    "notes": "Both airflow and presence sensors are needed in the same room; the same-room pairing cannot be expressed, only that each exists in rooms. Room type and capacity are model facts and omitted."
+  }
+---
+
 # NIGHTTIME VENTILATION SAVER AGENT
 
 ## [ROLE & CONTEXT]

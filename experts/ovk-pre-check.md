@@ -1,3 +1,64 @@
+---
+title: "OVK Pre-Check (Airflow) (SE)"
+summary: "Runs a weekly off-hours airflow test on each air handling unit and compares it with the OVK-approved flow to show whether the building would pass inspection."
+domain: "ESG & Compliance"
+scope: "building"
+cadence: "weekly"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Temporarily ramps ventilation fans in unoccupied hours and reports compliance risk to staff; it is not a safety component of critical infrastructure, but it does actuate equipment without per-action approval."}
+saving: {"minutesPerRun": 90, "basis": "A ventilation technician ramping each air handling unit to reference speed, reading airflow and calculating deviation from the OVK protocol for one building."}
+outcomes: {"format": "classification", "unit": "AHUs", "labels": {"confirmed": "OVK risk - fail", "minor": "OVK risk - marginal", "normal": "OVK compliant", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "AHU airflow",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Flow",
+          "https://qudt.org/vocab/quantitykind/MassFlowRate"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/SupplyAir",
+          "https://w3id.org/rec/device/ExtractAir",
+          "https://w3id.org/rec/device/ExhaustAir",
+          "https://w3id.org/rec/device/OutdoorAir",
+          "http://proptechos.com/ontology/extension/IntakeAir"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Fan speed control",
+        "kind": "actuator",
+        "quantityKind": [
+          "https://w3id.org/rec/core/RotationSpeed",
+          "https://w3id.org/rec/core/Speed",
+          "http://proptechos.com/ontology/extension/ModulationLevel",
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpoint"
+        ]
+      },
+      {
+        "label": "Fan power (for SFP)",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ]
+      },
+      {
+        "label": "Duct pressure",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Pressure",
+          "http://proptechos.com/ontology/extension/DifferentialPressure"
+        ]
+      }
+    ],
+    "notes": "OVK approved flows and reference speeds are twin metadata, not modelled as data. Fan speed command is needed for the active test ramp but airflow measurement still allows passive checks, so it is a want."
+  }
+---
+
 # OVK PRE-CHECK (AIRFLOW) (SE)
 
 ## [ROLE & CONTEXT]

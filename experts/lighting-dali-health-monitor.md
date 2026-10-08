@@ -1,3 +1,62 @@
+---
+title: "Lighting / DALI Health Monitor"
+summary: "Detects lamp and driver failures, DALI communication faults and emergency lighting test failures from gateway data, and reports them to operations staff."
+domain: "Operations"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitors lighting device status and reports to staff; it does not control lighting or run emergency tests, so it is not itself a safety component, though it reports on fire-safety emergency lighting."}
+saving: {"minutesPerRun": 30, "basis": "A technician checking DALI gateway status, device counts per line and emergency test records for one building and listing failed units."}
+outcomes: {"format": "classification", "unit": "devices", "labels": {"confirmed": "Failure", "minor": "Degraded", "normal": "Normal", "dataIssue": "No data"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Lighting device status or alarm",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/State",
+          "http://proptechos.com/ontology/extension/OnOffState",
+          "http://proptechos.com/ontology/extension/CapabilityTypeState",
+          "http://proptechos.com/ontology/extension/CapabilityTypeAlarm",
+          "https://w3id.org/rec/core/AlarmMajor",
+          "https://w3id.org/rec/core/AlarmMinor",
+          "https://w3id.org/rec/core/AlarmSevere"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Lighting",
+          "http://proptechos.com/ontology/extension/DeviceDiagnostic"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Lighting dimming level",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Level",
+          "http://proptechos.com/ontology/extension/ModulationLevel"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Lighting"
+        ]
+      },
+      {
+        "label": "Lighting power",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActivePowerTotal",
+          "http://proptechos.com/ontology/extension/PowerTotal"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Lighting"
+        ]
+      }
+    ],
+    "notes": "DALI-specific lamp failure, driver failure, communication error and emergency test results have no dedicated quantity kinds; approximated by status and alarm kinds in lighting placement. Emergency battery test data is not expressible."
+  }
+---
+
 # LIGHTING / DALI HEALTH MONITOR
 
 ## [ROLE & CONTEXT]

@@ -1,3 +1,55 @@
+---
+title: "VVC Temperature Monitor (SE)"
+summary: "Monitors hot water circulation return temperature and alerts when it stays below the 50°C Legionella threshold, with a likely root cause."
+domain: "ESG & Compliance"
+scope: "system"
+cadence: "hourly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Monitors sensor data and alerts operations staff; it takes no action on pumps or valves and does not interact with tenants. It supports a health safety process but only reports, so it is not itself a safety component."}
+saving: {"minutesPerRun": 3, "basis": "A technician checking one hot-water circulation loop's temperatures against the Legionella limits."}
+outcomes: {"format": "classification", "unit": "loops", "labels": {"confirmed": "Critical - Legionella risk", "minor": "Warning", "normal": "Normal", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "VVC (hot water circulation) return temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/HotWaterReturn"
+        ],
+        "resolution": {
+          "ideal": "PT15M",
+          "minimum": "PT1H"
+        }
+      }
+    ],
+    "want": [
+      {
+        "label": "VVC supply temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/HotWaterFlow"
+        ]
+      },
+      {
+        "label": "VVC pump status",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/OnOffState",
+          "http://proptechos.com/ontology/extension/State"
+        ]
+      }
+    ],
+    "notes": "No dedicated VVC placement exists; HotWaterReturn is used. Hot water tank temperature not separately expressible."
+  }
+---
+
 # VVC TEMPERATURE MONITOR (SE)
 
 ## [ROLE & CONTEXT]

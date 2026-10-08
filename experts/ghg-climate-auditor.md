@@ -1,3 +1,98 @@
+---
+title: "GHG Climate Auditor (DK)"
+summary: "Compiles Scope 1 and Scope 2 greenhouse gas inventories and year-over-year trends for climate audits under Danish klimasyn and the GHG Protocol."
+domain: "ESG & Compliance"
+scope: "building"
+cadence: "yearly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Calculates emissions from energy, fuel and refrigerant data and produces reports for sustainability staff; no interaction with natural persons and no safety function."}
+saving: {"minutesPerRun": 240, "basis": "A sustainability or energy consultant collecting energy, fuel and refrigerant data, applying emission factors and writing the Scope 1 and 2 inventory for one building."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "Significant increase", "minor": "Increasing", "normal": "On track", "dataIssue": "Data gaps"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Energy meters",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ]
+          },
+          {
+            "label": "Energy signature analysis",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "District heating energy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictHeatingFlow",
+          "https://w3id.org/rec/device/PrimaryHeatingFlow",
+          "https://w3id.org/rec/device/DistrictHeatingReturn",
+          "https://w3id.org/rec/device/PrimaryHeatingReturn"
+        ]
+      },
+      {
+        "label": "District cooling energy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictCoolingFlow",
+          "https://w3id.org/rec/device/PrimaryCoolingFlow",
+          "https://w3id.org/rec/device/DistrictCoolingReturn",
+          "https://w3id.org/rec/device/PrimaryCoolingReturn"
+        ]
+      },
+      {
+        "label": "Fuel / gas consumption",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Volume",
+          "https://w3id.org/rec/core/EnergyTotal",
+          "https://w3id.org/rec/core/Flow"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Fuel",
+          "http://proptechos.com/ontology/extension/FuelOil",
+          "http://proptechos.com/ontology/extension/CityGas",
+          "http://proptechos.com/ontology/extension/Gas_Meter",
+          "http://proptechos.com/ontology/extension/InternalGas"
+        ]
+      },
+      {
+        "label": "Emissions / carbon intensity",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CO2e",
+          "http://proptechos.com/ontology/extension/CarbonIntensity"
+        ]
+      },
+      {
+        "label": "Refrigerant inventory and top-up records",
+        "kind": "external",
+        "system": "refrigerant log / maintenance system"
+      }
+    ],
+    "notes": "Emission factors and refrigerant charges are external reference data."
+  }
+---
+
 # GHG Climate Auditor (DK)
 
 ## [ROLE & CONTEXT]

@@ -1,3 +1,76 @@
+---
+title: "Night Setback Optimizer"
+summary: "Calculates the latest heating start time that reaches setpoint at occupancy start and adjusts the schedule using forecast and building time constant."
+domain: "Energy"
+scope: "building"
+cadence: "daily"
+autonomy: "autonomous"
+aiAct: {"risk": "minimal", "rationale": "Adjusts heating start times within fixed safety bounds in an office building; it does not interact with people and is not a safety function, though it does act on building heating without per-action approval."}
+saving: {"minutesPerRun": 25, "basis": "An energy engineer comparing indoor temperature at occupancy start with the forecast and tuning the heating start time for one building's zones."}
+outcomes: {"format": "classification", "unit": "zones", "labels": {"confirmed": "Too early", "minor": "Too late", "normal": "Optimal", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "Indoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/IndoorAir"
+        ]
+      },
+      {
+        "anyOf": [
+          {
+            "label": "Outdoor temperature",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Temperature"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/OutdoorAir"
+            ]
+          },
+          {
+            "label": "Weather forecast",
+            "kind": "external",
+            "system": "weather forecast service"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Heating setpoint",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpoint",
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpointValue",
+          "https://w3id.org/rec/core/Temperature"
+        ]
+      },
+      {
+        "label": "Presence / occupancy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence"
+        ]
+      },
+      {
+        "label": "Solar irradiance",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/GlobalIrradiance"
+        ]
+      }
+    ],
+    "notes": "BMS heating schedule and building time constant are metadata/control configuration and not expressible; the time constant can be estimated from 14 days of indoor temperature history."
+  }
+---
+
 # NIGHT SETBACK OPTIMIZER
 
 ## [ROLE & CONTEXT]

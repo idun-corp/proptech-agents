@@ -1,3 +1,81 @@
+---
+title: "Complaint Pattern Analyzer"
+summary: "Analyses the prior month's tenant complaints against weather, schedules and sensor data to find systemic causes behind recurring complaint clusters."
+domain: "Tenant Experience"
+scope: "building"
+cadence: "monthly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses historical complaint tickets and telemetry and reports patterns to operations staff; takes no action and does not interact with tenants."}
+saving: {"minutesPerRun": 180, "basis": "A property or operations manager categorising a month of complaint tickets, clustering them by zone and time, and cross-checking them against telemetry for one building."}
+outcomes: {"format": "classification", "unit": "patterns", "labels": {"confirmed": "Systemic pattern", "minor": "Emerging pattern", "normal": "Isolated", "dataIssue": "Data insufficient"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Room temperature",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Temperature"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/IndoorAir"
+            ],
+            "scope": "room"
+          },
+          {
+            "label": "Indoor climate signature",
+            "kind": "tommestok",
+            "analysis": "INDOOR_CLIMATE_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Room temperature setpoint",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpoint",
+          "http://proptechos.com/ontology/extension/CapabilityTypeSetpointValue"
+        ]
+      },
+      {
+        "label": "Room CO2",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/CO2"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/IndoorAir"
+        ],
+        "scope": "room"
+      },
+      {
+        "label": "HVAC operating state",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/OnOffState",
+          "http://proptechos.com/ontology/extension/State",
+          "http://proptechos.com/ontology/extension/CapabilityTypeState"
+        ]
+      }
+    ],
+    "notes": "The complaint tickets (felanmalningar) are ServiceObjects, not building sensor data, so not modeled; facade orientation and AHU zone mapping are building-model facts."
+  }
+---
+
 # COMPLAINT PATTERN ANALYZER
 
 ## [ROLE & CONTEXT]

@@ -1,3 +1,87 @@
+---
+title: "SVEBY Energy Performance Verifier (SE)"
+summary: "Compares weather-normalised measured energy use with the design prediction per end-use, using the SVEBY method, and traces gaps to likely causes."
+domain: "Energy"
+scope: "building"
+cadence: "on demand"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses metered energy data and design figures and reports to engineers and owners; it controls nothing and does not interact with tenants."}
+saving: {"minutesPerRun": 240, "basis": "An energy engineer normalising 12 months of measured data, comparing it to the design calculation per end-use and writing a verification report for one building."}
+outcomes: {"format": "classification", "unit": "buildings", "labels": {"confirmed": "Significant gap", "minor": "Minor gap", "normal": "Verified - on target", "dataIssue": "Cannot verify"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Measured building energy",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ],
+            "history": {
+              "ideal": "P12M",
+              "minimum": "P12M"
+            }
+          },
+          {
+            "label": "Energy signature analysis",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "District heating energy",
+        "kind": "sensor",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/ThermalEnergy",
+          "https://w3id.org/rec/core/EnergyTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictHeatingFlow",
+          "https://w3id.org/rec/device/PrimaryHeatingFlow",
+          "https://w3id.org/rec/device/DistrictHeatingReturn",
+          "https://w3id.org/rec/device/PrimaryHeatingReturn"
+        ]
+      },
+      {
+        "label": "Electricity sub-metering",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/ActiveEnergyTotal",
+          "https://w3id.org/rec/core/EnergyTotal"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/ElectricalGridInternal",
+          "https://w3id.org/rec/device/ElectricalGridTenant",
+          "http://proptechos.com/ontology/extension/InternalBuildingOperationsMeter"
+        ]
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      },
+      {
+        "label": "Design energy calculation",
+        "kind": "external",
+        "system": "energy simulation / BBR design calculation"
+      }
+    ],
+    "notes": "Design calculation, Atemp and year built are outside sensor data; the design calculation is a want because it cannot be checked in the twin. Degree-day weather data is external."
+  }
+---
+
 # SVEBY Energy Performance Verifier (SE)
 
 ## [ROLE & CONTEXT]

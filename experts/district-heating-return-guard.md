@@ -1,3 +1,87 @@
+---
+title: "District Heating Return Guard"
+summary: "Monitors primary return temperature in district heating substations and diagnoses causes of high return temperature before flow charges accrue."
+domain: "Energy"
+scope: "system"
+cadence: "hourly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses substation sensor data and reports to operations staff; it takes no control action on valves, pumps or heating curves, so it is not a safety component of the heating supply."}
+saving: {"minutesPerRun": 5, "basis": "An energy technician checking one substation's return temperature trend and deciding whether to act."}
+outcomes: {"format": "classification", "unit": "substations", "labels": {"confirmed": "Critical", "minor": "High return", "normal": "Normal", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "District heating return temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictHeatingReturn",
+          "https://w3id.org/rec/device/PrimaryHeatingReturn"
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "District heating supply temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictHeatingFlow",
+          "https://w3id.org/rec/device/PrimaryHeatingFlow"
+        ]
+      },
+      {
+        "label": "District heating flow",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Flow",
+          "https://qudt.org/vocab/quantitykind/MassFlowRate"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictHeatingFlow",
+          "https://w3id.org/rec/device/PrimaryHeatingFlow",
+          "https://w3id.org/rec/device/DistrictHeatingReturn",
+          "https://w3id.org/rec/device/PrimaryHeatingReturn"
+        ]
+      },
+      {
+        "label": "Control valve position",
+        "kind": "actuator",
+        "quantityKind": [
+          "http://proptechos.com/ontology/extension/ValvePosition"
+        ]
+      },
+      {
+        "label": "Secondary heating temperatures",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/SecondaryHeatingFlow",
+          "https://w3id.org/rec/device/SecondaryHeatingReturn"
+        ]
+      },
+      {
+        "label": "Outdoor temperature",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Temperature"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/OutdoorAir"
+        ]
+      }
+    ],
+    "notes": "Only the primary return temperature is needed to classify; supply, flow, valve, secondary side and outdoor temperature support diagnosis and context, so they are wants. 'Heating system' valve position has no placement narrowing to stay permissive."
+  }
+---
+
 # District Heating Return Guard
 
 ## [ROLE & CONTEXT]

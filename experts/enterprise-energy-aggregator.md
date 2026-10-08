@@ -1,3 +1,90 @@
+---
+title: "Enterprise Energy Aggregator (EKL / Energisyn) (Nordics)"
+summary: "Aggregates energy use across sites, buildings, processes and transport into an enterprise profile and tracks Nordic energy audit thresholds and deadlines."
+domain: "ESG & Compliance"
+scope: "portfolio"
+cadence: "monthly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Aggregates energy data and compliance status into reports for the organisation's staff; it takes no action and does not interact with natural persons."}
+saving: {"minutesPerRun": 300, "basis": "An energy or sustainability manager collecting site data per carrier, converting fuels to kWh, splitting by category and checking coverage and audit thresholds."}
+outcomes: {"format": "report", "unit": "enterprise energy profiles"}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Energy meters",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/EnergyTotal",
+              "https://w3id.org/rec/core/ActiveEnergyTotal",
+              "http://proptechos.com/ontology/extension/ThermalEnergy"
+            ]
+          },
+          {
+            "label": "Energy signature analysis",
+            "kind": "tommestok",
+            "analysis": "ENERGY_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "District heating energy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictHeatingFlow",
+          "https://w3id.org/rec/device/PrimaryHeatingFlow",
+          "https://w3id.org/rec/device/DistrictHeatingReturn",
+          "https://w3id.org/rec/device/PrimaryHeatingReturn"
+        ]
+      },
+      {
+        "label": "District cooling energy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/EnergyTotal",
+          "http://proptechos.com/ontology/extension/ThermalEnergy"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/DistrictCoolingFlow",
+          "https://w3id.org/rec/device/PrimaryCoolingFlow",
+          "https://w3id.org/rec/device/DistrictCoolingReturn",
+          "https://w3id.org/rec/device/PrimaryCoolingReturn"
+        ]
+      },
+      {
+        "label": "Fuel / gas consumption",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Volume",
+          "https://w3id.org/rec/core/EnergyTotal",
+          "https://w3id.org/rec/core/Flow"
+        ],
+        "placementContext": [
+          "http://proptechos.com/ontology/extension/Fuel",
+          "http://proptechos.com/ontology/extension/FuelOil",
+          "http://proptechos.com/ontology/extension/CityGas",
+          "http://proptechos.com/ontology/extension/Gas_Meter",
+          "http://proptechos.com/ontology/extension/InternalGas"
+        ]
+      },
+      {
+        "label": "Transport / fleet fuel data",
+        "kind": "external",
+        "system": "fleet fuel records"
+      }
+    ],
+    "notes": "Per-building view of an enterprise-level agent; process and transport energy are mostly outside the building model."
+  }
+---
+
 # Enterprise Energy Aggregator (EKL / Energisyn) (Nordics)
 
 ## [ROLE & CONTEXT]

@@ -1,3 +1,63 @@
+---
+title: "Supply Air Filter Analyzer"
+summary: "Assesses supply air filter clogging in each air handling unit from pressure drop versus airflow and tells operations staff which filters to replace."
+domain: "Operations"
+scope: "system"
+cadence: "weekly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses AHU sensor data and reports to maintenance staff; it takes no action on the ventilation system and does not interact with tenants."}
+saving: {"minutesPerRun": 20, "basis": "A technician exporting 30 days of airflow and pressure data for one air handling unit and working out the filter resistance trend."}
+outcomes: {"format": "classification", "unit": "AHUs", "labels": {"confirmed": "Replace now", "minor": "Approaching limit", "normal": "Normal", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Supply airflow and filter pressure drop",
+            "kind": "sensor",
+            "all": [
+              {
+                "quantityKind": [
+                  "https://w3id.org/rec/core/Flow"
+                ],
+                "placementContext": [
+                  "https://w3id.org/rec/device/SupplyAir"
+                ]
+              },
+              {
+                "quantityKind": [
+                  "http://proptechos.com/ontology/extension/DifferentialPressure",
+                  "https://w3id.org/rec/core/Pressure"
+                ],
+                "placementContext": [
+                  "http://proptechos.com/ontology/extension/SupplyAirFilter",
+                  "https://w3id.org/rec/device/SupplyAir"
+                ]
+              }
+            ],
+            "history": {
+              "ideal": "P30D",
+              "minimum": "P7D"
+            },
+            "resolution": {
+              "ideal": "PT1H",
+              "minimum": "PT1H"
+            }
+          },
+          {
+            "label": "Tommestok supply air filter prediction",
+            "kind": "tommestok",
+            "analysis": "SUPPLY_AIR_FILTER_PREDICTION"
+          }
+        ]
+      }
+    ],
+    "want": [],
+    "notes": "Needs paired supply airflow and differential pressure from the same AHU; pairing by AHU cannot be expressed. Pressure placement is permissive (SupplyAir or SupplyAirFilter). Resolution minimum PT1H taken from the prompt's hourly data."
+  }
+---
+
 # SUPPLY AIR FILTER ANALYZER
 
 ## [ROLE & CONTEXT]

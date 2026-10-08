@@ -1,3 +1,64 @@
+---
+title: "Indoor Climate Reviewer"
+summary: "Reviews temperature, CO2 and humidity in one building per run against fault thresholds and confirms only rooms with a recurring pattern in 30-day history."
+domain: "Tenant Experience"
+scope: "building"
+cadence: "daily"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Analyses building sensor data and reports to operations staff for a downstream routing agent; it takes no action and does not interact with tenants."}
+saving: {"minutesPerRun": 40, "basis": "A technician checking current climate readings for a building's rooms, pulling 30-day history for those in breach and writing up the findings."}
+outcomes: {"format": "classification", "unit": "rooms", "labels": {"confirmed": "Confirmed fault", "minor": "Minor fault", "normal": "Normal", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "anyOf": [
+          {
+            "label": "Room temperature, CO2 or humidity",
+            "kind": "sensor",
+            "quantityKind": [
+              "https://w3id.org/rec/core/Temperature",
+              "https://w3id.org/rec/core/CO2",
+              "https://w3id.org/rec/core/Humidity"
+            ],
+            "placementContext": [
+              "https://w3id.org/rec/device/IndoorAir"
+            ],
+            "scope": "room"
+          },
+          {
+            "label": "Indoor climate analysis",
+            "kind": "tommestok",
+            "analysis": "INDOOR_CLIMATE_SIGNATURE"
+          }
+        ]
+      }
+    ],
+    "want": [
+      {
+        "label": "Occupancy",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence"
+        ]
+      },
+      {
+        "label": "Supply airflow",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Flow",
+          "https://qudt.org/vocab/quantitykind/MassFlowRate"
+        ],
+        "placementContext": [
+          "https://w3id.org/rec/device/SupplyAir"
+        ]
+      }
+    ],
+    "notes": "Need is any one of room temperature, CO2 or humidity (the agent checks whichever sensors exist). Room area and type are building-model facts and omitted."
+  }
+---
+
 # INDOOR CLIMATE REVIEWER
 
 ## [ROLE & CONTEXT]

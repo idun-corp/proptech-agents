@@ -1,3 +1,49 @@
+---
+title: "IAQ Sensor Drift Detector"
+summary: "Detects calibration drift in CO2 and humidity sensors using night baselines and zone cross-checks, and flags sensors needing recalibration."
+domain: "Operations"
+scope: "building"
+cadence: "weekly"
+autonomy: "advisory"
+aiAct: {"risk": "minimal", "rationale": "Detection only; it recalibrates nothing and reports to operations staff. Drifted sensors can affect ventilation control, but the agent is not a safety component."}
+saving: {"minutesPerRun": 60, "basis": "A technician extracting a week of night-time CO2 and humidity readings, comparing sensors with their zone peers and estimating ventilation impact for one building."}
+outcomes: {"format": "classification", "unit": "sensors", "labels": {"confirmed": "Drift confirmed", "minor": "Drift likely", "normal": "Normal", "dataIssue": "Data issue"}}
+dataNeeds: {
+    "version": 1,
+    "need": [
+      {
+        "label": "CO2",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/CO2"
+        ],
+        "history": {
+          "ideal": "P7D",
+          "minimum": "P3D"
+        }
+      }
+    ],
+    "want": [
+      {
+        "label": "Humidity",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Humidity"
+        ]
+      },
+      {
+        "label": "Presence / occupancy (to confirm unoccupied nights)",
+        "kind": "sensor",
+        "quantityKind": [
+          "https://w3id.org/rec/core/Presence",
+          "http://proptechos.com/ontology/extension/AreaPresence"
+        ]
+      }
+    ],
+    "notes": "Sensor calibration dates and AHU zone grouping are metadata, not expressible. Cross-sensor correlation needs 3 or more sensors per AHU zone but is secondary to the night baseline check."
+  }
+---
+
 # IAQ SENSOR DRIFT DETECTOR
 
 ## [ROLE & CONTEXT]
