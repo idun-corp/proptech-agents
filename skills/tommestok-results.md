@@ -128,17 +128,28 @@ The highest hourly power over the last 12 months, per stream.
 
 ### Indoor climate signature
 
-The distribution of indoor temperature across the building's rooms over the analysis
-window.
+A **snapshot** of indoor temperature across the building, taken once per run. Tommestok
+reads the latest value of every indoor-air temperature sensor in the building, drops
+readings that are not fresh, and computes statistics **across sensors** at that moment.
+It is not an average over a period: each value describes one moment, and the series of
+daily snapshots is the trend.
 
 | Sensor littera | Unit | Meaning |
 |---|---|---|
-| `{L}-INDOOR-MEAN`, `{L}-INDOOR-MEDIAN` | °C | Typical indoor temperature |
-| `{L}-INDOOR-P5`, `{L}-INDOOR-P95` | °C | The coldest and warmest 5 % |
-| `{L}-INDOOR-SD` | °C | Spread |
-| `{L}-INDOOR-N_SENSORS` | count | Number of sensors behind the figures |
+| `{L}-INDOOR-MEAN`, `{L}-INDOOR-MEDIAN` | °C | Typical indoor temperature at the snapshot |
+| `{L}-INDOOR-P5`, `{L}-INDOOR-P95` | °C | The coldest and warmest 5 % of sensors at the snapshot |
+| `{L}-INDOOR-SD` | °C | Room-to-room spread at the snapshot |
+| `{L}-INDOOR-N_SENSORS` | count | Number of sensors with a fresh reading at the snapshot |
 
-Quality check: always report `N_SENSORS`. A figure from a handful of sensors is weak.
+- The snapshot time is the observation time, so the time of day matters. A snapshot
+  taken at night says nothing about afternoon overheating. Compare snapshots taken at
+  about the same hour.
+- For the trend, read `get-sensor-historical-data` with `aggregation: "raw"` over
+  `_30days` or `_90days`: one value per run, so the series is small.
+- Temperature only: no CO2 or humidity. No per-room values are published, so the
+  signature cannot tell **which** rooms are warm or cold, or for how long.
+- Quality check: always report `N_SENSORS`. A figure from a handful of sensors is weak,
+  and a sudden drop in `N_SENSORS` means sensors stopped reporting.
 
 ### Operating hours
 
