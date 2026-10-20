@@ -164,6 +164,54 @@ The building's typical weekly operating schedule, derived from its energy patter
 These describe a **typical** week, not observed presence. Each run adds one week, so the
 history shows how the schedule changes.
 
+### Pump runtime
+
+Daily runtime per pump or fan, from its runtime counter (or an electricity meter used as a
+proxy), and the 30-day share of each duty/standby pair. **One value per complete local day,
+stamped at that day's local midnight** (22:00 or 23:00 UTC the day before for
+Europe/Stockholm). The newest value is **yesterday**; each run re-states the last three
+days. Today is never in the result — for "right now", read the pump's live signals.
+
+`{T}` is the letters and digits of the input counter's littera, e.g. `B52KB21PK1ADT` for
+`B52_KB21_PK1A_DT`.
+
+| Sensor littera | Unit | Meaning |
+|---|---|---|
+| `{L}-PUMP-RUNTIME-{T}-RUNTIME` | hours | Hours the pump ran that day (at most the day's length) |
+| `{L}-PUMP-RUNTIME-{T}-STUCK` | 1 / 0 | 1 = at least 20 h of readings and no rise: did not run, or the counter is stuck |
+| `{L}-PUMP-RUNTIME-{T}-RESETS` | count | Counter resets that day (they contribute nothing) |
+| `{L}-PUMP-RUNTIME-{T}-COVERAGE` | hours | Hours of the day with readings |
+| `{L}-PUMP-RUNTIME-{T}-LONGEST-STOP` | hours | Longest stop that day |
+| `{L}-PUMP-RUNTIME-{TA}-{TB}-PARITY` | % | Pump A's share of the pair's runtime over the 30 days ending that day |
+
+- **STUCK = 1 is not a fault by itself.** A standby pump off all day reads the same. Compare
+  with its sister pump and with demand: sister ≈ 24 h and PARITY between about 30 and 70 %
+  = normal duty/standby rotation.
+- **LONGEST-STOP is absent** where the counter is too coarse to show a stop (e.g. a counter
+  in whole hours). Absent is not zero; use RUNTIME instead.
+- **PARITY is absent** unless both counters have all 30 days. A is the counter whose
+  littera sorts first.
+- Low COVERAGE means missing readings: a short RUNTIME on such a day is not a stop.
+- For a trend, read `get-sensor-historical-data` on RUNTIME with `aggregation: "raw"`
+  over `_7days` or `_30days`: one value per day.
+
+### Simultaneous heating and cooling
+
+Daily hours when a supply unit's heating coil valve and cooling coil valve (or
+dehumidification coil valve, as a pair of its own) were open at the same time. Same daily
+stamp as pump runtime: newest value = yesterday.
+
+| Sensor littera | Unit | Meaning |
+|---|---|---|
+| `{L}-SIMULT-HC-{UNIT}-{FAN}[-DEHUM]-{IDS}-HOURS` | hours | Hours both valves were open |
+| `…-STARTUP` | hours | The part of HOURS inside the start-up window (04–08 local), **included in** HOURS |
+| `…-LONGEST` | hours | Longest continuous stretch |
+| `…-COVERAGE` | hours | Hours of the day with readings on both valves |
+| `…-OUTDOOR` | °C | Mean outdoor temperature during the simultaneous minutes (absent on a day with none) |
+
+- Start-up hours are usually normal (re-heat while a unit starts); judge HOURS − STARTUP.
+- `-DEHUM` pairs (heating + dehumidification) are often intended: dehumidify, then re-heat.
+
 ## 4. Profiles and time zones
 
 Profiles are the water hourly medians and the peak power `-DAY` (24 values), and the
@@ -217,3 +265,5 @@ hour — never take differences of it.
    history for that day → convert UTC hours to local with the offset of the date in
    question.
 5. Absent ≠ zero. Not found ≠ does not exist.
+6. Daily results (pump runtime, simultaneous heating/cooling) end yesterday; use live
+   signals for today.
